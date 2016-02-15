@@ -1,0 +1,13 @@
+﻿	 ;$solrIndexedTypeOnline;allPromotions;"Promotion"
+								 ;$solrIndexedTypeOnline;availableInStores;"Stores"
+								 ;$solrIndexedTypeOnline;brand;"Brand"
+								 ;$solrIndexedTypeOnline;category;"Category"
+								 ;$solrIndexedTypeOnline;code;"Code"
+								 ;$solrIndexedTypeOnline;description;"Description"
+								 ;$solrIndexedTypeOnline;manufacturerName;"Manufacturer Name"
+								 ;$solrIndexedTypeOnline;name;"Name"
+								 ;$solrIndexedTypeOnline;price;"Price"
+								 ;$solrIndexedTypeOnline;summary;"Summary" 
+
+
+ ;	$solrIndexedTypeStaged;                  brand              ; 		"Brand"
