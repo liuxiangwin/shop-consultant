@@ -1,0 +1,72 @@
+# ImpEx for SOLR Configuration
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog=ConsultingStoreClassification
+
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+
+
+$prefix=de-consulting
+$productCatalog=de-consultingstoreProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=$prefixSolrServerConfig
+$indexConfigName=$prefixSolrIndexConfig
+$searchConfigName=$prefixPageSize
+$facetSearchConfigName=$prefixIndex
+$facetSearchConfigDescription=Consulting DE Solr index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=$prefixProductType
+$indexBaseSite=$prefixsite
+$indexLanguages=ja,en,de,fr,se,es
+$indexCurrencies=JPY,EUR,GBP
+$solrMode=embeddedalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$solrIndexedTypeStaged=de-consultingstoreProductTypeStaged
+$solrIndexedTypeOnline=de-consultingstoreProductTypeOnline
+
+# Classification Facet properties
+INSERT_UPDATE SolrIndexedProperty;facet[default=true];solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=true];fieldValueProvider;;;;;;;;;$classAttributeAssignment
+;;$solrIndexedTypeStaged;programmingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;programmingclassification:::programmingdisciplines::::
+;;$solrIndexedTypeOnline;programmingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;programmingclassification:::programmingdisciplines::::
+;;$solrIndexedTypeStaged;dataSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;dataclassification:::datadisciplines::::
+;;$solrIndexedTypeOnline;dataSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;dataclassification:::datadisciplines::::
+;;$solrIndexedTypeStaged;softSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;businessuserclassification:::businessuserdisciplines::::
+;;$solrIndexedTypeOnline;softSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;businessuserclassification:::businessuserdisciplines::::
+;;$solrIndexedTypeStaged;devopsSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;operationalclassification:::devopsdisciplines::::
+;;$solrIndexedTypeOnline;devopsSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;operationalclassification:::devopsdisciplines::::
+;;$solrIndexedTypeStaged;testingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;testingclassification:::testingdisciplines::::
+;;$solrIndexedTypeOnline;testingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;testingclassification:::testingdisciplines::::
+;;$solrIndexedTypeStaged;projectSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;projectmanagementclassification:::projectdisciplines::::
+;;$solrIndexedTypeOnline;projectSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;projectmanagementclassification:::projectdisciplines::::
+
+
+
+# Define Range Set
+#INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+
+# Define Ranges
+#INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+
+#INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;visible;fieldValueProvider;customFacetSortProvider;rangeSets(name);$classAttributeAssignment
+
+#INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider;$classAttributeAssignment
+
+# Import Classification Features
+#INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider;$classAttributeAssignment
+
+# Show the Classification Features in the Product List View Category /Search Pages
+#INSERT_UPDATE ClassAttributeAssignment;$classClass[unique=true];$classAttribute[unique=true];$classSystemVersion[unique=true];listable[default=true]
+
+# Redirect page URL
+#INSERT_UPDATE SolrURIRedirect;url[unique=true]
+
+#INSERT_UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true]
+
+#INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+
+#INSERT_UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+

@@ -1,0 +1,12 @@
+#
+# Import the BaseStore
+#
+
+# Language
+$lang=es
+
+$storeUid=jp-consultingstore
+
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;Consultoría tienda

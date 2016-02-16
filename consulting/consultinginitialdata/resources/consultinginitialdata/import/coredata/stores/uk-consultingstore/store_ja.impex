@@ -1,0 +1,12 @@
+#
+# Import the BaseStore
+#
+
+# Language
+$lang=ja
+
+$storeUid=uk-consultingstore
+
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;Consulting Store

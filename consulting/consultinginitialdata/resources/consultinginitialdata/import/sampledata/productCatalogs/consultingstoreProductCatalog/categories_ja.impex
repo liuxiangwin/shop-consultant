@@ -1,0 +1,19 @@
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=consultingstoreProductCatalog
+$productCatalogName=Consulting Store Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=ja
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+;Development;;発育
+;Data;;データ
+;Business-User-Centric;;ビジネスユーザー中心
+;Operational;;運用
+;Testing;;テスト
+;Project-Management;;プロジェクト管理

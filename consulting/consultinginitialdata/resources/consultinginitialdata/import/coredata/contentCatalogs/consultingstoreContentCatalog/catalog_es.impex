@@ -1,0 +1,10 @@
+#
+# Import the Content Catalog
+#
+$contentCatalog=consultingstoreContentCatalog
+# Language
+$lang=es
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;$contentCatalog;Consultoría tienda Catálogo contenido;

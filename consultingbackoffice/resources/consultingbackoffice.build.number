@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Jun 11 18:11:35 CEST 2015
+builddate=20150611 1811
+description=consultingbackoffice
+name=consultingbackoffice
+releasedate=20150608 1239
+vendor=hybris
+version=5.6.0.0
+version.api=5.6.0

@@ -1,0 +1,31 @@
+#
+# Import CMS content for the site
+#
+
+$contentCatalog=consultingstoreContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=es
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;mobile-account;"Mi cuenta"
+ ;;mobile-add-edit-address;"Añadir / Editar Dirección"
+ ;;mobile-address-book;"Directorio"
+ ;;mobile-cartPage;"Tu Carrito de Compras"
+ ;;mobile-checkout-login;"Pasar por la caja"
+ ;;mobile-faq;"Preguntas frecuentes"
+ ;;mobile-homepage;"Página de inicio"
+ ;;mobile-login;"Iniciar sesión"
+ ;;mobile-multiStepCheckoutSummaryPage;"Echa un vistazo"
+ ;;mobile-notFound;"Extraviado"
+ ;;mobile-order;"Detalles de pedidos"
+ ;;mobile-orderConfirmationPage;"Confirmación del pedido"
+ ;;mobile-orders;"Historial de Pedidos"
+ ;;mobile-payment-details;"Detalles del pago"
+ ;;mobile-profile;"perfilar"
+ ;;mobile-searchEmpty;"Sin resultados"
+ ;;mobile-storefinderPage;"StoreFinder"
+ ;;mobile-termsAndConditions;" Términos y Condiciones"
+ ;;mobile-updatePassword;"Actualización Recordar Contraseña"

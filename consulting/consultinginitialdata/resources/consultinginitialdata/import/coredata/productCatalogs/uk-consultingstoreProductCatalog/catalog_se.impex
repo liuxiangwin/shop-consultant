@@ -1,0 +1,11 @@
+#
+# Import the Product Catalog and Classification Catalog
+#
+$productCatalog=uk-consultingstoreProductCatalog
+
+# Language
+$lang=se
+
+# Create Catalog
+UPDATE Catalog;id[unique=true];name[lang=$lang]
+;$productCatalog;Konsult Store Product Catalog;
