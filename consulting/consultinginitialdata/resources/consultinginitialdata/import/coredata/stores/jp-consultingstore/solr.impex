@@ -31,7 +31,7 @@ $indexCurrencies=JPY,EUR,GBP
 #$solrMode=$config-uk.consultingsite.solrMode
 #$embedded=$config-uk.solr.embedded
 
-$solrMode=embedded
+$solrMode=standalone
 $embedded=embedded
 
 
