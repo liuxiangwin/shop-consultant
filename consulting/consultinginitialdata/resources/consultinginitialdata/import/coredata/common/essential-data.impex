@@ -148,9 +148,10 @@ INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
 ;us-sales-tax-full-t;0
 ;ca-sales-tax-full-t;0
 
-# Add cron jobs here
-
-################################## SELECT * FROM jobs 
+####################################################################
+					# Add cron jobs here
+					# SELECT * FROM jobs
+################################## ##################################
 INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;cartRemovalJob;cartRemovalJob
 ;siteMapMediaJob;siteMapMediaJob
