@@ -18,7 +18,6 @@ $classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$
 $prefix= uk-consulting
 $productCatalog= uk-consultingstoreProductCatalog
 $catalogVersions= catalogVersions(catalog(id),version);
-
 $serverConfigName=$prefixSolrServerConfig
 $indexConfigName=$prefixSolrIndexConfig
 $searchConfigName=$prefixPageSize
