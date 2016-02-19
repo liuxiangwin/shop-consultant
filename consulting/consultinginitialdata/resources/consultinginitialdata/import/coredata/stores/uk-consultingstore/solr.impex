@@ -26,7 +26,12 @@ $facetSearchConfigDescription=Consulting UK Solr index
 $searchIndexNamePrefix=$prefix
 $solrIndexedType=$prefixProductType
 $indexBaseSite=$prefixsite
-$indexLanguages=ja,en,de,fr,se,es
+
+#########################################################################################
+##### Highly Payattion to the Lanngue would create index according this language
+#########################################################################################
+
+$indexLanguages=ja,en
 $indexCurrencies=JPY,EUR,GBP
 
 
