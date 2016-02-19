@@ -21,7 +21,13 @@ $facetSearchConfigDescription=Consulting JP Solr index
 $searchIndexNamePrefix=$prefix
 $solrIndexedType=$prefixProductType
 $indexBaseSite=$prefixsite
-$indexLanguages=ja,en,de,fr,se,es
+
+#########################################################################################
+##### Highly Payattion to the Lanngue would create index according this language
+#	  $indexLanguages=ja,en,de,fr,se,es
+#########################################################################################
+
+$indexLanguages=ja,en
 $indexCurrencies=JPY,EUR,GBP
 $solrMode=embeddedalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
