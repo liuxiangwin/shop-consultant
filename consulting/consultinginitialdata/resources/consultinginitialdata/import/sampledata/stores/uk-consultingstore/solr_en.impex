@@ -1,7 +1,8 @@
 # ImpEx for SOLR Configuration
-
+###############################################################################################################################################################
 # Macros / Replacement Parameter definitions
 $prefix=consulting
+###############################################################################################################################################################
 
 $indexedType=ProductType
 $facetSearchConfigName=$prefixIndex
@@ -13,11 +14,12 @@ $contentCatalogName=consultingstoreContentCatalog
 $solrIndexedTypeStaged=uk-consultingstoreProductTypeStaged
 $solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline
 
+###############################################################################################################################################################
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
 $productCatalog=consultingstoreProductCatalog-uk
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
-
+###############################################################################################################################################################
 # Language
 $lang=en
 
