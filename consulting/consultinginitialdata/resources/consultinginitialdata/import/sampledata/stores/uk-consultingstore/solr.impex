@@ -30,27 +30,23 @@ $indexLanguages=ja,en
 
 $indexCurrencies=JPY,EUR,GBP
 
-
-
-#$solrMode=embeddedalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-
 $solrIndexedTypeStaged=uk-consultingstoreProductTypeStaged
 $solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline
 
 # Classification Facet properties
-INSERT_UPDATE SolrIndexedProperty;facet[default=true];solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=true];fieldValueProvider;;;;;;;;;$classAttributeAssignment
-;;$solrIndexedTypeStaged;programmingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;programmingclassification:::programmingdisciplines::::
-;;$solrIndexedTypeOnline;programmingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;programmingclassification:::programmingdisciplines::::
-;;$solrIndexedTypeStaged;dataSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;dataclassification:::datadisciplines::::
-;;$solrIndexedTypeOnline;dataSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;dataclassification:::datadisciplines::::
-;;$solrIndexedTypeStaged;softSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;businessuserclassification:::businessuserdisciplines::::
-;;$solrIndexedTypeOnline;softSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;businessuserclassification:::businessuserdisciplines::::
-;;$solrIndexedTypeStaged;devopsSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;operationalclassification:::devopsdisciplines::::
-;;$solrIndexedTypeOnline;devopsSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;operationalclassification:::devopsdisciplines::::
-;;$solrIndexedTypeStaged;testingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;testingclassification:::testingdisciplines::::
-;;$solrIndexedTypeOnline;testingSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;testingclassification:::testingdisciplines::::
-;;$solrIndexedTypeStaged;projectSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;projectmanagementclassification:::projectdisciplines::::
-;;$solrIndexedTypeOnline;projectSkills			;text   ;  			 ;    ;    ;;commerceClassificationPropertyValueProvider;;;;;;;;;projectmanagementclassification:::projectdisciplines::::
+INSERT_UPDATE SolrIndexedProperty;	facet[default=true];		solrIndexedType(identifier)[unique=true]	;name[unique=true]			;type(code)		;sortableType(code)	;currency[default=false]	;localized[default=false]	;multiValue[default=true]	;fieldValueProvider								;;;;;;;;	;$classAttributeAssignment
+								;					   ;		$solrIndexedTypeStaged						;programmingSkills			;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;programmingclassification:::programmingdisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;programmingSkills			;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;programmingclassification:::programmingdisciplines::::
+								;					   ;		$solrIndexedTypeStaged						;dataSkills					;text   		;  			 		;   						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;dataclassification:::datadisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;dataSkills					;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;dataclassification:::datadisciplines::::
+								;					   ;		$solrIndexedTypeStaged						;softSkills					;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;businessuserclassification:::businessuserdisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;softSkills					;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;businessuserclassification:::businessuserdisciplines::::
+								;					   ;		$solrIndexedTypeStaged						;devopsSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;operationalclassification:::devopsdisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;devopsSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;operationalclassification:::devopsdisciplines::::
+								;					   ;		$solrIndexedTypeStaged						;testingSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;testingclassification:::testingdisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;testingSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;testingclassification:::testingdisciplines::::
+								;					   ;		$solrIndexedTypeStaged						;projectSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;projectmanagementclassification:::projectdisciplines::::
+								;					   ;		$solrIndexedTypeOnline						;projectSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;projectmanagementclassification:::projectdisciplines::::
 
 
 
