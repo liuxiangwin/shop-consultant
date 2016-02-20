@@ -42,17 +42,17 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 
 
 # CMS Link Components
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
-;;GlobalCountryLink;Global Header Country Link;/;GlobalCountryLink;GlobalCountryLink;;;;
-;;HomepageNavLink;Home Page Nav Link;/;HomepageNavLink;HomepageNavLink;;;;
-;;StoreFinderLink;Store Finder Link;/store-finder;StoreFinderLink;StoreFinderLink;;;;
-;;LoginLink;Login Link;/login;LoginLink;LoginLink;;;;
-;;DevelopmentCategoryLink;Development Link;Development/c/Development;DevelopmentCategoryLink;DevelopmentCategoryLink;;Development;;
-;;OperationalCategoryLink;Operational Link;Operational/c/Operational;OperationalCategoryLink;OperationalCategoryLink;;Operational;;
-;;DataCategoryLink;Data Link;Data/c/Data;DataCategoryLink;DataCategoryLink;;Data;;
-;;Business-User-CentricCategoryLink;Business-User-Centric Link;Business-User-Centric/c/Business-User-Centric;Business-User-CentricCategoryLink;Business-User-CentricCategoryLink;;Business-User-Centric;;
-;;TestingCategoryLink;Testing Link;Testing/c/Testing;TestingCategoryLink;TestingCategoryLink;;Testing;;
-;;Project-ManagementCategoryLink;Project-Management Link;Project Management/c/Project Management;Project-ManagementCategoryLink;Project-ManagementCategoryLink;;Project Management;;
+INSERT_UPDATE CMSLinkComponent	;$contentCV[unique=true];uid[unique=true]					;name							;url												;&linkRef								;&componentRef						;target(code)[default='sameWindow']
+								;						;GlobalCountryLink					;Global Header Country Link		;/													;GlobalCountryLink						;GlobalCountryLink					;;;;
+								;						;HomepageNavLink					;Home Page Nav Link				;/													;HomepageNavLink						;HomepageNavLink					;;;;
+								;						;StoreFinderLink					;Store Finder Link				;/store-finder										;StoreFinderLink						;StoreFinderLink					;;;;
+								;						;LoginLink							;Login Link						;/login												;LoginLink								;LoginLink							;;;;
+								;						;DevelopmentCategoryLink			;Development Link				;Development/c/Development							;DevelopmentCategoryLink				;DevelopmentCategoryLink			;;Development;;
+								;						;OperationalCategoryLink			;Operational Link				;Operational/c/Operational							;OperationalCategoryLink				;OperationalCategoryLink			;;Operational;;
+								;						;DataCategoryLink					;Data Link						;Data/c/Data										;DataCategoryLink						;DataCategoryLink					;;Data;;
+								;						;Business-User-CentricCategoryLink	;Business-User-Centric Link		;Business-User-Centric/c/Business-User-Centric		;Business-User-CentricCategoryLink		;Business-User-CentricCategoryLink	;;Business-User-Centric;;
+								;						;TestingCategoryLink				;Testing Link					;Testing/c/Testing									;TestingCategoryLink					;TestingCategoryLink				;;Testing;;
+								;						;Project-ManagementCategoryLink		;Project-Management Link		;Project Management/c/Project Management			;Project-ManagementCategoryLink			;Project-ManagementCategoryLink		;;Project Management;;
 
 
 ;;AboutAcceleratorLink;About Accelerator Link;"http://www.hybris.com/multichannel-accelerator";AboutAcceleratorLink;AboutAcceleratorLink;newWindow;;;
@@ -88,14 +88,14 @@ INSERT_UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;&c
 ;;MiniCart;Mini Cart;MiniCart;SUBTOTAL;3;LightboxHomeDeliveryBannerComponent
 
 # Navigation Bar Component
-INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;&componentRef
-;;DevelopmentBarComponent;Development Bar Component;10;DevelopmentCategoryLink;;DevelopmentBarComponent
-;;DataBarComponent;Data Bar Component;10;DataCategoryLink;;DataBarComponent
-;;Business-User-CentricBarComponent;Business-User-Centric Bar Component;10;Business-User-CentricCategoryLink;;Business-User-CentricBarComponent
-;;OperationalBarComponent;Operational Bar Component;10;OperationalCategoryLink;;OperationalBarComponent
-;;TestingBarComponent;Testing Bar Component;10;TestingCategoryLink;;TestingBarComponent
-;;Project-ManagemenBarComponent;Project-Management Bar Component;10;Project-ManagementCategoryLink;;Project-ManagementBarComponent
-################################################### Finish Debuging Here###################################################
+INSERT_UPDATE NavigationBarComponent	;$contentCV[unique=true]	;uid[unique=true]					;name									;wrapAfter	;link(uid, $contentCV)				;styleClass		;&componentRef
+										;							;DevelopmentBarComponent			;Development Bar Component				;10			;DevelopmentCategoryLink			;				;DevelopmentBarComponent
+										;							;DataBarComponent					;Data Bar Component						;10			;DataCategoryLink					;				;DataBarComponent
+										;							;Business-User-CentricBarComponent	;Business-User-Centric Bar Component	;10			;Business-User-CentricCategoryLink	;				;Business-User-CentricBarComponent
+										;							;OperationalBarComponent			;Operational Bar Component				;10			;OperationalCategoryLink			;				;OperationalBarComponent
+										;							;TestingBarComponent				;Testing Bar Component					;10			;TestingCategoryLink				;				;TestingBarComponent
+										;							;Project-ManagementBarComponent		;Project-Management Bar Component		;10			;Project-ManagementCategoryLink		;				;Project-ManagementBarComponent
+################################################### Finish Debuging Here#########################################################################################################################################################
 
 
 # Account Navigation Bar Components
@@ -114,7 +114,7 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-;;NavBarComponent;Navigation Bar Collection Component;DevelopmentBarComponent,DataBarComponent,Business-User-CentricBarComponent,TestingBarComponent, OperationalBarComponent,Project-ManagemenBarComponent;NavBarComponent
+;;NavBarComponent;Navigation Bar Collection Component;DevelopmentBarComponent,DataBarComponent,Business-User-CentricBarComponent,TestingBarComponent, OperationalBarComponent,Project-ManagementBarComponent;NavBarComponent
 
 
 # CMS tabs components
@@ -278,14 +278,13 @@ INSERT_UPDATE CMSNavigationNode	;uid[unique=true]	;$contentCV[unique=true]	;name
 ############################################ Finish Debuging Here#####################################################
 
 # Navigation Bar Component
-INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
-;;DevelopmentBarComponent;DevelopmentNavNode
-;;DataBarComponent;DataNavNode
-;;Business-User-CentricBarComponent;Business-User-CentricNavNode
-;;TestingBarComponent;TestingNavNode
-;;OperationalBarComponent;OperationalNavNode
-######;;Project-ManagementBarComponent;Project-ManagementNavNode
-
+INSERT_UPDATE NavigationBarComponent;	$contentCV[unique=true];	uid[unique=true]					;navigationNode(&nodeRef)		;dropDownLayout(code)
+									;	;							DevelopmentBarComponent				;DevelopmentNavNode
+									;	;							DataBarComponent					;DataNavNode
+									;	;							Business-User-CentricBarComponent	;Business-User-CentricNavNode
+									;	;							TestingBarComponent					;TestingNavNode
+									;	;							OperationalBarComponent				;OperationalNavNode
+									;	;						Project-ManagementBarComponent			;Project-ManagementNavNode 
 ############################################ Project Managerment node notwork#####################################################
 
 
