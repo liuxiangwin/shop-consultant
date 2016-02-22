@@ -41,8 +41,8 @@ INSERT_UPDATE SolrIndexedProperty;	solrIndexedType(identifier)[unique=true];    
 #####################################################################################################################
 
 #UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost
-INSERT_UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost
- ;$solrIndexedTypeStaged;name-asc;"Name (ascending)";"false";
+INSERT_UPDATE SolrSort;	indexedType(identifier)[unique=true]	;code[unique=true]	;name[lang=$lang]	;	useBoost
+ 					  ;	$solrIndexedTypeStaged					;name-asc			;"Name (ascending)"	;	"false";
  ;$solrIndexedTypeStaged;name-desc;"Name (descending)";"false";
  ;$solrIndexedTypeStaged;price-asc;"Price (lowest first)";"false";
  ;$solrIndexedTypeStaged;price-desc;"Price (highest first)";"false";
@@ -55,4 +55,8 @@ INSERT_UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];na
  ;$solrIndexedTypeOnline;relevance;"Relevance";"true";
  ;$solrIndexedTypeOnline;topRated;"Top Rated";"false";
  
+ ;$solrIndexedTypeOnline;price-desc;"Guess-like";"false";
+ ;$solrIndexedTypeStaged;price-desc;"Guess-like";"false";
  
+ ####### Proudct search page list 相关性  Define the available sorts
+##################################################################################################################### 	
