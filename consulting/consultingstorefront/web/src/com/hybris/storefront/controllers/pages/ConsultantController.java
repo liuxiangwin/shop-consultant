@@ -19,7 +19,7 @@ import com.hybris.storefront.security.cookie.CountrySelectedCookieGenerator;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 @Controller

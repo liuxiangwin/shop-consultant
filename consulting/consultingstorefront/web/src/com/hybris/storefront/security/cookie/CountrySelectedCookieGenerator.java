@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public class CountrySelectedCookieGenerator extends EnhancedCookieGenerator

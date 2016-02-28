@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public interface StoreSessionHelper

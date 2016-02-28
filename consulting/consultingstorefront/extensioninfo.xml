@@ -13,8 +13,13 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
 	<extension abstractclassprefix="Generated" classprefix="ConsultingStorefront" name="consultingstorefront">
-		<requires-extension name="b2ccheckoutaddon"/>
-		<requires-extension name="btg"/>
+		
+		
+
+
+<requires-extension name="captainamerican"/>
+<requires-extension name="b2ccheckoutaddon"/>
+<requires-extension name="btg"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="consultingfacades"/>
 

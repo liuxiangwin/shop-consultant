@@ -54,7 +54,8 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 	}
 
 	@Override
-	public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException, ServletException
+	public void onLogoutSuccess(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) throws IOException, ServletException
 	{
 		getGuidCookieStrategy().deleteCookie(request, response);
 
@@ -75,7 +76,12 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 				targetUrl = super.getDefaultTargetUrl();
 			}
 		}
+		//final String targetUrlModify = "/jp-consultingsite/en/?clear=true&site=uk-consultingsite";
+		//https://localhost:9002/consultingstorefront/jp-consultingsite/en/?clear=true&site=jp-consultingsite
 
-		return targetUrl;
+
+		//return targetUrlModify;
+
+		return "https://localhost:9002/consultingstorefront/jp-consultingsite/en/?clear=true&site=uk-consultingsite";
 	}
 }

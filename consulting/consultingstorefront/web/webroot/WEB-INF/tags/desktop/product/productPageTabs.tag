@@ -17,4 +17,14 @@
 	<cms:pageSlot position="Tabs" var="tabs">
 		<cms:component component="${tabs}"/>
 	</cms:pageSlot>
+	
+	
+	<div class="tabHead" id="3d-design-tabHead">3D View SAP_3D</div>
+	<div class="tabBody" id="3d-design-tab-body"
+		onclick="javascript:LoadFile();"
+		style="padding: 0px; margin: 0px; display: block;"
+		data-format="SAP_3D">
+		
+
+	</div>
 </div>

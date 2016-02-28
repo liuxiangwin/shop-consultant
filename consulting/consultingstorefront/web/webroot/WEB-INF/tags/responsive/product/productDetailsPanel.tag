@@ -6,8 +6,16 @@
 
 
 <div class="product-details">
+	<h2>${consultant}</h2>
 	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-		<div class="name">${product.name} <span class="sku">ID ${product.code}</span></div>
+		<div class="name">${product.name} 
+			<span class="sku">ID ${product.code}
+			</span>
+			
+			<%-- <span class="surname">surname ${product.surname}
+			</span>
+			 --%>
+		</div>
 	</ycommerce:testId>
 	<product:productReviewSummary product="${product}" showLinks="true"/>
 

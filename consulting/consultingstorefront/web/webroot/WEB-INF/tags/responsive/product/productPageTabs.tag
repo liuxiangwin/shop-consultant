@@ -4,7 +4,8 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <div class="tabs js-tabs tabs-responsive">
-
+	
+	
 	<div class="tabhead">
 		<a href=""><spring:theme code="product.product.details" /></a> <span
 			class="glyphicon"></span>
@@ -28,9 +29,21 @@
 	<div class="tabbody">
 		<product:productPageReviewsTab product="${product}" />
 	</div>
+	
+	<div id="tabguessLike" class="tabhead">
+		<a href="">Guess You Like</a> <span
+			class="glyphicon"></span>
+	</div>	
+	<div class="tabbody">
+		<product:3DViewerTab product="${product}" />
+	</div>
+	
 
 	<cms:pageSlot position="Tabs" var="tabs">
 		<cms:component component="${tabs}" />
 	</cms:pageSlot>
+	
+	
+	
 
 </div>

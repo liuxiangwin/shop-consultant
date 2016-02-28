@@ -4,7 +4,7 @@
 package com.hybris.storefront.util.impl;
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 
@@ -24,7 +24,7 @@ import com.hybris.storefront.util.StoreSessionHelper;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public class DefaultStoreSessionHelper implements StoreSessionHelper

@@ -7,8 +7,10 @@
 
 <div class="tab-details">
 	<ycommerce:testId code="productDetails_content_label">
-		<p>
+		<p id="Alan">
 			${product.description}
 		<p>
+		
+		
 	</ycommerce:testId>
 </div>
