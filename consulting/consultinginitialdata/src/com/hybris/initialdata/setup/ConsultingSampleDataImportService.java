@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public class ConsultingSampleDataImportService extends SampleDataImportService

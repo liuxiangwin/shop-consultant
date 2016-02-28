@@ -8,7 +8,7 @@ import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public class ConsultingCoreDataImportService extends CoreDataImportService

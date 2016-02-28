@@ -6,8 +6,10 @@ $indexedType=ProductType
 $facetSearchConfigName=$prefixIndex
 $contentCatalogName=consultingstoreContentCatalog
 
-$solrIndexedTypeStaged=consultingstore-jp-ProductTypeStaged
-$solrIndexedTypeOnline=consultingstore-jp-ProductTypeOnline
+$solrIndexedTypeStaged=jp-consultingstoreProductTypeStaged
+$solrIndexedTypeOnline=jp-consultingstoreProductTypeOnline
+
+
 $solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
 $productCatalog=se-consultingstoreProductCatalog
@@ -16,19 +18,21 @@ $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=
 # Language
 $lang=en
 
-UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
-;$solrIndexedTypeStaged;programmingSkills;Programming Disciplines;
-;$solrIndexedTypeOnline;programmingSkills;Programming Disciplines;
-;$solrIndexedTypeStaged;dataSkills;Data Disciplines;
-;$solrIndexedTypeOnline;dataSkills;Data Disciplines;
-;$solrIndexedTypeStaged;softSkills;Soft Skill Disciplines;
-;$solrIndexedTypeOnline;softSkills;Soft Skill Disciplines;
-;$solrIndexedTypeStaged;devopsSkills;Devops Disciplines;
-;$solrIndexedTypeOnline;devopsSkills;Devops Disciplines;
-;$solrIndexedTypeStaged;testingSkills;Testing Disciplines;
-;$solrIndexedTypeOnline;testingSkills;Testing Disciplines;
-;$solrIndexedTypeStaged;projectSkills;Project Disciplines;
-;$solrIndexedTypeOnline;projectSkills;Project Disciplines;
+
+INSERT_UPDATE SolrIndexedProperty;	solrIndexedType(identifier)[unique=true];	name[unique=true];		displayName[lang=$lang]
+								;	$solrIndexedTypeStaged;						programmingSkills;		Programming Disciplines;
+								;	$solrIndexedTypeOnline;						programmingSkills;		Programming Disciplines;
+								;	$solrIndexedTypeStaged;						dataSkills;				Data Disciplines;
+								;	$solrIndexedTypeOnline;						dataSkills;				Data Disciplines;
+								;	$solrIndexedTypeStaged;						softSkills;				Soft Skill Disciplines;
+								;	$solrIndexedTypeOnline;						softSkills;				Soft Skill Disciplines;
+								;	$solrIndexedTypeStaged;						devopsSkills;			Devops Disciplines;
+								;	$solrIndexedTypeOnline;						devopsSkills;			Devops Disciplines;
+								;	$solrIndexedTypeStaged;						testingSkills;			Testing Disciplines;
+								;	$solrIndexedTypeOnline;						testingSkills;			Testing Disciplines;
+								;	$solrIndexedTypeStaged;						projectSkills;			Project Disciplines;
+								;	$solrIndexedTypeOnline;						projectSkills;			Project Disciplines;
+
 
 
 # Redirect page URL (Must use INSERT_UPDATE here)

@@ -97,6 +97,12 @@ INSERT_UPDATE SolrSort	;&sortRefID							;indexedType(identifier)[unique=true]		
 						;$solrIndexedTypeOnline-sortRef5	;$solrIndexedTypeOnline						;price-asc				;;;;;;;;;;;;;;
 						;$solrIndexedTypeStaged-sortRef6	;$solrIndexedTypeStaged						;price-desc				;;;;;;;;;;;;;;
 						;$solrIndexedTypeOnline-sortRef6	;$solrIndexedTypeOnline						;price-desc				;;;;;;;;;;;;;;
+						
+						;$solrIndexedTypeStaged-sortRef7	;$solrIndexedTypeStaged						;guess-like				;;;;;;;;;;;;;;
+						;$solrIndexedTypeOnline-sortRef7	;$solrIndexedTypeOnline						;guess-like				;;;;;;;;;;;;;;
+						
+####### Proudct search page list 相关性  Define the available sorts
+##################################################################################################################### 						
 
 
 
@@ -105,8 +111,8 @@ INSERT_UPDATE SolrSort	;&sortRefID							;indexedType(identifier)[unique=true]		
 #INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID);identityProvider;;;;;;;;;;;;
 ##################################################################################################################### 
 INSERT_UPDATE SolrIndexedType		;identifier[unique=true]		;type(code)		;variant	;sorts(&sortRefID)
-									;$solrIndexedTypeStaged			;Product		;FALSE		;$solrIndexedTypeStaged-sortRef1,$solrIndexedTypeStaged-sortRef3,$solrIndexedTypeStaged-sortRef4,$solrIndexedTypeStaged-sortRef5,$solrIndexedTypeStaged-sortRef6;;;;;;;;;;;;;
-									;$solrIndexedTypeOnline			;Product		;FALSE		;$solrIndexedTypeOnline-sortRef1,$solrIndexedTypeOnline-sortRef3,$solrIndexedTypeOnline-sortRef4,$solrIndexedTypeOnline-sortRef5,$solrIndexedTypeOnline-sortRef6;;;;;;;;;;;;;
+									;$solrIndexedTypeStaged			;Product		;FALSE		;$solrIndexedTypeStaged-sortRef1,$solrIndexedTypeStaged-sortRef3,$solrIndexedTypeStaged-sortRef4,$solrIndexedTypeStaged-sortRef5,$solrIndexedTypeStaged-sortRef6,$solrIndexedTypeStaged-sortRef7;;;;;;;;;;;;;
+									;$solrIndexedTypeOnline			;Product		;FALSE		;$solrIndexedTypeOnline-sortRef1,$solrIndexedTypeOnline-sortRef3,$solrIndexedTypeOnline-sortRef4,$solrIndexedTypeOnline-sortRef5,$solrIndexedTypeOnline-sortRef6,$solrIndexedTypeOnline-sortRef7;;;;;;;;;;;;;
 
 
 ##################################################################################################################### 

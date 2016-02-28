@@ -17,7 +17,7 @@ import org.junit.Test;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 @IntegrationTest

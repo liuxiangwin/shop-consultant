@@ -24,22 +24,22 @@ INSERT_UPDATE ClassificationSystemversion;catalog(id)[unique=true];version[uniqu
 
 # Add  classification and classification supercategory hierarchy
 INSERT_UPDATE ClassificationClass;code[unique=true];allowedPrincipals(uid)[default=customergroup];$superClass;name[lang=en];$sysVer[virtual=true,unique=true];;;;;;;;
-;programmingclassification;;;
-;dataclassification;;;
-;businessuserclassification;;;
-;operationalclassification;;;
-;testingclassification;;;
-;projectmanagementclassification;;;
+								;programmingclassification;;;
+								;dataclassification;;;
+								;businessuserclassification;;;
+								;operationalclassification;;;
+								;testingclassification;;;
+								;projectmanagementclassification;;;
 
 
 # Classification attribute (aka) feature descriptor (aka) feature list(s)
 INSERT_UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion
-;programmingdisciplines;
-;datadisciplines;
-;businessuserdisciplines;
-;devopsdisciplines;
-;testingdisciplines;
-;projectdisciplines;
+									;programmingdisciplines;
+									;datadisciplines;
+									;businessuserdisciplines;
+									;devopsdisciplines;
+									;testingdisciplines;
+									;projectdisciplines;
 
 
 

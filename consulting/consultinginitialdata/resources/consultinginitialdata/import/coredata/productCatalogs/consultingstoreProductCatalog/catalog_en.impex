@@ -3,7 +3,7 @@
 #
 
 ####################################################################
- Same Macro defination with catalog.impex
+# Same Macro defination with catalog.impex
 ####################################################################
 $productCatalog=consultingstoreProductCatalog
 ####################################################################

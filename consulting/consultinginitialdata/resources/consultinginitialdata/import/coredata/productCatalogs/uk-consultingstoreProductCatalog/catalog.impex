@@ -32,6 +32,7 @@ INSERT_UPDATE CatalogVersion; 	catalog(id)[unique=true];    version[unique=true]
 #########################################################################################################################################
 					# 			Insert Classifications System Version
 					# 						Not Implements
+					# 			SELECT * FROM catalogversions
 #########################################################################################################################################
 #INSERT_UPDATE ClassificationSystemVersion;catalog(id)[unique=true];version[unique=true];active;inclPacking[virtual=true,default=true];inclDuty[virtual=true,default=true];inclFreight[virtual=true,default=true];inclAssurance[virtual=true,default=true]
 #;$classificationCatalog;1.0;true

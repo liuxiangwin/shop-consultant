@@ -24,7 +24,7 @@ $facetSearchConfigDescription=Consulting JP Solr index
 $searchIndexNamePrefix=$prefix
 $solrIndexedType=$prefixProductType
 $indexBaseSite=$prefixsite
-$indexLanguages=ja,en,de,fr,se,es
+$indexLanguages=ja,en
 $indexCurrencies=JPY,EUR,GBP
 
 #

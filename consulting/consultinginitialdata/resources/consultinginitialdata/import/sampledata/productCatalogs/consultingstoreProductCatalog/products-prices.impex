@@ -15,9 +15,9 @@ $approved=approvalstatus(code)[default='approved']
 # Europe1PriceFactory_PTG(code)[default=uk-vat-full]
 # I'd prefer this wasn't set to product and instead to user group - future to get working
 ####################################################
-UPDATE Consultant;code[unique=true];unit(code)[default=HR];$prices;$approved;$catalogVersion
-;00000001;;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY;;;;
-;00000002;;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY;;;;
+UPDATE Consultant;	code[unique=true]	;unit(code)[default=HR]	;$prices										;$approved;$catalogVersion
+				;	00000001			;						;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY	;;;;
+				;	00000002			;						;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY	;;;;
 ;00000003;;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY;;;;
 ;00000004;;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY;;;;
 ;00000005;;50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY;;;;

@@ -1,21 +1,22 @@
 # ImpEx for Importing Categories
-
-# Macros / Replacement Parameter definitions
-$productCatalog=consultingstoreProductCatalog
-$productCatalogName=Consulting Store Product Catalog
-
+###############################################################################################################################################################
+				# Macros / Replacement Parameter definitions
+	$productCatalog=consultingstoreProductCatalog
+	$productCatalogName=Consulting Store Product Catalog
+###############################################################################################################################################################
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $supercategories=source(code, $catalogVersion)[unique=true]
 $categories=target(code, $catalogVersion)[unique=true]
 
 # Insert Categories
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
-;Development;
-;Data;
-;Business-User-Centric;
-;Operational;
-;Testing;
-;Project-Management;
+INSERT_UPDATE Category	;	code[unique=true];	allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+						;	Development;
+						;	Data;
+						;	Business-User-Centric;
+						;	Operational;
+						;	Testing;
+						;	Project-Management;
+						;	IT-Serivce;
 
 
 # Insert Category Structure

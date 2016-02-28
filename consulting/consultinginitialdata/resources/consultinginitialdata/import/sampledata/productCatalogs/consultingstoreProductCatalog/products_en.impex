@@ -11,7 +11,7 @@ $lang=en
 
 # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
-;00000001;;Steve Barnacle;;
+;00000001;;Alan Liu;;
 ;00000002;;Tracy Barnacle;;
 ;00000003;;Shannon Barnacle;;
 ;00000004;;Conrad Barnacle;;
@@ -45,7 +45,7 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 ;00000032;;Super Consultant-man;;
 ;00000033;;Brendon Dobbs;;
 ;00000034;;Craig David;;
-;00000035;;Marc Biscuit;;;00000001;;Steve Barnacle;;
+;00000035;;Marc Biscuit;;;00000001;;Alan Liu;;
 ;00000002;;Tracy Barnacle;;
 ;00000003;;Shannon Barnacle;;
 ;00000004;;Conrad Barnacle;;
@@ -131,7 +131,7 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 ;00000082;;Tiny Biggs;;
 ;00000083;;Ann Other;;
 ;00000084;;Les Vagas;
-;00000085;;Steve Barnacle;;
+;00000085;;Alan Liu;;
 ;00000086;;Tracy Barnacle;;
 ;00000087;;Shannon Barnacle;;
 ;00000088;;Conrad Barnacle;;
