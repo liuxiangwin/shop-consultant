@@ -3,17 +3,27 @@
  */
 package com.hybris.core.services.impl;
 
+import de.hybris.platform.catalog.CatalogVersionService;
+import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.search.restriction.SearchRestrictionService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.session.SessionService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.core.constants.ConsultingCoreConstants;
@@ -22,7 +32,7 @@ import com.hybris.core.services.ConsultantService;
 
 
 /**
- * @author Steve Barnacle
+ * @author Alan Liu
  *
  */
 public class DefaultConsultantService implements ConsultantService
@@ -31,6 +41,14 @@ public class DefaultConsultantService implements ConsultantService
 
 	private SessionService sessionService;
 
+	@Autowired
+	protected SearchRestrictionService searchRestrictionService;
+
+	@Autowired
+	private CatalogVersionService catalogVersionService;
+
+	@Resource
+	private CMSSiteService cmsSiteService;
 
 	public static final Logger LOG = Logger.getLogger(DefaultConsultantService.class);
 
@@ -43,8 +61,8 @@ public class DefaultConsultantService implements ConsultantService
 		exampleCountryModel.setIsocode(countryIsocode);
 		final CountryModel countryModel = flexibleSearchService.getModelByExample(exampleCountryModel);
 
-		final Language langauge = C2LManager.getInstance()
-				.getLanguageByIsoCode(countryModel.getDefaultLanguageIsocode().toLowerCase());
+		final Language langauge = C2LManager.getInstance().getLanguageByIsoCode(
+				countryModel.getDefaultLanguageIsocode().toLowerCase());
 		return langauge;
 	}
 
@@ -187,4 +205,80 @@ public class DefaultConsultantService implements ConsultantService
 		this.sessionService = sessionService;
 	}
 
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.hybris.core.services.ConsultantService#getExtraInfo(java.lang.String)
+	 */
+	@Override
+	public List<String> getExtraInfo(final String code)
+	{
+		final ConsultantModel exampleConsultant = new ConsultantModel();
+		exampleConsultant.setCode(code);
+		List<ConsultantModel> resultList = null;
+
+		//final String catalogId = "uk-consultingstoreProductCatalog";
+		//final String catalogVersion = "Online";
+
+		try
+		{
+			//searchRestrictionService.disableSearchRestrictions();
+			final String queryUserPk = "SELECT {p:" + ConsultantModel.PK + "} " + "FROM {" + ConsultantModel._TYPECODE + " AS p} "
+					+ "WHERE " + "{p:" + ConsultantModel.CODE + "}=?code";
+
+			final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
+			//final String catalogId = catalogVersionModel.getCatalog().getId(); // e.g. "mycatalog"
+			//final String catalogVersion = catalogVersionModel.getVersion(); // e.g. "Staged"
+
+			//catalogVersionService.setSessionCatalogVersion(catalogId, catalogVersion);
+
+			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
+
+			//query.setCatalogVersions(catalogVersionService.getCatalogVersion(catalogId, catalogVersion));
+			query.setCatalogVersions(catalogVersionModel);
+			query.addQueryParameter("code", code);
+
+			resultList = flexibleSearchService.<ConsultantModel> search(query).getResult();
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Exception" + e.getMessage());
+		}
+		finally
+		{
+			//searchRestrictionService.enableSearchRestrictions();
+		}
+
+		final List<String> list = new ArrayList<String>();
+
+		/*
+		 * for (int i = 0; i < resultList.size(); i++) { if (resultList.get(i).getSurname() != null) {
+		 * list.add(resultList.get(0).getSurname()); }
+		 * 
+		 * if (resultList.get(i).getForname() != null) { //list.add(resultList.get(0).getSurname());
+		 * list.add(resultList.get(i).getForname()); }
+		 * 
+		 * //list.add(consultant.getForname()); return list;
+		 * 
+		 * }
+		 */
+
+
+		if (resultList.size() > 0)
+		{
+
+			list.add(resultList.get(0).getSurname());
+			list.add(resultList.get(0).getForname());
+			return list;
+		}
+		else
+		{
+			return Collections.emptyList();
+		}
+
+
+
+	}
 }

@@ -7,12 +7,13 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.jalo.c2l.Language;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.hybris.core.model.ConsultantModel;
 
 
 /**
- * @author Steve Barnacle
+ * @author Alan Liu
  *
  */
 public interface ConsultantService
@@ -46,4 +47,7 @@ public interface ConsultantService
 
 
 	Language getDefaultLanguageForCountryIsocode(String countryIsocode);
+
+
+	List<String> getExtraInfo(String code);
 }

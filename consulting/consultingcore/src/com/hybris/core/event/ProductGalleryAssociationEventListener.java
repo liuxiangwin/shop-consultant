@@ -23,7 +23,7 @@ import com.hybris.core.model.ConsultantModel;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public class ProductGalleryAssociationEventListener extends AbstractEventListener<AfterItemCreationEvent>

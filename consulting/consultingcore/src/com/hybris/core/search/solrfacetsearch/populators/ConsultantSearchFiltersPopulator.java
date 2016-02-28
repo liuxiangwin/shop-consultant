@@ -19,7 +19,7 @@ import com.hybris.core.services.ConsultantService;
 
 
 /**
- * @author Steve Barnacle
+ * @author Alan Liu
  *
  */
 
