@@ -4,10 +4,13 @@
 package com.hybris.facades.product;
 
 import de.hybris.platform.jalo.c2l.Language;
+import de.hybris.platform.commercefacades.order.data.ConsultantData;
+
+import java.util.List;
 
 
 /**
- * @author I320189
+ * @author Alan Liu
  *
  */
 public interface ConsultantFacade
@@ -38,5 +41,8 @@ public interface ConsultantFacade
 	 * @return Language
 	 */
 	Language getDefaultLanguageForCountryIsocode(String countryIsocode);
+
+
+	List<ConsultantData> getExtraInfo(String code);
 
 }

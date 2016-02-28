@@ -3,14 +3,18 @@
  */
 package com.hybris.facades.product.impl;
 
+import de.hybris.platform.commercefacades.order.data.ConsultantData;
 import de.hybris.platform.jalo.c2l.Language;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hybris.core.services.ConsultantService;
 import com.hybris.facades.product.ConsultantFacade;
 
 
 /**
- * @author Steve
+ * @author Alan Liu
  *
  */
 public class DefaultConsultantFacade implements ConsultantFacade
@@ -81,5 +85,32 @@ public class DefaultConsultantFacade implements ConsultantFacade
 	public void setConsultantService(final ConsultantService consultantService)
 	{
 		this.consultantService = consultantService;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hybris.facades.product.ConsultantFacade#getExtraInfo(java.lang.String)
+	 */
+	@Override
+	public List<ConsultantData> getExtraInfo(final String code)
+	{
+
+		final List<String> result = consultantService.getExtraInfo(code);
+
+		final List<ConsultantData> datas = new ArrayList<ConsultantData>();
+		final ConsultantData consultantData = new ConsultantData();
+		if (result.get(0) != null)
+		{
+			consultantData.setForName(result.get(0));
+		}
+		if (result.get(1) != null)
+		{
+			consultantData.setSurName(result.get(1));
+		}
+
+		datas.add(consultantData);
+		return datas;
 	}
 }

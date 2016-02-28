@@ -20,4 +20,10 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.ConsultantData">
+		<property name="surName" type="String"/>
+		<property name="forName" type="String"/>
+	</bean>	
 </beans>
