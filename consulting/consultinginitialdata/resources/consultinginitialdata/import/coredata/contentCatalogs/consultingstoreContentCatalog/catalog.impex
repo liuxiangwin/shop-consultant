@@ -10,21 +10,21 @@ $languages= ja,en,de,fr,se,es
 ###############################################################################################################################################################
 
 
-###############################################################################################################################################################
+###############################################################################	################################################################################
 # 			Content catalog for CMS contents
 ###############################################################################################################################################################
 #### SELECT * FROM catalogs 
 ###############################################################################################################################################################
-INSERT_UPDATE  ContentCatalog;    id[unique=true]
-							 ;    $contentCatalog
+INSERT_UPDATE  ContentCatalog ; id[unique=true]
+                              ; $contentCatalog
 
 ###############################################################################################################################################################
 # 			Catalog versions for content catalogs
 ###############################################################################################################################################################
 
-INSERT_UPDATE CatalogVersion; catalog(id)[unique=true];  version[unique=true]; active;  languages(isoCode); writePrincipals(uid)[mode=append]; readPrincipals(uid)[mode=append]
-							; $contentCatalog         ;  Staged              ; false;   $languages        ; cmsmanagergroup                  ; cmsmanagergroup;
-							; $contentCatalog         ;  Online              ; true ;   $languages        ; cmsmanagergroup                  ; cmsmanagergroup;
+INSERT_UPDATE CatalogVersion ; catalog(id)[unique=true] ; version[unique=true] ; active ; languages(isoCode) ; writePrincipals(uid)[mode=append] ; readPrincipals(uid)[mode=append]
+                             ; $contentCatalog          ; Staged               ; false  ; $languages         ; cmsmanagergroup                   ; cmsmanagergroup                 ;  
+                             ; $contentCatalog          ; Online               ; true   ; $languages         ; cmsmanagergroup                   ; cmsmanagergroup                 ;  
 ###############################################################################################################################################################
 
 

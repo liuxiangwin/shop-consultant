@@ -10,10 +10,10 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $lang=de
 
 # Create Categories
-UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
-;Development;;Weiterentwicklung
-;Data;;Daten
-;Business-User-Centric;;Business-User-Centric
-;Operational;;Operational
-;Testing;;Erprobung
-;Project-Management;;Projektmanagement
+UPDATE Category ; code[unique=true]     ; $catalogVersion ; name[lang=$lang]     
+                ; Development           ;                 ; Weiterentwicklung    
+                ; Data                  ;                 ; Daten                
+                ; Business-User-Centric ;                 ; Business-User-Centric
+                ; Operational           ;                 ; Operational          
+                ; Testing               ;                 ; Erprobung            
+                ; Project-Management    ;                 ; Projektmanagement    
