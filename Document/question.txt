@@ -1,0 +1,103 @@
+﻿              
+1.	Mapping and relationship between CMSSite and Store. it's like the use of base store and what are related affects.
+2.	Product catalog reference in content and synchronization issue.
+3.	The WCMS implementation mechanism with template, if same template refer by different page.
+4.	Check out process and order process.
+5.	Different between hop and sop in Checkout process .
+6.	Solr understanding ,if we need customization facet, if we want to change sequence like “Shop by price” before “shop by brand”.
+7.	Content  synchronization between global and country level, focus on 2 country site.
+and it would digging into this part  demo what I got in the next following
+
+#########################################################################################################################
+https://wiki.hybris.com/display/~tuna.ozkasap@sap.com/Stores+and+Sites
+
+https://wiki.hybris.com/display/ps/SE+-+Technical+screening
+
+#########################################################################################################################
+
+#########################################################################################################################
+                       Solr
+#################################################################################
+There plenty of place to memory,if i want to make a product work in the solr
+1.How to cofig solr .which file we need attention to 
+2.How does solr work,(i alreay know the send the request and return indexing data) search resitrition for
+#################################################################################
+
+
+#########################################################################################################################
+                  	Catlog
+#################################################################################
+
+how to design catelog we know we have content catalog and product catelog
+price,detail,media
+
+3.What is site mean,store mean
+4.TyepeofPkString vs pk
+5.why need 1 contentCatalog and nx product and stores?
+7.what is category classfication for
+
+8.what is catalog really meaning for design
+#################################################################################
+
+                  	UML wiki Media conversion
+#################################################################################
+6.how to picture the UML and post wiki
+
+9.Acquiring Consultant Images
+Media converstion
+
+
+
+#################################################################################
+The product you sell is
+Consultants
+1.The price is the daily rate
+2.The skills are classification attributes
+3.Some consultants are available in some countries, others not
+#################################################################################
+Product Search Page
+SOLR should be used for searching
+We should only be able to search products that are searchable/visible for the current country.
+SOLR should run standalone
+#################################################################################
+
+
+Product Catalog Requirements:
+There should be a global product catalog where we can create/import products. The global product catalog administrators need to approve products before they are accessible by the countries.
+There should be the capability for country administrators to change products and prices without affecting other countries.
+There should be the capability for country administrators to disable products from being searchable/visible in that country.
+######uk-consultingstore
+#################################################################################
+
+
+The shop will have the following pages:
+Choose Country Page
+Product Search Page
+Product Detail Page
+Shopping Cart Page
+Checkout Page
+User Registration Page
+Login Page
+
+
+Question pattern like what already konw then what is my quesiton about,
+then you answer me and guide me which way to conquer.
+
+
+solr.impex
+
+
+
+
+
+
+
+
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+
+
+email-content-slot 出错
+
