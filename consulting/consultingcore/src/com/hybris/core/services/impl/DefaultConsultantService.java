@@ -217,10 +217,6 @@ public class DefaultConsultantService implements ConsultantService
 		final ConsultantModel exampleConsultant = new ConsultantModel();
 		exampleConsultant.setCode(code);
 		List<ConsultantModel> resultList = null;
-
-		//final String catalogId = "uk-consultingstoreProductCatalog";
-		//final String catalogVersion = "Online";
-
 		try
 		{
 			//searchRestrictionService.disableSearchRestrictions();
@@ -230,15 +226,12 @@ public class DefaultConsultantService implements ConsultantService
 			final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
 			//final String catalogId = catalogVersionModel.getCatalog().getId(); // e.g. "mycatalog"
 			//final String catalogVersion = catalogVersionModel.getVersion(); // e.g. "Staged"
-
 			//catalogVersionService.setSessionCatalogVersion(catalogId, catalogVersion);
 
 			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
-
 			//query.setCatalogVersions(catalogVersionService.getCatalogVersion(catalogId, catalogVersion));
 			query.setCatalogVersions(catalogVersionModel);
 			query.addQueryParameter("code", code);
-
 			resultList = flexibleSearchService.<ConsultantModel> search(query).getResult();
 
 		}
@@ -253,19 +246,6 @@ public class DefaultConsultantService implements ConsultantService
 
 		final List<String> list = new ArrayList<String>();
 
-		/*
-		 * for (int i = 0; i < resultList.size(); i++) { if (resultList.get(i).getSurname() != null) {
-		 * list.add(resultList.get(0).getSurname()); }
-		 * 
-		 * if (resultList.get(i).getForname() != null) { //list.add(resultList.get(0).getSurname());
-		 * list.add(resultList.get(i).getForname()); }
-		 * 
-		 * //list.add(consultant.getForname()); return list;
-		 * 
-		 * }
-		 */
-
-
 		if (resultList.size() > 0)
 		{
 
@@ -277,8 +257,24 @@ public class DefaultConsultantService implements ConsultantService
 		{
 			return Collections.emptyList();
 		}
+	}
 
 
-
+	public List<ConsultantModel> getTutoContentProduct()
+	{
+		List<ConsultantModel> foundContentList = null;
+		try
+		{
+			final String queryUserPk = "SELECT {p:" + ConsultantModel.PK + "} " + "FROM {" + ConsultantModel._TYPECODE + " AS p} ";
+			//final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
+			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
+			//query.setCatalogVersions(catalogVersionModel);
+			foundContentList = flexibleSearchService.<ConsultantModel> search(query).getResult();
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Exception" + e.getMessage());
+		}
+		return foundContentList;
 	}
 }
