@@ -22,32 +22,34 @@ public interface ConsultantService
 	 * @param consultantModel
 	 * @return Collection<CountryModel>
 	 */
-	Collection<CountryModel> getActiveCountries(ConsultantModel consultantModel);
+	public Collection<CountryModel> getActiveCountries(ConsultantModel consultantModel);
 
 
 	/**
 	 * @param sessionService
 	 * @return String
 	 */
-	String getCountrySelectedForSession(boolean returnSafeDefault);
+	public String getCountrySelectedForSession(boolean returnSafeDefault);
 
 
 	/**
 	 * @param sessionService
 	 * @param countryCode
 	 */
-	void setCountryCodeSelectedForSession(String countryCode);
+	public void setCountryCodeSelectedForSession(String countryCode);
 
 
 	/**
 	 * @param sessionService
 	 * @param countryCode
 	 */
-	void setCountryPkSelectionForSession(String countryCode);
+	public void setCountryPkSelectionForSession(String countryCode);
 
 
-	Language getDefaultLanguageForCountryIsocode(String countryIsocode);
+	public Language getDefaultLanguageForCountryIsocode(String countryIsocode);
 
 
-	List<String> getExtraInfo(String code);
+	public List<String> getExtraInfo(String code);
+
+	public List<ConsultantModel> getTutoContentProduct();
 }
