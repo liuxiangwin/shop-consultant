@@ -14,6 +14,18 @@ $jarResourceCms=$config-jarResourceCmsValue
 # "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
 # "RestrictedPageTypes" is used to restrict templates to page types                                        
 
+###### 1.Create PageTempate first;(it contains Frontime Template name could also read through hmc)
+###### 2.Also update PageTempate first could with cscockpit like (jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm);
+
+###### 3.insert update (ContentSlotName) and it is for recording the connection with VariantSelector(name) 
+######  and concreate component implementaion
+
+###### 4.Create Content Slots,INSERT_UPDATE (ContentSlot) pay attenion it is contentslot not contenslot name ; recording all the contentslot in it
+
+####### 5.Create INSERT_UPDATE ContentSlotForTemplate,   recording  connection between VariantSelector-ProductDetails  and  VariantSelector
+######## it record through postion with slot name
+
+
 
 ########################################################################################################## 
 #  							PageTemplate                                                                                     
@@ -93,7 +105,10 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
 
 # Product Details Page Template
 # The CrossSelling and UpSelling slots are designed for related products, cross-sells and up-sells.
-INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'] ; validComponentTypes(code)       ; compTypeGroup(code)
+
+############## ContentSlotName is for recording the connection with VariantSelector(name) and concreate component implementaion
+
+INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='F'] ; validComponentTypes(code)       ; compTypeGroup(code)
                               ; SiteLogo               ;                                                                             ;                                 ; logo               
                               ; CountryLink            ;                                                                             ;                                 ; narrow             
                               ; HeaderLinks            ;                                                                             ;                                 ; headerlinks        
@@ -780,8 +795,11 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
                                      ;                         ; TopHeaderSlot-ErrorPage          ; TopHeaderSlot          ;                                                                        ; TopHeaderSlot                            ; true          
                                      ;                         ; BottomHeaderSlot-ErrorPage       ; BottomHeaderSlot       ;                                                                        ; BottomHeaderSlot                         ; true          
                                      ;                         ; PlaceholderContentSlot-ErrorPage ; PlaceholderContentSlot ;                                                                        ; PlaceholderContentSlot                   ; true          
-
+  
+                                     
+########################################################################################################## ########################################################################################################## 
 # Create Content Pages               
+########################################################################################################## ########################################################################################################## 
 
 # Site-wide Homepage                 
 INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name     ; masterTemplate(uid,$contentCV) ; label   ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='true']

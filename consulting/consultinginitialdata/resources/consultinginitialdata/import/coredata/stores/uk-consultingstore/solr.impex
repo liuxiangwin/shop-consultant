@@ -255,6 +255,9 @@ INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; n
                                   ; $solrIndexedTypeStaged                   ; stockLevelStatus       ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; productStockLevelStatusValueProvider    ;                       
                                   ; $solrIndexedTypeOnline                   ; stockLevelStatus       ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; productStockLevelStatusValueProvider    ;                       
 
+								  ; $solrIndexedTypeOnline					 ; contentValue           ; string 	   ;                    ;                         ;true                      ;    						 ;    								  ;    								  ; tutoProductContentValueProvider         ;
+								  ; $solrIndexedTypeStaged					 ; contentValue           ; string 	   ;                    ;                         ;true                      ;    						 ;    								  ;    								  ; tutoProductContentValueProvider         ;
+
 ##################################################################################################################### 
 # 												Category fields     
 

@@ -14,9 +14,9 @@ $activeCountries=activeCountries(isocode[unique=true])
 
 
 # Insert Products				
-INSERT_UPDATE Consultant ; code[unique=true] ; $supercategories                                                              ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved
+INSERT_UPDATE Consultant ; code[unique=true] ; $supercategories                                                              ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved; content  
 # Uber expert (me) ;-)   
-                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; hybris           ;                 ;                        ;     ;                   ;                 ;          ;  
+                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; hybris           ;                 ;                        ;     ;                   ;                 ;          ;  NBA-Team
 
 # Development consultants only
                          ; 00000002          ; Development                                                                   ; hybris           ;                 ;                        ;     ;                   ;                 ;          
