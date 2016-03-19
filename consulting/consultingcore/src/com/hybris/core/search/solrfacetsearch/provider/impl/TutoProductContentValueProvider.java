@@ -45,7 +45,17 @@ public class TutoProductContentValueProvider extends AbstractPropertyFieldValueP
 		{
 			if (consultantModel != null)
 			{
-				fieldValues.add(new FieldValue("Tuto-Content", consultantModel.getContent()));
+
+				final Collection<String> fieldNames = fieldNameProvider.getFieldNames(indexedProperty, null);
+				for (final String fieldName : fieldNames)
+				{
+					//fieldValues.add(new FieldValue("contentValue", consultantModel.getContent()));
+					fieldValues.add(new FieldValue(fieldName, consultantModel.getContent()));
+				}
+
+
+
+
 			}
 		}
 
