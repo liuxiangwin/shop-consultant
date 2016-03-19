@@ -52,4 +52,6 @@ public interface ConsultantService
 	public List<String> getExtraInfo(String code);
 
 	public List<ConsultantModel> getTutoContentProduct();
+
+	public String getTutoContentProduct(ConsultantModel consultantModel);
 }

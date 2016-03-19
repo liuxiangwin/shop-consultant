@@ -260,6 +260,7 @@ public class DefaultConsultantService implements ConsultantService
 	}
 
 
+	@Override
 	public List<ConsultantModel> getTutoContentProduct()
 	{
 		List<ConsultantModel> foundContentList = null;
@@ -276,5 +277,23 @@ public class DefaultConsultantService implements ConsultantService
 			LOG.error("Exception" + e.getMessage());
 		}
 		return foundContentList;
+	}
+
+
+	@Override
+	public String getTutoContentProduct(final ConsultantModel consultantModel)
+	{
+		final ConsultantModel exampleConsultant = new ConsultantModel();
+		exampleConsultant.setCode(consultantModel.getCode());
+		final ConsultantModel consultant = flexibleSearchService.getModelByExample(exampleConsultant);
+
+		if (consultant != null)
+		{
+			return consultant.getContent();
+		}
+		else
+		{
+			return "";
+		}
 	}
 }
