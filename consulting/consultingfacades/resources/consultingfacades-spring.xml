@@ -190,4 +190,20 @@
 	</bean>
 
 	<bean id="genderData" class="com.hybris.facades.product.data.GenderData" scope="prototype"/>
+	
+	<!-- <alias name="tutoContentCommerceSearchResultProductPopulator" alias="tutoContentCommerceSearchResultProductPopulator"/>
+    <bean id="tutoContentCommerceSearchResultProductPopulator"
+          class="com.hybris.facades.populators.TutoSearchResultProductPopulator">
+    </bean> 
+	 -->
+	
+	<alias name="tutoContentCommerceSearchResultProductPopulator" alias="tutoContentCommerceSearchResultProductPopulator"/>
+    <bean id="tutoContentCommerceSearchResultProductPopulator"
+          class="com.hybris.facades.populators.TutoSearchResultProductPopulator"
+          parent="defaultCommerceSearchResultProductPopulator">
+    </bean>
+	
+	
+	
+	
 </beans>

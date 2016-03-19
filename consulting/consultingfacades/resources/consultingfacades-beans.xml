@@ -25,5 +25,11 @@
 	<bean class="de.hybris.platform.commercefacades.order.data.ConsultantData">
 		<property name="surName" type="String"/>
 		<property name="forName" type="String"/>
+		<property name="content" type="String"/>
 	</bean>	
+	
+				
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">		
+		<property name="content" type="String"/>
+	</bean>
 </beans>
