@@ -108,7 +108,7 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
 
 ############## ContentSlotName is for recording the connection with VariantSelector(name) and concreate component implementaion
 
-INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='F'] ; validComponentTypes(code)       ; compTypeGroup(code)
+INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'] ; validComponentTypes(code)       ; compTypeGroup(code)
                               ; SiteLogo               ;                                                                             ;                                 ; logo               
                               ; CountryLink            ;                                                                             ;                                 ; narrow             
                               ; HeaderLinks            ;                                                                             ;                                 ; headerlinks        
