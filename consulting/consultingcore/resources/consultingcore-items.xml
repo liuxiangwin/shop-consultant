@@ -13,6 +13,13 @@
 			autocreate="true" generate="true" type="list" />
 		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum"
 			autocreate="true" generate="true" type="set" />
+
+		<collectiontype code="ConsultantLevel" elementtype="ConsultantLevelEnum"
+			autocreate="true" generate="true" type="set" />
+
+		<collectiontype code="ConsultantSerivceType"
+			elementtype="ConsultantSerivceTypeEnum" autocreate="true" generate="true"
+			type="set" />
 	</collectiontypes>
 
 
@@ -32,6 +39,22 @@
 			<value code="WHITE" />
 			<value code="YELLOW" />
 		</enumtype>
+
+		<enumtype code="ConsultantLevelEnum" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="Principal" />
+			<value code="Senior" />
+			<value code="Standard" />
+		</enumtype>
+
+		<enumtype code="ConsultantSerivceTypeEnum" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="Code_Review" />
+			<value code="Perf_Review" />
+			<value code="System_Review" />
+			<value code="Common_Support" />
+		</enumtype>
+
 	</enumtypes>
 
 
@@ -60,7 +83,9 @@
 			</attributes>
 		</itemtype>
 
+		<!-- Add New Type code here for refernce -->
 		<typegroup name="Consulting">
+
 			<itemtype code="Consultant" extends="Product" autocreate="true"
 				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
 				<description>The representation of a consultant</description>
@@ -76,15 +101,61 @@
 						<persistence type="property"></persistence>
 					</attribute>
 
-					<!-- [y] Add Alan property to solr indexing. -->					
+					<!-- [y] Add Alan property to solr indexing. -->
 					<attribute type="java.lang.String" qualifier="content">
 						<modifiers optional="true" />
 						<persistence type="property" />
 						<description>Attribute is used in category/search page to display the product content</description>
 					</attribute>
-
 				</attributes>
 			</itemtype>
+
+			<itemtype code="ConsultantLevelVariantProduct" extends="VariantProduct"
+				autocreate="true" generate="true"
+				jaloclass="com.hybris.core.jalo.ConsultantLevelVariantProduct">
+				<description>Consultant VariantProduct type that contains different level
+				</description>
+				<attributes>
+					<attribute qualifier="level" type="localized:java.lang.String"
+						metatype="VariantAttributeDescriptor">
+						<description>"consult level" e.g. principal/senior/standard level.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="level" type="ConsultantLevel">
+						<description>ConsultantL evel.
+						</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+
+			<itemtype code="ConsultantServiceVariantProduct" extends="VariantProduct"
+				autocreate="true" generate="true"
+				jaloclass="com.hybris.core.jalo.ConsultantServiceVariantProduct">
+				<description>Consultant VariantProduct type that contains different level
+				</description>
+				<attributes>
+					<attribute qualifier="level" type="localized:java.lang.String"
+						metatype="VariantAttributeDescriptor">
+						<description>"consult level" e.g. principal/senior/standard level.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="service" type="ConsultantSerivceType">
+						<description>Consultant Serivce Type
+						</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
 		</typegroup>
 
 
