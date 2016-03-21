@@ -35,6 +35,15 @@
 					<format:price priceData="${product.price}"/>
 				</div>
 			</ycommerce:testId>
+			
+			
+		<ycommerce:testId code="test_searchPage_wholeProduct">
+			    <div class="contentProduct">
+			       <%--  <format:content value="${product.content}"/> --%>
+			       <%--  <h2>Alan ${product.content}</h2> --%>
+			    </div>
+			</ycommerce:testId> 
+			
 
 
 			<ycommerce:testId code="searchPage_productName_link_${product.code}">

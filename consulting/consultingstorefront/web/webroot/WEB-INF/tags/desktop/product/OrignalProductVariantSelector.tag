@@ -7,32 +7,17 @@
 <%@ attribute name="product" required="true" type="de.hybris.platform.commercefacades.product.data.ProductData" %>
 
 		<c:set var="showAddToCart"  value="" scope="session" />
-		<div id="shoot">
-		 <h2>Alan Variant Product</h2>
-		 <h2 id="variantType">${product.variantType}</h2>
-		 <h2 id="variantOptions">${product.variantOptions}</h2>
-		 
-		 <h2 id="product.baseOptions[0].options">${product.baseOptions[0]}</h2>
-	   </div>
-	   
-	   
-		<%-- Determine if product is one of apparel style or size variant --%>
-
-		<%-- <c:if test="${product.variantType eq 'ApparelStyleVariantProduct'}"> --%>
-		
-		<c:if test="${product.variantType eq 'ConsultantLevelVariantProduct'}">
+	 <h2>Alan Variant Product</h2>
+<%-- Determine if product is one of apparel style or size variant --%>
+		<c:if test="${product.variantType eq 'ApparelStyleVariantProduct'}">
 			<c:set var="variantStyles" value="${product.variantOptions}" />
 		</c:if>
-		<%-- <c:if test="${(not empty product.baseOptions[0].options) and (product.baseOptions[0].variantType eq 'ApparelStyleVariantProduct')}"> --%>
-		<c:if test="${(not empty product.baseOptions[0].options) and (product.baseOptions[0].variantType eq 'ConsultantLevelVariantProduct')}">
+		<c:if test="${(not empty product.baseOptions[0].options) and (product.baseOptions[0].variantType eq 'ApparelStyleVariantProduct')}">
 			<c:set var="variantStyles" value="${product.baseOptions[0].options}" />
 			<c:set var="variantSizes" value="${product.variantOptions}" />
 			<c:set var="currentStyleUrl" value="${product.url}" />
 		</c:if>
-		
-		<%-- <c:if test="${(not empty product.baseOptions[1].options) and (product.baseOptions[0].variantType eq 'ApparelSizeVariantProduct')}"> --%>
-		
-		<c:if test="${(not empty product.baseOptions[1].options) and (product.baseOptions[0].variantType eq 'ConsultantServiceVariantProduct')}">
+		<c:if test="${(not empty product.baseOptions[1].options) and (product.baseOptions[0].variantType eq 'ApparelSizeVariantProduct')}">
 			<c:set var="variantStyles" value="${product.baseOptions[1].options}" />
 			<c:set var="variantSizes" value="${product.baseOptions[0].options}" />
 			<c:set var="currentStyleUrl" value="${product.baseOptions[1].selected.url}" />
