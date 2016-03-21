@@ -66,8 +66,19 @@
 				cardinality="many"></sourceElement>
 			<targetElement type="Country" qualifier="activeCountries"
 				cardinality="many"></targetElement>
-
 		</relation>
+		
+		
+		<relation localized="false" generate="true"
+			code="VariantConsultant2CountryRelation">
+			<deployment table="VariantCon2CntryRel" typecode="18001" />
+			<sourceElement type="Consultant" qualifier="consultant"
+				cardinality="many"></sourceElement>
+			<targetElement type="Country" qualifier="activeCountries"
+				cardinality="many"></targetElement>
+		</relation>
+		
+		
 	</relations>
 
 	<itemtypes>
@@ -85,7 +96,6 @@
 
 		<!-- Add New Type code here for refernce -->
 		<typegroup name="Consulting">
-
 			<itemtype code="Consultant" extends="Product" autocreate="true"
 				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
 				<description>The representation of a consultant</description>
@@ -123,7 +133,7 @@
 						<persistence type="property" />
 					</attribute>
 
-					<attribute qualifier="level" type="ConsultantLevel">
+					<attribute qualifier="levelCategory" type="ConsultantLevel">
 						<description>ConsultantL evel.
 						</description>
 						<modifiers />
@@ -147,7 +157,7 @@
 						<persistence type="property" />
 					</attribute>
 
-					<attribute qualifier="service" type="ConsultantSerivceType">
+					<attribute qualifier="serviceCatgory" type="ConsultantSerivceType">
 						<description>Consultant Serivce Type
 						</description>
 						<modifiers />
