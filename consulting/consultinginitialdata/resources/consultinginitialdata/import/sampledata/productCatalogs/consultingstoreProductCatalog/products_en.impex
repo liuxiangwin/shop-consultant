@@ -45,7 +45,7 @@ UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]     ; su
                ; 00000032          ;                 ; Super Consultant-man ;                     ;                        
                ; 00000033          ;                 ; Brendon Dobbs        ;                     ;                        
                ; 00000034          ;                 ; Craig David          ;                     ;                        
-               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                      
+               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                        
                ; 00000002          ;                 ; Tracy Barnacle       ;                     ;                        
                ; 00000003          ;                 ; Shannon Barnacle     ;                     ;                        
                ; 00000004          ;                 ; Conrad Barnacle      ;                     ;                        
@@ -81,3 +81,16 @@ UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]     ; su
                ; 00000034          ;                 ; Craig David          ;                     ;                        
                ; 00000035          ;                 ; Marc Biscuit         ;                     ;                        
                ; 00000036          ;                 ; Ali Mony             ;                     ;                        
+
+               
+               
+# Update Varaiant Product Name
+UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
+               ; 00000266          ;                 ; Steve Roges      ;                     ;                        
+               ; 00000267          ;                 ; Tony Stark       ;                     ;                        
+               ; 00000268          ;                 ; Jack Lenon       ;                     ;                        
+               
+               ; 00000366          ;                 ; KongFu Panda     ;                     ;                        
+               ; 00000367          ;                 ; WuGui            ;                     ;                        
+               ; 00000368          ;                 ; Kai              ;                     ;                        
+	              

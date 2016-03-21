@@ -1,0 +1,50 @@
+SELECT {PK} FROM 
+{	Consultant as c JOIN Consultant2CountryRelation as c2c ON {c.pk} = {c2c.source} 
+	JOIN Country as cty 
+	ON {cty.pk} = {c2c.target}
+} 
+
+WHERE {cty.isocode} = 'GB'
+	
+	
+	SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	FROM {VariantProduct AS p LEFT JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}}
+
+	
+	SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} }
+	
+	
+
+
+
+SELECT DISTINCT tbl.pk, tbl.code FROM 
+(
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp1:PK} }
+		WHERE {p:varianttype} IS NULL AND ({bp1:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp2:PK} }
+		WHERE {p:varianttype} IS NULL AND ({bp2:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
+			{{                          
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}                          
+		)                            
+	}}                            
+)tbl ORDER BY tbl.code    
+	
+	
