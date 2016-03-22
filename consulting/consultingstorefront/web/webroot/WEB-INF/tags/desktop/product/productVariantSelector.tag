@@ -3,41 +3,77 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <%@ attribute name="product" required="true" type="de.hybris.platform.commercefacades.product.data.ProductData" %>
 
 		<c:set var="showAddToCart"  value="" scope="session" />
-		<div id="shoot">
-		 <h2>Alan Variant Product</h2>
-		 <h2 id="variantType">${product.variantType}</h2>
-		 <h2 id="variantOptions">${product.variantOptions}</h2>
-		 
-		 <h2 id="product.baseOptions[0].options">${product.baseOptions[0]}</h2>
-	   </div>
-	   
-	   
-		<%-- Determine if product is one of apparel style or size variant --%>
+		
+		 <%-- <h2 id="variantOptionQualifier">${variantStyle.variantOptionQualifier[0]}</h2> --%>
+		<!--  product.baseOptions[0].options = Service
+		 	  product.baseOptions[1].options = Level    -->
+<div id="shoot">
+	<h2>Alan Variant Product</h2>
+	<%-- <h2 id="variantType">${product.variantType}</h2>
+	
 
+
+	<h2 id=product_variant_Type>${product.variantType}</h2>
+	<h2 id="product.baseOptions[0].options length">
+		${fn:length(product.baseOptions[0].options)}</h2>
+	<h2 id="product.baseOptions[0].options[0]">${product.baseOptions[0].options[0].variantOptionQualifiers[0].qualifier}</h2>
+
+	<h2 id="product.baseOptions[1].options length">
+		${fn:length(product.baseOptions[1].options)}</h2> --%>
+		
+		
+	<%-- <h2 id="product.baseOptions[1]options[0]">
+		${product.baseOptions[1].options[0].variantOptionQualifiers[0].qualifier}</h2>
+	<h2 id="product.baseOptions[1]">
+		${product.baseOptions[1].options[1].variantOptionQualifiers[0].qualifier}</h2>
+	<h2 id="product.baseOptions[1]">
+		${product.baseOptions[1].options[2].variantOptionQualifiers[0].qualifier}</h2> --%>
+	
+	<h2 id="product baseOptions">${fn:length(product.baseOptions)}</h2>
+	<h2 id="product baseOptions_element1">${product.baseOptions[0]}</h2>
+	<h2 id="product baseOptions_element2">${product.baseOptions[1]}</h2>
+	
+	
+	<h2>${fn:length(product.variantOptions)}</h2>
+
+	<h2 id="0-Constult Service">${product.baseOptions[0].variantType}</h2>
+	<h2 id="0-Constult Service">${product.name}</h2>
+	<h2 id="1-Constult Level">${product.baseOptions[1].variantType}</h2>
+	
+</div> 
+
+
+<%-- Determine if product is one of apparel style or size variant --%>
 		<%-- <c:if test="${product.variantType eq 'ApparelStyleVariantProduct'}"> --%>
 		
 		<c:if test="${product.variantType eq 'ConsultantLevelVariantProduct'}">
 			<c:set var="variantStyles" value="${product.variantOptions}" />
 		</c:if>
-		<%-- <c:if test="${(not empty product.baseOptions[0].options) and (product.baseOptions[0].variantType eq 'ApparelStyleVariantProduct')}"> --%>
-		<c:if test="${(not empty product.baseOptions[0].options) and (product.baseOptions[0].variantType eq 'ConsultantLevelVariantProduct')}">
+		
+		<c:if test="${(not empty product.baseOptions[0].options) 
+			and (product.baseOptions[0].variantType eq 'ConsultantLevelVariantProduct')}">
 			<c:set var="variantStyles" value="${product.baseOptions[0].options}" />
-			<c:set var="variantSizes" value="${product.variantOptions}" />
+			<c:set var="variantSizes" value="${product.baseOptions[0].variantOptions}" />
 			<c:set var="currentStyleUrl" value="${product.url}" />
 		</c:if>
 		
-		<%-- <c:if test="${(not empty product.baseOptions[1].options) and (product.baseOptions[0].variantType eq 'ApparelSizeVariantProduct')}"> --%>
 		
-		<c:if test="${(not empty product.baseOptions[1].options) and (product.baseOptions[0].variantType eq 'ConsultantServiceVariantProduct')}">
-			<c:set var="variantStyles" value="${product.baseOptions[1].options}" />
-			<c:set var="variantSizes" value="${product.baseOptions[0].options}" />
+		<c:if test="${(not empty product.baseOptions[1].options) 
+			and (product.baseOptions[0].variantType eq 'ConsultantServiceVariantProduct')}">
+			<c:set var="variantStyles" value="${product.baseOptions[1].options}" />			
+			<%-- <c:set var="variantSizes" value="${product.baseOptions[1].options}" />  --%>
+			<c:set var="variantSizes" value="${product.baseOptions[0].options}" /> 
 			<c:set var="currentStyleUrl" value="${product.baseOptions[1].selected.url}" />
 		</c:if>
+		
 		<c:url value="${currentStyleUrl}" var="currentStyledProductUrl"/>
+		
 		<%-- Determine if product is other variant --%>
 		<c:if test="${empty variantStyles}">
 			<c:if test="${not empty product.variantOptions}">
@@ -57,18 +93,26 @@
 					<c:set var="showAddToCart" value="${false}" scope="session" />
 				</c:otherwise>
 			</c:choose>
-			<div class="variant_options">
+			<div class="variant_options_customersization">
 				<c:if test="${not empty variantStyles}">
 					<div class="colour clearfix">
 						<div><spring:theme code="product.variants.colour"/> ${currentStyleValue}</div>
+						
 						<ul class="colorlist">
+						
 							<c:forEach items="${variantStyles}" var="variantStyle">
 								<c:forEach items="${variantStyle.variantOptionQualifiers}" var="variantOptionQualifier">
-									<c:if test="${variantOptionQualifier.qualifier eq 'style'}">
+									
+									<%-- <h3 id="v_name">${variantOptionQualifier.name}</h3> --%>
+									
+									<c:if test="${variantOptionQualifier.qualifier eq 'level'}">
 										<c:set var="styleValue" value="${variantOptionQualifier.value}" />
 										<c:set var="imageData" value="${variantOptionQualifier.image}" />
+										
+										<c:set var="vname" value="${variantOptionQualifier.name}" />
 									</c:if>
 								</c:forEach>
+								
 								<li <c:if test="${variantStyle.url eq currentStyleUrl}">class="selected"</c:if>>
 									<c:url value="${variantStyle.url}" var="productStyleUrl"/>
 									<a href="${productStyleUrl}" class="colorVariant" name="${variantStyle.url}">
@@ -76,11 +120,12 @@
 											<img src="${imageData.url}" title="${styleValue}" alt="${styleValue}"/>
 										</c:if>
 										<c:if test="${empty imageData}">
-											<span class="swatch_colour_a" title="${styleValue}"></span>
+											<span class="swatch_colour_a" title="${styleValue}" >${variantStyle.code} -- ${styleValue}</span>
 										</c:if>
 									</a>
 								</li>
 							</c:forEach>
+							
 						</ul>
 						
 					</div>
@@ -95,14 +140,18 @@
 											<option selected="selected"><spring:theme code="product.variants.select.style"/></option>
 										</c:if>
 										<c:if test="${not empty variantSizes}">
-											<option value="${currentStyledProductUrl}" <c:if test="${empty variantParams['size']}">selected="selected"</c:if>>
-												<spring:theme code="product.variants.select.size"/>
+											<option value="${currentStyledProductUrl}"
+												<%--  <c:if test="${empty variantParams['service']}">selected="selected"</c:if>> --%>
+												<spring:theme code="product.variants.select.size"/> 
+												<!-- Alan liu -->
 											</option>
 											<c:forEach items="${variantSizes}" var="variantSize">
-												<c:set var="optionsString" value="" />
+												<c:set var="optionsString" value="" />											
+												
 												<c:forEach items="${variantSize.variantOptionQualifiers}" var="variantOptionQualifier">
-													<c:if test="${variantOptionQualifier.qualifier eq 'size'}">
+													<c:if test="${variantOptionQualifier.qualifier eq 'service'}">
 														<c:set var="optionsString">${optionsString}&nbsp;${variantOptionQualifier.name}&nbsp;${variantOptionQualifier.value}, </c:set>
+														<c:set var="serviceValue" value="${variantOptionQualifier.value}" />
 													</c:if>
 												</c:forEach>
 
@@ -121,8 +170,15 @@
 												</c:if>
 
 												<c:url value="${variantSize.url}" var="variantOptionUrl"/>
-												<option value="${variantOptionUrl}" ${(variantSize.url eq product.url) ? 'selected="selected"' : ''}>
-													${optionsString}&nbsp;<format:price priceData="${variantSize.priceData}"/>&nbsp;&nbsp;${variantSize.stock.stockLevel}
+												<%-- <option value="${variantOptionUrl}" 
+													${(variantSize.url eq product.url) ? 'selected="selected"' : ''}>
+													${optionsString}&nbsp;
+													<format:price priceData="${variantSize.priceData}"/>&nbsp;&nbsp;
+													${variantSize.stock.stockLevel}
+												</option> --%>
+												
+												<option value="${variantOptionUrl}">
+												${variantSize.code}-- ${serviceValue}													
 												</option>
 											</c:forEach>
 										</c:if>
