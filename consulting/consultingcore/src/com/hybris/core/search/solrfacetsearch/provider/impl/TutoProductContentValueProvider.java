@@ -3,7 +3,6 @@
  */
 package com.hybris.core.search.solrfacetsearch.provider.impl;
 
-
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.solrfacetsearch.config.IndexConfig;
@@ -24,7 +23,6 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.hybris.core.model.ConsultantModel;
 import com.hybris.core.services.ConsultantService;
 
 
@@ -54,22 +52,33 @@ public class TutoProductContentValueProvider extends AbstractPropertyFieldValueP
 
 		try
 		{
-			final String content = consultantService.getTutoContentProduct((ConsultantModel) model);
+			//final String content = consultantService.getTutoContentProduct((ConsultantModel) model);
 
+			final Object value = getPropertyValue(model);
 			final List<FieldValue> fieldValues = new ArrayList<FieldValue>();
+			if (value != null)
+			{
+				final String content = value.toString();
 
-			if (indexedProperty.isLocalized())
-			{
-				final Collection<LanguageModel> languages = indexConfig.getLanguages();
-				for (final LanguageModel language : languages)
+
+				if (indexedProperty.isLocalized())
 				{
-					fieldValues.addAll(createFieldValue(content, language, indexedProperty));
+					final Collection<LanguageModel> languages = indexConfig.getLanguages();
+					for (final LanguageModel language : languages)
+					{
+						fieldValues.addAll(createFieldValue(content, language, indexedProperty));
+					}
 				}
+				else
+				{
+					fieldValues.addAll(createFieldValue(content, null, indexedProperty));
+				}
+
 			}
-			else
-			{
-				fieldValues.addAll(createFieldValue(content, null, indexedProperty));
-			}
+			/*
+			 * else { throw new FieldValueProviderException("Content value is null " + indexedProperty.getName() +
+			 * " using " + this.getClass().getName()); }
+			 */
 			return fieldValues;
 		}
 		catch (final Exception e)
@@ -83,7 +92,7 @@ public class TutoProductContentValueProvider extends AbstractPropertyFieldValueP
 		 * final Collection<FieldValue> fieldValues = new ArrayList<FieldValue>(); final List<ConsultantModel>
 		 * foundContentList = consultantService.getTutoContentProduct(); for (final ConsultantModel consultantModel :
 		 * foundContentList) { if (consultantModel != null) {
-		 * 
+		 *
 		 * final Collection<String> fieldNames = fieldNameProvider.getFieldNames(indexedProperty, null); for (final String
 		 * * fieldName : fieldNames) { //fieldValues.add(new FieldValue("contentValue", consultantModel.getContent()));
 		 * fieldValues.add(new FieldValue(fieldName, consultantModel.getContent())); } } }
@@ -125,6 +134,15 @@ public class TutoProductContentValueProvider extends AbstractPropertyFieldValueP
 		return fieldValues;
 	}
 
+	protected Object getPropertyValue(final Object model)
+	{
+		return getPropertyValue(model, "content");
+	}
+
+	protected Object getPropertyValue(final Object model, final String propertyName)
+	{
+		return modelService.getAttributeValue(model, propertyName);
+	}
 
 
 	protected FieldNameProvider getFieldNameProvider()
