@@ -126,7 +126,7 @@ public class ProductPageController extends AbstractPageController
 			return redirection;
 		}
 
-		final List<String> list = consultantService.getExtraInfo(productCode);
+		//final List<String> list = consultantService.getExtraInfo(productCode);
 
 		updatePageTitle(productModel, model);
 		populateProductDetailForDisplay(productModel, model, request);
@@ -137,8 +137,8 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute("productReferences", productReferences);
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 
-		model.addAttribute("consultant", list.get(0));
-		model.addAttribute("consultant", list.get(1));
+		//model.addAttribute("consultant", list.get(0));
+		//model.addAttribute("consultant", list.get(1));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productModel.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productModel.getDescription());
