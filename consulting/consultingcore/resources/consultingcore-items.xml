@@ -72,7 +72,7 @@
 		<relation localized="false" generate="true"
 			code="VariantConsultant2CountryRelation">
 			<deployment table="VariantCon2CntryRel" typecode="18001" />
-			<sourceElement type="Consultant" qualifier="consultant"
+			<sourceElement type="VariantProduct" qualifier="variantproduct"
 				cardinality="many"></sourceElement>
 			<targetElement type="Country" qualifier="activeCountries"
 				cardinality="many"></targetElement>
@@ -129,40 +129,45 @@
 					<attribute qualifier="level" type="localized:java.lang.String"
 						metatype="VariantAttributeDescriptor">
 						<description>"consult level" e.g. principal/senior/standard level.</description>
-						<modifiers />
+						<modifiers/>
 						<persistence type="property" />
 					</attribute>
 
 					<attribute qualifier="levelCategory" type="ConsultantLevel">
-						<description>ConsultantL evel.
-						</description>
-						<modifiers />
+						<description>ConsultantL evel.	</description>
+						<modifiers/>
 						<persistence type="property" />
 					</attribute>
+					
+					<attribute type="java.lang.String" qualifier="content">
+						<modifiers optional="true" />
+						<persistence type="property" />
+						<description>Attribute is used in category/search page to display the product content</description>
+					</attribute>
+					
 				</attributes>
 			</itemtype>
 
 
 
-			<itemtype code="ConsultantServiceVariantProduct" extends="VariantProduct"
+			<itemtype code="ConsultantServiceVariantProduct" extends="ConsultantLevelVariantProduct"
 				autocreate="true" generate="true"
 				jaloclass="com.hybris.core.jalo.ConsultantServiceVariantProduct">
 				<description>Consultant VariantProduct type that contains different level
 				</description>
 				<attributes>
-					<attribute qualifier="level" type="localized:java.lang.String"
+					<attribute qualifier="service" type="localized:java.lang.String"
 						metatype="VariantAttributeDescriptor">
-						<description>"consult level" e.g. principal/senior/standard level.</description>
-						<modifiers />
+						<description>per review code review</description>
+						<modifiers/>
 						<persistence type="property" />
 					</attribute>
 
 					<attribute qualifier="serviceCatgory" type="ConsultantSerivceType">
-						<description>Consultant Serivce Type
-						</description>
-						<modifiers />
+						<description>Consultant Serivce Type</description>
+						<modifiers/>
 						<persistence type="property" />
-					</attribute>
+					</attribute>					
 				</attributes>
 			</itemtype>
 
