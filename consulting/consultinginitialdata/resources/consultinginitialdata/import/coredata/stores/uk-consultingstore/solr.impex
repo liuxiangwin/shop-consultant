@@ -45,7 +45,10 @@ $solrServerURLMaster=http://localhost:8983/solr/
 $solrServerURLSlave=http://localhost:8983/solr/                                                            
 
 $solrIndexedTypeStaged=uk-consultingstoreProductTypeStaged                                                 
-$solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline                                                 
+$solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline    
+
+
+$SolrQuery=""                                               
 
 
 ##################################################################################################################### 
@@ -297,22 +300,6 @@ INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; n
                                   ; $solrIndexedTypeOnline                   ; allPromotions     ; string     ;                    ;                         ;                          ; true                      ;                     ; MultiSelectOr   ; Alpha           ; 0        ; false   ;                                    ;                                   ; promotionCodeValueProvider     ; promotionFacetDisplayNameProvider             ;                              ;                          
                                   ; $solrIndexedTypeOnline                   ; availableInStores ; string     ;                    ;                         ;                          ; true                      ;                     ; MultiSelectOr   ; Custom          ; 10000    ; true    ;                                    ;                                   ; productStoreStockValueProvider ; $prefixPointOfServiceFacetDisplayNameProvider ; distanceAttributeSortProvider
 
-
-##################################################################################################################### 
-# 					Create the queries that will be used to extract data for Solr
-##################################################################################################################### 
-
-INSERT_UPDATE SolrIndexerQuery ; solrIndexedType(identifier)[unique=true] ; identifier[unique=true]            ; type(code) ; injectCurrentDate[default=true] ; injectCurrentTime[default=true] ; injectLastIndexTime[default=true] ; query                                                                                                                                                                          ; user(uid)
-                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-fullQuery   ; full       ;                                 ;                                 ; FALSE                             ; "SELECT {PK} FROM {Consultant as c JOIN Consultant2CountryRelation as c2c ON {c.pk} = {c2c.source} JOIN Country as cty ON {cty.pk} = {c2c.target}} WHERE {cty.isocode} = 'GB'" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-                               ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-fullQuery   ; full       ;                                 ;                                 ; FALSE                             ; "SELECT {PK} FROM {Consultant as c JOIN Consultant2CountryRelation as c2c ON {c.pk} = {c2c.source} JOIN Country as cty ON {cty.pk} = {c2c.target}} WHERE {cty.isocode} = 'GB'" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-updateQuery ; update     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant as c JOIN Consultant2CountryRelation as c2c ON {c.pk} = {c2c.source} JOIN Country as cty ON {cty.pk} = {c2c.target}} WHERE {cty.isocode} = 'GB'" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-                               ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-updateQuery ; update     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant as c JOIN Consultant2CountryRelation as c2c ON {c.pk} = {c2c.source} JOIN Country as cty ON {cty.pk} = {c2c.target}} WHERE {cty.isocode} = 'GB'" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}"                                                                                                                                                ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-                               ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}"                                                                                                                                                ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
-
-
-
-
 # Define the sort fields       
 INSERT_UPDATE SolrSortField ; sort(indexedType(identifier),code)[unique=true] ; fieldName[unique=true] ; ascending[unique=true]
                             ; $solrIndexedTypeStaged:relevance                ; score                  ; false                 
@@ -325,3 +312,122 @@ INSERT_UPDATE SolrSortField ; sort(indexedType(identifier),code)[unique=true] ; 
                             ; $solrIndexedTypeOnline:name-desc                ; name                   ; false                 
                             ; $solrIndexedTypeOnline:price-asc                ; priceValue             ; true                  
                             ; $solrIndexedTypeOnline:price-desc               ; priceValue             ; false                 
+
+                            
+ ##################################################################################################################### 
+# 					Create the queries that will be used to extract data for Solr
+##################################################################################################################### 
+
+INSERT_UPDATE SolrIndexerQuery ; solrIndexedType(identifier)[unique=true] ; identifier[unique=true]            ; type(code) ; injectCurrentDate[default=true] ; injectCurrentTime[default=true] ; injectLastIndexTime[default=true] ; query                                                                                                                                                                          ; user(uid)
+                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-fullQuery   ; full       ;                                 ;                                 ; FALSE                             ; "
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		
+	{{
+		
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+	}}	
+	UNION		
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+    }}
+	UNION	
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}}
+	}}		
+)tbl ORDER BY tbl.code ";          
+                            ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-fullQuery   ; full       ;                                 ;                                 ; FALSE                             ; "
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		
+	{{
+		
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+	}}	
+	UNION		
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+    }}
+	UNION	
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}}
+	}}		
+)tbl ORDER BY tbl.code" ;          
+
+                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-updateQuery ; update     ;                                 ;                                 ;                                   ; "
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		
+	{{
+		
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+	}}	
+	UNION		
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+    }}
+	UNION	
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}}
+	}}		
+)tbl ORDER BY tbl.code" ;         
+
+                               ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-updateQuery ; update     ;                                 ;                                 ;                                   ; "
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		
+	{{
+		
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+	}}	
+	UNION		
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+    }}
+	UNION	
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}}
+	}}		
+)tbl ORDER BY tbl.code" ;          
+                               ; $solrIndexedTypeStaged                   ; $solrIndexedTypeStaged-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}"                                                                                                                                                ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
+                               ; $solrIndexedTypeOnline                   ; $solrIndexedTypeOnline-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}"                                                                                                                                                ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
+                            
+                            
+                            
+                            
