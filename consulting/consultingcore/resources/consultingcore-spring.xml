@@ -468,7 +468,7 @@
 	
 	<alias alias="retrieveChannelStrategy" name ="alanRetrieveChannelStrategy"/>
 	<bean id="alanRetrieveChannelStrategy"
-    	class="de.hybris.platform.europe1.channel.strategies.impl.DefaultRetrieveChannelStrategy" scope="tenant">
+    	class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy" scope="tenant">
     	<property name="enumerationService" ref="enumerationService"/>
 	</bean>
 
