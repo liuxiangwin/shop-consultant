@@ -7,47 +7,47 @@ $superClass=superCategories(code,$sysVer)
 $catalogVersion=catalogVersion(catalog(id[default=$classificiationSystem]), version[default=$systemVersion])[unique=true]
 $classSystemVersion=systemVersion(catalog(id[default='$classificiationSystem']),version[default='1.0'])[unique=true]
 
-UPDATE ClassificationClass;code[unique=true];name[lang=$lang];$catalogVersion
-;programmingclassification;Programming Classification;;
-;dataclassification;Data Classification;;
-;businessuserclassification;Business User Classification;;
-;operationalclassification;Operation Classification;;
-;testingclassification;Testing Classification;;
-;projectmanagementclassification;Project Mgmt Classification;;
+UPDATE ClassificationClass ; code[unique=true]               ; name[lang=$lang]             ; $catalogVersion
+                           ; programmingclassification       ; Programming Classification   ;                ;  
+                           ; dataclassification              ; Data Classification          ;                ;  
+                           ; businessuserclassification      ; Business User Classification ;                ;  
+                           ; operationalclassification       ; Operation Classification     ;                ;  
+                           ; testingclassification           ; Testing Classification       ;                ;  
+                           ; projectmanagementclassification ; Project Mgmt Classification  ;                ;  
 
 
 # Classification attribute (aka) feature descriptor (aka) feature list(s)
-UPDATE ClassificationAttribute;code[unique=true];name[lang=$lang];$classSystemVersion
-;programmingdisciplines;Programming Disciplines;
-;datadisciplines;Data Disciplines;
-;businessuserdisciplines;Business User Disciplines;
-;devopsdisciplines;Devops Disciplines;
-;testingdisciplines;Testing Disciplines;
-;projectdisciplines;Project Disciplines;
+UPDATE ClassificationAttribute ; code[unique=true]       ; name[lang=$lang]          ; $classSystemVersion
+                               ; programmingdisciplines  ; Programming Disciplines   ;                    
+                               ; datadisciplines         ; Data Disciplines          ;                    
+                               ; businessuserdisciplines ; Business User Disciplines ;                    
+                               ; devopsdisciplines       ; Devops Disciplines        ;                    
+                               ; testingdisciplines      ; Testing Disciplines       ;                    
+                               ; projectdisciplines      ; Project Disciplines       ;                    
 
-# CAV - (aka) feature values
-UPDATE ClassificationAttributeValue;code[unique=true];name[lang=$lang];$classSystemVersion;
-;Java;Java;
-;Spring;Spring;
-;Impex;Impex;
-;Scala;Scala;
-;Groovy;Groovy;
-;Architect;Architect;
-;UX Design;UX Design;
-;Scripting;Scripting;
-;Javascript;Javascript;
-;Spring;Spring;
-;Solr;Solr;
-;CMS;CMS;
-;Training;Training;
-;Backoffice;Backoffice;
-;Performance;Performance;
-;Automated integration Testing;Automated integration Testing;
-;Automated Unit Testing;Automated Unit Testing;
-;Smoke Testing;Smoke Testing;
-;Functional Testing;Functional Testing;
-;System Integrated Testing;System Integrated Testing;
-;Jira Mgmt;Jira Mgmt;
-;Scrum;Scrum;
-;Agile;Agile;
-;Kanban;Kanban;
+# CAV - (aka) feature values   
+UPDATE ClassificationAttributeValue ; code[unique=true]             ; name[lang=$lang]              ; $classSystemVersion ;  
+                                    ; Java                          ; Java                          ;                     
+                                    ; Spring                        ; Spring                        ;                     
+                                    ; Impex                         ; Impex                         ;                     
+                                    ; Scala                         ; Scala                         ;                     
+                                    ; Groovy                        ; Groovy                        ;                     
+                                    ; Architect                     ; Architect                     ;                     
+                                    ; UX Design                     ; UX Design                     ;                     
+                                    ; Scripting                     ; Scripting                     ;                     
+                                    ; Javascript                    ; Javascript                    ;                     
+                                    ; Spring                        ; Spring                        ;                     
+                                    ; Solr                          ; Solr                          ;                     
+                                    ; CMS                           ; CMS                           ;                     
+                                    ; Training                      ; Training                      ;                     
+                                    ; Backoffice                    ; Backoffice                    ;                     
+                                    ; Performance                   ; Performance                   ;                     
+                                    ; Automated integration Testing ; Automated integration Testing ;                     
+                                    ; Automated Unit Testing        ; Automated Unit Testing        ;                     
+                                    ; Smoke Testing                 ; Smoke Testing                 ;                     
+                                    ; Functional Testing            ; Functional Testing            ;                     
+                                    ; System Integrated Testing     ; System Integrated Testing     ;                     
+                                    ; Jira Mgmt                     ; Jira Mgmt                     ;                     
+                                    ; Scrum                         ; Scrum                         ;                     
+                                    ; Agile                         ; Agile                         ;                     
+                                    ; Kanban                        ; Kanban                        ;                     

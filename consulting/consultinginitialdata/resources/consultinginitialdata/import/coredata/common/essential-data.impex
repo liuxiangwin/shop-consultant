@@ -19,8 +19,10 @@
 INSERT_UPDATE Unit ; unitType[unique=true] ; code[unique=true] ; name[lang=de] ; name[lang=en] ;  ;  ;  ;  
                    ; each                  ; EA                ; eaches        ; each          ;  ;  ;  ;  
                    ; hour                  ; HR                ; per hour      ; per hour      ;  ;  ;  ;  
-
-
+                   ; hour                  ; 1s-manager        ; per hour      ; per hour      ;  ;  ;  ;  
+                   ; hour                  ; 2s-manager        ; per hour      ; per hour      ;  ;  ;  ;  
+                   ; hour                  ; 3s-manager        ; per hour      ; per hour      ;  ;  ;  ;  
+                   
 # Languages        
 INSERT_UPDATE Language ; isocode[unique=true] ; fallbackLanguages(isocode) ; active[default=true]
                        ; en                   ;                            ;                     ;  

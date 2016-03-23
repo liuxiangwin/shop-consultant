@@ -17,38 +17,92 @@ $approved=approvalstatus(code)[default='approved']
 ####################################################
 UPDATE Consultant ; code[unique=true] ; unit(code)[default=HR] ; $prices                                        ; $approved ; $catalogVersion
                   ; 00000001          ;                        ; 90.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+
                   ; 00000002          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000003          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000004          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000005          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000006          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000007          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000008          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000009          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
+
+   # ImpEx for Importing Prices
+
+"#% impex.setLocale( Locale.ENGLISH )"
+
+$catalogVersion=Staged
+$productCatalog=consultingstoreProductCatalog
+$productCatalogName=Consulting Store Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=$catalogVersion])[unique=true,default=$productCatalog:$catalogVersion]
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+##$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+$approved=approvalstatus(code)[default='approved']
+
+######################################################
+# NOTE - TODO     
+# Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+# I'd prefer this wasn't set to product and instead to user group - future to get working
+####################################################
+UPDATE Consultant ; code[unique=true] ; unit(code)[default=HR] ; $prices                                        ; $approved ; $catalogVersion
+                  ; 00000001          ;                        ; 90.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+
+                  ; 00000002          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  ; 00000003          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  ; 00000004          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  ; 00000005          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  ; 00000006          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
+
                   ; 00000010          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000011          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000012          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000013          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000014          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000015          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000016          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000017          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
+
                   ; 00000018          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000019          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000020          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000021          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000022          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000023          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
                   ; 00000024          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000025          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
                   ; 00000026          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000027          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000028          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000029          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  
                   ; 00000030          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000031          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000032          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+
                   ; 00000033          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000034          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000035          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
                   ; 00000036          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
+                  
+#                 
+# Update the variant product price
+#                 
+                  
+UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; unit(code)[default=HR] ; $prices                                         ; $approved ; $catalogVersion
+                                     ; 00000266          ;                        ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY  ;           ;                ;  ;  
+                                     ; 00000267          ;                        ; 198.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+                                     ; 00000268          ;                        ; 298.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+
+
+
+UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; unit(code)[default=HR] ; $prices                                         ; $approved ; $catalogVersion
+                                       ; 00000366          ;                        ; 66.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY  ;           ;                ;  ;  
+                                       ; 00000367          ;                        ; 166.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+                                       ; 00000368          ;                        ; 266.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+
+
+#                                      
+# Some pricerows created using the PriceRow entity
+#                                      
+
+
+                                       
+INSERT_UPDATE PriceRow ; $catalogVersion ; unit(code)[default=HR] ; channel(code)[unique=true] ; product(code,$catalogVersion)[unique=true]
+                       ;                 ;                        ; "city"                     ; 00000266                                  
+                       

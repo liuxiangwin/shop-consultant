@@ -98,22 +98,22 @@ UPDATE Consultant ; code[unique=true] ; $activeCountries  ; $catalogVersion
 # Consultant Variant Product
 
 # Insert Level Products		###################		
-INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content              ;	level
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content              ; level     
                                             
-                                            ; 00000266          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000001     ; Principal           ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ;  Principal;
+                                            ; 00000266          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000001     ; Principal           ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Principal ;  
 
                                             
-                                            ; 00000267          ; Development                                                                   ; 00000001     ; Senior              ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ;  Senior;
-                                            ; 00000268          ; Development                                                                   ; 00000001     ; Standard            ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ;  Standard;
+                                            ; 00000267          ; Development                                                                   ; 00000001     ; Senior              ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Senior    ;  
+                                            ; 00000268          ; Development                                                                   ; 00000001     ; Standard            ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Standard  ;  
 
 # Insert Serivce Products###################				
-INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ;  level
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ; service       
                                               
-                                              ; 00000366          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000266     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ;  System_Review;
+                                              ; 00000366          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000266     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; System_Review ;  
 
                                               
-                                              ; 00000367          ; Data                                                                          ; 00000267     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ;  Perf_Review;
-                                              ; 00000368          ; Business-User-Centric                                                         ; 00000268     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ;  Code_Review;
+                                              ; 00000367          ; Data                                                                          ; 00000267     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Perf_Review   ;  
+                                              ; 00000368          ; Business-User-Centric                                                         ; 00000268     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Code_Review   ;  
 
 # Link countries to VariantConsultants and where they can work
 # ImpEx for Importing Products                

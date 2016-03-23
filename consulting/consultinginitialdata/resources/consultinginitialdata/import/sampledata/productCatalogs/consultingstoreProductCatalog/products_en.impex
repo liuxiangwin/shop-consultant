@@ -11,75 +11,42 @@ $lang=en
 
 # Update allProducts with localisations
 UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]     ; summary[lang=$lang] ; description[lang=$lang]
-               ; 00000001          ;                 ; Alan Liu             ;                     ;                        
+               ; 00000001          ;                 ; Alan Liu             ;                     ;  
+                                     
                ; 00000002          ;                 ; Tracy Barnacle       ;                     ;                        
                ; 00000003          ;                 ; Shannon Barnacle     ;                     ;                        
                ; 00000004          ;                 ; Conrad Barnacle      ;                     ;                        
                ; 00000005          ;                 ; Robert Barnacle      ;                     ;                        
-               ; 00000006          ;                 ; Susan Barnacle       ;                     ;                        
-               ; 00000007          ;                 ; Sky Barnacle         ;                     ;                        
-               ; 00000008          ;                 ; Barney Barnacle      ;                     ;                        
-               ; 00000009          ;                 ; Enderman Barnacle    ;                     ;                        
+               ; 00000006          ;                 ; Susan Barnacle       ;                     ;       
+
+                    
                ; 00000010          ;                 ; Minecraft Barnacle   ;                     ;                        
                ; 00000011          ;                 ; Madhatter Barnacle   ;                     ;                        
                ; 00000012          ;                 ; Evelyn Barnacle      ;                     ;                        
-               ; 00000013          ;                 ; Ian Rubenstein       ;                     ;                        
-               ; 00000014          ;                 ; Rob Rubenstein       ;                     ;                        
-               ; 00000015          ;                 ; Devlin Rubenstein    ;                     ;                        
-               ; 00000016          ;                 ; Frank Oz             ;                     ;                        
-               ; 00000017          ;                 ; Warren Buffet        ;                     ;                        
+               ; 00000013          ;                 ; Ian Rubenstein       ;                     ;    
+
+                                     
                ; 00000018          ;                 ; Les Brown            ;                     ;                        
                ; 00000019          ;                 ; Duncan Goodyew       ;                     ;                        
                ; 00000020          ;                 ; Billy Brewin         ;                     ;                        
-               ; 00000021          ;                 ; Jack Sparrow         ;                     ;                        
-               ; 00000022          ;                 ; Bill Evans           ;                     ;                        
-               ; 00000023          ;                 ; Don Murphy           ;                     ;                        
+               ; 00000021          ;                 ; Jack Sparrow         ;                     ;   
+
+                                     
                ; 00000024          ;                 ; Pat Skilledup        ;                     ;                        
-               ; 00000025          ;                 ; Nicola Liquorish     ;                     ;                        
+               ; 00000025          ;                 ; Nicola Liquorish     ;                     ;    
+                                   
                ; 00000026          ;                 ; Rebecca Walls        ;                     ;                        
                ; 00000027          ;                 ; Donna Hodges         ;                     ;                        
                ; 00000028          ;                 ; Tessy Roper          ;                     ;                        
-               ; 00000029          ;                 ; Nikita Kaye          ;                     ;                        
+               ; 00000029          ;                 ; Nikita Kaye          ;                     ;    
+                                   
                ; 00000030          ;                 ; Nikki Routelledge    ;                     ;                        
                ; 00000031          ;                 ; Jim Career           ;                     ;                        
-               ; 00000032          ;                 ; Super Consultant-man ;                     ;                        
+               ; 00000032          ;                 ; Super Consultant-man ;                     ;   
+                                    
                ; 00000033          ;                 ; Brendon Dobbs        ;                     ;                        
                ; 00000034          ;                 ; Craig David          ;                     ;                        
-               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                        
-               ; 00000002          ;                 ; Tracy Barnacle       ;                     ;                        
-               ; 00000003          ;                 ; Shannon Barnacle     ;                     ;                        
-               ; 00000004          ;                 ; Conrad Barnacle      ;                     ;                        
-               ; 00000005          ;                 ; Robert Barnacle      ;                     ;                        
-               ; 00000006          ;                 ; Susan Barnacle       ;                     ;                        
-               ; 00000007          ;                 ; Sky Barnacle         ;                     ;                        
-               ; 00000008          ;                 ; Barney Barnacle      ;                     ;                        
-               ; 00000009          ;                 ; Enderman Barnacle    ;                     ;                        
-               ; 00000010          ;                 ; Minecraft Barnacle   ;                     ;                        
-               ; 00000011          ;                 ; Madhatter Barnacle   ;                     ;                        
-               ; 00000012          ;                 ; Evelyn Barnacle      ;                     ;                        
-               ; 00000013          ;                 ; Ian Rubenstein       ;                     ;                        
-               ; 00000014          ;                 ; Rob Rubenstein       ;                     ;                        
-               ; 00000015          ;                 ; Devlin Rubenstein    ;                     ;                        
-               ; 00000016          ;                 ; Frank Oz             ;                     ;                        
-               ; 00000017          ;                 ; Warren Buffet        ;                     ;                        
-               ; 00000018          ;                 ; Les Brown            ;                     ;                        
-               ; 00000019          ;                 ; Duncan Goodyew       ;                     ;                        
-               ; 00000020          ;                 ; Billy Brewin         ;                     ;                        
-               ; 00000021          ;                 ; Jack Sparrow         ;                     ;                        
-               ; 00000022          ;                 ; Bill Evans           ;                     ;                        
-               ; 00000023          ;                 ; Don Murphy           ;                     ;                        
-               ; 00000024          ;                 ; Pat Skilledup        ;                     ;                        
-               ; 00000025          ;                 ; Nicola Liquorish     ;                     ;                        
-               ; 00000026          ;                 ; Rebecca Walls        ;                     ;                        
-               ; 00000027          ;                 ; Donna Hodges         ;                     ;                        
-               ; 00000028          ;                 ; Tessy Roper          ;                     ;                        
-               ; 00000029          ;                 ; Nikita Kaye          ;                     ;                        
-               ; 00000030          ;                 ; Nikki Routelledge    ;                     ;                        
-               ; 00000031          ;                 ; Jim Career           ;                     ;                        
-               ; 00000032          ;                 ; Super Consultant-man ;                     ;                        
-               ; 00000033          ;                 ; Brendon Dobbs        ;                     ;                        
-               ; 00000034          ;                 ; Craig David          ;                     ;                        
-               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                        
+               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                      
                ; 00000036          ;                 ; Ali Mony             ;                     ;                        
 
                
