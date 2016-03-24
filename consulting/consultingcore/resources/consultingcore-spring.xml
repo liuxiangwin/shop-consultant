@@ -458,7 +458,8 @@
 		<property name="rootCategoryCode" value="categories" />
 	</bean>
 
-
+	
+	<!-- Product Value Provider -->
 	<bean id="tutoProductContentValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.TutoProductContentValueProvider"
 		parent="abstractPropertyFieldValueProvider">
@@ -466,10 +467,24 @@
 		<property name="consultantService" ref="consultantService" />
 	</bean>
 	
+	<bean id="workingExperiecenceValueProvider"
+		class="com.hybris.core.search.solrfacetsearch.provider.impl.WorkingExperiecenceValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+	
 	<alias alias="retrieveChannelStrategy" name ="alanRetrieveChannelStrategy"/>
 	<bean id="alanRetrieveChannelStrategy"
     	class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy" scope="tenant">
     	<property name="enumerationService" ref="enumerationService"/>
 	</bean>
-
+	
+	<!-- europe1.manager -->
+	 <bean id="alan.manager"  parent="europe1.manager" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
+          init-method="init" destroy-method="destroy">
+        <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/>
+    </bean>
+    
+    
+	
 </beans>
