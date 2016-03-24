@@ -100,9 +100,12 @@ UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; unit(code)[default=
 #                                      
 # Some pricerows created using the PriceRow entity
 #                                      
-
-
-                                       
+INSERT_UPDATE PriceRow ; productId[unique=true] ; unit(code[unique=true,default=pieces]) ; channel(code)[unique=true] ; currency(isocode)[unique=true] ; price ; minqtd ; unitFactor ; net   ; $catalogVersion
+                       ; 00000001               ; 1s-manager                             ; "city"                     ; GBP                            ;1880  ; 1      ; 1          ; false ;                ; ;
+                       ; 00000266               ; 2s-manager                             ; "city"                     ; GBP                            ; 980  ; 1      ; 1          ; false ;                ; ;                       
+                       ; 00000267               ; 2s-manager                             ; "town"                     ; GBP                            ; 880  ; 1      ; 1          ; false ;                ; ; 
+                       ; 00000268               ; 3s-manager                             ; "town"                     ; GBP                            ; 780  ; 1      ; 1          ; false ;                ; ;
+                       ; 00000366               ; 3s-manager                             ; "town"                     ; GBP                            ; 680  ; 1      ; 1          ; false ;                ; ;                                       
 #INSERT_UPDATE PriceRow ; $catalogVersion ; unit(code)[default=HR] ; channel(code)[unique=true] ; product(code,$catalogVersion)[unique=true]
-#                       ;                 ;                        ; "city"                     ; 00000266                                  
+#                      ;                        ;                                        ; "city"                     ; 00000266                       
                        
