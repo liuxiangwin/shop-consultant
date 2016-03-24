@@ -103,6 +103,6 @@ UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; unit(code)[default=
 
 
                                        
-INSERT_UPDATE PriceRow ; $catalogVersion ; unit(code)[default=HR] ; channel(code)[unique=true] ; product(code,$catalogVersion)[unique=true]
-                       ;                 ;                        ; "city"                     ; 00000266                                  
+#INSERT_UPDATE PriceRow ; $catalogVersion ; unit(code)[default=HR] ; channel(code)[unique=true] ; product(code,$catalogVersion)[unique=true]
+#                       ;                 ;                        ; "city"                     ; 00000266                                  
                        
