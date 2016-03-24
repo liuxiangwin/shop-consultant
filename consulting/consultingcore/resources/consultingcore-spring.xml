@@ -480,9 +480,10 @@
 	</bean>
 	
 	<!-- europe1.manager -->
-	 <bean id="alan.manager"  parent="europe1.manager" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
+	 <bean id="europe1.manager"  class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
           init-method="init" destroy-method="destroy">
-        <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/>
+       <!--  <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/> -->
+         <property name="retrieveChannelStrategy" ref="alanRetrieveChannelStrategy"/>
     </bean>
     
     
