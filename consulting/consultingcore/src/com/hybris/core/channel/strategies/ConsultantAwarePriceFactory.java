@@ -103,6 +103,8 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		qualifiers.put(PriceRow.MINQTD, Long.valueOf(row.getMinQuantity()));
 		qualifiers.put(PriceRow.UNIT, row.getUnit());
 		qualifiers.put(PriceRow.PRICEROW, row);
+
+		//row.getp
 		final DateRange dateRange = row.getDateRange();
 
 
