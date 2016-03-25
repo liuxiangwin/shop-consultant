@@ -11,33 +11,6 @@ $prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1Pr
 $approved=approvalstatus(code)[default='approved']
 
 ######################################################
-# NOTE - TODO
-# Europe1PriceFactory_PTG(code)[default=uk-vat-full]
-# I'd prefer this wasn't set to product and instead to user group - future to get working
-####################################################
-UPDATE Consultant ; code[unique=true] ; unit(code)[default=HR] ; $prices                                        ; $approved ; $catalogVersion
-                  ; 00000001          ;                        ; 90.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
-
-                  ; 00000002          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000003          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000004          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000005          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-                  ; 00000006          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY   ;           ;                ;  ;  
-
-
-   # ImpEx for Importing Prices
-
-"#% impex.setLocale( Locale.ENGLISH )"
-
-$catalogVersion=Staged
-$productCatalog=consultingstoreProductCatalog
-$productCatalogName=Consulting Store Product Catalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=$catalogVersion])[unique=true,default=$productCatalog:$catalogVersion]
-$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
-##$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
-$approved=approvalstatus(code)[default='approved']
-
-######################################################
 # NOTE - TODO     
 # Europe1PriceFactory_PTG(code)[default=uk-vat-full]
 # I'd prefer this wasn't set to product and instead to user group - future to get working
@@ -100,12 +73,15 @@ UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; unit(code)[default=
 #                                      
 # Some pricerows created using the PriceRow entity
 #                                      
-INSERT_UPDATE PriceRow ; productId[unique=true] ; unit(code[unique=true,default=pieces]) ; channel(code)[unique=true] ; currency(isocode)[unique=true] ; price ; minqtd ; unitFactor ; net   ; $catalogVersion
-                       ; 00000001               ; 1s-manager                             ; "city"                     ; GBP                            ;1880  ; 1      ; 1          ; false ;                ; ;
-                       ; 00000266               ; 2s-manager                             ; "city"                     ; GBP                            ; 980  ; 1      ; 1          ; false ;                ; ;                       
-                       ; 00000267               ; 2s-manager                             ; "town"                     ; GBP                            ; 880  ; 1      ; 1          ; false ;                ; ; 
-                       ; 00000268               ; 3s-manager                             ; "town"                     ; GBP                            ; 780  ; 1      ; 1          ; false ;                ; ;
-                       ; 00000366               ; 3s-manager                             ; "town"                     ; GBP                            ; 680  ; 1      ; 1          ; false ;                ; ;                                       
-#INSERT_UPDATE PriceRow ; $catalogVersion ; unit(code)[default=HR] ; channel(code)[unique=true] ; product(code,$catalogVersion)[unique=true]
-#                      ;                        ;                                        ; "city"                     ; 00000266                       
-                       
+#INSERT_UPDATE PriceRow ; productId[unique=true] ; unit(code[unique=true,default=pieces]) ; currency(isocode)[unique=true] ; price                                          ; channel(code)[unique=true] ; minqtd ; unitFactor ; net   ; $catalogVersion
+
+
+INSERT_UPDATE PriceRow ; product(code,$catalogVersion)[unique=true] ; unit(code[unique=true,default=pieces]) ; currency(isocode)[unique=true] ; price                                          ; channel(code)[unique=true] ; minqtd ; unitFactor ; net   ; $catalogVersion
+                       ; 00000001                                   ; 1s-manager                             ; GBP                            ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ; "city"                     ; 1      ; 1          ; false ;                ;  ;  
+                       ; 00000266                                   ; 2s-manager                             ; GBP                            ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ; "city"                     ; 1      ; 1          ; false ;                ;  ;  
+                       ; 00000267                                   ; 2s-manager                             ; GBP                            ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ; "town"                     ; 1      ; 1          ; false ;                ;  ;  
+                       ; 00000268                                   ; 3s-manager                             ; GBP                            ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ; "town"                     ; 1      ; 1          ; false ;                ;  ;  
+                       ; 00000366                                   ; 3s-manager                             ; GBP                            ; 98.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY ; "town"                     ; 1      ; 1          ; false ;                ;  ;  
+
+
+
