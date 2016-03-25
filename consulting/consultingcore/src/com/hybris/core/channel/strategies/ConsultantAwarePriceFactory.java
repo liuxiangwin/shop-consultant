@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Required;
+
 
 /**
  * @author AlanLiu
@@ -96,7 +98,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		}
 	}
 
-
 	public static final PriceInformation createPriceInformation(final PriceRow row, final Currency currency)
 	{
 		final Map qualifiers = new HashMap();
@@ -118,5 +119,12 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 				.convert(currency, row.getPriceAsPrimitive() / row.getUnitFactorAsPrimitive());
 		// if base price is not in requested net/gross state, compute it
 		return new PriceInformation(qualifiers, new PriceValue(currency.getIsoCode(), basePrice, row.isNetAsPrimitive()));
+	}
+
+	@Override
+	@Required
+	public void setRetrieveChannelStrategy(final RetrieveChannelStrategy retrieveChannelStrategy)
+	{
+		this.retrieveChannelStrategy = retrieveChannelStrategy;
 	}
 }

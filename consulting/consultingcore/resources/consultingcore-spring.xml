@@ -88,7 +88,11 @@
 		value="supercategories" /> <property name="fieldNameProvider" ref="solrFieldNameProvider" 
 		/> </bean> -->
 
-
+	<bean id="categoryCodeValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="categoriesQualifier" value="supercategories" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
 
 	<bean id="abstractCategoryNameValueProvider" abstract="true"
 		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider"
