@@ -66,4 +66,4 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 	}}                            
 )tbl ORDER BY tbl.code    
 	
-	
+select * from {Product as P} where {P.pk}='8796137848833'	
