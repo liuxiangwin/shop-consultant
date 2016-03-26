@@ -19,6 +19,8 @@
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="consultingfulfilmentprocess"/>
+		<requires-extension name="commerceservices"/>
+		
 		<requires-extension name="hmc"/>
 
 		<coremodule generated="true" manager="com.hybris.core.jalo.ConsultingCoreManager" packageroot="com.hybris.core"/>

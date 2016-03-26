@@ -88,7 +88,8 @@
 		value="supercategories" /> <property name="fieldNameProvider" ref="solrFieldNameProvider" 
 		/> </bean> -->
 
-	<bean id="categoryCodeValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+	<bean id="categoryCodeValueProvider"
+		class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
 		parent="abstractPropertyFieldValueProvider">
 		<property name="categoriesQualifier" value="supercategories" />
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
@@ -462,7 +463,7 @@
 		<property name="rootCategoryCode" value="categories" />
 	</bean>
 
-	
+
 	<!-- Product Value Provider -->
 	<bean id="tutoProductContentValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.TutoProductContentValueProvider"
@@ -470,26 +471,40 @@
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 		<property name="consultantService" ref="consultantService" />
 	</bean>
-	
+
 	<bean id="workingExperiecenceValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.WorkingExperiecenceValueProvider"
 		parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 	</bean>
-	
-	<alias alias="retrieveChannelStrategy" name ="alanRetrieveChannelStrategy"/>
+
+	<!-- Replace the Default Channel for customerzation-->
+	<alias alias="retrieveChannelStrategy" name="alanRetrieveChannelStrategy" />
 	<bean id="alanRetrieveChannelStrategy"
-    	class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy" scope="tenant">
-    	<property name="enumerationService" ref="enumerationService"/>
+		class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy"
+		scope="tenant">
+		<property name="enumerationService" ref="enumerationService" />
 	</bean>
-	
+
 	<!-- europe1.manager -->
-	 <bean id="europe1.manager"  class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
-          init-method="init" destroy-method="destroy">
-       <!--  <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/> -->
-         <property name="retrieveChannelStrategy" ref="alanRetrieveChannelStrategy"/>
-    </bean>
-    
-    
-	
+	<!-- <bean id="europe1.manager" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory" 
+		init-method="init" destroy-method="destroy"> <property name="retrieveChannelStrategy" 
+		ref="alanRetrieveChannelStrategy"/> </bean> -->
+
+	<!-- Replace the DefaultPrice Service for customerzation-->
+	<alias alias="priceService" name="netPriceService" />
+	<bean id="netPriceService"
+		class="de.hybris.platform.commerceservices.price.impl.NetPriceService"
+		parent="abstractBusinessService">
+		<property name="netGrossStrategy" ref="netGrossStrategy" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias alias="commercePriceService" name="consultantCommercePriceService" />
+	<bean id="consultantCommercePriceService"
+		class="com.hybris.core.channel.strategies.ConsultantPriceService">
+		<property name="priceService" ref="priceService" />
+	</bean>
+
+
 </beans>
