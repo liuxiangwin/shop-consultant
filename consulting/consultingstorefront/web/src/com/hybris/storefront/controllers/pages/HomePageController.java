@@ -14,9 +14,11 @@
 package com.hybris.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.SessionContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 /**
  * Controller for home page
@@ -38,10 +41,13 @@ public class HomePageController extends AbstractPageController
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
+		ctx.setAttribute("c-channel", "city");
+		ctx.setAttribute("c-intro", "frist_manager");
+
 		if (logout)
 		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"account.confirmation.signout.title");
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "account.confirmation.signout.title");
 			return REDIRECT_PREFIX + ROOT;
 		}
 
