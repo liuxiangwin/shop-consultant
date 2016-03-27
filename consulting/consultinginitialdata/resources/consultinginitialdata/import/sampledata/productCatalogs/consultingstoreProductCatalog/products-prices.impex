@@ -16,13 +16,13 @@ $approved=approvalstatus(code)[default='approved']
 # I'd prefer this wasn't set to product and instead to user group - future to get working
 ####################################################
 UPDATE Consultant ; code[unique=true] ; unit(code)[default=HR] ; $prices                                      ; $approved ; $catalogVersion
-                  ; 00000001          ;                        ; 168.50 EUR ,   77.00 USD, 9273.00 JPY                                         ;           ;                ;  ;  
+                  ; 00000001          ;                        ; 168.50 EUR ,   77.00 USD, 9273.00 JPY        ;           ;                ;  ;  
 
                   ; 00000002          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
                   ; 00000003          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
                   ; 00000004          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
                   ; 00000005          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
-                  ; 00000006          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
+                  ; 00000006          ;                        ; 68.50 EUR, 	77.00 USD, 9273.00 JPY           ;           ;                ;  ;  
 
 
                   ; 00000010          ;                        ; 50.00 GBP, 68.50 EUR, 77.00 USD, 9273.00 JPY ;           ;                ;  ;  
@@ -89,4 +89,10 @@ INSERT_UPDATE PriceRow ; product(code,$catalogVersion)[unique=true] ; unit(code[
                        ; 00000366                                   ; 3s-manager                             ; GBP                            ; 688.00 GBP, 1660.50 EUR, 77.00 USD, 9273.00 JPY  ; "town"                                                    ; "thrid_manager"                                    ; "town"                     ; 1      ; 1          ; false ;                ;  ;  
 
 
+INSERT_UPDATE PriceRow ; product(code,$catalogVersion)[unique=true] ; unit(code[unique=true,default=pieces]) ; currency(isocode)[unique=true] ; price      ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; channel(code) ; minqtd ; unitFactor ; net   ; $catalogVersion
+##### Demotration for  scale price#################################################
+                       ; 00000006                                   ; 1s-manager                             ; GBP                            ; 400.00 GBP ; "city"                                        ; "frist_manager"                        ; "city"        ; 100    ; 1          ; false ;                ;  ;  
+                       ; 00000006                                   ; 2s-manager                             ; GBP                            ; 360.00 GBP ; "town"                                        ; "thrid_manager"                        ; "town"        ; 100    ; 1          ; false ;                ;  ;  
+#                       ; 00000006                                   ; 3s-manager                             ; GBP                            ; 330.00 GBP ; "city"                                        ; "frist_manager"                        ; "city"        ; 200    ; 1          ; false ;                ;  ;  
+#                       ; 00000006                                   ;                                        ; GBP                            ; 280.00 GBP ; "city"                                        ; "frist_manager"                        ; "town"        ; 400    ; 1          ; false ;                ;  ;  
 
