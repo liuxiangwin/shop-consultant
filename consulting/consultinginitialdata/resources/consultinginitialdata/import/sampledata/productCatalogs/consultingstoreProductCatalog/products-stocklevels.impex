@@ -6,47 +6,54 @@ $productCatalogName=Consulting Store Product Catalog
 $vendor=vendors(code)[default=consulting]
 $warehouse=warehouse(code)[unique=true, default=consulting-dc]
 $inStockStatus=instockStatus(code)[unique=true][default=notSpecified]
-$globalStockAvailabilty=available[default=1000]
+$globalStockAvailabilty=available[default=666]
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 INSERT_UPDATE StockLevel ; $warehouse ; productCode[unique=true] ; $inStockStatus ; $globalStockAvailabilty ; maxPreOrder[default=0] ; maxStockLevelHistoryCount[default=0] ; overSelling[default=0] ; preOrder[default=0] ; reserved[default=0]
                          ;            ; 00000001                 ;                ;                         ;
+
                          ;            ; 00000002                 ;                ;                         ;                        
                          ;            ; 00000003                 ;                ;                         ;                        
                          ;            ; 00000004                 ;                ;                         ;                        
                          ;            ; 00000005                 ;                ;                         ;                        
                          ;            ; 00000006                 ;                ;                         ;                        
-                         ;            ; 00000007                 ;                ;                         ;                        
-                         ;            ; 00000008                 ;                ;                         ;                        
-                         ;            ; 00000009                 ;                ;                         ;                        
+
+
                          ;            ; 00000010                 ;                ;                         ;                        
                          ;            ; 00000011                 ;                ;                         ;                        
                          ;            ; 00000012                 ;                ;                         ;                        
                          ;            ; 00000013                 ;                ;                         ;                        
-                         ;            ; 00000014                 ;                ;                         ;                        
-                         ;            ; 00000015                 ;                ;                         ;                        
-                         ;            ; 00000016                 ;                ;                         ;                        
-                         ;            ; 00000017                 ;                ;                         ;                        
+
+
                          ;            ; 00000018                 ;                ;                         ;                        
                          ;            ; 00000019                 ;                ;                         ;                        
                          ;            ; 00000020                 ;                ;                         ;                        
                          ;            ; 00000021                 ;                ;                         ;                        
-                         ;            ; 00000022                 ;                ;                         ;                        
-                         ;            ; 00000023                 ;                ;                         ;                        
+
                          ;            ; 00000024                 ;                ;                         ;                        
                          ;            ; 00000025                 ;                ;                         ;                        
+
                          ;            ; 00000026                 ;                ;                         ;                        
                          ;            ; 00000027                 ;                ;                         ;                        
                          ;            ; 00000028                 ;                ;                         ;                        
                          ;            ; 00000029                 ;                ;                         ;                        
+
                          ;            ; 00000030                 ;                ;                         ;                        
                          ;            ; 00000031                 ;                ;                         ;                        
                          ;            ; 00000032                 ;                ;                         ;                        
+
                          ;            ; 00000033                 ;                ;                         ;                        
                          ;            ; 00000034                 ;                ;                         ;                        
                          ;            ; 00000035                 ;                ;                         ;                        
                          ;            ; 00000036                 ;                ;                         ;                        
 
+######## Variant Product Stock Level#########
+                         ;            ; 00000366                 ;                ;                         ;
+                         ;            ; 00000367                 ;                ;                         ;
+                         ;            ; 00000368                 ;                ;                         ;
+                         ;            ; 00000266                 ;                ;                         ;
+                         ;            ; 00000267                 ;                ;                         ;
+                         ;            ; 00000268                 ;                ;                         ;
 
 
 #INSERT_UPDATE Vendor;code[unique=true]
