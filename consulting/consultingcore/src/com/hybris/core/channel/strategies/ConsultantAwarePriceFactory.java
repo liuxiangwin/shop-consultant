@@ -30,9 +30,12 @@ import org.springframework.beans.factory.annotation.Required;
 
 
 /**
+ * This class support customer the EuporeFactory but it powerfully deprecated
+ * 
  * @author AlanLiu
  *
  */
+@Deprecated
 public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 //extends Europe1PriceFactory
 {

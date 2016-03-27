@@ -56,12 +56,14 @@
 		</enumtype>
 
 		<enumtype code="ConsultantChannel" autocreate="true" generate="true" dynamic="true">
+			<value code="no_channel" />
 			<value code="city" />
 			<value code="town" />
 		</enumtype>
 		
 		
 		<enumtype code="Introducer" autocreate="true" generate="true" dynamic="true">
+			<value code="no_contact" />
 			<value code="frist_manager" />
 			<value code="second_manager" />
 			<value code="thrid_manager" />
@@ -125,13 +127,13 @@
 					<attribute type="consultantChannel" qualifier="ConsultantChannel">
 						<persistence type="property" />
 						<modifiers read="true" write="true" optional="true" />
-						 <defaultvalue>em().getEnumerationValue("ConsultantChannel","city")</defaultvalue>
+						 <defaultvalue>em().getEnumerationValue("ConsultantChannel","no_channel")</defaultvalue>
 					</attribute>
 					
 					<attribute type="introducer" qualifier="Introducer">
 						<persistence type="property" />
 						<modifiers read="true" write="true" optional="true" />
-						 <defaultvalue>em().getEnumerationValue("Introducer","frist_manager")</defaultvalue>
+						 <defaultvalue>em().getEnumerationValue("Introducer","no_contact")</defaultvalue>
 					</attribute>				
 				</attributes>				
 			</itemtype>
