@@ -14,7 +14,7 @@
 		<!--  product.baseOptions[0].options = Service
 		 	  product.baseOptions[1].options = Level    -->
 <div id="shoot">
-	<h2>Alan Variant Product</h2>
+	<h2>Variant Product Detail</h2>
 	<%-- <h2 id="variantType">${product.variantType}</h2>
 	
 
@@ -34,7 +34,8 @@
 		${product.baseOptions[1].options[1].variantOptionQualifiers[0].qualifier}</h2>
 	<h2 id="product.baseOptions[1]">
 		${product.baseOptions[1].options[2].variantOptionQualifiers[0].qualifier}</h2> --%>
-	
+		
+	<%-- 
 	<h2 id="product baseOptions">${fn:length(product.baseOptions)}</h2>
 	<h2 id="product baseOptions_element1">${product.baseOptions[0]}</h2>
 	<h2 id="product baseOptions_element2">${product.baseOptions[1]}</h2>
@@ -44,7 +45,7 @@
 
 	<h2 id="0-Constult Service">${product.baseOptions[0].variantType}</h2>
 	<h2 id="0-Constult Service">${product.name}</h2>
-	<h2 id="1-Constult Level">${product.baseOptions[1].variantType}</h2>
+	<h2 id="1-Constult Level">${product.baseOptions[1].variantType}</h2> --%>
 	
 </div> 
 
@@ -96,7 +97,9 @@
 			<div class="variant_options_customersization">
 				<c:if test="${not empty variantStyles}">
 					<div class="colour clearfix">
-						<div><spring:theme code="product.variants.colour"/> ${currentStyleValue}</div>
+						<%-- <div><spring:theme code="product.variants.colour"/> ${currentStyleValue}</div> --%>
+						
+						<div>Level Type</div>
 						
 						<ul class="colorlist">
 						
@@ -133,7 +136,9 @@
 				<c:if test="${not empty variantSizes}">
 					<div class="size clearfix">
 						<form>
-							<label for="Size"><spring:theme code="product.variants.size"/></label>
+							<%-- <label for="Size"><spring:theme code="product.variants.size"/></label> --%>
+							
+							<label for="Size">Service Type</label>
 							
 									<select id="Size" class="variant-select" disabled="disabled" >
 										<c:if test="${empty variantSizes}">
@@ -178,7 +183,7 @@
 												</option> --%>
 												
 												<option value="${variantOptionUrl}">
-												${variantSize.code}-- ${serviceValue}													
+												${variantSize.code}&nbsp ${serviceValue}													
 												</option>
 											</c:forEach>
 										</c:if>
