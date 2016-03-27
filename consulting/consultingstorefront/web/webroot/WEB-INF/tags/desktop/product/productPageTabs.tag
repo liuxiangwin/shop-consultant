@@ -19,7 +19,7 @@
 	</cms:pageSlot>
 	
 	
-	<div class="tabHead" id="3d-design-tabHead">3D View SAP_3D</div>
+	<div class="tabHead" id="3d-design-tabHead">Backgroud Detail</div>
 	<div class="tabBody" id="3d-design-tab-body"
 		onclick="javascript:LoadFile();"
 		style="padding: 0px; margin: 0px; display: block;"
