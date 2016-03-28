@@ -14,6 +14,8 @@ $lang=en
 
 # CMS Link Components
 UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; linkName[lang=$lang]  
+                        ;                         ; ConsultantChannelLink             ; Select a channel;
+
                         ;                         ; GlobalCountryLink                 ; Select a country page ;  
                         ;                         ; DevelopmentCategoryLink           ; Development           ;  
                         ;                         ; DataCategoryLink                  ; Data                  ;  

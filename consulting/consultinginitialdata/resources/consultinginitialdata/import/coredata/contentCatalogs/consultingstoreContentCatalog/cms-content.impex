@@ -250,6 +250,7 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
 
 INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='LandingPage2Template'] ; validComponentTypes(code) ; compTypeGroup(code)
                               ; SiteLogo               ;                                                                       ;                           ; logo               
+                              ; ChannelLink            ;                                                                       ;                           ; narrow
                               ; CountryLink            ;                                                                       ;                           ; narrow             
                               ; HeaderLinks            ;                                                                       ;                           ; headerlinks        
                               ; SearchBox              ;                                                                       ;                           ; searchbox          
@@ -464,6 +465,9 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
 # Create Content Slots        
 INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]       ; name                            ; active
                           ;                         ; SiteLogoSlot           ; Default Site Logo Slot          ; true  
+#######################   Add Channel Link#############################
+                          ;                         ; ChannelLinkSlot        ; Channel Link                    ; true  
+
                           ;                         ; CountryLinkSlot        ; Country Link Slot               ; true  
                           ;                         ; HomepageNavLinkSlot    ; Default Homepage Link           ; true  
                           ;                         ; MiniCartSlot           ; Mini Cart                       ; true  
@@ -585,6 +589,9 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
 INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true]                    ; position[unique=true]  ; pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'] ; contentSlot(uid,$contentCV)[unique=true] ; allowOverwrite
                                      ;                         ; SiteLogo-LandingPage2               ; SiteLogo               ;                                                                           ; SiteLogoSlot                             ; true          
                                      ;                         ; HomepageCountryLink-LandingPage2    ; CountryLink            ;                                                                           ; CountryLinkSlot                          ; true          
+                                     
+                                     ;                         ; HomepageChannel-LandingPage2        ; ChannelLink            ;                                                                           ; ChannelLinkSlot                          ; true          
+
                                      ;                         ; HomepageLink-LandingPage2           ; HomepageNavLink        ;                                                                           ; HomepageNavLinkSlot                      ; true          
                                      ;                         ; NavigationBar-LandingPage2          ; NavigationBar          ;                                                                           ; NavigationBarSlot                        ; true          
                                      ;                         ; MiniCart-LandingPage2               ; MiniCart               ;                                                                           ; MiniCartSlot                             ; true          
@@ -804,6 +811,8 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
 # Site-wide Homepage                 
 INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name     ; masterTemplate(uid,$contentCV) ; label   ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='true']
                           ;                         ; homepage         ; Homepage ; LandingPage2Template           ; homepage
+
+
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]                  ; mime     ; realfilename                           ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]

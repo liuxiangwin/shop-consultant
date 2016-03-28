@@ -43,6 +43,8 @@ INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]
 
 # CMS Link Components Define Customer LinkComponent              
 INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; name                            ; url                                                                     ; &linkRef                          ; &componentRef                     ; target(code)[default='sameWindow']
+                               ;                         ; ConsultantChannelLink             ; Consultant Channel Link         ; /                                                                       ; ConsultantChannelLink             ; ConsultantChannelLink             ;                                   ; Channel               ;  ;  
+
                                ;                         ; GlobalCountryLink                 ; Global Header Country Link      ; /                                                                       ; GlobalCountryLink                 ; GlobalCountryLink                 ;                                   ;                       ;  ;  
                                ;                         ; HomepageNavLink                   ; Home Page Nav Link              ; /                                                                       ; HomepageNavLink                   ; HomepageNavLink                   ;                                   ;                       ;  ;  
                                ;                         ; StoreFinderLink                   ; Store Finder Link               ; /store-finder                                                           ; StoreFinderLink                   ; StoreFinderLink                   ;                                   ;                       ;  ;  
@@ -221,6 +223,9 @@ INSERT_UPDATE BreadcrumbComponent ; $contentCV[unique=true] ; uid[unique=true]  
 INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]       ; cmsComponents(&componentRef)       
                           ;                         ; SiteLogoSlot           ; SiteLogoComponent                  
                           ;                         ; HomepageNavLinkSlot    ; HomepageNavLink                    
+#######################   Add Channel Link#############################
+                          ;                         ; ChannelLinkSlot        ; ConsultantChannelLink              
+                          
                           ;                         ; CountryLinkSlot        ; GlobalCountryLink                  
                           ;                         ; MiniCartSlot           ; MiniCart                           
                           ;                         ; NavigationBarSlot      ; NavBarComponent,breadcrumbComponent
@@ -385,7 +390,7 @@ UPDATE CategoryPage ; $contentCV[unique=true] ; uid[unique=true] ; previewImage(
 INSERT_UPDATE CMSActionRestriction ; $contentCV[unique=true] ; uid[unique=true] ; name ;  
 
 # CMS AddToCart Action             
-INSERT_UPDATE AddToCartAction ; $contentCV[unique=true] ; uid[unique=true] ; url 	   ; name 					    ; restrictions(uid,$contentCV) ; &actionRef
+INSERT_UPDATE AddToCartAction ; $contentCV[unique=true] ; uid[unique=true] ; url       ; name                       ; restrictions(uid,$contentCV) ; &actionRef     
                               ;                         ; AddToCartAction  ; /cart/add ; Product Add To Cart Action ; ActionRestriction            ; AddToCartAction
 
 # CMS ListAddToCartAction     
