@@ -64,12 +64,12 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
 
-	private static final String DE_CONSULTING_STORE = "de-consultingstore";
+	private static final String ZH_CONSULTING_STORE = "zh-consultingstore";
 	private static final String UK_CONSULTING_STORE = "uk-consultingstore";
-	private static final String FR_CONSULTING_STORE = "fr-consultingstore";
-	private static final String SE_CONSULTING_STORE = "se-consultingstore";
-	private static final String ES_CONSULTING_STORE = "es-consultingstore";
-	private static final String JP_CONSULTING_STORE = "jp-consultingstore";
+	//private static final String FR_CONSULTING_STORE = "fr-consultingstore";
+	//private static final String SE_CONSULTING_STORE = "se-consultingstore";
+	//private static final String ES_CONSULTING_STORE = "es-consultingstore";
+	//private static final String JP_CONSULTING_STORE = "jp-consultingstore";
 
 	private static final String BASE_CONSULTING_CATALOG_PREFIX = "consultingstore";
 
@@ -168,21 +168,21 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 		// 3. Import core country product catalogs
 		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, UK_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, DE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, SE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, ES_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, FR_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, JP_CONSULTING_STORE);
+		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, ZH_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, SE_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, ES_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, FR_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, JP_CONSULTING_STORE);
 
 
 
 		// 4. Import core country stores
 		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, UK_CONSULTING_STORE, "");
-		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, DE_CONSULTING_STORE, "");
-		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
-		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
-		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
-		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
+		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, ZH_CONSULTING_STORE, "");
+		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
+		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
+		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
+		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
 
 
 
@@ -190,21 +190,21 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 		// 5 Import core solr
 		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, DE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE);
+		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE);
 
 
 
 		// 6 Import Jobs
 		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, UK_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, DE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, SE_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, ES_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, FR_CONSULTING_STORE);
-		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, JP_CONSULTING_STORE);
+		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, ZH_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, SE_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, ES_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, FR_CONSULTING_STORE);
+		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, JP_CONSULTING_STORE);
 
 
 
@@ -223,11 +223,11 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 		// 10 Sample Store
 		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, UK_CONSULTING_STORE, "");
-		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, DE_CONSULTING_STORE, "");
-		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
-		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
-		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
-		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
+		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, ZH_CONSULTING_STORE, "");
+		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
+		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
+		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
+		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
 
 
 
@@ -245,21 +245,21 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 		// 12. Sync base product catalog to country staged
 		executeBaseCatalogSyncJob(UK_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(DE_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(SE_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(ES_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(FR_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(JP_CONSULTING_STORE);
+		executeBaseCatalogSyncJob(ZH_CONSULTING_STORE);
+		//executeBaseCatalogSyncJob(SE_CONSULTING_STORE);
+		//executeBaseCatalogSyncJob(ES_CONSULTING_STORE);
+		//executeBaseCatalogSyncJob(FR_CONSULTING_STORE);
+		//executeBaseCatalogSyncJob(JP_CONSULTING_STORE);
 
 
 
 		// 13. Sync staged country to online
 		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, UK_CONSULTING_STORE, true);
-		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, DE_CONSULTING_STORE, true);
-		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, SE_CONSULTING_STORE, true);
-		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, ES_CONSULTING_STORE, true);
-		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, FR_CONSULTING_STORE, true);
-		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, JP_CONSULTING_STORE, true);
+		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, ZH_CONSULTING_STORE, true);
+		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, SE_CONSULTING_STORE, true);
+		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, ES_CONSULTING_STORE, true);
+		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, FR_CONSULTING_STORE, true);
+		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, JP_CONSULTING_STORE, true);
 
 
 		// 14 Sync base content to onbline content
@@ -269,33 +269,33 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		// 15 Import Sample Solr
 		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE,
 				getSolrMode(UK_CONSULTING_STORE));
-		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, DE_CONSULTING_STORE,
-				getSolrMode(DE_CONSULTING_STORE));
-		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE,
-				getSolrMode(SE_CONSULTING_STORE));
-		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE,
-				getSolrMode(ES_CONSULTING_STORE));
-		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE,
-				getSolrMode(FR_CONSULTING_STORE));
-		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE,
-				getSolrMode(JP_CONSULTING_STORE));
+		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE,
+				getSolrMode(ZH_CONSULTING_STORE));
+		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE,
+		//		getSolrMode(SE_CONSULTING_STORE));
+		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE,
+		//		getSolrMode(ES_CONSULTING_STORE));
+		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE,
+		//		getSolrMode(FR_CONSULTING_STORE));
+		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE,
+		//		getSolrMode(JP_CONSULTING_STORE));
 
 
 		// 16. Activate solr cor jobs
 
 		LOG.debug("Activating solr indexes ");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Staged");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, DE_CONSULTING_STORE + "Staged");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Staged");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Staged");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Staged");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Staged");
+		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Staged");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Staged");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Staged");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Staged");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Staged");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Online");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, DE_CONSULTING_STORE + "Online");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Online");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Online");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Online");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Online");
+		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Online");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Online");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Online");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Online");
+		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Online");
 
 	}
 
@@ -311,8 +311,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		PerformResult performResult = null;
 
 		// In the case of the base, do our own custom sync to the staged version of each sub catalog
-		final Catalog baseConsultingCatalogue = CatalogManager.getInstance()
-				.getCatalog(BASE_CONSULTING_CATALOG_PREFIX + "ProductCatalog");
+		final Catalog baseConsultingCatalogue = CatalogManager.getInstance().getCatalog(
+				BASE_CONSULTING_CATALOG_PREFIX + "ProductCatalog");
 		final Catalog targetConsultingCatalogue = CatalogManager.getInstance().getCatalog(catalogId + "ProductCatalog");
 
 		if (baseConsultingCatalogue != null && targetConsultingCatalogue != null)
@@ -322,8 +322,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 					.getCatalogVersion(CatalogManager.OFFLINE_VERSION);
 
 			performResult = executeCatalogSyncJob(
-					CatalogManager.getInstance().getSyncJob(baseConsultingSource, targetConsultingTarget),
-					catalogId + "ProductCatalog");
+					CatalogManager.getInstance().getSyncJob(baseConsultingSource, targetConsultingTarget), catalogId
+							+ "ProductCatalog");
 
 		}
 		return performResult;
