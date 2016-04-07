@@ -14,7 +14,7 @@ $lang=en
 
 # CMS Link Components
 UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; linkName[lang=$lang]  
-                        ;                         ; ConsultantChannelLink             ; Select a channel;
+                        ;                         ; ConsultantChannelLink             ; Select a channel      ;  
 
                         ;                         ; GlobalCountryLink                 ; Select a country page ;  
                         ;                         ; DevelopmentCategoryLink           ; Development           ;  
@@ -29,25 +29,29 @@ UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]            
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
 #INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
 
-INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]               ; altText                
-                    ;                         ; /images/hybris-site-logo.jpeg   ; "Consulting Store Logo"
-                    ;                         ; /images/flag-united-kingdom.jpg ; "United Kingdom Flag"  
-                    ;                         ; /images/flag-france.jpg         ; "France Flag"          
-                    ;                         ; /images/flag-germany.jpg        ; "Germany Flag"         
-                    ;                         ; /images/flag-sweden.jpg         ; "Sweden Flag"          
-                    ;                         ; /images/flag-spain.jpg          ; "Spain Flag"           
-                    ;                         ; /images/flag-japan.jpg          ; "Japan Flag"           
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]              ; altText                
+                    ;                         ; /images/hybris-site-logo.jpeg  ; "Consulting Store Logo"
+                    ;                         ; /images/landingpage.jpg        ; "Vision Advertisement" 
+                    ;                         ; /images/category-slot-shop.jpg ; "How to shop"          
+                    ;                         ; /images/flag-france.jpg        ; "France Flag"          
+                    ;                         ; /images/flag-germany.jpg       ; "Germany Flag"         
+                    ;                         ; /images/flag-sweden.jpg        ; "Sweden Flag"          
+                    ;                         ; /images/flag-spain.jpg         ; "Spain Flag"           
+                    ;                         ; /images/flag-japan.jpg         ; "Japan Flag"           
+
+                    ;                         ; /images/career2.jpg            ; "career2 Flag"         
+                    ;                         ; /images/career1.jpg            ; "career1 Flag"         
 
 
 # Site Logo Component
-UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]           ; $picture[lang=$lang]            ;  
-                             ;                         ; SiteLogoComponent          ; /images/hybris-site-logo.jpeg   ;  
-                             ;                         ; UkFlagBannerComponent      ; /images/flag-united-kingdom.jpg ;  
-                             ;                         ; FranceFlagBannerComponent  ; /images/flag-france.jpg         ;  
-                             ;                         ; GermanyFlagBannerComponent ; /images/flag-germany.jpg        ;  
-                             ;                         ; SwedenFlagBannerComponent  ; /images/flag-sweden.jpg         ;  
-                             ;                         ; SpainFlagBannerComponent   ; /images/flag-spain.jpg          ;  
-                             ;                         ; JapanFlagBannerComponent   ; /images/flag-japan.jpg          ;  
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]      ; $picture[lang=$lang]           ;  
+                             ;                         ; SiteLogoComponent     ; /images/hybris-site-logo.jpeg  ;  
+                             ;                         ; VisionBannerComponent ; /images/landingpage.jpg        ;  
+                             ;                         ; HowToShopComponent    ; /images/category-slot-shop.jpg ;  
+#                            ;                         ; GermanyFlagBannerComponent; /images/flag-germany.jpg       ;  
+#                            ;                         ; SwedenFlagBannerComponent; /images/flag-sweden.jpg        ;  
+#                            ;                         ; SpainFlagBannerComponent; /images/flag-spain.jpg         ;  
+#                            ;                         ; JapanFlagBannerComponent; /images/flag-japan.jpg         ;  
 
 
 # CMS Mini Cart Component    

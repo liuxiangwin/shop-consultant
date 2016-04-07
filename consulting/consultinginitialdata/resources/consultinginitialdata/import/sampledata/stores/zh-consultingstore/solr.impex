@@ -1,0 +1,49 @@
+# ImpEx for SOLR Configuration
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog=ConsultingStoreClassification
+
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+
+
+$prefix=zh-consulting
+$productCatalog=zh-consultingstoreProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=$prefixSolrServerConfig
+$indexConfigName=$prefixSolrIndexConfig
+$searchConfigName=$prefixPageSize
+$facetSearchConfigName=$prefixIndex
+$facetSearchConfigDescription=Consulting ZH Solr index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=$prefixProductType
+$indexBaseSite=$prefixsite
+
+#########################################################################################
+##### 			Highly Payattion to the Lanngue would create index according this language
+###########		$indexLanguages=ja,en,de,fr,se,es
+#########################################################################################
+$indexLanguages=ja,en
+
+$indexCurrencies=JPY,EUR,GBP
+
+$solrIndexedTypeStaged=uk-consultingstoreProductTypeStaged
+$solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline
+
+
+$solrIndexedType=zh-consultingstoreProductType  
+
+# Classification Facet properties
+INSERT_UPDATE SolrIndexedProperty;	facet[default=true];		solrIndexedType(identifier)[unique=true]	;name[unique=true]			;type(code)		;sortableType(code)	;currency[default=false]	;localized[default=false]	;multiValue[default=true]	;fieldValueProvider								;;;;;;;;	;$classAttributeAssignment
+								;					   ;		$solrIndexedType						;programmingSkills			;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;programmingclassification:::programmingdisciplines::::
+								;					   ;		$solrIndexedType						;dataSkills					;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;dataclassification:::datadisciplines::::
+								;					   ;		$solrIndexedType						;softSkills					;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;businessuserclassification:::businessuserdisciplines::::
+								;					   ;		$solrIndexedType						;devopsSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;operationalclassification:::devopsdisciplines::::
+								;					   ;		$solrIndexedType						;testingSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;testingclassification:::testingdisciplines::::
+								;					   ;		$solrIndexedType						;projectSkills				;text   		;  			 		;    						;    						;							;commerceClassificationPropertyValueProvider	;;;;;;;;	;projectmanagementclassification:::projectdisciplines::::
+
+
+

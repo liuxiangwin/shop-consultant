@@ -5,7 +5,7 @@ $classificiationSystemName=Y Consulting Classification System
 $systemVersion=1.0
 $productCatalog=consultingstoreProductCatalog
 $catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
-$lang=en
+$lang=en,zh
 $sysVer=catalogVersion(catalog(id[default=$classificiationSystem]),version[default=$systemVersion])
 $superClass=superCategories(code,$sysVer);
 $classCatalogVersion=catalogVersion(catalog(id[default='$classificiationSystem']),version[default='1.0'])[unique=true,default='$classificiationSystem:1.0']

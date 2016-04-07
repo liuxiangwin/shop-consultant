@@ -14,16 +14,16 @@ $jarResourceCms=$config-jarResourceCmsValue
 # "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
 # "RestrictedPageTypes" is used to restrict templates to page types                                        
 
-###### 1.Create PageTempate first;(it contains Frontime Template name could also read through hmc)
+###### 1.Create PageTempate first;(it contains Frontime Template name could also read through hmc)         
 ###### 2.Also update PageTempate first could with cscockpit like (jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm);
 
 ###### 3.insert update (ContentSlotName) and it is for recording the connection with VariantSelector(name) 
-######  and concreate component implementaion
+######  and concreate component implementaion                                                              
 
 ###### 4.Create Content Slots,INSERT_UPDATE (ContentSlot) pay attenion it is contentslot not contenslot name ; recording all the contentslot in it
 
 ####### 5.Create INSERT_UPDATE ContentSlotForTemplate,   recording  connection between VariantSelector-ProductDetails  and  VariantSelector
-######## it record through postion with slot name
+######## it record through postion with slot name                                                          
 
 
 
@@ -250,7 +250,7 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
 
 INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='LandingPage2Template'] ; validComponentTypes(code) ; compTypeGroup(code)
                               ; SiteLogo               ;                                                                       ;                           ; logo               
-                              ; ChannelLink            ;                                                                       ;                           ; narrow
+                              ; ChannelLink            ;                                                                       ;                           ; narrow             
                               ; CountryLink            ;                                                                       ;                           ; narrow             
                               ; HeaderLinks            ;                                                                       ;                           ; headerlinks        
                               ; SearchBox              ;                                                                       ;                           ; searchbox          
@@ -588,9 +588,11 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
 
 INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true]                    ; position[unique=true]  ; pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'] ; contentSlot(uid,$contentCV)[unique=true] ; allowOverwrite
                                      ;                         ; SiteLogo-LandingPage2               ; SiteLogo               ;                                                                           ; SiteLogoSlot                             ; true          
+
+                                     ;                         ; HomepageChannel-LandingPage2        ; ChannelLink            ;                                                                           ; ChannelLinkSlot                          ; true          
                                      ;                         ; HomepageCountryLink-LandingPage2    ; CountryLink            ;                                                                           ; CountryLinkSlot                          ; true          
                                      
-                                     ;                         ; HomepageChannel-LandingPage2        ; ChannelLink            ;                                                                           ; ChannelLinkSlot                          ; true          
+                                     
 
                                      ;                         ; HomepageLink-LandingPage2           ; HomepageNavLink        ;                                                                           ; HomepageNavLinkSlot                      ; true          
                                      ;                         ; NavigationBar-LandingPage2          ; NavigationBar          ;                                                                           ; NavigationBarSlot                        ; true          
@@ -654,6 +656,7 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
                                      ;                         ; SiteLogo-ContentPage1               ; SiteLogo               ;                                                                           ; SiteLogoSlot                             ; true          
                                      ;                         ; HomepageLink-ContentPage1           ; HomepageNavLink        ;                                                                           ; HomepageNavLinkSlot                      ; true          
                                      ;                         ; HomepageCountryLink-ContentPage1    ; CountryLink            ;                                                                           ; CountryLinkSlot                          ; true          
+                                     ;                         ; HomepageChannel-ContentPage1        ; ChannelLink            ;                                                                           ; ChannelLinkSlot                          ; true          
                                      ;                         ; NavigationBar-ContentPage1          ; NavigationBar          ;                                                                           ; NavigationBarSlot                        ; true          
                                      ;                         ; MiniCart-ContentPage1               ; MiniCart               ;                                                                           ; MiniCartSlot                             ; true          
                                      ;                         ; Footer-ContentPage1                 ; Footer                 ;                                                                           ; FooterSlot                               ; true          
@@ -802,7 +805,7 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
                                      ;                         ; TopHeaderSlot-ErrorPage          ; TopHeaderSlot          ;                                                                        ; TopHeaderSlot                            ; true          
                                      ;                         ; BottomHeaderSlot-ErrorPage       ; BottomHeaderSlot       ;                                                                        ; BottomHeaderSlot                         ; true          
                                      ;                         ; PlaceholderContentSlot-ErrorPage ; PlaceholderContentSlot ;                                                                        ; PlaceholderContentSlot                   ; true          
-  
+                                     
                                      
 ########################################################################################################## ########################################################################################################## 
 # Create Content Pages               

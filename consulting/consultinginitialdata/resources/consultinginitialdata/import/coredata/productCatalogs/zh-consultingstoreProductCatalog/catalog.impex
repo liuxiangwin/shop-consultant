@@ -2,11 +2,10 @@
 # Import the uk-consulting Product Catalog and Classification Catalog
 ##########################################################################################################################################
 
-$productCatalog=uk-consultingstoreProductCatalog
+$productCatalog=zh-consultingstoreProductCatalog
 $classificationCatalog=ConsultingStoreClassification
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$languages=de,en,ja
-
+$languages=en,zh,de
 #########################################################################################################################################
 # Product catalog
 #########################################################################################################################################

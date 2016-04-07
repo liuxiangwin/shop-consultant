@@ -5,7 +5,7 @@
 $version=Staged
 $contentCatalog=consultingstoreContentCatalog
 $contentCatalogName=Consulting Store Content Catalog
-$productCatalog=uk-consultingtoreProductCatalog
+$productCatalog=uk-consultingstoreProductCatalog				   
 $productCatalogName=Consulting Store Product Catalog
 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
@@ -450,22 +450,31 @@ INSERT_UPDATE JspIncludeComponent ; $contentCV[unique=true] ; uid[unique=true]  
 
 
 ###### Homepage ######            
-INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]               ; realfilename              ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; &imageRef ; folder(qualifier)[default='images'] ;  
-                    ;                         ; /images/flag-united-kingdom.jpg ; flag-united-kingdom-S.jpg ; $siteResource/images/flag-united-kingdom-S.jpg                             ;                            ; ukFlag    ;                                     ;  
-                    ;                         ; /images/flag-france.jpg         ; flag-france-S.jpg         ; $siteResource/images/flag-france-S.jpg                                     ;                            ; frFlag    ;                                     ;  
-                    ;                         ; /images/flag-germany.jpg        ; flag-germany-S.jpg        ; $siteResource/images/flag-germany-S.jpg                                    ;                            ; deFlag    ;                                     ;  
-                    ;                         ; /images/flag-sweden.jpg         ; flag-sweden-S.jpg         ; $siteResource/images/flag-sweden-S.jpg                                     ;                            ; seFlag    ;                                     ;  
-                    ;                         ; /images/flag-spain.jpg          ; flag-spain-S.jpg          ; $siteResource/images/flag-spain-S.jpg                                      ;                            ; esFlag    ;                                     ;  
-                    ;                         ; /images/flag-japan.jpg          ; flag-japan-S.jpg          ; $siteResource/images/flag-japan-S.jpg                                      ;                            ; jaFlag    ;                                     ;  
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]               ; realfilename              ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; &imageRef     ; folder(qualifier)[default='images'] ;  
+                    ;                         ; /images/flag-united-kingdom.jpg ; flag-united-kingdom-S.jpg ; $siteResource/images/flag-united-kingdom-S.jpg                             ;                            ; ukFlag        ;                                     ;  
+                    ;                         ; /images/flag-france.jpg         ; flag-france-S.jpg         ; $siteResource/images/flag-france-S.jpg                                     ;                            ; frFlag        ;                                     ;  
+                    ;                         ; /images/flag-germany.jpg        ; flag-germany-S.jpg        ; $siteResource/images/flag-germany-S.jpg                                    ;                            ; deFlag        ;                                     ;  
+                    ;                         ; /images/flag-sweden.jpg         ; flag-sweden-S.jpg         ; $siteResource/images/flag-sweden-S.jpg                                     ;                            ; seFlag        ;                                     ;  
+                    ;                         ; /images/flag-spain.jpg          ; flag-spain-S.jpg          ; $siteResource/images/flag-spain-S.jpg                                      ;                            ; esFlag        ;                                     ;  
+                    ;                         ; /images/flag-japan.jpg          ; flag-japan-S.jpg          ; $siteResource/images/flag-japan-S.jpg                                      ;                            ; jaFlag        ;                                     ;  
 
+                    ;                         ; /images/landingpage.jpg         ; landingpage.jpg           ; $siteResource/images/landingpage.jpg                                       ;                            ; landingFlag   ;                                     ;  
+                    ;                         ; /images/category-slot-shop.jpg  ; category-slot-shop.jpg    ; $siteResource/images/category-slot-shop.jpg                                ;                            ; howToShopFlag ;                                     ;  
+                    ;                         ; /images/career1.jpg             ; career1.jpg               ; $siteResource/images/career1.jpg                                           ;                            ; career1Flag   ;                                     ;  
+                    ;                         ; /images/career2.jpg             ; career2.jpg               ; $siteResource/images/career2.jpg                                           ;                            ; career2Flag   ;                                     ;  
 
-INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]           ; name                         ; &componentRef              ; urlLink           
-                                    ;                         ; UkFlagBannerComponent      ; Uk Flag Banner Component     ; UkFlagBannerComponent      ; "/consultant/GB/" ;  
-                                    ;                         ; FranceFlagBannerComponent  ; France Flag Banner Component ; FranceFlagBannerComponent  ; "/consultant/FR/" ;  
-                                    ;                         ; GermanyFlagBannerComponent ; German Flag Banner Component ; GermanyFlagBannerComponent ; "/consultant/DE/" ;  
-                                    ;                         ; SwedenFlagBannerComponent  ; Sweden Flag Banner Component ; SwedenFlagBannerComponent  ; "/consultant/SE/" ;  
-                                    ;                         ; SpainFlagBannerComponent   ; Spain Flag Banner Component  ; SpainFlagBannerComponent   ; "/consultant/ES/" ;  
-                                    ;                         ; JapanFlagBannerComponent   ; Japan Flag Banner Component  ; JapanFlagBannerComponent   ; "/consultant/JP/" ;  
+INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]      ; name                    ; &componentRef         ; urlLink
+                                    ;                         ; VisionBannerComponent ; Vision Banner Component ; VisionBannerComponent ; "/"    ;  
+                                    ;                         ; HowToShopComponent    ; How to shop Component   ; HowToShopComponent    ; "/"    ;  
+#                                    ;                         ; GermanyFlagBannerComponent ; German Flag Banner Component ; GermanyFlagBannerComponent ; "/consultant/DE/" ;  
+#                                    ;                         ; SwedenFlagBannerComponent  ; Sweden Flag Banner Component ; SwedenFlagBannerComponent  ; "/consultant/SE/" ;  
+#                                    ;                         ; SpainFlagBannerComponent   ; Spain Flag Banner Component  ; SpainFlagBannerComponent   ; "/consultant/ES/" ;  
+#                                    ;                         ; JapanFlagBannerComponent   ; Japan Flag Banner Component  ; JapanFlagBannerComponent   ; "/consultant/JP/" ;  
+                                    ;                         ; CareerOneComponent    ; Career one Component    ; CareerOneComponent    ; "/"    ;  
+                                    ;                         ; CareerTwoComponent    ; Career two Component    ; CareerTwoComponent    ; "/"    ;  
+
+INSERT_UPDATE ProductCarouselComponent ; $contentCV[unique = true] ; uid[unique = true]        ; name                                        ; products(code, $productCV)                            ; scroll(code) ; popup ; &componentRef            
+                                       ;                           ; HomePageCarouselComponent ; ConsutlantService Homepage Product Carousel ; 00000001,00000002,00000003,00000004,00000005,00000006 ; allVisible   ; false ; HomePageCarouselComponent
 
 
 
@@ -475,13 +484,18 @@ INSERT_UPDATE RotatingImagesComponent ; $contentCV[unique=true] ; uid[unique=tru
 
 INSERT_UPDATE ProductCarouselComponent ; $contentCV[unique=true] ; uid[unique=true] ; name ; products(code,$productCV) ; scroll(code) ; popup ; &componentRef
 
-INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]        ; name                   ; active ; cmsComponents(&componentRef)                                                                                                                           
-                          ;                         ; Section1Slot-FlagBanner ; Home Page Flag Banners ; true   ; UkFlagBannerComponent,FranceFlagBannerComponent,SpainFlagBannerComponent,GermanyFlagBannerComponent,SwedenFlagBannerComponent,JapanFlagBannerComponent ;  
-
+INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]           ; name                      ; active ; cmsComponents(&componentRef)             
+                          ;                         ; Section1Slot-VisionBanner  ; Home Page Flag Banners    ; true   ; VisionBannerComponent,HowToShopComponent ;  
+#                          ;                         ; Section1Slot-FlagBanner ; Home Page Flag Banners ; true   ; UkFlagBannerComponent,FranceFlagBannerComponent,SpainFlagBannerComponent,GermanyFlagBannerComponent,SwedenFlagBannerComponent,JapanFlagBannerComponent ;
+                          ;                         ; Section2ASlot-CareerBanner ; Home Page Career1 Banners ; true   ; CareerOneComponent                       ;  
+                          ;                         ; Section2BSlot-CareerBanner ; Home Page Career2 Banners ; true   ; CareerTwoComponent                       ;  
+                          ;                         ; Section3Slot-WhatNew       ; WhatNew                   ; true   ; HomePageCarouselComponent                ;  
 
 INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='homepage'] ; contentSlot(uid,$contentCV)[unique=true]
-                                 ;                         ; Section1-Flags   ; Section1              ;                                                       ; Section1Slot-FlagBanner                 ;  
-
+                                 ;                         ; Section1-Landing   ; Section1              ;                                                       ; Section1Slot-VisionBanner               ;  
+                                 ;                         ; Section2A-Career ; Section2A             ;                                                       ; Section2ASlot-CareerBanner              ;  
+                                 ;                         ; Section2B-Career ; Section2B             ;                                                       ; Section2BSlot-CareerBanner              ;  
+                                 ;                         ; Section3-WhatNew ; Section3              ;                                                       ; Section3Slot-WhatNew                    ;  
 
 ## Examples                      
 #INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
