@@ -121,7 +121,7 @@ INSERT_UPDATE SolrIndexedType ; identifier[unique=true] ; type(code) ; variant ;
 
 ##################################################################################################################### 
 INSERT_UPDATE SolrFacetSearchConfig ; name[unique=true]            ; description                         ; indexNamePrefix              ; languages(isocode) ; currencies(isocode) ; solrServerConfig(name)  ; solrSearchConfig(description) ; solrIndexConfig(name) ; solrIndexedTypes(identifier) ; enabledLanguageFallbackMechanism ; $catalogVersions                        
-                                    ; $facetSearchConfigName ; $facetSearchConfigDescription ; $searchIndexNamePrefix ; $indexLanguages    ; $indexCurrencies    ; $prefixSolrServerConfig ; $searchConfigName             ; $indexConfigName      ; $solrIndexedType       ; TRUE                             ; uk-consultingstoreProductCatalog:Online ;  ;  ;  ;  ;  ;  ;  
+                                    ; $facetSearchConfigName ; $facetSearchConfigDescription ; $searchIndexNamePrefix ; $indexLanguages    ; $indexCurrencies    ; $prefixSolrServerConfig ; $searchConfigName             ; $indexConfigName      ; $solrIndexedType       ; TRUE                             ; zh-consultingstoreProductCatalog:Online ;  ;  ;  ;  ;  ;  ;  
 
 
 ##################################################################################################################### 
