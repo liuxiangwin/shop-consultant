@@ -91,7 +91,7 @@ INSERT_UPDATE Vendor ; code[unique=true] ; name
 INSERT_UPDATE Warehouse ; code[unique=true] ; name    ; vendor(code)[default=default] ; default[default=true]
                         ; warehouse_London  ; Beijing ; consulting                    ;                      
                         ; warehouse_Beijing ; London  ; consulting                    ;                      
-
+                        ; warehouse_DC 		; DC  ; consulting                    ;
 
 # Disable preview for email pages
 UPDATE CMSPageType ; code[unique=true] ; previewDisabled
