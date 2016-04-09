@@ -2,18 +2,8 @@
 # Macros / Replacement Parameter definitions
 $storeUid=uk-consultingstore
 $productCatalog=uk-consultingstoreProductCatalog
-
-
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $storeImage=storeImage(qualifier, $catalogVersion)
-
-
-INSERT_UPDATE OpeningSchedule ; code[unique=true] ;  
-
-INSERT_UPDATE WeekdayOpeningDay ; openingSchedule(code)[unique=true] ; dayOfWeek(code)[unique=true] ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm] ;  
-
-INSERT_UPDATE SpecialOpeningDay ; openingSchedule(code)[unique=true] ; date[unique=true,dateformat=dd.MM.yyyy] ; closed ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm]
-
 
 INSERT_UPDATE Address ; &addrID           ; streetname              ; streetnumber ; postalcode[unique=true] ; town[unique=true] ; country(isocode) ; region(isocode) ; phone1 ; owner(PointOfService.name)[unique=true]
                       ; addrID-Manchester ; "7th Avenue 10th Floor" ;              ; LD 10106                ; London            ; GB               ;                 ;        ; Manchester                             
@@ -28,3 +18,10 @@ INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrI
 UPDATE PointOfService ; name[unique=true] ; features(code) ;  
 
 INSERT_UPDATE PoS2WarehouseRel ; source(name)[unique=true] ; target(code)[unique=true]
+
+
+
+
+INSERT_UPDATE OpeningSchedule ; code[unique=true] ;
+INSERT_UPDATE WeekdayOpeningDay ; openingSchedule(code)[unique=true] ; dayOfWeek(code)[unique=true] ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm] ;
+INSERT_UPDATE SpecialOpeningDay ; openingSchedule(code)[unique=true] ; date[unique=true,dateformat=dd.MM.yyyy] ; closed ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm]
