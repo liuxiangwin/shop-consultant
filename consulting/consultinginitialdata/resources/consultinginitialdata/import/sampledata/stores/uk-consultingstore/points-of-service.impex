@@ -15,15 +15,15 @@ INSERT_UPDATE WeekdayOpeningDay ; openingSchedule(code)[unique=true] ; dayOfWeek
 INSERT_UPDATE SpecialOpeningDay ; openingSchedule(code)[unique=true] ; date[unique=true,dateformat=dd.MM.yyyy] ; closed ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm]
 
 
-INSERT_UPDATE Address ; &addrID          ; streetname              ; streetnumber ; postalcode[unique=true] ; town[unique=true] ; country(isocode) ; region(isocode) ; phone1 ; owner(PointOfService.name)[unique=true]
-                      ; addrID-manhattan ; "7th Avenue 10th Floor" ;              ; NY 10106                ; New York          ; GB               ;                 ;        ; Manhattan                              
-                      ; addrID-brooklyn  ; "Coney Island Avenue"   ;              ; NY 11230                ; New York          ; GB               ;                 ;        ; Brooklyn                               
+INSERT_UPDATE Address ; &addrID           ; streetname              ; streetnumber ; postalcode[unique=true] ; town[unique=true] ; country(isocode) ; region(isocode) ; phone1 ; owner(PointOfService.name)[unique=true]
+                      ; addrID-Manchester ; "7th Avenue 10th Floor" ;              ; LD 10106                ; London            ; GB               ;                 ;        ; Manchester                             
+                      ; addrID-Wales      ; "Coney Island Avenue"   ;              ; LD 11230                ; London            ; GB               ;                 ;        ; Wales                                  
 
 INSERT_UPDATE StoreLocatorFeature ; code[unique=true]
 
-INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrID) ; latitude  ; longitude  ; geocodeTimestamp[dateformat = dd.MM.yyyy] ; features(code) ; basestore(uid)[default = '$storeUid'] ;  
-                             ; Manhattan           ; STORE      ; addrID-manhattan ; 40.75267  ; -73.989705 ;                                           ;                ; $storeUid                             ;  
-                             ; Brooklyn            ; STORE      ; addrID-brooklyn  ; 40.614734 ; -73.963050 ;                                           ;                ; $storeUid                             ;  
+INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrID)  ; latitude  ; longitude  ; geocodeTimestamp[dateformat = dd.MM.yyyy] ; features(code) ; basestore(uid)[default = '$storeUid'] ;  
+                             ; Manchester          ; STORE      ; addrID-Manchester ; 40.75267  ; -73.989705 ;                                           ;                ; $storeUid                             ;  
+                             ; Wales               ; STORE      ; addrID-Wales      ; 40.614734 ; -73.963050 ;                                           ;                ; $storeUid                             ;  
 
 UPDATE PointOfService ; name[unique=true] ; features(code) ;  
 
