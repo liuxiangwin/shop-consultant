@@ -22,13 +22,17 @@ INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrI
                              ; Haidian             ; STORE      ; addrID-Haidian   ; 40.75267  ; -73.989705 ;                                           ;                ; $storeUid                             ;  
                              ; ChaoYan             ; STORE      ; addrID-Chaoyan   ; 40.614734 ; -73.963050 ;                                           ;                ; $storeUid                             ;  
 
-
-
 INSERT_UPDATE Address ; &addrID        ; streetname           ; streetnumber ; postalcode[unique=true] ; town[unique=true] ; country(isocode) ; region(isocode) ; phone1 ; owner(PointOfService.name)[unique=true]
                       ; addrID-Haidian ; "Qing Hua East Road" ;              ; LD 10106                ; Beijing           ; CN               ;                 ;        ; Manchester                             
                       ; addrID-Chaoyan ; "Tian Ze Road"       ;              ; LD 11230                ; Beijing           ; CN               ;                 ;        ; Wales                                  
 
 
-UPDATE PointOfService ; name[unique=true] ; features(code) ;  
+INSERT_UPDATE PointOfService ; name[unique = true] ; warehouses(code)
+                             ; Haidian             ; warehouse_DC    
+                             ; ChaoYan             ; warehouse_DC    
 
+
+
+
+UPDATE PointOfService ; name[unique=true] ; features(code) ;  
 INSERT_UPDATE PoS2WarehouseRel ; source(name)[unique=true] ; target(code)[unique=true]

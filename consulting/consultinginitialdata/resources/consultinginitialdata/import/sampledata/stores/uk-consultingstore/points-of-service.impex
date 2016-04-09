@@ -15,13 +15,19 @@ INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrI
                              ; Manchester          ; STORE      ; addrID-Manchester ; 40.75267  ; -73.989705 ;                                           ;                ; $storeUid                             ;  
                              ; Wales               ; STORE      ; addrID-Wales      ; 40.614734 ; -73.963050 ;                                           ;                ; $storeUid                             ;  
 
-UPDATE PointOfService ; name[unique=true] ; features(code) ;  
+#                            
+# Link warehouses to point of services
+#                            
+INSERT_UPDATE PointOfService ; name[unique = true] ; warehouses(code)
+                             ; Manchester          ; warehouse_DC    
+                             ; Wales               ; warehouse_DC    
 
+
+
+
+UPDATE PointOfService ; name[unique=true] ; features(code) ;  
 INSERT_UPDATE PoS2WarehouseRel ; source(name)[unique=true] ; target(code)[unique=true]
 
-
-
-
-INSERT_UPDATE OpeningSchedule ; code[unique=true] ;
-INSERT_UPDATE WeekdayOpeningDay ; openingSchedule(code)[unique=true] ; dayOfWeek(code)[unique=true] ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm] ;
+INSERT_UPDATE OpeningSchedule ; code[unique=true] ;  
+INSERT_UPDATE WeekdayOpeningDay ; openingSchedule(code)[unique=true] ; dayOfWeek(code)[unique=true] ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm] ;  
 INSERT_UPDATE SpecialOpeningDay ; openingSchedule(code)[unique=true] ; date[unique=true,dateformat=dd.MM.yyyy] ; closed ; openingTime[dateformat=hh:mm] ; closingTime[dateformat=hh:mm]
