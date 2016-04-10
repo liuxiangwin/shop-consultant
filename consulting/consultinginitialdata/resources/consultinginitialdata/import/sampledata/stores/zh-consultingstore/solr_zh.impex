@@ -9,8 +9,6 @@ $facetSearchConfigName=$prefixIndex
 $contentCatalogName=consultingstoreContentCatalog
 
 #$solrIndexedTypeStaged=consultingstore-uk-ProductTypeStaged
-#$solrIndexedTypeOnline=consultingstore-uk-ProductTypeOnline
-
 $solrIndexedTypeStaged=zh-consultingstoreProductTypeStaged
 $solrIndexedTypeOnline=zh-consultingstoreProductTypeOnline
 
@@ -25,25 +23,25 @@ $lang=zh
 $solrIndexedType=zh-consultingstoreProductType  
 #UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
 
-INSERT_UPDATE SolrIndexedProperty;	solrIndexedType(identifier)[unique=true];	name[unique=true];		displayName[lang=$lang]
-								;	$solrIndexedType;						programmingSkills;		Programming Disciplines;
-								;	$solrIndexedType;						dataSkills;				Data Disciplines;
-								;	$solrIndexedType;						softSkills;				Soft Skill Disciplines;
-								;	$solrIndexedType;						devopsSkills;			Devops Disciplines;
-								;	$solrIndexedType;						testingSkills;			Testing Disciplines;
-								;	$solrIndexedType;						projectSkills;			Project Disciplines;
+INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; name[unique=true] ; displayName[lang=$lang] 
+                                  ; $solrIndexedType                         ; programmingSkills ; "编程技能" ;  
+                                  ; $solrIndexedType                         ; dataSkills        ; "数据技能"        ;  
+                                  ; $solrIndexedType                         ; softSkills        ; "软件技能"  ;  
+                                  ; $solrIndexedType                         ; devopsSkills      ; "开发技能"      ;  
+                                  ; $solrIndexedType                         ; testingSkills     ; "测试技能"     ;  
+                                  ; $solrIndexedType                         ; projectSkills     ; "项目技能"     ;  
 
 
 # Redirect page URL (Must use INSERT_UPDATE here)
-UPDATE SolrURIRedirect;url[unique=true];&redirectRefID
-UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true];&redirectRefID
-UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+UPDATE SolrURIRedirect ; url[unique=true] ; &redirectRefID
+UPDATE SolrPageRedirect ; redirectItem(uid,$contentCatalogVersion)[unique=true] ; &redirectRefID
+UPDATE SolrProductRedirect ; redirectItem(code,$productCatalogVersion)[unique=true] ; &redirectRefID
 
 # Category Redirect (Must use INSERT_UPDATE here)
-INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+INSERT_UPDATE SolrCategoryRedirect ; redirectItem(code,$productCatalogVersion)[unique=true] ; &redirectRefID
 
 # Synonyms (Must use INSERT_UPDATE here)
-INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];synonymFrom[unique=true];synonymTo
+INSERT_UPDATE SolrSynonymConfig ; facetSearchConfig(name)[unique=true,default=$facetSearchConfigName] ; language(isocode)[unique=true,default=$lang] ; synonymFrom[unique=true] ; synonymTo
 
 # Starts With Keyword Redirects (Must use INSERT_UPDATE here)
-INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+INSERT_UPDATE SolrFacetSearchKeywordRedirect ; facetSearchConfig(name)[unique=true,default=$facetSearchConfigName] ; language(isocode)[unique=true,default=$lang] ; keyword[unique=true] ; matchType(code)[unique=true] ; redirect(&redirectRefID) ; ignoreCase[default=true]

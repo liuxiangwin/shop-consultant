@@ -22,18 +22,6 @@ $searchIndexNamePrefix=$prefix
 $solrIndexedType=$prefixProductType
 $indexBaseSite=$prefixsite
 
-#########################################################################################
-##### 			Highly Payattion to the Lanngue would create index according this language
-###########		$indexLanguages=ja,en,de,fr,se,es
-#########################################################################################
-$indexLanguages=ja,en
-
-$indexCurrencies=JPY,EUR,GBP
-
-$solrIndexedTypeStaged=uk-consultingstoreProductTypeStaged
-$solrIndexedTypeOnline=uk-consultingstoreProductTypeOnline
-
-
 $solrIndexedType=zh-consultingstoreProductType  
 
 # Classification Facet properties
