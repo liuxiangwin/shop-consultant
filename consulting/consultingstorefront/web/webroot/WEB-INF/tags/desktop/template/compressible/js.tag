@@ -79,3 +79,6 @@
 
 <%-- Fix for Webkit Browsers (Needs to be loaded last)  --%>
 <script type="text/javascript" src="${commonResourcePath}/js/acc.skiplinks.js"></script>
+
+
+<script type="text/javascript" src="${commonResourcePath}/js/posselector.js"></script>
