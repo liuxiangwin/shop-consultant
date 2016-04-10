@@ -1,7 +1,7 @@
 #
 # Import the CMS Site configuration for the store
 #
-
+# This only locationlaztion  CMMSite name in different language
 # Language
 $lang=zh
 
