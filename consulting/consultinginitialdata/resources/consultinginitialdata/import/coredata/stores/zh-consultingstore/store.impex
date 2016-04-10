@@ -4,7 +4,7 @@
 
 $productCatalog=zh-consultingstoreProductCatalog
 $classificationCatalog=ConsultingStoreClassification
-$currencies=JPY,GBP,EUR
+$currencies=EUR,JPY,GBP
 $net=false
 $storeUid=zh-consultingstore
 $defaultCurrency=GBP
