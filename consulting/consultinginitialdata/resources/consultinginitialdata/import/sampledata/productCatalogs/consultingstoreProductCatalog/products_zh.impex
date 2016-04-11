@@ -1,0 +1,35 @@
+# ImpEx for Importing Product Localisations
+ 
+# Macros / Replacement Parameter definitions
+$productCatalog=consultingstoreProductCatalog
+$productCatalogName=Consulting Store Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=zh
+
+# Update allProducts with localisations
+UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
+               ; 00000001          ;                 ; "刘翔"             ;                     ;                        
+                                     
+               ; 00000003          ;                 ; "杰克。李"           ;                     ;                        
+               ; 00000010          ;                 ; "托尼"             ;                     ;                        
+                                     
+               ; 00000018          ;                 ; "亨瑞克"            ;                     ;                        
+               ; 00000024          ;                 ; "帕特"             ;                     ;                        
+                                   
+               ; 00000026          ;                 ; "瑞贝卡"            ;                     ;                        
+               ; 00000030          ;                 ; "尼克"             ;                     ;                        
+               ; 00000033          ;                 ; "布莱顿"            ;                     ;                        
+               ; 00000066          ;                 ; "顾问级别"           ;                     ;                        
+
+               
+               
+# Update Varaiant Product Name
+UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
+               ; 00000266          ;                 ; "史蒂夫"            ;                     ;                        
+               ; 00000267          ;                 ; "史塔克"            ;                     ;                        
+               ; 00000268          ;                 ; "李安"             ;                     ;                        
+               
+	              

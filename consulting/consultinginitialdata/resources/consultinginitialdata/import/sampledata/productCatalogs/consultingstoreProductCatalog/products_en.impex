@@ -10,44 +10,16 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $lang=en
 
 # Update allProducts with localisations
-UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]     ; summary[lang=$lang] ; description[lang=$lang]
-               ; 00000001          ;                 ; Alan Liu             ;                     ;  
+UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]  ; summary[lang=$lang] ; description[lang=$lang]
+               ; 00000001          ;                 ; Alan Liu          ;                     ;                        
                                      
-               ; 00000002          ;                 ; Tracy Barnacle       ;                     ;                        
-               ; 00000003          ;                 ; Shannon Barnacle     ;                     ;                        
-               ; 00000004          ;                 ; Conrad Barnacle      ;                     ;                        
-               ; 00000005          ;                 ; Robert Barnacle      ;                     ;                        
-               ; 00000006          ;                 ; Susan Barnacle       ;                     ;       
-
-                    
-               ; 00000010          ;                 ; Minecraft Barnacle   ;                     ;                        
-               ; 00000011          ;                 ; Madhatter Barnacle   ;                     ;                        
-               ; 00000012          ;                 ; Evelyn Barnacle      ;                     ;                        
-               ; 00000013          ;                 ; Ian Rubenstein       ;                     ;    
-
-                                     
-               ; 00000018          ;                 ; Les Brown            ;                     ;                        
-               ; 00000019          ;                 ; Duncan Goodyew       ;                     ;                        
-               ; 00000020          ;                 ; Billy Brewin         ;                     ;                        
-               ; 00000021          ;                 ; Jack Sparrow         ;                     ;   
-
-                                     
-               ; 00000024          ;                 ; Pat Skilledup        ;                     ;                        
-               ; 00000025          ;                 ; Nicola Liquorish     ;                     ;    
-                                   
-               ; 00000026          ;                 ; Rebecca Walls        ;                     ;                        
-               ; 00000027          ;                 ; Donna Hodges         ;                     ;                        
-               ; 00000028          ;                 ; Tessy Roper          ;                     ;                        
-               ; 00000029          ;                 ; Nikita Kaye          ;                     ;    
-                                   
-               ; 00000030          ;                 ; Nikki Routelledge    ;                     ;                        
-               ; 00000031          ;                 ; Jim Career           ;                     ;                        
-               ; 00000032          ;                 ; Super Consultant-man ;                     ;   
-                                    
-               ; 00000033          ;                 ; Brendon Dobbs        ;                     ;                        
-               ; 00000034          ;                 ; Craig David          ;                     ;                        
-               ; 00000035          ;                 ; Marc Biscuit         ;                     ;                      
-               ; 00000036          ;                 ; Ali Mony             ;                     ;                        
+               ; 00000003          ;                 ; Jack Lee          ;                     ;                        
+               ; 00000010          ;                 ; Tony Erton        ;                     ;                        
+               ; 00000018          ;                 ; Herick Brown      ;                     ;                        
+               ; 00000024          ;                 ; Pat Tog           ;                     ;                        
+               ; 00000026          ;                 ; Rebecca Walls     ;                     ;                        
+               ; 00000030          ;                 ; Nick Routelledge ;                     ;                        
+               ; 00000033          ;                 ; Brendon Dobbs     ;                     ;                        
 
                
                
@@ -57,7 +29,4 @@ UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summar
                ; 00000267          ;                 ; Tony Stark       ;                     ;                        
                ; 00000268          ;                 ; Jack Lenon       ;                     ;                        
                
-               ; 00000366          ;                 ; KongFu Panda     ;                     ;                        
-               ; 00000367          ;                 ; WuGui            ;                     ;                        
-               ; 00000368          ;                 ; Kai              ;                     ;                        
 	              

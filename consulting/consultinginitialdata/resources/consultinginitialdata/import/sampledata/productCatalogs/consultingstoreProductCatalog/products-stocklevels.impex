@@ -4,7 +4,7 @@
 $productCatalog=consultingstoreProductCatalog
 $productCatalogName=Consulting Store Product Catalog
 $vendor=vendors(code)[default=consulting]
-$warehouse=warehouse(code)[unique=true, default=consulting-dc]
+$warehouse=warehouse(code)[unique=true, default=warehouse_DC]
 $inStockStatus=instockStatus(code)[unique=true][default=notSpecified]
 $globalStockAvailabilty=available[default=666]
 

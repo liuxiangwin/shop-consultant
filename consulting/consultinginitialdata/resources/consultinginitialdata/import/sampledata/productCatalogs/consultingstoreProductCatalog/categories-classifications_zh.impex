@@ -18,12 +18,12 @@ UPDATE ClassificationClass ; code[unique=true]               ; name[lang=$lang] 
 
 # Classification attribute (aka) feature descriptor (aka) feature list(s)
 UPDATE ClassificationAttribute ; code[unique=true]       ; name[lang=$lang]          ; $classSystemVersion
-                               ; programmingdisciplines  ; Programming Disciplines   ;                    
-                               ; datadisciplines         ; Data Disciplines          ;                    
-                               ; businessuserdisciplines ; Business User Disciplines ;                    
-                               ; devopsdisciplines       ; Devops Disciplines        ;                    
-                               ; testingdisciplines      ; Testing Disciplines       ;                    
-                               ; projectdisciplines      ; Project Disciplines       ;                    
+                               ; programmingdisciplines  ; "编程"Programming Disciplines   ;                    
+                               ; datadisciplines         ; "数据"Data Disciplines          ;                    
+                               ; businessuserdisciplines ; "商务"Business User Disciplines ;                    
+                               ; devopsdisciplines       ; "操作"Devops Disciplines        ;                    
+                               ; testingdisciplines      ; "测试"Testing Disciplines       ;                    
+                               ; projectdisciplines      ; "项目管理"Project Disciplines       ;                    
 
 # CAV - (aka) feature values   
 UPDATE ClassificationAttributeValue ; code[unique=true]             ; name[lang=$lang]              ; $classSystemVersion ;  
