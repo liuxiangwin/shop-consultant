@@ -8,6 +8,7 @@ $currencies=EUR,JPY,GBP
 $net=false
 $storeUid=uk-consultingstore
 $defaultCurrency=EUR
+#$languages=en,zh
 $languages=en,zh
 $defaultLanguage=en
 

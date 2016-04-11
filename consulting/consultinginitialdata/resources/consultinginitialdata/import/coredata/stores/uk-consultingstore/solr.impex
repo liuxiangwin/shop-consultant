@@ -301,23 +301,17 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+		WHERE {cty.isocode} = 'GB' and {p.variantType}IS NULL
 	}}	                           
 	UNION		                       
 	{{                            
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
-		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
-		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+		WHERE {cty.isocode} = 'GB'
     }}                         
-	UNION	                        
-	{{                            
-		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
-		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
-		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
-		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
-		JOIN Country as cty ON {cty.pk} = {v2c.target}}
-	}}		                          
+		                          
 )tbl ORDER BY tbl.code"        ;                                          
 
 
@@ -329,23 +323,17 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+		WHERE {cty.isocode} = 'GB' and {p.variantType}IS NULL
 	}}	                           
 	UNION		                       
 	{{                            
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
-		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
-		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+		WHERE {cty.isocode} = 'GB'
     }}                         
-	UNION	                        
-	{{                            
-		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
-		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
-		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
-		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
-		JOIN Country as cty ON {cty.pk} = {v2c.target}}
-	}}		                          
+			                          
 )tbl ORDER BY tbl.code"        ;                                          
                                ; $solrIndexedType                   ; $solrIndexedType-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
                                
