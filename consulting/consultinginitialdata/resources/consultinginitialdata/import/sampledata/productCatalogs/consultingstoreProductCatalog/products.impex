@@ -60,6 +60,13 @@ INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $supercategori
                                             ; 00000267          ; Development                                                                   ; 00000066     ; Senior              ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Senior    ;  
                                             ; 00000268          ; Development                                                                   ; 00000066     ; Standard            ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Standard  ;  
 
+UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $activeCountries ; $catalogVersion
+                                     ; 00000266          ; GB,CN            ;                
+                                     ; 00000267          ; GB,CN            ;                
+                                     ; 00000268          ; GB,CN            ;                
+
+
+
 # Insert service type of 00000266 Principal consultant		                
 INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ; service             
                                               ; 00000366          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000266     ; Architecture_Review  ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Architecture_Review ;  
