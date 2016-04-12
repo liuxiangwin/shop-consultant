@@ -25,7 +25,7 @@ $approved=approvalstatus(code)[default='approved']
 
 #mode=append,          
 
-INSERT_UPDATE PriceRow ; product(code,$catalogVersion)[unique=true] ; unit(code[unique=true,default=pieces]) ; currency(isocode)[unique=true] ; price       ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; channel(code)[unique=true] ; minqtd ; unitFactor ; net   ; $catalogVersion
+INSERT_UPDATE PriceRow ; product(code,$catalogVersion)[unique=true] ; unit(code[unique=true,default=HR]) ; currency(isocode)[unique=true] ; price       ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; channel(code)[unique=true] ; minqtd ; unitFactor ; net   ; $catalogVersion
  					  ####### Domestic Price #######	
                        ; 00000001                                   ;                                        ; EUR                            ; 600.00 EUR  ; "domestic"                                                    ; "frist_manager"                                    ;                            ; 1      ; 1          ; false ;                ;  ;  
                        ; 00000001                                   ;                                        ; EUR                            ; 540.00 EUR  ; "domestic"                                                    ; "thrid_manager"                                    ;                            ; 100    ; 1          ; false ;                ;  ;  
