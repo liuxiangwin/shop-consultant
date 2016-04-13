@@ -6,5 +6,5 @@
 $lang=zh
 
 # DynamicLink
-UPDATE DynamicLink;code[unique=true];description[lang=$lang]
- ;accelerator-site-links;"加速器店面"
+UPDATE DynamicLink ; code[unique=true]      ; description[lang=$lang]
+                   ; accelerator-site-links ; "加速器店面"                

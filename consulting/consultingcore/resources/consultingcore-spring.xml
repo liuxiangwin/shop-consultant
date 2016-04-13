@@ -477,6 +477,13 @@
 		parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 	</bean>
+	
+	<bean id="consultantProductPriceValueProvider"
+		class="com.hybris.core.search.solrfacetsearch.provider.impl.ConsultantProductPriceValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="consultantCommercePriceService" />
+	</bean>
 
 	<!-- Replace the Default Channel for customerzation-->
 	<alias alias="retrieveChannelStrategy" name="alanRetrieveChannelStrategy" />
@@ -505,6 +512,18 @@
 		class="com.hybris.core.channel.strategies.ConsultantPriceService">
 		<property name="priceService" ref="priceService" />
 	</bean>
+	
+	
+	<alias alias="europe1.manager" name="europe1.manager2" />
+    <bean id="europe1.manager2" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
+          init-method="init" destroy-method="destroy">
+        <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/>
+    </bean>
+	
 
-
+	<bean id="countrySelectorStrategy"
+		class="com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy">
+	</bean>
+	
+	
 </beans>

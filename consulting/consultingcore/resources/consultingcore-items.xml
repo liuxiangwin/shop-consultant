@@ -49,6 +49,7 @@
 
 		<enumtype code="ConsultantSerivceTypeEnum" autocreate="true"
 			generate="true" dynamic="true">
+			<value code="Architecture_Review"/>
 			<value code="Code_Review" />
 			<value code="Perf_Review" />
 			<value code="System_Review" />
@@ -57,8 +58,8 @@
 
 		<enumtype code="ConsultantChannel" autocreate="true" generate="true" dynamic="true">
 			<value code="no_channel" />
-			<value code="city" />
-			<value code="town" />
+			<value code="domestic" />
+			<value code="international" />
 		</enumtype>
 		
 		
@@ -74,8 +75,8 @@
 		<enumtype code="PriceRowChannel" autocreate="false" generate="false"
 			dynamic="true">
 			<!-- Default Values to support Mobile channel and desktop channel -->
-			<value code="city" />
-			<value code="town" />
+			<value code="domestic" />
+			<value code="international" />
 		</enumtype>		
 
 	</enumtypes>
@@ -99,6 +100,16 @@
 				cardinality="many"></sourceElement>
 			<targetElement type="Country" qualifier="activeCountries"
 				cardinality="many"></targetElement>
+		</relation>
+		
+		
+		<relation generate="true" localized="false"
+				  code="Customer2CMSSite" autocreate="true">
+			<description>This relation connects customer with site</description>
+			<sourceElement type="Customer" cardinality="many"
+						   qualifier="customers" />
+			<targetElement type="CMSSite" cardinality="one"
+						   qualifier="site" collectiontype="list" />
 		</relation>
 
 
@@ -137,6 +148,20 @@
 					</attribute>				
 				</attributes>				
 			</itemtype>
+			
+			<itemtype code="Product"  autocreate="false"
+				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
+				<description>Extending the Product from core with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="nationality">
+						<modifiers optional="true" />
+						<persistence type="property" />
+						<description>Nationality of consultant</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
 
 			<itemtype code="Consultant" extends="Product" autocreate="true"
 				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
@@ -158,8 +183,6 @@
 						<persistence type="property" />
 						<description>Working Experience Year</description>
 					</attribute>
-
-
 					<!-- [y] Add Alan property to solr indexing. -->
 					<attribute type="java.lang.String" qualifier="content">
 						<modifiers optional="true" />
@@ -187,7 +210,14 @@
 						<modifiers />
 						<persistence type="property" />
 					</attribute>
-
+	
+				<!-- 	<attribute type="java.lang.String" qualifier="nationality">
+						<modifiers optional="true" />
+						<persistence type="property" />
+						<description>Nationality of consultant</description>
+					</attribute>
+	 -->
+	
 					<attribute type="java.lang.String" qualifier="content">
 						<modifiers optional="true" />
 						<persistence type="property" />
@@ -218,7 +248,14 @@
 						<persistence type="property" />
 					</attribute>
 				</attributes>
+			</itemtype>		
+			
+			
+			<itemtype code="PosSelectorComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  jaloclass="com.hybris.platform.posselector.jalo.PosSelectorComponentJalo">
 			</itemtype>
+			
+			
 
 		</typegroup>
 

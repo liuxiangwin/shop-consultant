@@ -1,5 +1,5 @@
 # 
 # Import links for the Multi Channel Cockpit (MCC)
 #
-INSERT_UPDATE DynamicLink;code[unique=true];area(code);sortorder;extensionName;parentLink(code);visibleScript;script
-;accelerator-site-links;channel;0;consultingcore;webfrontends;"return java.lang.Boolean.TRUE;";"return com.hybris.core.util.MccSiteUrlHelper.getAllSitesAndUrls();"
+INSERT_UPDATE DynamicLink ; code[unique=true]      ; area(code) ; sortorder ; extensionName  ; parentLink(code) ; visibleScript                  ; script
+                          ; accelerator-site-links ; channel    ; 0         ; consultingcore ; webfrontends     ; "return java.lang.Boolean.TRUE ; "     ; "return com.hybris.core.util.MccSiteUrlHelper.getAllSitesAndUrls() ; "
