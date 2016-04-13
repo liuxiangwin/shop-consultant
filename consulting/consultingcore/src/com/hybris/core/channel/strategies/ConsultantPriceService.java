@@ -51,6 +51,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
 import com.google.common.base.Preconditions;
+import com.hybris.core.util.SiteUtil;
 import com.hybris.core.util.SortUtil;
 
 
@@ -60,8 +61,6 @@ import com.hybris.core.util.SortUtil;
 public class ConsultantPriceService implements CommercePriceService
 {
 	private final static Logger LOG = Logger.getLogger(ConsultantPriceService.class);
-
-	private PriceService priceService;
 
 	@Resource
 	private ModelService modelService;
@@ -73,6 +72,9 @@ public class ConsultantPriceService implements CommercePriceService
 	private CMSSiteService cmsSiteService;
 	@Resource
 	private CatalogService catalogService;
+
+	private PriceService priceService;
+
 
 	@Override
 	public PriceInformation getFromPriceForProduct(final ProductModel product)
@@ -91,34 +93,28 @@ public class ConsultantPriceService implements CommercePriceService
 	{
 		validateParameterNotNull(product, "Product model cannot be null");
 		//final List<PriceInformation> prices = getPriceService().getPriceInformationsForProduct(product);
-
 		final PriceInformation pInfo = findMatchPriceRows(product);
-		/*
-		 * if (CollectionUtils.isNotEmpty(prices)) { PriceInformation minPriceForLowestQuantity = null; for (final
-		 * PriceInformation price : prices) { if (minPriceForLowestQuantity == null || (((Long)
-		 * minPriceForLowestQuantity.getQualifierValue("minqtd")).longValue() > ((Long) price
-		 * .getQualifierValue("minqtd")).longValue())) { minPriceForLowestQuantity = price; } } return
-		 * minPriceForLowestQuantity; }
-		 */
+
 		return pInfo;
 	}
 
+	@SuppressWarnings("deprecation")
 	public PriceInformation findMatchPriceRows(final ProductModel product)
 	{
 		Preconditions.checkNotNull(product);
-		//uk-consultingsite or zh-consultingsite
 		final String currentSiteUid = cmsSiteService.getCurrentSite().getUid();
-		//CN Or GB
 		boolean isDomesticPrice = false;
 		boolean isInternationPrice = false;
 		final String productCountry = product.getNationality();
 		if (currentSiteUid != null && !currentSiteUid.equals("") && productCountry != null && !productCountry.equals(""))
 		{
-			if (currentSiteUid.substring(0, 2).equalsIgnoreCase("uk") && productCountry.equalsIgnoreCase("GB"))
+			if (currentSiteUid.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
 			{
 				isDomesticPrice = true;
 			}
-			else if (currentSiteUid.substring(0, 2).equalsIgnoreCase("zh") && productCountry.equalsIgnoreCase("CN"))
+			else if (currentSiteUid.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
 			{
 				isDomesticPrice = true;
 			}
@@ -134,7 +130,6 @@ public class ConsultantPriceService implements CommercePriceService
 
 		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
 				modelService.<Product> getSource(product), null);
-
 		final List<PriceInformation> domesticList = new ArrayList<PriceInformation>();
 		final List<PriceInformation> internationList = new ArrayList<PriceInformation>();
 
@@ -249,7 +244,6 @@ public class ConsultantPriceService implements CommercePriceService
 		{
 			Assert.isTrue(price1.getPriceValue().getCurrencyIso().equals(price2.getPriceValue().getCurrencyIso()),
 					"differing currency of web prices");
-
 			return compareValues(price1.getPriceValue().getValue(), price2.getPriceValue().getValue());
 		}
 	}
@@ -266,18 +260,17 @@ public class ConsultantPriceService implements CommercePriceService
 			final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
 			catalogId = clm.getCatalog().getId();
 		}
-		//zh-consultingstoreProductCatalog
-		//CN Or GB
 		boolean isDomesticPrice = false;
 		boolean isInternationPrice = false;
 		final String productCountry = productModel.getNationality();
 		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
 		{
-			if (catalogId.substring(0, 2).equalsIgnoreCase("uk") && productCountry.equalsIgnoreCase("GB"))
+			if (catalogId.substring(0, 2).equalsIgnoreCase(SiteUtil.SITE_UK) && productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
 			{
 				isDomesticPrice = true;
 			}
-			else if (catalogId.substring(0, 2).equalsIgnoreCase("zh") && productCountry.equalsIgnoreCase("CN"))
+			else if (catalogId.substring(0, 2).equalsIgnoreCase(SiteUtil.SITE_ZH)
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
 			{
 				isDomesticPrice = true;
 			}
@@ -292,7 +285,6 @@ public class ConsultantPriceService implements CommercePriceService
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		final Currency currentCurr = ctx.getCurrency();
 		final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
-
 		final Collection<PriceRow> rows = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
 				modelService.<Product> getSource(productModel), null);
 
@@ -327,5 +319,16 @@ public class ConsultantPriceService implements CommercePriceService
 			}
 		}
 		return results;
+	}
+
+	private void originalGetMinPriceForLowestQunatity()
+	{
+		/*
+		 * if (CollectionUtils.isNotEmpty(prices)) { PriceInformation minPriceForLowestQuantity = null; for (final
+		 * PriceInformation price : prices) { if (minPriceForLowestQuantity == null || (((Long)
+		 * minPriceForLowestQuantity.getQualifierValue("minqtd")).longValue() > ((Long) price
+		 * .getQualifierValue("minqtd")).longValue())) { minPriceForLowestQuantity = price; } } return
+		 * minPriceForLowestQuantity; }
+		 */
 	}
 }
