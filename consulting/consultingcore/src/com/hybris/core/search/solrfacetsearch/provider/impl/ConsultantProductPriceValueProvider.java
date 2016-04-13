@@ -29,11 +29,8 @@ import com.hybris.core.channel.strategies.ConsultantPriceService;
 public class ConsultantProductPriceValueProvider extends AbstractPropertyFieldValueProvider implements FieldValueProvider,
 		Serializable
 {
-
 	private FieldNameProvider fieldNameProvider;
 	private ConsultantPriceService priceService;
-
-
 
 	@Override
 	public Collection<FieldValue> getFieldValues(final IndexConfig indexConfig, final IndexedProperty indexedProperty,
