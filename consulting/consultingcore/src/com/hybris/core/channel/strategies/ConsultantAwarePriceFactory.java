@@ -3,131 +3,154 @@
  */
 package com.hybris.core.channel.strategies;
 
+import de.hybris.platform.catalog.CatalogService;
 import de.hybris.platform.catalog.jalo.CatalogAwareEurope1PriceFactory;
-import de.hybris.platform.europe1.channel.strategies.RetrieveChannelStrategy;
-import de.hybris.platform.europe1.constants.Europe1Tools;
-import de.hybris.platform.europe1.enums.PriceRowChannel;
-import de.hybris.platform.europe1.jalo.PDTRow;
+import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
+import de.hybris.platform.core.PK;
+import de.hybris.platform.europe1.constants.Europe1Constants;
+import de.hybris.platform.europe1.jalo.Europe1PriceFactory;
+import de.hybris.platform.europe1.jalo.PDTRowsQueryBuilder;
+import de.hybris.platform.europe1.jalo.PDTRowsQueryBuilder.QueryWithParams;
 import de.hybris.platform.europe1.jalo.PriceRow;
+import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.jalo.SessionContext;
-import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
-import de.hybris.platform.jalo.order.price.JaloPriceFactoryException;
-import de.hybris.platform.jalo.order.price.PriceInformation;
+import de.hybris.platform.jalo.flexiblesearch.FlexibleSearch;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.user.User;
-import de.hybris.platform.util.DateRange;
-import de.hybris.platform.util.PriceValue;
+import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Required;
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+
+import com.google.common.base.Preconditions;
+import com.hybris.core.util.SiteUtil;
 
 
 /**
  * This class support customer the EuporeFactory but it powerfully deprecated
- * 
+ *
  * @author AlanLiu
  *
  */
-@Deprecated
+//@Deprecated
 public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 //extends Europe1PriceFactory
 {
+	private final static Logger LOG = Logger.getLogger(ConsultantAwarePriceFactory.class);
 
-	private RetrieveChannelStrategy retrieveChannelStrategy;
+	@Resource
+	private CMSSiteService cmsSiteService;
+
+	@Resource
+	private ModelService modelService;
+
+	@Resource
+	private CatalogService catalogService;
 
 	@Override
-	public List getPriceInformations(final SessionContext ctx, @SuppressWarnings("deprecation") final Product product,
-			@SuppressWarnings("deprecation") final EnumerationValue productGroup, final User user,
-			@SuppressWarnings("deprecation") final EnumerationValue userGroup, final Currency curr, final boolean net,
-			final Date date, final Collection taxValues) throws JaloPriceFactoryException
+	public Collection<PriceRow> queryPriceRows4Price(final SessionContext ctx, final Product product,
+			final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
 	{
-		// compute price info rows ( filter out unreachable rows first )
-		final Collection<PriceRow> priceRows = filterPriceRows(matchPriceRowsForInfo(ctx, product, productGroup, user, userGroup,
-				curr, date, net));
-		final List<PriceInformation> priceInfos = new ArrayList<PriceInformation>(priceRows.size());
-		Collection theTaxValues = taxValues;
+		final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
 
-		final List<PriceInformation> defaultPriceInfos = new ArrayList<PriceInformation>(priceRows.size());
-		final PriceRowChannel channel = retrieveChannelStrategy.getChannel(ctx);
+		Preconditions.checkNotNull(product);
+		//final String currentSiteUid = cmsSiteService.getCurrentSite().getUid();
 
-		for (final PriceRow row : priceRows)
+		Preconditions.checkNotNull(productModel);
+		final Set<CatalogVersionModel> cls = catalogService.getSessionCatalogVersions();
+		String catalogId = "";
+		if (cls.size() > 0)
 		{
-			PriceInformation pInfo = Europe1Tools.createPriceInformation(row, curr);
-			// convert net/gross if necessary
-			if (pInfo.getPriceValue().isNet() != net)
-			{
-				// lazy load taxes if prices have to be converted
-				if (theTaxValues == null)
-				{
-					theTaxValues = Europe1Tools.getTaxValues(getTaxInformations(product, getPTG(ctx, product), user,
-							getUTG(ctx, user), date));
-				}
-				// we have to create a new info object since it is immutable
-				pInfo = new PriceInformation(pInfo.getQualifiers(), pInfo.getPriceValue().getOtherPrice(theTaxValues));
-			}
-			//YTODO: We need to cross verify this logic. It works fine but is redundant.
-			// always creates a list with the default PriceRows
-			if (row.getChannel() == null)
-			{
-				defaultPriceInfos.add(pInfo);
-			}
+			final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
+			catalogId = clm.getCatalog().getId();
+		}
 
-			// if its coming from a default channel should return only default PriceRows (default is null channel)
-			if (channel == null && row.getChannel() == null)
+		//CN Or GB
+		boolean isDomesticPrice = false;
+		boolean isInternationPrice = false;
+		final String productCountry = productModel.getNationality();
+		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
+		{
+			if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
 			{
-				priceInfos.add(pInfo);
+				isDomesticPrice = true;
 			}
-			// if its coming from a specific channel then it should match with the PriceRow channel
-			else if (channel != null && row.getChannel() != null && row.getChannel().getCode().equalsIgnoreCase(channel.getCode()))
+			else if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
 			{
-				priceInfos.add(pInfo);
+				isDomesticPrice = true;
+			}
+			else
+			{
+				isInternationPrice = true;
 			}
 		}
-		// If no PriceRow was found for the specified channel then it should return the default list.
-		if (priceInfos.size() == 0)
+		//final Currency currentCurr = ctx.getCurrency();
+		//final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
+
+		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
+				modelService.<Product> getSource(productModel), null);
+
+		final List<PriceRow> domesticList = new ArrayList<PriceRow>();
+		final List<PriceRow> internationList = new ArrayList<PriceRow>();
+
+		for (final PriceRow priceRow : priceRowsList)
 		{
-			return defaultPriceInfos;
+			//final Currency priceRowCurr = priceRow.getCurrency();
+			//if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
+			//{
+			final PriceRowModel priceRowModel = modelService.get(priceRow);
+			final String channel = priceRowModel.getConsultantChannel().getCode();
+
+			if (channel.equalsIgnoreCase("domestic") && isDomesticPrice)
+			{
+				domesticList.add(priceRow);
+			}
+			else if (channel.equalsIgnoreCase("international") && isInternationPrice)
+			{
+				internationList.add(priceRow);
+			}
+			//}
+		}
+		if (isDomesticPrice)
+		{
+			return domesticList;
+		}
+		else if (isInternationPrice)
+		{
+			return internationList;
 		}
 		else
 		{
-			return priceInfos;
+			LOG.error("Not match price row list found");
 		}
+		return null;
 	}
 
-	public static final PriceInformation createPriceInformation(final PriceRow row, final Currency currency)
+	private Collection<PriceRow> orignalQuery(final SessionContext ctx, final Product product,
+			final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
 	{
-		final Map qualifiers = new HashMap();
-		qualifiers.put(PriceRow.MINQTD, Long.valueOf(row.getMinQuantity()));
-		qualifiers.put(PriceRow.UNIT, row.getUnit());
-		qualifiers.put(PriceRow.PRICEROW, row);
 
-		//row.getp
-		final DateRange dateRange = row.getDateRange();
+		final PK productPk = product == null ? null : product.getPK();
+		final PK productGroupPk = productGroup == null ? null : productGroup.getPK();
+		final PK userPk = user == null ? null : user.getPK();
+		final PK userGroupPk = userGroup == null ? null : userGroup.getPK();
+		final String productId = extractProductId(ctx, product);
 
 
-		if (dateRange != null)
-		{
-			qualifiers.put(PDTRow.DATERANGE, dateRange);
-		}
-		final Currency act_curr = row.getCurrency();
-		// get base price ( convert if necessary )
-		final double basePrice = currency.equals(act_curr) ? row.getPriceAsPrimitive() / row.getUnitFactorAsPrimitive() : act_curr
-				.convert(currency, row.getPriceAsPrimitive() / row.getUnitFactorAsPrimitive());
-		// if base price is not in requested net/gross state, compute it
-		return new PriceInformation(qualifiers, new PriceValue(currency.getIsoCode(), basePrice, row.isNetAsPrimitive()));
-	}
-
-	@Override
-	@Required
-	public void setRetrieveChannelStrategy(final RetrieveChannelStrategy retrieveChannelStrategy)
-	{
-		this.retrieveChannelStrategy = retrieveChannelStrategy;
+		final PDTRowsQueryBuilder builder = getPDTRowsQueryBuilderFor(Europe1Constants.TC.PRICEROW);
+		final QueryWithParams queryAndParams = builder.withAnyProduct().withAnyUser().withProduct(productPk)
+				.withProductId(productId).withProductGroup(productGroupPk).withUser(userPk).withUserGroup(userGroupPk).build();
+		return FlexibleSearch.getInstance().search(ctx, queryAndParams.getQuery(), queryAndParams.getParams(), PriceRow.class)
+				.getResult();
 	}
 }

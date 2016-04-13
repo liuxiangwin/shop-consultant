@@ -15,6 +15,9 @@ package com.hybris.core.channel.strategies;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
+import de.hybris.platform.catalog.CatalogService;
+import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commerceservices.price.CommercePriceService;
 import de.hybris.platform.commerceservices.util.AbstractComparator;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -33,9 +36,12 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.variants.model.VariantProductModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -45,6 +51,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
 import com.google.common.base.Preconditions;
+import com.hybris.core.util.SortUtil;
 
 
 /**
@@ -61,6 +68,11 @@ public class ConsultantPriceService implements CommercePriceService
 
 	@Resource
 	private SessionService sessionService;
+
+	@Resource
+	private CMSSiteService cmsSiteService;
+	@Resource
+	private CatalogService catalogService;
 
 	@Override
 	public PriceInformation getFromPriceForProduct(final ProductModel product)
@@ -81,13 +93,12 @@ public class ConsultantPriceService implements CommercePriceService
 		//final List<PriceInformation> prices = getPriceService().getPriceInformationsForProduct(product);
 
 		final PriceInformation pInfo = findMatchPriceRows(product);
-
 		/*
 		 * if (CollectionUtils.isNotEmpty(prices)) { PriceInformation minPriceForLowestQuantity = null; for (final
 		 * PriceInformation price : prices) { if (minPriceForLowestQuantity == null || (((Long)
 		 * minPriceForLowestQuantity.getQualifierValue("minqtd")).longValue() > ((Long) price
 		 * .getQualifierValue("minqtd")).longValue())) { minPriceForLowestQuantity = price; } } return
-		 * minPriceForLowestQuantity; } return null;
+		 * minPriceForLowestQuantity; }
 		 */
 		return pInfo;
 	}
@@ -95,13 +106,37 @@ public class ConsultantPriceService implements CommercePriceService
 	public PriceInformation findMatchPriceRows(final ProductModel product)
 	{
 		Preconditions.checkNotNull(product);
-		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
+		//uk-consultingsite or zh-consultingsite
+		final String currentSiteUid = cmsSiteService.getCurrentSite().getUid();
+		//CN Or GB
+		boolean isDomesticPrice = false;
+		boolean isInternationPrice = false;
+		final String productCountry = product.getNationality();
+		if (currentSiteUid != null && !currentSiteUid.equals("") && productCountry != null && !productCountry.equals(""))
+		{
+			if (currentSiteUid.substring(0, 2).equalsIgnoreCase("uk") && productCountry.equalsIgnoreCase("GB"))
+			{
+				isDomesticPrice = true;
+			}
+			else if (currentSiteUid.substring(0, 2).equalsIgnoreCase("zh") && productCountry.equalsIgnoreCase("CN"))
+			{
+				isDomesticPrice = true;
+			}
+			else
+			{
+				isInternationPrice = true;
+			}
+		}
 
+		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		final Currency currentCurr = ctx.getCurrency();
 		final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
 
 		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
 				modelService.<Product> getSource(product), null);
+
+		final List<PriceInformation> domesticList = new ArrayList<PriceInformation>();
+		final List<PriceInformation> internationList = new ArrayList<PriceInformation>();
 
 		for (final PriceRow priceRow : priceRowsList)
 		{
@@ -109,28 +144,50 @@ public class ConsultantPriceService implements CommercePriceService
 
 			if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
 			{
-				final boolean channelValue = (ctx.getAttribute("c-channel") != null) && (!ctx.getAttribute("c-channel").equals(""));
-				final boolean introValue = (ctx.getAttribute("c-intro") != null) && (!ctx.getAttribute("c-channel").equals(""));
+				final PriceRowModel priceRowModel = modelService.get(priceRow);
+				final String channel = priceRowModel.getConsultantChannel().getCode();
 
-				if (channelValue && introValue)
+				if (channel.equalsIgnoreCase("domestic") && isDomesticPrice)
 				{
-					final PriceRowModel priceRowModel = modelService.get(priceRow);
-
-					final String channel = priceRowModel.getConsultantChannel().getCode();
-
-					final String introduce = priceRowModel.getIntroducer().getCode();
-
-					if (channel.equalsIgnoreCase((String) ctx.getAttribute("c-channel"))
-							&& (introduce.equalsIgnoreCase((String) ctx.getAttribute("c-intro"))))
-					{
-						final PriceInformation priceInformation = Europe1Tools.createPriceInformation(priceRow, priceRow.getCurrency());
-						return priceInformation;
-					}
+					final PriceInformation priceInformation = Europe1Tools.createPriceInformation(priceRow, priceRow.getCurrency());
+					domesticList.add(priceInformation);
+				}
+				else if (channel.equalsIgnoreCase("international") && isInternationPrice)
+				{
+					final PriceInformation priceInformation = Europe1Tools.createPriceInformation(priceRow, priceRow.getCurrency());
+					internationList.add(priceInformation);
 				}
 			}
 		}
+		if (!domesticList.isEmpty() && isDomesticPrice)
+		{
+			return getMinPriceForLowestQunatity(domesticList);
+		}
+		else if (!internationList.isEmpty() && isInternationPrice)
+		{
+			return getMinPriceForLowestQunatity(internationList);
+		}
 		return null;
 
+	}
+
+	/**
+	 * @param domesticList
+	 * @return
+	 */
+	private PriceInformation getMinPriceForLowestQunatity(final List<PriceInformation> domesticList)
+	{
+		PriceInformation minPriceForLowestQuantity = null;
+		for (final PriceInformation price : domesticList)
+		{
+			if (minPriceForLowestQuantity == null
+					|| (((Long) minPriceForLowestQuantity.getQualifierValue("minqtd")).longValue() > ((Long) price
+							.getQualifierValue("minqtd")).longValue()))
+			{
+				minPriceForLowestQuantity = price;
+			}
+		}
+		return minPriceForLowestQuantity;
 	}
 
 	protected PriceInformation getLowestVariantPrice(final ProductModel product)
@@ -195,5 +252,80 @@ public class ConsultantPriceService implements CommercePriceService
 
 			return compareValues(price1.getPriceValue().getValue(), price2.getPriceValue().getValue());
 		}
+	}
+
+
+	//Solr indexing would be trigger
+	public List<PriceInformation> getPriceInformationsForProduct(final ProductModel productModel)
+	{
+		Preconditions.checkNotNull(productModel);
+		final Set<CatalogVersionModel> cls = catalogService.getSessionCatalogVersions();
+		String catalogId = "";
+		if (cls.size() > 0)
+		{
+			final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
+			catalogId = clm.getCatalog().getId();
+		}
+		//zh-consultingstoreProductCatalog
+		//CN Or GB
+		boolean isDomesticPrice = false;
+		boolean isInternationPrice = false;
+		final String productCountry = productModel.getNationality();
+		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
+		{
+			if (catalogId.substring(0, 2).equalsIgnoreCase("uk") && productCountry.equalsIgnoreCase("GB"))
+			{
+				isDomesticPrice = true;
+			}
+			else if (catalogId.substring(0, 2).equalsIgnoreCase("zh") && productCountry.equalsIgnoreCase("CN"))
+			{
+				isDomesticPrice = true;
+			}
+			else
+			{
+				isInternationPrice = true;
+			}
+		}
+
+		final List<PriceInformation> results = new ArrayList<PriceInformation>();
+
+		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
+		final Currency currentCurr = ctx.getCurrency();
+		final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
+
+		final Collection<PriceRow> rows = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
+				modelService.<Product> getSource(productModel), null);
+
+		final List<PriceRow> list = new ArrayList<PriceRow>(rows);
+
+		Collections.sort(list, SortUtil.PR_COMP);
+
+		for (final PriceRow priceRow : list)
+		{
+			final Currency priceRowCurr = priceRow.getCurrency();
+
+			if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
+			{
+				final PriceRowModel priceRowModel = modelService.get(priceRow);
+
+				final String channel = priceRowModel.getConsultantChannel().getCode();
+
+				if (channel.equalsIgnoreCase("domestic") && isDomesticPrice)
+				{
+					final PriceInformation priceInformation = Europe1Tools.createPriceInformation(priceRow, priceRow.getCurrency());
+					results.add(priceInformation);
+				}
+				else if (channel.equalsIgnoreCase("international") && isInternationPrice)
+				{
+					final PriceInformation priceInformation = Europe1Tools.createPriceInformation(priceRow, priceRow.getCurrency());
+					results.add(priceInformation);
+				}
+				else
+				{
+					LOG.error("Not match price row list found");
+				}
+			}
+		}
+		return results;
 	}
 }

@@ -11,6 +11,7 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.solrfacetsearch.config.IndexedProperty;
 import de.hybris.platform.solrfacetsearch.config.IndexedType;
 import de.hybris.platform.solrfacetsearch.search.SearchQuery;
+import de.hybris.platform.solrfacetsearch.search.SearchQuery.Operator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -25,8 +26,8 @@ import com.hybris.core.services.ConsultantService;
 
 
 
-public class ConsultantSearchFiltersPopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_SORT_TYPE>
-		extends SearchFiltersPopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_SORT_TYPE>
+public class ConsultantSearchFiltersPopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_SORT_TYPE> extends
+		SearchFiltersPopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_SORT_TYPE>
 {
 
 	private ConsultantService consultantService;
@@ -36,16 +37,17 @@ public class ConsultantSearchFiltersPopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_
 
 
 	@Override
-	public void populate(final SearchQueryPageableData<SolrSearchQueryData> source,
+	public void populate(
+			final SearchQueryPageableData<SolrSearchQueryData> source,
 			final SolrSearchRequest<FACET_SEARCH_CONFIG_TYPE, IndexedType, IndexedProperty, SearchQuery, INDEXED_TYPE_SORT_TYPE> target)
 	{
 		super.populate(source, target);
 
 
 		/* Uncomment 3 lines below for pre-filtering option */
-		//final String selectedValue = getConsultantService().getCountrySelectedForSession(true);
-		//LOG.info("Filtering search filter for active country : " + selectedValue);
-		//target.getSearchQuery().searchInField("activeCountries", selectedValue, Operator.OR);
+		final String selectedValue = getConsultantService().getCountrySelectedForSession(true);
+		LOG.info("Filtering search filter for active country : " + selectedValue);
+		target.getSearchQuery().searchInField("activeCountries", selectedValue, Operator.OR);
 
 	}
 
