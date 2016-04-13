@@ -265,11 +265,12 @@ public class ConsultantPriceService implements CommercePriceService
 		final String productCountry = productModel.getNationality();
 		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
 		{
-			if (catalogId.substring(0, 2).equalsIgnoreCase(SiteUtil.SITE_UK) && productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
+			if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
 			{
 				isDomesticPrice = true;
 			}
-			else if (catalogId.substring(0, 2).equalsIgnoreCase(SiteUtil.SITE_ZH)
+			else if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
 					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
 			{
 				isDomesticPrice = true;

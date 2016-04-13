@@ -32,6 +32,7 @@ public class ConsultantProductPriceValueProvider extends AbstractPropertyFieldVa
 	private FieldNameProvider fieldNameProvider;
 	private ConsultantPriceService priceService;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Collection<FieldValue> getFieldValues(final IndexConfig indexConfig, final IndexedProperty indexedProperty,
 			final Object model) throws FieldValueProviderException
