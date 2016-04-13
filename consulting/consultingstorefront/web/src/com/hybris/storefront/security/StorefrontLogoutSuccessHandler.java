@@ -82,6 +82,6 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 
 		//return targetUrlModify;
 
-		return "https://localhost:9002/consultingstorefront/jp-consultingsite/en/?clear=true&site=uk-consultingsite";
+		return "https://localhost:9002/consultingstorefront/uk-consultingsite/en/?clear=true&site=uk-consultingsite";
 	}
 }

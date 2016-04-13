@@ -17,8 +17,10 @@
 		
 
 
-<requires-extension name="captainamerican"/>
+<!-- <requires-extension name="countryselector"/> -->
 <requires-extension name="b2ccheckoutaddon"/>
+<requires-extension name="captainamerican"/>
+
 <requires-extension name="btg"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="consultingfacades"/>

@@ -17,9 +17,16 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.servicelayer.session.SessionService;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy;
 
 
 /**
@@ -37,9 +46,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/")
 public class HomePageController extends AbstractPageController
 {
-	@RequestMapping(method = RequestMethod.GET)
+
+	private static final String SELECTED_COUNTRY_CODE = "selectedcountry";
+
+	@Resource(name = "cmsSiteService")
+	private CMSSiteService cmsSiteService;
+
+	@Autowired
+	private CountrySelectorStrategy countrySelectorStrategy;
+
+	@Resource
+	private SessionService sessionService;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{country}/")
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+			final RedirectAttributes redirectModel, final HttpServletResponse response, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		ctx.setAttribute("c-channel", "city");

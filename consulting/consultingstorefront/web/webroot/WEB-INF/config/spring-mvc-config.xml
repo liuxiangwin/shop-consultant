@@ -117,6 +117,11 @@
 			<property name="btgSegmentStrategy" ref="btgSegmentStrategy"/>
 		</bean>
 		<bean class="com.hybris.storefront.interceptors.beforeview.GoogleMapsBeforeViewHandler" />
+		
+		<bean class=" com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorBeforeViewHandler" >
+		</bean>
+		
+		
 	</util:list>
 	
 	<!-- Interceptor that runs once per request and before the controller handler method is called -->
@@ -373,6 +378,9 @@
 			<aop:around pointcut-ref="entryCheckoutStepPoint" method="validateCheckoutStep" />
 		</aop:aspect>
 	</aop:config>
+	
+	
+		
 
 
 </beans>
