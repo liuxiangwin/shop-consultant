@@ -4,7 +4,8 @@
 
 $productCatalog=uk-consultingstoreProductCatalog
 $classificationCatalog=ConsultingStoreClassification
-$currencies=EUR,JPY,GBP
+#$currencies=EUR,JPY,GBP
+$currencies=EUR
 $net=false
 $storeUid=uk-consultingstore
 $defaultCurrency=EUR

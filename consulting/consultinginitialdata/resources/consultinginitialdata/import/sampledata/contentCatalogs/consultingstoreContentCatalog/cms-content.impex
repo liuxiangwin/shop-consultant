@@ -5,8 +5,13 @@
 $version=Staged
 $contentCatalog=consultingstoreContentCatalog
 $contentCatalogName=Consulting Store Content Catalog
-$productCatalog=uk-consultingstoreProductCatalog				   
+
+$productCatalog=consultingstoreProductCatalog			   
 $productCatalogName=Consulting Store Product Catalog
+
+
+
+
 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
@@ -15,6 +20,7 @@ $image=image(code, $contentCV);
 $media=media(code, $contentCV);
 $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
+$lang=en;
 
 $productResource=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultinginitialdata/import/productCatalogs/$productCatalog
 $jarResourceCms=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultinginitialdata/import/sampledata/cockpits/cmscockpit
@@ -26,19 +32,55 @@ $siteResource=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultin
 
 
 # Site Logo
-#INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
 INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]             ; realfilename          ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; &imageRef      ; folder(qualifier)[default='images'] ;  
 #;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/consulting/NotFoundPage.png
                     ;                         ; /images/hybris-site-logo.jpeg ; hybris-site-logo.jpeg ; $siteResource/images/hybris-site-logo.jpeg                                 ;                            ; siteLogoHybris ;                                     ;  
 
-################################################### Finish Debuging Here#################################################################################################################################################################
-
-
-
 # CMS Site Settings 
 # Site Logo Component
-INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]  ; name                ; &componentRef     ; urlLink
-                                    ;                         ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; "/"    
+INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]  ; name                ; &componentRef     ; $picture[lang=$lang]          ; urlLink
+                                    ;                         ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; /images/hybris-site-logo.jpeg ; "/"    
+
+
+
+# Site Logo                         
+                                    
+                                    
+#INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; realfilename  ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; altText ; folder(qualifier)[default='images']
+#                                   
+#                                   
+#                    ;                         ; ruagLogo          ; logo-ruag.png ; $siteResource/logo-ruag.png                                                ; image/png                  ; hybris  
+#Accelerator         ;                         
+                                    
+                                    
+                                    
+                                    
+                                    
+#INSERT_UPDATE                      
+#SimpleBannerComponent; $contentCV[unique=true]; uid[unique=true]  ; $picture[lang=$lang]; urlLink
+#             		 ;  					  ; SiteLogoComponent ; ruagLogo ; /
+
+
+
+INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true] ; name  ; linkName        ; url                            ; &linkRef   ; &componentRef ; target(code)[default='sameWindow'] ; 
+                               ;                         ; ZhSiteLink       ; China ; China Site Link ; /setcountry?country=zh&lang=zh ; ZhSiteLink ; ZhSiteLink    ;                                    ;  
+                               ;                         ; UkSiteLink       ; UK    ; UK Site Link    ; /setcountry?country=uk&lang=en ; UkSiteLink ; UkSiteLink    ;                                    ; 
+                               
+                               
+INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name                  ; masterTemplate(uid,$contentCV) ; label        ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
+                          ;                         ; siteSelector     ; Country Selector Page ; ContentPage1Template           ; /siteselector
+                          
+                          
+# ContentSlot             
+INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true] ; name                                     ; active ; cmsComponents(&componentRef) ;  ;  ;  
+                          ;                         ; Section2BSlot-SS ; Section2B Slot for Country Selector Page ; true   ; ZhSiteLink, UkSiteLink       ;  ;  ;  
+                          
+                          
+# ContentSlotForPage      
+INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='siteSelector'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
+                                 ;                         ; Section2B-SS     ; Section2B             ;                                                           ; Section2BSlot-SS                         ;  ;  ;  
+
+
 
 
 # CMS Link Components Define Customer LinkComponent              
@@ -89,7 +131,7 @@ INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]
 INSERT_UPDATE MiniCartComponent ; $contentCV[unique=true] ; uid[unique=true] ; name      ; &componentRef ; totalDisplay(code) ; shownProductCount ; lightboxBannerComponent(&componentRef)
                                 ;                         ; MiniCart         ; Mini Cart ; MiniCart      ; SUBTOTAL           ; 3                 ; LightboxHomeDeliveryBannerComponent   
 
-# Navigation Bar Component      
+# Navigation Bar Component Alan Liu    
 INSERT_UPDATE NavigationBarComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; name                                ; wrapAfter ; link(uid, $contentCV)             ; styleClass ; &componentRef                    
                                      ;                         ; DevelopmentBarComponent           ; Development Bar Component           ; 10        ; DevelopmentCategoryLink           ;            ; DevelopmentBarComponent          
                                      ;                         ; DataBarComponent                  ; Data Bar Component                  ; 10        ; DataCategoryLink                  ;            ; DataBarComponent                 
@@ -122,11 +164,6 @@ INSERT_UPDATE NavigationBarCollectionComponent ; $contentCV[unique=true] ; uid[u
 # CMS tabs components                          
 INSERT_UPDATE CMSTabParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; name         ; visible ; &componentRef
                                        ;                         ; deliveryTab      ; Delivery tab ; true    ; deliveryTab  
-
-################################################### Finish Debuging Here###################################################
-
-
-
 
 INSERT_UPDATE CMSTabParagraphContainer ; $contentCV[unique=true] ; uid[unique=true]  ; name          ; visible ; simpleCMSComponents(uid, $contentCV) ; &componentRef    
                                        ;                         ; TabPanelContainer ; Tab container ; true    ; deliveryTab                          ; TabPanelContainer
@@ -219,7 +256,7 @@ INSERT_UPDATE BreadcrumbComponent ; $contentCV[unique=true] ; uid[unique=true]  
 
 
 
-# Content Slots ##### Insert Components into slot postion              
+# Content Slots ##### Insert Components into slot postion   (Alan Liu)           
 INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]       ; cmsComponents(&componentRef)       
                           ;                         ; SiteLogoSlot           ; SiteLogoComponent                  
                           ;                         ; HomepageNavLinkSlot    ; HomepageNavLink                    
@@ -463,15 +500,15 @@ INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]               
                     ;                         ; /images/career1.jpg             ; career1.jpg               ; $siteResource/images/career1.jpg                                           ;                            ; career1Flag   ;                                     ;  
                     ;                         ; /images/career2.jpg             ; career2.jpg               ; $siteResource/images/career2.jpg                                           ;                            ; career2Flag   ;                                     ;  
 
-INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]      ; name                    ; &componentRef         ; urlLink
-                                    ;                         ; VisionBannerComponent ; Vision Banner Component ; VisionBannerComponent ; "/"    ;  
-                                    ;                         ; HowToShopComponent    ; How to shop Component   ; HowToShopComponent    ; "/"    ;  
+INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]      ; name                    ; &componentRef         ; $picture[lang=$lang]           ; urlLink
+                                    ;                         ; VisionBannerComponent ; Vision Banner Component ; VisionBannerComponent ; /images/landingpage.jpg        ; "/"    ;  
+                                    ;                         ; HowToShopComponent    ; How to shop Component   ; HowToShopComponent    ; /images/category-slot-shop.jpg ; "/"    ;  
 #                                    ;                         ; GermanyFlagBannerComponent ; German Flag Banner Component ; GermanyFlagBannerComponent ; "/consultant/DE/" ;  
 #                                    ;                         ; SwedenFlagBannerComponent  ; Sweden Flag Banner Component ; SwedenFlagBannerComponent  ; "/consultant/SE/" ;  
 #                                    ;                         ; SpainFlagBannerComponent   ; Spain Flag Banner Component  ; SpainFlagBannerComponent   ; "/consultant/ES/" ;  
 #                                    ;                         ; JapanFlagBannerComponent   ; Japan Flag Banner Component  ; JapanFlagBannerComponent   ; "/consultant/JP/" ;  
-                                    ;                         ; CareerOneComponent    ; Career one Component    ; CareerOneComponent    ; "/"    ;  
-                                    ;                         ; CareerTwoComponent    ; Career two Component    ; CareerTwoComponent    ; "/"    ;  
+                                    ;                         ; CareerOneComponent    ; Career one Component    ; CareerOneComponent    ; /images/career1.jpg            ; "/"    ;  
+                                    ;                         ; CareerTwoComponent    ; Career two Component    ; CareerTwoComponent    ; /images/career2.jpg            ; "/"    ;  
 
 INSERT_UPDATE ProductCarouselComponent ; $contentCV[unique = true] ; uid[unique = true]        ; name                                        ; products(code, $productCV)                            ; scroll(code) ; popup ; &componentRef            
                                        ;                           ; HomePageCarouselComponent ; ConsutlantService Homepage Product Carousel ; 00000001,00000002,00000003,00000004,00000005,00000006 ; allVisible   ; false ; HomePageCarouselComponent
@@ -492,7 +529,7 @@ INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]          
                           ;                         ; Section3Slot-WhatNew       ; WhatNew                   ; true   ; HomePageCarouselComponent                ;  
 
 INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='homepage'] ; contentSlot(uid,$contentCV)[unique=true]
-                                 ;                         ; Section1-Landing   ; Section1              ;                                                       ; Section1Slot-VisionBanner               ;  
+                                 ;                         ; Section1-Landing ; Section1              ;                                                       ; Section1Slot-VisionBanner               ;  
                                  ;                         ; Section2A-Career ; Section2A             ;                                                       ; Section2ASlot-CareerBanner              ;  
                                  ;                         ; Section2B-Career ; Section2B             ;                                                       ; Section2BSlot-CareerBanner              ;  
                                  ;                         ; Section3-WhatNew ; Section3              ;                                                       ; Section3Slot-WhatNew                    ;  
@@ -700,16 +737,6 @@ INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true]   
                                  ;                         ; SideContent-profile ; SideContent           ;                                                      ; SideContent-profile                      ;  ;  ;  
                                  ;                         ; BodyContent-profile ; BodyContent           ;                                                      ; BodyContent-profile                      ;  ;  ;  
 
-
-
-
-
-
-
-
-
-
-
 ###### Account Address Book      
 # ContentSlot                    
 INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]         ; name                                       ; active ; cmsComponents(&componentRef)   ;  ;  ;  
@@ -757,10 +784,6 @@ INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true]   
 #################################################Impresive debuging working here#############################################################################
 ##############################################################################################################################
 
-
-
-
-
 ###### Account Order History     
 
 # ContentSlot                    
@@ -783,9 +806,6 @@ INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]        ; 
 INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true]        ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='order'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
                                  ;                         ; SideContent-orderdetail ; SideContent           ;                                                    ; SideContent-orderdetail                  ;  ;  ;  
                                  ;                         ; BodyContent-orderdetail ; BodyContent           ;                                                    ; BodyContent-orderdetail                  ;  ;  ;  
-
-
-
 
 ##################### Account Update Password
 # ContentSlot                    

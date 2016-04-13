@@ -1,100 +1,144 @@
 # ImpEx for Importing CMS Content
 # ZH Localisation
 
+# ImpEx for Importing CMS Content
+# English Localisation
+
 # Macros / Replacement Parameter definitions
-$contentCatalog=__CONTENT_CATALOG_NAME__
+$Version=Staged
+$contentCatalog=consultingstoreContentCatalog
 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$Version])[default=$contentCatalog:$Version]
 $picture=media(code, $contentCV);
-$siteResource=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultinginitialdata/import/contentCatalogs/$contentCatalog
-
+$siteResource=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultinginitialdata/import/sampledata/contentCatalogs/$contentCatalog
 # Language
 $lang=zh
 
-# Site Logo Component
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 
 # CMS Link Components
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; linkName[lang=$lang]  
+                        ;                         ; ConsultantChannelLink             ; Select a channel      ;  
+
+                        ;                         ; GlobalCountryLink                 ; Select a country page ;  
+                        ;                         ; DevelopmentCategoryLink           ; "开发"           ;  
+                        ;                         ; DataCategoryLink                  ; "数据"                  ;  
+                        ;                         ; Business-User-CentricCategoryLink ; "商业用户中" ;  
+                        ;                         ; OperationalCategoryLink           ; "运营"           ;  
+                        ;                         ; TestingCategoryLink               ; "测试"              ;  
+                        ;                         ; Project-ManagementCategoryLink    ; "项目管理"    ;  
+
+
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+#INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]              ; altText                
+                    ;                         ; /images/hybris-site-logo.jpeg  ; "Consulting Store Logo"
+                    ;                         ; /images/landingpage.jpg        ; "Vision Advertisement" 
+                    ;                         ; /images/category-slot-shop.jpg ; "How to shop"          
+                    ;                         ; /images/flag-france.jpg        ; "France Flag"          
+                    ;                         ; /images/flag-germany.jpg       ; "Germany Flag"         
+                    ;                         ; /images/flag-sweden.jpg        ; "Sweden Flag"          
+                    ;                         ; /images/flag-spain.jpg         ; "Spain Flag"           
+                    ;                         ; /images/flag-japan.jpg         ; "Japan Flag"           
 
-# CMS Mini Cart Component
-UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;title[lang=$lang]
+                    ;                         ; /images/career2.jpg            ; "career2 Flag"         
+                    ;                         ; /images/career1.jpg            ; "career1 Flag"         
 
-# CMS tabs components
-UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];content[lang=$lang]
 
-# CMS Footer Component
-UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+# Site Logo Component
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]      ; $picture[lang=$lang]           ;  
+                             ;                         ; SiteLogoComponent     ; /images/hybris-site-logo.jpeg  ;  
+                             ;                         ; VisionBannerComponent ; /images/landingpage.jpg        ;  
+                             ;                         ; HowToShopComponent    ; /images/category-slot-shop.jpg ;  
+#                            ;                         ; GermanyFlagBannerComponent; /images/flag-germany.jpg       ;  
+#                            ;                         ; SwedenFlagBannerComponent; /images/flag-sweden.jpg        ;  
+#                            ;                         ; SpainFlagBannerComponent; /images/flag-spain.jpg         ;  
+#                            ;                         ; JapanFlagBannerComponent; /images/flag-japan.jpg         ;  
 
-# CMS Paragraph Component (Contact information)
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 
-# CMS ProductReferences Components
-UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+# CMS Mini Cart Component    
+UPDATE MiniCartComponent ; $contentCV[unique=true] ; uid[unique=true] ; name ; title[lang=$lang]
+
+# CMS Tab Paragraph Components
+UPDATE CMSTabParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang] ; content[lang=$lang]
+
+# CMS Footer Component          
+UPDATE FooterComponent ; $contentCV[unique=true] ; uid[unique=true] ; notice[lang=$lang]
+
+# CMS Paragraph Components
+UPDATE CMSParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; content[lang=$lang]
+
+# CMS Product References Components
+UPDATE ProductReferencesComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
 # CMS PurchasedCategorySuggestionComponent Components
-UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE PurchasedCategorySuggestionComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
-# CMS CartSuggestion Components
-UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+# CMS CartSuggestion Components             
+UPDATE CartSuggestionComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
-# Category Pages
-UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+# Category Pages               
+UPDATE CategoryPage ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
 # CMS Navigation Nodes
-UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE CMSNavigationNode ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
-# FAQ Page
 
-# CMS Paragraph Component (Contact information)
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh];
-
-# Terms and Conditions Page
+# FAQ Page               
 
 # CMS Paragraph Component (Contact information)
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh];
+UPDATE CMSParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; content[lang=en] ;  
 
-# Homepage
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+# Terms and Conditions Page  
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+# CMS Paragraph Component (Contact information)
+UPDATE CMSParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; content[lang=en] ;  
 
-UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
 
-UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+# Homepage                   
+
+# Media Content              
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; &imageRef ; folder(qualifier)[default='images'] ; altText
+
+
+# CMS Banner Components
+UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; altText ; &imageRef
+
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; $picture[lang=$lang]
+
+UPDATE BannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; headline[lang=$lang] ; $picture[lang=$lang] ; content[lang=$lang]
+
+UPDATE ProductCarouselComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
+
 
 # Camera Accessories and Supplies Category Landing Page
 
-UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE CategoryPage ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang]
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; folder(qualifier)[default='images'] ; altText
 
-UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];$picture[lang=$lang];description[lang=$lang]
+UPDATE CategoryFeatureComponent ; $contentCV[unique=true] ; uid[unique=true] ; title[lang=$lang] ; $picture[lang=$lang] ; description[lang=$lang]
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; $picture[lang=$lang]
 
-# Search Results Page
+# Search Results Page        
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+# Media Content              
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; folder(qualifier)[default='images'] ; altText
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; $picture[lang=$lang]
 
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+UPDATE CMSParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; content[lang=$lang]
 
-# Cart Page
+# Cart Page                  
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+# Media Content              
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true] ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; folder(qualifier)[default='images'] ; altText
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; $picture[lang=$lang]
 
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+UPDATE CMSParagraphComponent ; $contentCV[unique=true] ; uid[unique=true] ; content[lang=$lang]
+
+

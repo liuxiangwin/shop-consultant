@@ -47,6 +47,8 @@ INSERT_UPDATE PageTemplate ; $contentCV[unique=true] ; uid[unique=true]         
                            ;                         ; ContentPage1Template                 ; Content Page 1 Template                   ; layout/contentLayout1Page         ; ContentPage               
                            ;                         ; AccountPageTemplate                  ; Account Page Template                     ; account/accountLayoutPage         ; ContentPage               ; false               ;  
                            ;                         ; StoreFinderPageTemplate              ; Store Finder Page Template                ; storeFinder/storeFinderSearchPage ; ContentPage               ; false               ;  
+                           ;                         ; ChooseCountryPageTemplate            ; ChooseCountry Page Template               ; choosecountry/ChooseCountry       ; ContentPage               ;                     ;  
+
 
 # Templates without a frontendTemplateName
                            ;                         ; CartPageTemplate                     ; Cart Page Template                        ;                                   ; ContentPage               ; false               ;  
@@ -81,6 +83,7 @@ UPDATE PageTemplate ; $contentCV[unique=true] ; uid[unique=true]                
                     ;                         ; OrderConfirmationPageTemplate        ; $jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm                            
                     ;                         ; LoginPageTemplate                    ; $jarResourceCms/structure-view/structure_loginPageTemplate.vm                                        
                     ;                         ; CheckoutLoginPageTemplate            ; $jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm                                
+                    ;                         ; ChooseCountryPageTemplate            ; $jarResourceCms/structure-view/structure_ChooseCountryPageTemplate.vm                                
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -174,7 +177,7 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
                               ; MiniCart               ;                                                                                ;                           ; minicart           
                               ; NavigationBar          ;                                                                                ;                           ; navigation         
                               ; ProductLeftRefinements ;                                                                                ;                           ; narrow             
-                              ; SearchResultListSlot   ;                                                                                ;                           ; wide               
+                              ; SearchResultsListSlot  ;                                                                                ;                           ; wide               
                               ; Footer                 ;                                                                                ;                           ; footer             
                               ; TopHeaderSlot          ;                                                                                ;                           ; wide               
                               ; BottomHeaderSlot       ;                                                                                ;                           ; wide               
@@ -188,7 +191,7 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
                               ; MiniCart               ;                                                                                ;                           ; minicart           
                               ; NavigationBar          ;                                                                                ;                           ; navigation         
                               ; ProductLeftRefinements ;                                                                                ;                           ; narrow             
-                              ; SearchResultGridSlot   ;                                                                                ;                           ; wide               
+                              ; SearchResultsGridSlot  ;                                                                                ;                           ; wide               
                               ; Footer                 ;                                                                                ;                           ; footer             
                               ; TopHeaderSlot          ;                                                                                ;                           ; wide               
                               ; BottomHeaderSlot       ;                                                                                ;                           ; wide               
@@ -815,6 +818,10 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
 INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name     ; masterTemplate(uid,$contentCV) ; label   ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='true']
                           ;                         ; homepage         ; Homepage ; LandingPage2Template           ; homepage
 
+
+# Site-wide Homepage                 
+INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true]  ; name              ; masterTemplate(uid,$contentCV) ; label            ;  defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
+                          ;                         ; chooseCountryPage ; ChooseCountryPage ; ChooseCountryPageTemplate      ; chooseCountryPage
 
 
 # Preview Image for use in the CMS Cockpit for special ContentPages

@@ -8,6 +8,8 @@ $contentCatalog=consultingstoreContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$Version])[default=$contentCatalog:$Version]
 $picture=media(code, $contentCV);
 $siteResource=jar:com.hybris.initialdata.setup.InitialDataSystemSetup&/consultinginitialdata/import/sampledata/contentCatalogs/$contentCatalog
+
+
 # Language
 $lang=en
 
