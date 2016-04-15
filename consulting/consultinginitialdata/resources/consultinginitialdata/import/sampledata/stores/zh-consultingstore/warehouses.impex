@@ -6,8 +6,8 @@
 # Macros / Replacement Parameter definitions
 $storeUid=zh-consultingstore
 
-INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
-;$storeUid;warehouse_DC
+INSERT_UPDATE BaseStore2WarehouseRel ; source(uid)[unique=true] ; target(code)[unique=true]
+                                     ; $storeUid                ; warehouse_DC             
 
 INSERT_UPDATE PointOfService ; name[unique=true] ; displayName             ; warehouses(code) ; address(&addrID)        ; latitude ; longitude ; geocodeTimestamp[dateformat=dd.MM.yyyy] ; type(code)[default=WAREHOUSE]
                              ; warehouse_DC      ; Warehouse Consultanting ; warehouse_DC     ; address_warehouse_DC_id ; 48,15149 ; 11,61823  ; 29.05.2025                              

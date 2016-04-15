@@ -26,7 +26,10 @@ INSERT_UPDATE Address ; &addrID        ; streetname           ; streetnumber ; p
                       ; addrID-Haidian ; "Qing Hua East Road" ;              ; LD 10106                ; Beijing           ; CN               ;                 ;        ; Manchester                             
                       ; addrID-Chaoyan ; "Tian Ze Road"       ;              ; LD 11230                ; Beijing           ; CN               ;                 ;        ; Wales                                  
 
-
+#                            
+# Link warehouses to point of services 
+# 把仓库和POS(或是)实体店关联
+#   
 INSERT_UPDATE PointOfService ; name[unique = true] ; warehouses(code)
                              ; Haidian             ; warehouse_DC    
                              ; ChaoYan             ; warehouse_DC    

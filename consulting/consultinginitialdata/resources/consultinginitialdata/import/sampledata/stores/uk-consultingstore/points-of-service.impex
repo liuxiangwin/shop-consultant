@@ -16,7 +16,8 @@ INSERT_UPDATE PointOfService ; name[unique = true] ; type(code) ; address(&addrI
                              ; Wales               ; STORE      ; addrID-Wales      ; 40.614734 ; -73.963050 ;                                           ;                ; $storeUid                             ;  
 
 #                            
-# Link warehouses to point of services
+# Link warehouses to point of services 
+# 把仓库和POS(或是)实体店关联
 #                            
 INSERT_UPDATE PointOfService ; name[unique = true] ; warehouses(code)
                              ; Manchester          ; warehouse_DC    
