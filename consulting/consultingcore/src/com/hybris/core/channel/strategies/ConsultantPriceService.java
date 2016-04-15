@@ -109,12 +109,12 @@ public class ConsultantPriceService implements CommercePriceService
 		if (currentSiteUid != null && !currentSiteUid.equals("") && productCountry != null && !productCountry.equals(""))
 		{
 			if (currentSiteUid.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
-					&& productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_REGION))
 			{
 				isDomesticPrice = true;
 			}
 			else if (currentSiteUid.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
-					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_REGION))
 			{
 				isDomesticPrice = true;
 			}
@@ -266,12 +266,12 @@ public class ConsultantPriceService implements CommercePriceService
 		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
 		{
 			if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
-					&& productCountry.equalsIgnoreCase(SiteUtil.UK_CUR))
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_REGION))
 			{
 				isDomesticPrice = true;
 			}
 			else if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
-					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_CUR))
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_REGION))
 			{
 				isDomesticPrice = true;
 			}
