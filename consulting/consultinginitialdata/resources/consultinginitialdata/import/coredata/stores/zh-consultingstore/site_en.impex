@@ -9,5 +9,5 @@ $siteUid=zh-consultingsite
 
 # Create CMS Site
 UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
-;$siteUid;"Consulting CMS Site";en_US
+;$siteUid;"Consulting ZH Site";en_US
 
