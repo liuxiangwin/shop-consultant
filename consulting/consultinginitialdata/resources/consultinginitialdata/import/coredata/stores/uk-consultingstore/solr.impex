@@ -301,7 +301,10 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'GB' and {p.variantType}IS NULL
+		WHERE {cty.isocode} = 'GB'AND {p.variantType}IS NULL
+		
+		AND ({p.approvalstatus}= 
+        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}})) 	
 	}}	                           
 	UNION		                       
 	{{                            
@@ -309,9 +312,12 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'GB'
+		
+		WHERE {cty.isocode} = 'GB' 
+		
+		AND ({p.approvalstatus}= 
+        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))   
     }}                         
-		                          
 )tbl ORDER BY tbl.code"        ;                                          
 
 
@@ -323,7 +329,22 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'GB' and {p.variantType}IS NULL
+		WHERE {cty.isocode} = 'GB' 
+		AND 
+		{p.variantType} IS NULL
+		
+		AND 
+		({p.approvalstatus}=
+		({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))
+		
+		OR
+		{p:code} IN (
+			{{                          
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}) 
+			
+		
+		AND ({p:modifiedtime} >= ?lastIndexTime OR {c2c:modifiedtime} >= ?lastIndexTime)
 	}}	                           
 	UNION		                       
 	{{                            
@@ -332,8 +353,21 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
 		WHERE {cty.isocode} = 'GB'
+		
+		AND 
+		({p.approvalstatus}=
+		({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))
+		
+		OR
+		{p:code} IN (
+			{{                          
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}) 
+		
+		AND ({p:modifiedtime} >= ?lastIndexTime OR {v2c:modifiedtime} >= ?lastIndexTime) 
+		
+		      
     }}                         
-			                          
 )tbl ORDER BY tbl.code"        ;                                          
                                ; $solrIndexedType                   ; $solrIndexedType-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
                                
