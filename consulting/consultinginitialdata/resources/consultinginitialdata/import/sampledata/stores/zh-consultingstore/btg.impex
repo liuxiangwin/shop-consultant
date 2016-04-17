@@ -29,3 +29,20 @@ INSERT_UPDATE BTGNumberOfOrdersRelativeDateOperand ; uid[unique=true] ; value ; 
 INSERT_UPDATE BTGIntegerLiteralOperand ; uid[unique=true] ; literal ; $contentCatalogVersion
 
 INSERT_UPDATE BTGAssignToGroupDefinition ; uid[unique=true] ; code ; target ; userGroups(uid) ; segment(uid, $contentCatalogVersion) ; $contentCatalogVersion
+
+
+
+INSERT UserGroup ; uid                   ; name                  ; members(uid) 
+                 ; basecustomergroup     ; basecustomergroup     ; customergroup
+                 ; extendedcustomergroup ; extendedcustomergroup ; customergroup
+                 
+INSERT User ; uid  ; name ; groups(uid)      
+            ; solr ; solr ; basecustomergroup
+            
+UPDATE SearchRestriction[batchmode=true] ; principal(uid)[unique=true] ; principal(uid)   
+                                         ; customergroup               ; basecustomergroup
+                                         
+UPDATE SearchRestriction[batchmode=true] ; restrictedType(code)[unique=true] ; principal(uid)[unique=true] ; principal(uid)       
+                                         ; Product                           ; basecustomergroup           ; extendedcustomergroup
+
+
