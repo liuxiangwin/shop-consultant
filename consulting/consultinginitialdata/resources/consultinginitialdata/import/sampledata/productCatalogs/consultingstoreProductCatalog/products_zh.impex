@@ -13,7 +13,7 @@ $lang=zh
 UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
                ; 00000001          ;                 ; "王刚"             ;                     ;                        
                                      
-               ; 00000003          ;                 ; "李山"           ;                     ;                        
+               ; 00000003          ;                 ; "李山"             ;                     ;                        
                ; 00000010          ;                 ; "托尼"             ;                     ;                        
                                      
                ; 00000018          ;                 ; "亨瑞克"            ;                     ;                        
@@ -30,6 +30,6 @@ UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summar
 UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
                ; 00000266          ;                 ; "史蒂夫"            ;                     ;                        
                ; 00000267          ;                 ; "史塔克"            ;                     ;                        
-               ; 00000268          ;                 ; "杰克李安"             ;                     ;                        
+               ; 00000268          ;                 ; "杰克李安"           ;                     ;                        
                
 	              
