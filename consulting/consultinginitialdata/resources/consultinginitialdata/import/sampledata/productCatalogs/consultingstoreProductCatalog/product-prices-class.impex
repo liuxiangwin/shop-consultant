@@ -10,10 +10,7 @@ $prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1Pr
 ##$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
 $approved=approvalstatus(code)[default='approved']
 $lang=en
-
 #$ug=ug(code[default=hybridsPriceGroup])[unique=true]
-
-
 # ImpEx for Importing Prices groups into Merchandise Store
 
 

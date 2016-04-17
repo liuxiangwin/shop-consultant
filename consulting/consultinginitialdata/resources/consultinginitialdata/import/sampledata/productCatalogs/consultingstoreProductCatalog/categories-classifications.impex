@@ -15,79 +15,79 @@ $attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
 $unit=unit(code,$classSystemVersion)
 
 
-INSERT_UPDATE ClassificationSystem;id[unique=true];name[lang=$lang]
-;$classificiationSystem;$classificiationSystemName;
+INSERT_UPDATE ClassificationSystem ; id[unique=true]        ; name[lang=$lang]           
+                                   ; $classificiationSystem ; $classificiationSystemName ;  
 
-INSERT_UPDATE ClassificationSystemversion;catalog(id)[unique=true];version[unique=true];active;writeprincipals(uid);languages(isocode);inclPacking[virtual=true,default=true];inclDuty[virtual=true,default=true];inclFreight[virtual=true,default=true];inclAssurance[virtual=true,default=true];;;
-;$classificiationSystem;$systemVersion;true;employeegroup;en;;;;;;
+INSERT_UPDATE ClassificationSystemversion ; catalog(id)[unique=true] ; version[unique=true] ; active ; writeprincipals(uid) ; languages(isocode) ; inclPacking[virtual=true,default=true] ; inclDuty[virtual=true,default=true] ; inclFreight[virtual=true,default=true] ; inclAssurance[virtual=true,default=true] ;  ;  ;  
+                                          ; $classificiationSystem   ; $systemVersion       ; true   ; employeegroup        ; en                 ;                                        ;                                     ;                                        ;                                          ;  ;  
 
 
 # Add  classification and classification supercategory hierarchy
-INSERT_UPDATE ClassificationClass;code[unique=true];allowedPrincipals(uid)[default=customergroup];$superClass;name[lang=en];$sysVer[virtual=true,unique=true];;;;;;;;
-								;programmingclassification;;;
-								;dataclassification;;;
-								;businessuserclassification;;;
-								;operationalclassification;;;
-								;testingclassification;;;
-								;projectmanagementclassification;;;
+INSERT_UPDATE ClassificationClass ; code[unique=true]               ; allowedPrincipals(uid)[default=customergroup] ; $superClass ; name[lang=en] ; $sysVer[virtual=true,unique=true] ;  ;  ;  ;  ;  ;  ;  ;  
+                                  ; programmingclassification       ;                                               ;             ;               
+                                  ; dataclassification              ;                                               ;             ;               
+                                  ; businessuserclassification      ;                                               ;             ;               
+                                  ; operationalclassification       ;                                               ;             ;               
+                                  ; testingclassification           ;                                               ;             ;               
+                                  ; projectmanagementclassification ;                                               ;             ;               
 
 
 # Classification attribute (aka) feature descriptor (aka) feature list(s)
-INSERT_UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion
-									;programmingdisciplines;
-									;datadisciplines;
-									;businessuserdisciplines;
-									;devopsdisciplines;
-									;testingdisciplines;
-									;projectdisciplines;
+INSERT_UPDATE ClassificationAttribute ; code[unique=true]       ; $classSystemVersion
+                                      ; programmingdisciplines  ;                    
+                                      ; datadisciplines         ;                    
+                                      ; businessuserdisciplines ;                    
+                                      ; devopsdisciplines       ;                    
+                                      ; testingdisciplines      ;                    
+                                      ; projectdisciplines      ;                    
 
 
 
-# CAV - (aka) feature values
-INSERT_UPDATE ClassificationAttributeValue;code[unique=true];$classSystemVersion;
-;Java;
-;Spring;
-;Impex;
-;Scala;
-;Groovy;
-;Architect;
-;UX Design;
-;Scripting;
-;Javascript;
-;Solr;;;
-;CMS;;;
-;Training;;;
-;Backoffice;;;
-;Performance;;;
-;Automated integration Testing;;;
-;Automated Unit Testing;;;
-;Smoke Testing;;;
-;Functional Testing;;;
-;System Integrated Testing;;;
-;Jira Mgmt;;;
-;Scrum;;;
-;Agile;;;
-;Kanban;;;
+# CAV - (aka) feature values          
+INSERT_UPDATE ClassificationAttributeValue ; code[unique=true]             ; $classSystemVersion ;  
+                                           ; Java                          ;                     
+                                           ; Spring                        ;                     
+                                           ; Impex                         ;                     
+                                           ; Scala                         ;                     
+                                           ; Groovy                        ;                     
+                                           ; Architect                     ;                     
+                                           ; UX Design                     ;                     
+                                           ; Scripting                     ;                     
+                                           ; Javascript                    ;                     
+                                           ; Solr                          ;                     ;  ;  
+                                           ; CMS                           ;                     ;  ;  
+                                           ; Training                      ;                     ;  ;  
+                                           ; Backoffice                    ;                     ;  ;  
+                                           ; Performance                   ;                     ;  ;  
+                                           ; Automated integration Testing ;                     ;  ;  
+                                           ; Automated Unit Testing        ;                     ;  ;  
+                                           ; Smoke Testing                 ;                     ;  ;  
+                                           ; Functional Testing            ;                     ;  ;  
+                                           ; System Integrated Testing     ;                     ;  ;  
+                                           ; Jira Mgmt                     ;                     ;  ;  
+                                           ; Scrum                         ;                     ;  ;  
+                                           ; Agile                         ;                     ;  ;  
+                                           ; Kanban                        ;                     ;  ;  
 
 
 
 # Assign attributes to experience classification
-INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false];attributeValues(code,$classSystemVersion)
-;programmingclassification;programmingdisciplines;0;;enum;true;;;Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript;
-;dataclassification;datadisciplines;0;;enum;true;;;Solr;
-;businessuserclassification;businessuserdisciplines;0;;enum;true;;;CMS,Training,Backoffice;
-;operationalclassification;devopsdisciplines;0;;enum;true;;;Performance;
-;testingclassification;testingdisciplines;0;;enum;true;;;Automated integration Testing,Automated Unit Testing,Smoke Testing,Functional Testing,System Integrated Testing;
-;projectmanagementclassification;projectdisciplines;0;;enum;true;;;Jira Mgmt,Scrum,Agile,Kanban;
+INSERT_UPDATE ClassAttributeAssignment ; $class                          ; $attribute              ; position ; $unit ; attributeType(code[default=string]) ; multiValued[default=false] ; range[default=false] ; localized[default=false] ; attributeValues(code,$classSystemVersion)                                                                       
+                                       ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript                                         ;  
+                                       ; dataclassification              ; datadisciplines         ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Solr                                                                                                            ;  
+                                       ; businessuserclassification      ; businessuserdisciplines ; 0        ;       ; enum                                ; true                       ;                      ;                          ; CMS,Training,Backoffice                                                                                         ;  
+                                       ; operationalclassification       ; devopsdisciplines       ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Performance                                                                                                     ;  
+                                       ; testingclassification           ; testingdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Automated integration Testing,Automated Unit Testing,Smoke Testing,Functional Testing,System Integrated Testing ;  
+                                       ; projectmanagementclassification ; projectdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Jira Mgmt,Scrum,Agile,Kanban                                                                                    ;  
 
 
-UPDATE Category; $catVer[unique=true]; code[unique=true]; supercategories(code,$sysVer)[mode=append];
-;;Development;programmingclassification;
-;;Data;dataclassification;;;
-;;Business-User-Centric;businessuserclassification;;;
-;;Operational;operationalclassification;;;
-;;Testing;testingclassification;;;
-;;Project-Management;projectmanagementclassification;;;
+UPDATE Category ; $catVer[unique=true] ; code[unique=true]     ; supercategories(code,$sysVer)[mode=append] ;  
+                ;                      ; Development           ; programmingclassification                  ;  
+                ;                      ; Data                  ; dataclassification                         ;  ;  ;  
+                ;                      ; Business-User-Centric ; businessuserclassification                 ;  ;  ;  
+                ;                      ; Operational           ; operationalclassification                  ;  ;  ;  
+                ;                      ; Testing               ; testingclassification                      ;  ;  ;  
+                ;                      ; Project-Management    ; projectmanagementclassification            ;  ;  ;  
 
 
 #  Classification Units

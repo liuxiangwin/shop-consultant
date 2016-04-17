@@ -14,27 +14,39 @@ $activeCountries=activeCountries(isocode[unique=true])
 
 
 # Insert Products				
-INSERT_UPDATE Consultant ; code[unique=true] ; $supercategories                                                              ; nationality ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)             ; $catalogVersion ; $approved ; content              ; experienceyear
+INSERT_UPDATE Consultant ; code[unique=true] ; $supercategories                                                              ; nationality ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)             ; $catalogVersion ; $approved ; content    ; experienceyear
+                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 10Years       ;  
+
+                         ; 00000003          ; Development                                                                   ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 5Years        ;  
+                         ; 00000010          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
+                         ; 00000018          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
+                         ; 00000024          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
+                         ; 00000026          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
+                         ; 00000030          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
+                         ; 00000033          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
+                         ; 00000066          ; Development                                                                   ;             ; hybris           ;                 ;                        ;     ; ConsultantLevelVariantProduct ;                 ;           ;            ;               ;  
+
+
 # Uber expert (me) ;-)   
-                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; NBA-Final-Conference ; 10Years       ;  
+#                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 10Years       ;  
 
 # Development consultants only
-                         ; 00000003          ; Development                                                                   ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; NBA-West-Conference  ; 5Years        ;  
+#                         ; 00000003          ; Development                                                                   ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 5Years        ;  
 # Data consultants only  
-                         ; 00000010          ; Data                                                                          ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000010          ; Data                                                                          ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
 # Business-User-Centric consultants only
-                         ; 00000018          ; Business-User-Centric                                                         ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000018          ; Business-User-Centric                                                         ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
 # Operational consultants only
-                         ; 00000024          ; Operational                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000024          ; Operational                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
 # Testing consultants only
-                         ; 00000026          ; Testing                                                                       ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000026          ; Testing                                                                       ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
 # Project-Management consultants only
-                         ; 00000030          ; Project-Management                                                            ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000030          ; Project-Management                                                            ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
 # Mixed skilled consultants
-                         ; 00000033          ; Business-User-Centric,Development,Data,Project-Management                     ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ;                      ;               ;  
+#                         ; 00000033          ; Business-User-Centric,Development,Data,Project-Management                     ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
 
 ## Define Grade level base variant product
-                         ; 00000066          ; Development                                                                   ;             ; hybris           ;                 ;                        ;     ; ConsultantLevelVariantProduct ;                 ;           ;                      ;               ;  
+#                         ; 00000066          ; Development                                                                   ;             ; hybris           ;                 ;                        ;     ; ConsultantLevelVariantProduct ;                 ;           ;            ;               ;  
 
 
 # Link countries to Consultants and where they can work
@@ -55,10 +67,10 @@ UPDATE Consultant ; code[unique=true] ; $activeCountries ; $catalogVersion
 # Consultant Variant Product
 
 # Insert Level Products(Principal,Senior,Standard)
-INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; nationality;$supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content              ; level     
-                                            ; 00000266          ; UK;Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000066     ; Principal           ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Principal ;  
-                                            ; 00000267          ; UK;Development                                                                   ; 00000066     ; Senior              ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Senior    ;  
-                                            ; 00000268          ; UK;Development                                                                   ; 00000066     ; Standard            ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; NBA-Final-Conference ; Standard  ;  
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; nationality ; $supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content    ; level     
+                                            ; 00000266          ; UK          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000066     ; Principal           ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; Big Data   ; Principal ;  
+                                            ; 00000267          ; UK          ; Development                                                                   ; 00000066     ; Senior              ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; Big Data   ; Senior    ;  
+                                            ; 00000268          ; UK          ; Development                                                                   ; 00000066     ; Standard            ; hybris           ;                 ;                        ;     ; ConsultantServiceVariantProduct ;                 ;           ; Web Search ; Standard  ;  
 
 UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $activeCountries ; $catalogVersion
                                      ; 00000266          ; GB,CN            ;                
@@ -68,21 +80,21 @@ UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $activeCountries ; $c
 
 
 # Insert service type of 00000266 Principal consultant		                
-INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ; service             
-                                              ; 00000366          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000266     ; Architecture_Review  ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Architecture_Review ;  
-                                              ; 00000367          ; Data                                                                          ; 00000266     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; System_Review       ;  
-                                              ; 00000368          ; Business-User-Centric                                                         ; 00000266     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Perf_Review         ;  
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content    ; service             
+                                              ; 00000366          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000266     ; Architecture_Review  ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Big Data   ; Architecture_Review ;  
+                                              ; 00000367          ; Data                                                                          ; 00000266     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Big Data   ; System_Review       ;  
+                                              ; 00000368          ; Business-User-Centric                                                         ; 00000266     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Web Search ; Perf_Review         ;  
 
 # Insert service type of 00000267 Senior consultant		                
 INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ; service             
-                                              ; 00000369          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000267     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Architecture_Review ;  
-                                              ; 00000340          ; Data                                                                          ; 00000267     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; System_Review       ;  
-                                              ; 00000341          ; Business-User-Centric                                                         ; 00000267     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Perf_Review         ;  
+                                              ; 00000369          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000267     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Web Search ; Architecture_Review ;  
+                                              ; 00000340          ; Data                                                                          ; 00000267     ; System_Review        ; hybris           ;                 ;                        ;     ;                   ;                 ;           ;Web Search ; System_Review       ;  
+                                              ; 00000341          ; Business-User-Centric                                                         ; 00000267     ; Perf_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Web Search ; Perf_Review         ;  
 
 # Insert service type of 00000268 Standard consultant		                
 INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=HR] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content              ; service             
-                                              ; 00000342          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000268     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; Architecture_Review ;  
-                                              ; 00000343          ; Data                                                                          ; 00000268     ; Common_Support       ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; NBA-Final-Conference ; System_Review       ;  
+                                              ; 00000342          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000268     ; Code_Review          ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Cloud ; Architecture_Review ;  
+                                              ; 00000343          ; Data                                                                          ; 00000268     ; Common_Support       ; hybris           ;                 ;                        ;     ;                   ;                 ;           ; Cloud ; System_Review       ;  
 
 
 
@@ -97,4 +109,6 @@ INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercatego
 #                                       ; 00000367          ; JP               ;                
 #                                       ; 00000368          ; JP               ;                
                                               
+                                                   
+
                                                    
