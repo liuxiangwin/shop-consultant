@@ -465,6 +465,13 @@
 
 
 	<!-- Product Value Provider -->
+	<bean id="approvalStausValueProvider"
+		class="com.hybris.core.search.solrfacetsearch.provider.impl.ApprovalStausValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+	
+	
 	<bean id="tutoProductContentValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.TutoProductContentValueProvider"
 		parent="abstractPropertyFieldValueProvider">
@@ -477,7 +484,7 @@
 		parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 	</bean>
-	
+
 	<bean id="consultantProductPriceValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.ConsultantProductPriceValueProvider"
 		parent="abstractPropertyFieldValueProvider">
@@ -485,7 +492,7 @@
 		<property name="priceService" ref="consultantCommercePriceService" />
 	</bean>
 
-	<!-- Replace the Default Channel for customerzation-->
+	<!-- Replace the Default Channel for customerzation -->
 	<alias alias="retrieveChannelStrategy" name="alanRetrieveChannelStrategy" />
 	<bean id="alanRetrieveChannelStrategy"
 		class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy"
@@ -498,7 +505,7 @@
 		init-method="init" destroy-method="destroy"> <property name="retrieveChannelStrategy" 
 		ref="alanRetrieveChannelStrategy"/> </bean> -->
 
-	<!-- Replace the DefaultPrice Service for customerzation-->
+	<!-- Replace the DefaultPrice Service for customerzation -->
 	<alias alias="priceService" name="netPriceService" />
 	<bean id="netPriceService"
 		class="de.hybris.platform.commerceservices.price.impl.NetPriceService"
@@ -512,18 +519,32 @@
 		class="com.hybris.core.channel.strategies.ConsultantPriceService">
 		<property name="priceService" ref="priceService" />
 	</bean>
-	
-	
+
+
 	<alias alias="europe1.manager" name="europe1.manager2" />
-    <bean id="europe1.manager2" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
-          init-method="init" destroy-method="destroy">
-        <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/>
-    </bean>
-	
+	<bean id="europe1.manager2"
+		class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
+		init-method="init" destroy-method="destroy">
+		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
+	</bean>
+
 
 	<bean id="countrySelectorStrategy"
 		class="com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy">
 	</bean>
 	
 	
+	<alias name="defaultExtendedCommerceSearchQueryPageableConverter" alias="commerceSearchQueryPageableConverter" />
+    <bean id="defaultExtendedCommerceSearchQueryPageableConverter" parent="defaultCommerceSearchQueryPageableConverter">
+        <property name="populators">
+            <list merge="true">
+                <ref bean="searchApprovalStatusPopulator" />
+            </list>
+        </property>
+    </bean>
+	<bean id="searchApprovalStatusPopulator" class="com.hybris.core.search.solrfacetsearch.populators.SearchApprovalStatusPopulator">
+	</bean>
+	
+
+
 </beans>
