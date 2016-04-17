@@ -6,4 +6,4 @@ INSERT_UPDATE Trigger ; cronJob(code)[unique=true]             ; second ; minute
                       ; full-zh-consultingstoreIndex-cronJob   ; 0      ; 5      ; 3    ; -1  ; -1    ; -1   ; false    ; true  ; -1                
                       
 # Run the update-hybrisIndex-cronJob every 1 minutes
-                      ; update-zh-consultingstoreIndex-cronJob ; 20      ; -1     ; -1   ; -1  ; -1    ; -1   ; true     ; true  ; -1                
+                      ; update-zh-consultingstoreIndex-cronJob ; 0      ; 3     ; -1   ; -1  ; -1    ; -1   ; true     ; true  ; -1                

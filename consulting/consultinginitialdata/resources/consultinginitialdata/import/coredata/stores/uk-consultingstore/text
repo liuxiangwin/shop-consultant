@@ -1,5 +1,44 @@
 ==============================================
 
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		                            
+	{{                            
+		                             
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}
+		JOIN CatalogVersion as cv on {cv.pk} = {p.catalogversion}
+        JOIN Catalog as c on {cv.catalog} = {c.pk} 
+		}
+		WHERE {cty.isocode} = 'CN'
+		AND {p.variantType}IS NULL
+		AND
+        {c.id} = 'zh-consultingstoreProductCatalog' 
+    	 AND 
+        {cv.version} = 'Online'     
+		
+	}}	                           
+	UNION		                       
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
+		JOIN Country as cty ON {cty.pk} = {v2c.target}
+		JOIN CatalogVersion as cv on {cv.pk} = {p.catalogversion}
+        JOIN Catalog as c on {cv.catalog} = {c.pk}	
+		} 
+		
+		WHERE {cty.isocode} = 'CN' 
+		AND
+        {c.id} = 'zh-consultingstoreProductCatalog' 
+    	 AND 
+        {cv.version} = 'Online'    
+    }}                         
+)tbl ORDER BY tbl.code
+
+
+==============================================
+
 
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code ,{p.catalogVersion}
 		FROM {

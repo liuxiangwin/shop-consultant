@@ -236,6 +236,7 @@ INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; n
                                   ; $solrIndexedType                         ; primaryPromotionCode   ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; promotionCodeValueProvider              ;                       
                                   ; $solrIndexedType                         ; primaryPromotionBanner ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; promotionImageValueProvider             ;                       
                                   ; $solrIndexedType                         ; stockLevelStatus       ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; productStockLevelStatusValueProvider    ;                       
+                                  ; $solrIndexedType                         ; approvalStatus      	  ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; approvalStausValueProvider 								        ;
 
 #                                  ; $solrIndexedTypeOnline                   ; Favorite_Team          ; string     ;                    ;                         ; true                     ;                           ;                                    ;                                   ; tutoProductContentValueProvider         ;                       
 #                                  ; $solrIndexedTypeStaged                   ; Favorite_Team          ; string     ;                    ;                         ; true                     ;                           ;                                    ;                                   ; tutoProductContentValueProvider         ;                       
@@ -300,9 +301,6 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
 		WHERE {cty.isocode} = 'CN'AND {p.variantType}IS NULL
-		
-		AND ({p.approvalstatus}= 
-        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}})) 	
 	}}	                           
 	UNION		                       
 	{{                            
@@ -312,9 +310,6 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
 		
 		WHERE {cty.isocode} = 'CN' 
-		
-		AND ({p.approvalstatus}= 
-        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))   
     }}                         
 )tbl ORDER BY tbl.code"        ;                                          
 
@@ -330,10 +325,6 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		WHERE {cty.isocode} = 'CN' 
 		AND 
 		{p.variantType} IS NULL
-		
-		AND 
-		({p.approvalstatus}=
-		({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))
 		
 		OR
 		{p:code} IN (
@@ -351,10 +342,6 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
 		WHERE {cty.isocode} = 'CN'
-		
-		AND 
-		({p.approvalstatus}=
-		({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))
 		
 		OR
 		{p:code} IN (
