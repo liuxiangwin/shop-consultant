@@ -20,30 +20,30 @@ $lang=en
 #                                      
 #  Assign the product with Product Price Group
 #
-INSERT_UPDATE ProductPriceGroup ; code[unique=true]   ; name[lang=$lang]   
-                                ; Product-Class-Gobal ; Product-Class-Gobal
+INSERT_UPDATE ProductPriceGroup ; code[unique=true]   ; name[lang=$lang]    ; 
+                                ; Product-Class-Gobal ; Product-Class-Gobal ;                
                                 
 
-INSERT_UPDATE PriceRow ; pg(code[default= Product-Class-Gobal])[unique=true] ; currency(isocode)[unique=true] ; price   ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; minqtd ; unitFactor ; net   ; channel(code)[unique=true] ; unit(code[unique=true,default=HR]) ; $catalogVersion
-                       ;                                                     ; EUR                            ; 600.00  ; "domestic"                                                ;                                                    ; 1      ; 1          ; false ;                            ; domestic                           ;                ;  
-                       ;                                                     ; EUR                            ; 1000.00 ; "international"                                           ;                                                    ; 1      ; 1          ; false ;                            ; international                      ;                ;  
+INSERT_UPDATE PriceRow ; pg(code[default= Product-Class-Gobal])[unique=true] ; currency(isocode)[unique=true] ; price   ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; minqtd ; unitFactor ; net   ; channel(code)[unique=true] ; unit(code[unique=true,default=HR]) ;
+                       ;                                                     ; EUR                            ; 600.00  ; "domestic"                                                ;                                                    ; 1      ; 1          ; false ;                            ; domestic                           ;                 
+                       ;                                                     ; EUR                            ; 1000.00 ; "international"                                           ;                                                    ; 1      ; 1          ; false ;                            ; international                      ;                 
 
                                       
 
 INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
-                         ; 00000001          ; Product-Class-Gobal                                                                         ;         ;           ;                
-                         ; 00000003          ; Product-Class-Gobal                                                                         ;         ;           ;
-                         ; 00000010          ; Product-Class-Gobal                                                                         ;         ;           ;
-                         ; 00000018          ; Product-Class-Gobal                                                                         ;         ;           ;
-                         ; 00000010          ; Product-Class-Gobal                                                                         ;         ;           ;
-                         ; 00000024          ; Product-Class-Gobal                                                                         ;         ;           ;                         
-                         ; 00000026          ; Product-Class-Gobal                                                                         ;         ;           ;                         
-                         ; 00000030          ; Product-Class-Gobal                                                                         ;         ;           ;
-                         ; 00000033          ; Product-Class-Gobal                                                                         ;         ;           ;   
+                         ; 00000001          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000003          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000010          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000018          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000010          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000024          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000026          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000030          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000033          ; Product-Class-Gobal           ;           ;                ;  
 
 INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
 
-                         					; 00000266          ; Product-Class-Gobal                                                                         ;         ;           ;                         
-                         					; 00000267          ; Product-Class-Gobal                                                                         ;         ;           ;                         
-                        					; 00000268         ; Product-Class-Gobal                                                                         ;         ;           ;                         
+                                            ; 00000266          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000267          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000268          ; Product-Class-Gobal           ;           ;                ;  
                                                                                                  
