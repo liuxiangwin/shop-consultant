@@ -279,8 +279,8 @@ public class ConsultantPriceService implements CommercePriceService
 			{
 				isInternationPrice = true;
 			}
-		}
-
+		}//Europe1PriceFactoryDiscountsIntegrationTest
+		 //productGroup(TEST_PRODUCT_GROUP)
 		final List<PriceInformation> results = new ArrayList<PriceInformation>();
 
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
