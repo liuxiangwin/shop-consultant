@@ -109,9 +109,9 @@ public class ConsultingSampleDataImportService extends SampleDataImportService
 		//		.importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex",
 		//				extensionName, productCatalogName), false);
 
-		getSetupImpexService().importImpexFile(
-				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/product-prices-class.impex", extensionName,
-						productCatalogName), false);
+		//getSetupImpexService().importImpexFile(
+		//		String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/product-prices-class.impex", extensionName,
+		//				productCatalogName), false);
 		getSetupImpexService().importImpexFile(
 				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex", extensionName,
 						productCatalogName), false);
