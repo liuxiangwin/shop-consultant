@@ -29,13 +29,13 @@ import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.C2LManager;
 import de.hybris.platform.jalo.c2l.Currency;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.product.PriceService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.variants.model.VariantProductModel;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -128,8 +128,12 @@ public class ConsultantPriceService implements CommercePriceService
 		final Currency currentCurr = ctx.getCurrency();
 		final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
 
+		final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
+				modelService.<Product> getSource(product));
+
+
 		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
-				modelService.<Product> getSource(product), null);
+				modelService.<Product> getSource(product), productClass);
 		final List<PriceInformation> domesticList = new ArrayList<PriceInformation>();
 		final List<PriceInformation> internationList = new ArrayList<PriceInformation>();
 
@@ -281,13 +285,17 @@ public class ConsultantPriceService implements CommercePriceService
 			}
 		}//Europe1PriceFactoryDiscountsIntegrationTest
 		 //productGroup(TEST_PRODUCT_GROUP)
+
 		final List<PriceInformation> results = new ArrayList<PriceInformation>();
 
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		final Currency currentCurr = ctx.getCurrency();
 		final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
+
+		final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
+				modelService.<Product> getSource(productModel));
 		final Collection<PriceRow> rows = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
-				modelService.<Product> getSource(productModel), null);
+				modelService.<Product> getSource(productModel), productClass);
 
 		final List<PriceRow> list = new ArrayList<PriceRow>(rows);
 

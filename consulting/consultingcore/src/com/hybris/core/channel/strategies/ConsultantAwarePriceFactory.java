@@ -97,8 +97,11 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		//final Currency currentCurr = ctx.getCurrency();
 		//final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
 
+		final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
+				modelService.<Product> getSource(productModel));
+
 		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
-				modelService.<Product> getSource(productModel), null);
+				modelService.<Product> getSource(productModel), productClass);
 
 		final List<PriceRow> domesticList = new ArrayList<PriceRow>();
 		final List<PriceRow> internationList = new ArrayList<PriceRow>();
