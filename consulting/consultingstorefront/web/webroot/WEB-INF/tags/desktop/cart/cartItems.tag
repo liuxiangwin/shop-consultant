@@ -32,6 +32,7 @@
 			<tr>
 				<th id="header2" colspan="2"><spring:theme code="basket.page.title"/></th>
 				<th id="header3"><spring:theme code="basket.page.itemPrice"/></th>
+				<th id="header4">days</th>
 				<th id="header4"><spring:theme code="basket.page.quantity"/></th>
 				<c:if test="${ycommerce:checkIfPickupEnabledForStore() eq true}">
 					<th id="header5"><spring:theme code="basket.page.shipping"/></th>
@@ -111,6 +112,31 @@
 					
 					<td headers="header3" class="itemPrice">
 						<format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
+					</td>
+					
+					<td headers="header3" class="Days">
+						<c:url value="/cart/update" var="cartUpdateFormAction" />
+						<form:form id="updateCartForm${entry.entryNumber}" action="${cartUpdateFormAction}" method="post" commandName="updateQuantityForm${entry.entryNumber}"
+						           data-cart='{"cartCode" : "${cartData.code}","productPostPrice":"${entry.basePrice.value}","productName":"${entry.product.name}"}'>
+							<input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
+							<input type="hidden" name="productCode" value="${entry.product.code}"/>
+							<input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
+							<ycommerce:testId code="cart_product_quantity">
+								<form:label cssClass="skip" path="quantity" for="quantity${entry.entryNumber}"><spring:theme code="basket.page.quantity"/></form:label>
+								<form:input disabled="${not entry.updateable}" type="text" size="1" id="quantity${entry.entryNumber}" class="qty" path="quantity" />
+							</ycommerce:testId>
+							<c:if test="${entry.updateable}" >
+								<ycommerce:testId code="cart_product_updateQuantity">
+									<a href="#" id="QuantityProduct_${entry.entryNumber}" class="updateQuantityProduct"><spring:theme code="basket.page.update"/></a>
+								</ycommerce:testId>
+							</c:if>
+						</form:form>
+						<c:if test="${entry.updateable}" >
+							<ycommerce:testId code="cart_product_removeProduct">
+								<spring:theme code="text.iconCartRemove" var="iconCartRemove"/>
+								<a href="#" id="RemoveProduct_${entry.entryNumber}" class="submitRemoveProduct">${iconCartRemove}</a>
+							</ycommerce:testId>
+						</c:if>
 					</td>
 					
 					
