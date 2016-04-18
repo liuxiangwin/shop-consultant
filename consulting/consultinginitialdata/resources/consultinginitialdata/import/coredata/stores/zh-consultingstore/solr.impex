@@ -164,7 +164,7 @@ INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique
                              ; rangeRefGBP10    ; $priceRangeGBP                       ; £700-£799.99      ; 700  ; 799.99
                              ; rangeRefGBP11    ; $priceRangeGBP                       ; £800-£899.99      ; 800  ; 899.99
                              ; rangeRefGBP12    ; $priceRangeGBP                       ; £900-£999.99      ; 900  ; 999.99
-                             ; rangeRefGBP13    ; $priceRangeGBP                       ; £1,000-£100,000   ; 1000 ; 100000
+                             ; rangeRefGBP13    ; $priceRangeGBP                       ; £1,000-£100,000   ; 9000 ; 900000
 										                   
                              ; rangeRefEUR1     ; $priceRangeEUR                       ; €0-€19.99         ; 0    ; 19.99 
                              ; rangeRefEUR2     ; $priceRangeEUR                       ; €20-€49.99        ; 20   ; 49.99 
@@ -178,7 +178,7 @@ INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique
                              ; rangeRefEUR10    ; $priceRangeEUR                       ; €700-€799.99      ; 700  ; 799.99
                              ; rangeRefEUR11    ; $priceRangeEUR                       ; €800-€899.99      ; 800  ; 899.99
                              ; rangeRefEUR12    ; $priceRangeEUR                       ; €900-€999.99      ; 900  ; 999.99
-                             ; rangeRefEUR13    ; $priceRangeEUR                       ; €1,000-€100,000   ; 1000 ; 100000
+                             ; rangeRefEUR13    ; $priceRangeEUR                       ; €1,000-€160,000   ; 9000 ; 960000
 										                   
                              ; rangeRefUSD1     ; $priceRangeUSD                       ; $0-$19.99         ; 0    ; 19.99 
                              ; rangeRefUSD2     ; $priceRangeUSD                       ; $20-$49.99        ; 20   ; 49.99 
@@ -192,7 +192,7 @@ INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique
                              ; rangeRefUSD10    ; $priceRangeUSD                       ; $700-$799.99      ; 700  ; 799.99
                              ; rangeRefUSD11    ; $priceRangeUSD                       ; $800-$899.99      ; 800  ; 899.99
                              ; rangeRefUSD12    ; $priceRangeUSD                       ; $900-$999.99      ; 900  ; 999.99
-                             ; rangeRefUSD13    ; $priceRangeUSD                       ; $1,000-$100,000   ; 1000 ; 100000
+                             ; rangeRefUSD13    ; $priceRangeUSD                       ; $1,000-$100,000   ; 9000 ; 900000
 										                   
                              ; rangeRefJPY1     ; $priceRangeJPY                       ; ¥0-¥19.99         ; 0    ; 19.99 
                              ; rangeRefJPY2     ; $priceRangeJPY                       ; ¥20-¥49.99        ; 20   ; 49.99 
@@ -206,7 +206,7 @@ INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique
                              ; rangeRefJPY10    ; $priceRangeJPY                       ; ¥700-¥799.99      ; 700  ; 799.99
                              ; rangeRefJPY11    ; $priceRangeJPY                       ; ¥800-¥899.99      ; 800  ; 899.99
                              ; rangeRefJPY12    ; $priceRangeJPY                       ; ¥900-¥999.99      ; 900  ; 999.99
-                             ; rangeRefJPY13    ; $priceRangeJPY                       ; ¥1,000-¥100,000   ; 1000 ; 100000
+                             ; rangeRefJPY13    ; $priceRangeJPY                       ; ¥1,000-¥100,000   ; 9000 ; 900000
 
 ##################################################################################################################### 
 # 										Non-facet properties
