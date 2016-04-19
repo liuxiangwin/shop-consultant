@@ -203,7 +203,8 @@
           parent="defaultCommerceSearchResultProductPopulator">
     </bean>
 	
-	
+	<bean id="consultantStockLevelFacade" class="com.hybris.facades.stocklevel.DefaultStockLevelFacade">
+	</bean>
 	
 	
 </beans>
