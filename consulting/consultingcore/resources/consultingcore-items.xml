@@ -49,35 +49,37 @@
 
 		<enumtype code="ConsultantSerivceTypeEnum" autocreate="true"
 			generate="true" dynamic="true">
-			<value code="Architecture_Review"/>
+			<value code="Architecture_Review" />
 			<value code="Code_Review" />
 			<value code="Perf_Review" />
 			<value code="System_Review" />
 			<value code="Common_Support" />
 		</enumtype>
 
-		<enumtype code="ConsultantChannel" autocreate="true" generate="true" dynamic="true">
+		<enumtype code="ConsultantChannel" autocreate="true"
+			generate="true" dynamic="true">
 			<value code="no_channel" />
 			<value code="domestic" />
 			<value code="international" />
 		</enumtype>
-		
-		
-		<enumtype code="Introducer" autocreate="true" generate="true" dynamic="true">
+
+
+		<enumtype code="Introducer" autocreate="true" generate="true"
+			dynamic="true">
 			<value code="no_contact" />
 			<value code="frist_manager" />
 			<value code="second_manager" />
 			<value code="thrid_manager" />
 		</enumtype>
-		
-		
+
+
 
 		<enumtype code="PriceRowChannel" autocreate="false" generate="false"
 			dynamic="true">
 			<!-- Default Values to support Mobile channel and desktop channel -->
 			<value code="domestic" />
 			<value code="international" />
-		</enumtype>		
+		</enumtype>
 
 	</enumtypes>
 
@@ -101,15 +103,15 @@
 			<targetElement type="Country" qualifier="activeCountries"
 				cardinality="many"></targetElement>
 		</relation>
-		
-		
-		<relation generate="true" localized="false"
-				  code="Customer2CMSSite" autocreate="true">
+
+
+		<relation generate="true" localized="false" code="Customer2CMSSite"
+			autocreate="true">
 			<description>This relation connects customer with site</description>
 			<sourceElement type="Customer" cardinality="many"
-						   qualifier="customers" />
+				qualifier="customers" />
 			<targetElement type="CMSSite" cardinality="one"
-						   qualifier="site" collectiontype="list" />
+				qualifier="site" collectiontype="list" />
 		</relation>
 
 
@@ -119,7 +121,7 @@
 
 		<!-- Add New Type code here for refernce -->
 		<typegroup name="Consulting">
-			
+
 			<!-- Country Definition -->
 			<itemtype code="Country" autocreate="false" generate="false">
 				<attributes>
@@ -129,28 +131,28 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<!-- PriceRow Definition -->
 			<itemtype code="PriceRow" extends="PriceRow"
 				jaloclass="de.hybris.platform.europe1.jalo.PriceRow" autocreate="false"
-				generate="false">				
+				generate="false">
 				<attributes>
 					<attribute type="consultantChannel" qualifier="ConsultantChannel">
 						<persistence type="property" />
 						<modifiers read="true" write="true" optional="true" />
-						 <defaultvalue>em().getEnumerationValue("ConsultantChannel","no_channel")</defaultvalue>
+						<defaultvalue>em().getEnumerationValue("ConsultantChannel","no_channel")</defaultvalue>
 					</attribute>
-					
+
 					<attribute type="introducer" qualifier="Introducer">
 						<persistence type="property" />
 						<modifiers read="true" write="true" optional="true" />
-						 <defaultvalue>em().getEnumerationValue("Introducer","no_contact")</defaultvalue>
-					</attribute>				
-				</attributes>				
+						<defaultvalue>em().getEnumerationValue("Introducer","no_contact")</defaultvalue>
+					</attribute>
+				</attributes>
 			</itemtype>
-			
-			<itemtype code="Product"  autocreate="false"
-				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
+
+			<itemtype code="Product" autocreate="false" generate="true"
+				jaloclass="com.hybris.core.jalo.Consultant">
 				<description>Extending the Product from core with additional attributes.</description>
 				<attributes>
 					<attribute type="java.lang.String" qualifier="nationality">
@@ -160,8 +162,8 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
-			
+
+
 
 			<itemtype code="Consultant" extends="Product" autocreate="true"
 				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
@@ -210,14 +212,11 @@
 						<modifiers />
 						<persistence type="property" />
 					</attribute>
-	
-				<!-- 	<attribute type="java.lang.String" qualifier="nationality">
-						<modifiers optional="true" />
-						<persistence type="property" />
-						<description>Nationality of consultant</description>
-					</attribute>
-	 -->
-	
+
+					<!-- <attribute type="java.lang.String" qualifier="nationality"> <modifiers 
+						optional="true" /> <persistence type="property" /> <description>Nationality 
+						of consultant</description> </attribute> -->
+
 					<attribute type="java.lang.String" qualifier="content">
 						<modifiers optional="true" />
 						<persistence type="property" />
@@ -226,7 +225,6 @@
 
 				</attributes>
 			</itemtype>
-
 
 
 			<itemtype code="ConsultantServiceVariantProduct" extends="ConsultantLevelVariantProduct"
@@ -248,19 +246,23 @@
 						<persistence type="property" />
 					</attribute>
 				</attributes>
-			</itemtype>		
-			
-			
-			<itemtype code="PosSelectorComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
-				  jaloclass="com.hybris.platform.posselector.jalo.PosSelectorComponentJalo">
 			</itemtype>
-			
-			
 
+			<itemtype code="PosSelectorComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.hybris.platform.posselector.jalo.PosSelectorComponentJalo">
+			</itemtype>
+
+			<itemtype code="AbstractOrderEntry" autocreate="false" generate="true"	>
+				<attributes>
+					<attribute qualifier="days" type="java.lang.Long">
+					<modifiers initial="true" read="true" write="false"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
-
-
-
 
 
 		<!-- TypeGroups are for structure of this file only -->

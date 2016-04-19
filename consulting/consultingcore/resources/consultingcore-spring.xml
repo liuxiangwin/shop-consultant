@@ -470,8 +470,8 @@
 		parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 	</bean>
-	
-	
+
+
 	<bean id="tutoProductContentValueProvider"
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.TutoProductContentValueProvider"
 		parent="abstractPropertyFieldValueProvider">
@@ -532,19 +532,20 @@
 	<bean id="countrySelectorStrategy"
 		class="com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy">
 	</bean>
-	
-	
-	<alias name="defaultExtendedCommerceSearchQueryPageableConverter" alias="commerceSearchQueryPageableConverter" />
-    <bean id="defaultExtendedCommerceSearchQueryPageableConverter" parent="defaultCommerceSearchQueryPageableConverter">
-        <property name="populators">
-            <list merge="true">
-                <ref bean="searchApprovalStatusPopulator" />
-            </list>
-        </property>
-    </bean>
-	<bean id="searchApprovalStatusPopulator" class="com.hybris.core.search.solrfacetsearch.populators.SearchApprovalStatusPopulator">
-	</bean>
-	
 
+
+	<alias name="defaultExtendedCommerceSearchQueryPageableConverter"
+		alias="commerceSearchQueryPageableConverter" />
+	<bean id="defaultExtendedCommerceSearchQueryPageableConverter"
+		parent="defaultCommerceSearchQueryPageableConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="searchApprovalStatusPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="searchApprovalStatusPopulator"
+		class="com.hybris.core.search.solrfacetsearch.populators.SearchApprovalStatusPopulator">
+	</bean>
 
 </beans>
