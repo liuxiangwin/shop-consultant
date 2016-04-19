@@ -206,5 +206,12 @@
 	<bean id="consultantStockLevelFacade" class="com.hybris.facades.stocklevel.DefaultStockLevelFacade">
 	</bean>
 	
+	<alias name="consultantUpdateCart" alias="commerceUpdateCartEntryStrategy"/>
+	<bean id="consultantUpdateCart"
+			class="com.hybris.core.price.cart.ConsultantCommerceUpdateCartEntryStrategy"
+			parent="defaultCommerceUpdateCartEntryStrategy">
+		<property name="commerceUpdateCartEntryHooks" ref="commerceUpdateCartEntryMethodHooks"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean> 
 	
 </beans>
