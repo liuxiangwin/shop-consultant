@@ -20,7 +20,7 @@ import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
-import com.hybris.storefront.controllers.ControllerConstants;
+import de.hybris.platform.stock.exception.InsufficientStockLevelException;
 
 import java.util.Arrays;
 
@@ -36,6 +36,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hybris.facades.stocklevel.DefaultStockLevelFacade;
+import com.hybris.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -56,6 +59,9 @@ public class AddToCartController extends AbstractController
 
 	@Resource(name = "accProductFacade")
 	private ProductFacade productFacade;
+
+	@Resource(name = "consultantStockLevelFacade")
+	private DefaultStockLevelFacade stockLevelFacade;
 
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
@@ -78,6 +84,11 @@ public class AddToCartController extends AbstractController
 			try
 			{
 				final CartModificationData cartModification = cartFacade.addToCart(code, qty);
+				if (cartModification.getStatusCode().equalsIgnoreCase("success"))
+				{
+					stockLevelFacade.reserveStockLevel(code);
+				}
+
 				model.addAttribute("quantity", Long.valueOf(cartModification.getQuantityAdded()));
 				model.addAttribute("entry", cartModification.getEntry());
 				model.addAttribute("cartCode", cartModification.getCartCode());
@@ -96,6 +107,10 @@ public class AddToCartController extends AbstractController
 			{
 				model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
 				model.addAttribute("quantity", Long.valueOf(0L));
+			}
+			catch (final InsufficientStockLevelException e)
+			{
+				e.printStackTrace();
 			}
 		}
 

@@ -26,7 +26,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateQuantityForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
-import com.hybris.storefront.controllers.ControllerConstants;
+import de.hybris.platform.core.model.product.ProductModel;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +45,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hybris.facades.stocklevel.DefaultStockLevelFacade;
+import com.hybris.storefront.controllers.ControllerConstants;
+
 
 /**
  * Controller for cart page
@@ -60,6 +63,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "simpleBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder resourceBreadcrumbBuilder;
+
+	@Resource(name = "consultantStockLevelFacade")
+	private DefaultStockLevelFacade stockLevelFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -84,7 +90,7 @@ public class CartPageController extends AbstractCartPageController
 	 * checkout to begin. Note that this method does not require the user to be authenticated and therefore allows us to
 	 * validate that the cart is valid without first forcing the user to login. The cart will be checked again once the
 	 * user has logged in.
-	 * 
+	 *
 	 * @return The page to redirect to
 	 */
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
@@ -177,6 +183,7 @@ public class CartPageController extends AbstractCartPageController
 		{
 			try
 			{
+				final ProductModel product = stockLevelFacade.prepareRealseStockLevel(entryNumber);
 				final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
 						form.getQuantity().longValue());
 				if (cartModification.getQuantity() == form.getQuantity().longValue())
@@ -186,6 +193,7 @@ public class CartPageController extends AbstractCartPageController
 					if (cartModification.getQuantity() == 0)
 					{
 						// Success in removing entry
+						stockLevelFacade.realseStockLevel(product);
 						GlobalMessages
 								.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.remove");
 					}
@@ -232,5 +240,4 @@ public class CartPageController extends AbstractCartPageController
 
 		return ControllerConstants.Views.Pages.Cart.CartPage;
 	}
-
 }
