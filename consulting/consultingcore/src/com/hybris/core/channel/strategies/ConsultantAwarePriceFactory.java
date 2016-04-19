@@ -62,15 +62,21 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
 
 		Preconditions.checkNotNull(product);
-		//final String currentSiteUid = cmsSiteService.getCurrentSite().getUid();
 
 		Preconditions.checkNotNull(productModel);
 		final Set<CatalogVersionModel> cls = catalogService.getSessionCatalogVersions();
 		String catalogId = "";
 		if (cls.size() > 0)
 		{
-			final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
-			catalogId = clm.getCatalog().getId();
+			for (final CatalogVersionModel clm : cls)
+			{
+				//final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
+				final String catalogName = clm.getCatalog().getId();
+				if (catalogName.contains("ProductCatalog"))
+				{
+					catalogId = clm.getCatalog().getId();
+				}
+			}
 		}
 
 		//CN Or GB
