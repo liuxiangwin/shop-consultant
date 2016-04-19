@@ -214,4 +214,17 @@
 		<property name="configurationService" ref="configurationService"/>
 	</bean> 
 	
+	
+	<alias name="consultantCartValidationStrategy" alias="cartValidationStrategy"/>
+	<bean id="consultantCartValidationStrategy"
+			class="com.hybris.core.price.cart.ConsultantCartValidationStrategy"
+			parent="defaultCartValidationStrategy">
+		<property name="modelService" ref="modelService"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="productService" ref="productService"/>
+		<property name="commerceStockService" ref="commerceStockService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+	
 </beans>
