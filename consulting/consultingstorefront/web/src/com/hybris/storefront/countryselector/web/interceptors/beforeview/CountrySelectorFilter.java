@@ -41,6 +41,7 @@ public class CountrySelectorFilter extends OncePerRequestFilter
 		//https://localhost:9002/consultingstorefront/zh-consultingsite/en/?clear=true&site=zh-consultingsite
 		//response.sendRedirect("/consultingstorefront/main");
 		request.getCookies();
+		response.sendRedirect("/consultingstorefront/main");
 
 		filterChain.doFilter(request, response);
 	}

@@ -16,6 +16,8 @@ package com.hybris.storefront.countryselector.web.interceptors.beforeview;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.ContentPageModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.servicelayer.session.SessionService;
 
@@ -55,13 +57,21 @@ public class ChooseCountryController extends AbstractPageController
 	@Resource
 	private SessionService sessionService;
 
+	@Resource(name = "cmsPageService")
+	private CMSPageService cmsPageService;
+
+
 	@Autowired
 	private CountrySelectorStrategy countrySelectorStrategy;
 
 
 	@RequestMapping(method = RequestMethod.GET)
-	public void setSiteWithCookie(final HttpServletRequest request, final HttpServletResponse response) throws IOException
+	public void setSiteWithCookie(final HttpServletRequest request, final Model model, final HttpServletResponse response)
+			throws IOException
 	{
+		final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
+		//return cmsPageService.getPageForLabelOrId("homepage");
+		storeCmsPageInModel(model, contentPageModel);
 
 		final String country = request.getParameter("country");
 		final String lang = request.getParameter("lang");
