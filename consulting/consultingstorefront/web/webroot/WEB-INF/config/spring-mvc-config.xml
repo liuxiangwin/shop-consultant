@@ -81,6 +81,10 @@
 		<bean class="com.hybris.storefront.interceptors.beforecontroller.SetLanguageBeforeControllerHandler" />
 		<bean class="com.hybris.storefront.interceptors.beforecontroller.SetUiExperienceBeforeControllerHandler" />
 		<bean class="com.hybris.storefront.interceptors.beforecontroller.ThemeBeforeControllerHandler" />
+		
+		<!-- <bean class="com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorBeforeViewHandler" >
+		<property name="redirectStrategy" ref="redirectStrategy"/>
+		</bean> -->
 	</util:list>
 	
 	<alias name="defaultBeforeViewHandlersList" alias="beforeViewHandlersList" />
@@ -118,8 +122,8 @@
 		</bean>
 		<bean class="com.hybris.storefront.interceptors.beforeview.GoogleMapsBeforeViewHandler" />
 		
-		<bean class=" com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorBeforeViewHandler" >
-		</bean>
+<!-- 		<bean class=" com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorBeforeViewHandler" >
+		</bean> -->
 		
 		
 	</util:list>

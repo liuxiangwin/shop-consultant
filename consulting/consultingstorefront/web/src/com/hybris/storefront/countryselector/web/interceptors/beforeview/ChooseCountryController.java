@@ -16,6 +16,7 @@ package com.hybris.storefront.countryselector.web.interceptors.beforeview;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
@@ -66,8 +67,8 @@ public class ChooseCountryController extends AbstractPageController
 
 
 	@RequestMapping(method = RequestMethod.GET)
-	public void setSiteWithCookie(final HttpServletRequest request, final Model model, final HttpServletResponse response)
-			throws IOException
+	public String handleCountry(final HttpServletRequest request, final Model model, final HttpServletResponse response)
+			throws IOException, CMSItemNotFoundException
 	{
 		final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
 		//return cmsPageService.getPageForLabelOrId("homepage");
@@ -78,12 +79,23 @@ public class ChooseCountryController extends AbstractPageController
 		final String cookieValue = country + "_" + lang;
 
 		cookieGenerator.addCookie(response, cookieValue);
+		//cookieGenerator.addCookie(response, country);
+		CookieUtils.addCookie(response, 360000, "country", country);
+
+		getSessionService().getCurrentSession().setAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR, country);
+
+		//final String  cookieName = cookieGenerator.getCookieName();
 
 		cookieGenerator.getCookieName();
-		response.sendRedirect("https://localhost:9002/consultantstorefront/?site=consultant" + country + "&lang=" + lang);
+		//response.sendRedirect("https://localhost:9002/consultantstorefront/?site=consultant" + country + "&lang=" + lang);
 
 		//https://localhost:9002/consultingstorefront/zh-consultingsite/en/?clear=true&site=zh-consultingsite
 
+		storeCmsPageInModel(model, contentPageModel);
+		setUpMetaDataForContentPage(model, contentPageModel);
+		updatePageTitle(model, contentPageModel);
+
+		return getViewForPage(model);
 
 	}
 
@@ -175,5 +187,10 @@ public class ChooseCountryController extends AbstractPageController
 			return getNewReturnURL(request, check);
 		}
 		return REDIRECT_PREFIX + "https://localhost:9002/conshop/en/?site=conshop";
+	}
+
+	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
+	{
+		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 }

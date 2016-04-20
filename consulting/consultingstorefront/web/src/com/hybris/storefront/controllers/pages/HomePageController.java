@@ -22,7 +22,10 @@ import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.servicelayer.session.SessionService;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -58,11 +61,41 @@ public class HomePageController extends AbstractPageController
 	@Resource
 	private SessionService sessionService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{country}/")
+	//@RequestMapping(method = RequestMethod.GET, value = "/{country}/")
+	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
 			final RedirectAttributes redirectModel, final HttpServletResponse response, final HttpServletRequest request)
-			throws CMSItemNotFoundException
+			throws CMSItemNotFoundException, IOException
 	{
+
+		final Cookie[] cookies = request.getCookies();
+
+		Cookie cook;
+		String selectCountry = "";
+		if (cookies != null)
+		{
+			for (int i = 0; i < cookies.length; i++)
+			{
+				cook = cookies[i];
+				if (cook.getName().equalsIgnoreCase("country-selected"))
+				{
+					selectCountry = cook.getValue();
+				}
+
+			}
+		}
+		if (selectCountry.equalsIgnoreCase(""))
+		{
+			//getRedirectStrategy().sendRedirect(request, response, "/consultingstorefront/main");
+			//response.sendRedirect("/consultingstorefront/main");
+			return REDIRECT_PREFIX + "/main";
+			//return REDIRECT_PREFIX + "/consultingstorefront/main";
+			//request.getRequestDispatcher("/consultingstorefront/main").forward(request, response);
+		}
+
+
+
+
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		ctx.setAttribute("c-channel", "city");
 		ctx.setAttribute("c-intro", "frist_manager");

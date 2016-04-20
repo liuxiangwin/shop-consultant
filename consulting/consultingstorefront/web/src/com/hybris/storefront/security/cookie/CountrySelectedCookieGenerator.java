@@ -16,14 +16,14 @@ import org.springframework.beans.factory.annotation.Required;
 public class CountrySelectedCookieGenerator extends EnhancedCookieGenerator
 {
 
-	private final static String COUNTRY_SELECTED_COOKIENAME_SUFFIX = "country-selected";
+	private final static String COUNTRY_SELECTED = "country-selected";
 	private BaseSiteService baseSiteService;
 
 	@Override
 	public String getCookieName()
 	{
 		return StringUtils.deleteWhitespace(getBaseSiteService().getCurrentBaseSite().getUid())
-				+ COUNTRY_SELECTED_COOKIENAME_SUFFIX;
+				+ COUNTRY_SELECTED;
 	}
 
 	protected BaseSiteService getBaseSiteService()

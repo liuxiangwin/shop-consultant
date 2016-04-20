@@ -86,7 +86,7 @@
 		
 		
 		 <!-- filter to restore country seleted  -->
-		<ref bean="countrySelectorFilter"/>
+	<!-- <ref bean="countrySelectorFilter"/>  -->
 	</util:list>
 	
 	<bean id="storefrontTenantDefaultFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain" >
