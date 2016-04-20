@@ -62,25 +62,34 @@ INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]
 
 
 
-INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true] ; name  ; linkName        ; url                            ; &linkRef   ; &componentRef ; target(code)[default='sameWindow'] ; 
+INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true] ; name  ; linkName        ; url                            ; &linkRef   ; &componentRef ; target(code)[default='sameWindow'] ;  
                                ;                         ; ZhSiteLink       ; China ; China Site Link ; /setcountry?country=zh&lang=zh ; ZhSiteLink ; ZhSiteLink    ;                                    ;  
-                               ;                         ; UkSiteLink       ; UK    ; UK Site Link    ; /setcountry?country=uk&lang=en ; UkSiteLink ; UkSiteLink    ;                                    ; 
+                               ;                         ; UkSiteLink       ; UK    ; UK Site Link    ; /setcountry?country=uk&lang=en ; UkSiteLink ; UkSiteLink    ;                                    ;  
                                
                                
 INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name                  ; masterTemplate(uid,$contentCV) ; label        ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
                           ;                         ; siteSelector     ; Country Selector Page ; ContentPage1Template           ; /siteselector
-                          
+
+# Site-wide Homepage                 
+#INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name     ; masterTemplate(uid,$contentCV) ; label   ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='true']
+#                          ;                         ; homepage         ; Homepage ; LandingPage2Template           ; homepage
+
+
+# Site-wide Homepage                 
+#INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true]  ; name              ; masterTemplate(uid,$contentCV) ; label            ;  defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
+#                          ;                         ; chooseCountryPage ; ChooseCountryPage ; ChooseCountryPageTemplate      ; chooseCountryPage
+
+
                           
 # ContentSlot             
-INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true] ; name                                     ; active ; cmsComponents(&componentRef) ;  ;  ;  
-                          ;                         ; Section2BSlot-SS ; Section2B Slot for Country Selector Page ; true   ; ZhSiteLink, UkSiteLink       ;  ;  ;  
+INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]     ; name                                     ; active ; cmsComponents(&componentRef) ;  ;  ;  
+                          ;                         ; Section2BSlot-choose ; Section2B Slot for Country Selector Page ; true   ; ZhSiteLink, UkSiteLink       ;  ;  ;  
                           
                           
 # ContentSlotForPage      
 INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='siteSelector'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
-                                 ;                         ; Section2B-SS     ; Section2B             ;                                                           ; Section2BSlot-SS                         ;  ;  ;  
-
-
+#INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='chooseCountryPage'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
+                                 ;                         ; Section2B-choose ; Section2B             ;                                                                ; Section2BSlot-choose                     ;  ;  ;  
 
 
 # CMS Link Components Define Customer LinkComponent              
