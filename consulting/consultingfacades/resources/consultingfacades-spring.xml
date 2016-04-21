@@ -227,4 +227,13 @@
 		<property name="userService" ref="userService"/>
 	</bean>
 	
+	
+	<alias name="consultantCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="consultantCommerceAddToCartStrategy"
+			class="com.hybris.core.price.cart.ConsultantCommerceAddToCartStrategy"
+			parent="defaultCommerceAddToCartStrategy">
+		<property name="commerceAddToCartMethodHooks" ref="commerceAddToCartMethodHooks"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+	
 </beans>
