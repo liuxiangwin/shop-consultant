@@ -47,3 +47,17 @@ INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFa
                                             ; 00000267          ; Product-Class-Gobal           ;           ;                ;  
                                             ; 00000268          ; Product-Class-Gobal           ;           ;                ;  
                                                                                                  
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+
+                                            ; 00000366          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000367          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000368          ; Product-Class-Gobal           ;           ;                ;  
+
+                                            ; 00000369          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000340          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000341          ; Product-Class-Gobal           ;           ;                ;                                              
+                                            
+                                            ; 00000342          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000343          ; Product-Class-Gobal           ;           ;                ;                                              
+                                            
+                                                                                       

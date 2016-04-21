@@ -464,6 +464,25 @@ INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV
                               ; TopHeaderSlot          ;                                                                          ;                           ; wide               
                               ; BottomHeaderSlot       ;                                                                          ;                           ; wide               
                               ; PlaceholderContentSlot ;                                                                          ;                           ;                    
+# Choose Country Page Template
+INSERT_UPDATE ContentSlotName ; name[unique=true]      ; template(uid,$contentCV)[unique=true][default='ChooseCountryPageTemplate'] ; validComponentTypes(code) ; compTypeGroup(code)
+                              ; CountryLink            ;                                                                       ;                           ; narrow             
+                              ; HeaderLinks            ;                                                                       ;                           ; headerlinks        
+                              ; SearchBox              ;                                                                       ;                           ; searchbox          
+                              ; MiniCart               ;                                                                       ;                           ; minicart           
+                              ; NavigationBar          ;                                                                       ;                           ; navigation         
+                              ; Section1               ;                                                                       ;                           ; wide               
+                              ; Section2A              ;                                                                       ;                           ; narrow             
+                              ; Section2B              ;                                                                       ;                           ; narrow             
+                              ; Section2C              ;                                                                       ;                           ; wide               
+                              ; Section3               ;                                                                       ;                           ; wide               
+                              ; Section4               ;                                                                       ;                           ; narrow             
+                              ; Section5               ;                                                                       ;                           ; wide               
+                              ; Footer                 ;                                                                       ;                           ; footer             
+                              ; TopHeaderSlot          ;                                                                       ;                           ; wide               
+                              ; BottomHeaderSlot       ;                                                                       ;                           ; wide               
+                              ; PlaceholderContentSlot ;                                                                       ;                           ;                    
+
 
 # Create Content Slots        
 INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]       ; name                            ; active
@@ -809,7 +828,20 @@ INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true
                                      ;                         ; BottomHeaderSlot-ErrorPage       ; BottomHeaderSlot       ;                                                                        ; BottomHeaderSlot                         ; true          
                                      ;                         ; PlaceholderContentSlot-ErrorPage ; PlaceholderContentSlot ;                                                                        ; PlaceholderContentSlot                   ; true          
                                      
-                                     
+INSERT_UPDATE ContentSlotForTemplate ; $contentCV[unique=true] ; uid[unique=true]                 ; position[unique=true]  ; pageTemplate(uid,$contentCV)[unique=true][default='ChooseCountryPageTemplate'] ; contentSlot(uid,$contentCV)[unique=true] ; allowOverwrite
+                                     ;                         ; SiteLogo-LandingPage2               ; SiteLogo               ;                                                                           ; SiteLogoSlot                             ; true          
+                                     ;                         ; HomepageChannel-LandingPage2        ; ChannelLink            ;                                                                           ; ChannelLinkSlot                          ; true          
+                                     ;                         ; HomepageCountryLink-LandingPage2    ; CountryLink            ;                                                                           ; CountryLinkSlot                          ; true          
+                                     ;                         ; HomepageLink-LandingPage2           ; HomepageNavLink        ;                                                                           ; HomepageNavLinkSlot                      ; true          
+                                     ;                         ; NavigationBar-LandingPage2          ; NavigationBar          ;                                                                           ; NavigationBarSlot                        ; true          
+                                     ;                         ; MiniCart-LandingPage2               ; MiniCart               ;                                                                           ; MiniCartSlot                             ; true          
+                                     ;                         ; Footer-LandingPage2                 ; Footer                 ;                                                                           ; FooterSlot                               ; true          
+                                     ;                         ; HeaderLinks-LandingPage2            ; HeaderLinks            ;                                                                           ; HeaderLinksSlot                          ; true          
+                                     ;                         ; SearchBox-LandingPage2              ; SearchBox              ;                                                                           ; SearchBoxSlot                            ; true          
+                                     ;                         ; TopHeaderSlot-LandingPage2          ; TopHeaderSlot          ;                                                                           ; TopHeaderSlot                            ; true          
+                                     ;                         ; BottomHeaderSlot-LandingPage2       ; BottomHeaderSlot       ;                                                                           ; BottomHeaderSlot                         ; true          
+                                     ;                         ; PlaceholderContentSlot-LandingPage2 ; PlaceholderContentSlot ;                                                                           ; PlaceholderContentSlot                   ; true          
+                                                
 ########################################################################################################## ########################################################################################################## 
 # Create Content Pages               
 ########################################################################################################## ########################################################################################################## 
