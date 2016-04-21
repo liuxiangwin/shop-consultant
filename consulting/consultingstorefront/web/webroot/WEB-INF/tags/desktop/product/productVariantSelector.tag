@@ -16,7 +16,7 @@
 		<!--  product.baseOptions[0].options = Service
 		 	  product.baseOptions[1].options = Level    -->
 <div id="shoot">
-	<h2>Variant Product Detail</h2>
+	<!-- <h2>Variant Product Detail</h2> -->
 	<%-- <h2 id="variantType">${product.variantType}</h2>
 	
 
@@ -144,10 +144,10 @@
 					<c:set var="showAddToCart" value="${false}" scope="session" />
 				</c:otherwise>
 			</c:choose> 
-			<h1 id='showAddToCart'>${showAddToCart}</h1> 
+			<%-- <h1 id='showAddToCart'>${showAddToCart}</h1>  --%>
 			
 			<div class="variant_options_customersization">
-				<c:if test="${not empty variantStyles}">
+			<%-- 	<c:if test="${not empty variantStyles}">
 					<div class="colour clearfix">
 						<div>Level Type</div>
 						<ul class="colorlist">
@@ -179,7 +179,7 @@
 						</ul>
 						
 					</div>
-				</c:if>
+				</c:if> --%>
 				
 				<c:if test="${not empty variantSizes}">
 				
