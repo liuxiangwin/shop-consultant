@@ -215,7 +215,7 @@
 												  -------------------------------------------------------------------------------
 												--%>
 												
-												<h1 id='stock-button'>${(product.stock.stockLevel gt 0) and (product.stock.stockLevelStatus ne 'outOfStock')}</h1> 
+												<%-- <h1 id='stock-button'>${(product.stock.stockLevel gt 0) and (product.stock.stockLevelStatus ne 'outOfStock')}</h1>  --%>
 												<c:if test="${(product.stock.stockLevel gt 0) and (product.stock.stockLevelStatus ne 'outOfStock')}">
 													<c:set var="stockLevel">${product.stock.stockLevel}&nbsp;<spring:theme code="product.variants.in.stock"/></c:set>
 												</c:if>
@@ -226,9 +226,9 @@
 													<c:set var="stockLevel"><spring:theme code="product.variants.out.of.stock"/></c:set>
 												</c:if>
 
-												<c:if test="${(variantSize.url eq product.url)}">
+												<%-- <c:if test="${(variantSize.url eq product.url)}"> --%>
 													<c:set var="showAddToCart" value="${true}" scope="session" />
-												</c:if> 
+												<%-- </c:if>  --%>
 												
 												<c:url value="${variantSize.url}" var="variantOptionUrl"/>
 												<%-- <option value="${variantOptionUrl}" 
