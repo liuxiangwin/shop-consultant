@@ -101,7 +101,10 @@ public class ChooseCountryController extends AbstractPageController
 		{
 			if (selectCountry.equalsIgnoreCase("zh"))
 			{
-				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+
+				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/开发/c/Development";
+
+				//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
 			}
 			else
 			{
@@ -125,7 +128,8 @@ public class ChooseCountryController extends AbstractPageController
 
 		if (country.equalsIgnoreCase("zh"))
 		{
-			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+			//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/开发/c/Development";
 		}
 		else
 		{

@@ -55,27 +55,27 @@
 <%-- Determine if product is one of apparel style or size variant --%>
 		<%-- <c:if test="${product.variantType eq 'ApparelStyleVariantProduct'}"> --%>
 		
-		<h2 id='Alan-product-variant--ConsultantServiceVariantProduct'>${product.variantType}</h2>
+<%-- 		<h2 id='Alan-product-variant--ConsultantServiceVariantProduct'>${product.variantType}</h2>
        <h2 id='Alan2-product-baseoption-0--ConsultantLevelVariantProduc'>${product.baseOptions[0].variantType}</h2> 
        <h2 id='Alan3-product-baseoption-1'>${product.baseOptions[1].variantType}</h2> 
        <h2 id='p-variantOptons-1'>${fn:length(product.variantOptions)}</h2> 
        <h2 id='p-variantOptons-2'>${product.variantOptions[2]}</h2> 
-        <h2 id='p-level'>${product.baseOptions[0].options[0]}</h2> 
+        <h2 id='p-level'>${product.baseOptions[0].options[0]}</h2>  --%>
         
 		
-		<%-- <c:if test="${product.variantType eq 'ConsultantLevelVariantProduct'}"> --%>
-		<h2>${product.variantType eq 'ConsultantServiceVariantProduct'}</h2> 
+		<%-- <c:if test="${product.variantType eq 'ConsultantLevelVariantProduct'}">
+		<h2>${product.variantType eq 'ConsultantServiceVariantProduct'}</h2> --%> 
 		
 		<c:if test="${product.variantType eq 'ConsultantServiceVariantProduct'}">
 			<%-- <c:set var="variantStyles" value="${product.variantOptions}" /> --%>
 			<c:set var="variantStyles" value="${product.baseOptions[0].options}" />
 		</c:if>
 		
-		
+	<%-- 	
 		<h2 id='size-option-1'>${fn:length(product.baseOptions[0].options)}</h2> 
 		<h2 id='size-option-1'>${fn:length(product.baseOptions[1].options)}</h2> 
 		<h2 id='size-option-1'>${product.baseOptions[0].variantType}</h2> 
-		
+		 --%>
 		
 		<%-- ------------------------------------------------------------------------------- 	
 			This would be correct block code would render
@@ -111,13 +111,13 @@
 		<c:url value="${currentStyleUrl}" var="currentStyledProductUrl"/>
 		
 		<%-- Determine if product is other variant --%>
-		<h1 id='value-variantStyles-detemine'>${empty variantStyles}</h1> 
+		<%-- <h1 id='value-variantStyles-detemine'>${empty variantStyles}</h1>  --%>
 		<c:if test="${empty variantStyles}">
 			<%-- -------------------------------------------------------------------------------
 			  Current Product Responsiblity like SystemReview,CodeReview
 			  -------------------------------------------------------------------------------
 			--%>
-			<h3 id='variantOp--product.variantOptions]'>${fn:length(product.variantOptions)}</h3>
+			<%-- <h3 id='variantOp--product.variantOptions]'>${fn:length(product.variantOptions)}</h3> --%>
 			<c:if test="${not empty product.variantOptions}">
 				<c:set var="variantOptions" value="${product.variantOptions}" />
 			</c:if>
@@ -125,15 +125,15 @@
 			   Product Level like Stand,Senior
 			  -------------------------------------------------------------------------------
 			--%>
-			<h3 id='variantOp--product.baseOptions[0]'>${fn:length(product.baseOptions[0].options)}</h3>
+			<%-- <h3 id='variantOp--product.baseOptions[0]'>${fn:length(product.baseOptions[0].options)}</h3> --%>
 			<c:if test="${not empty product.baseOptions[0].options}">
 				<c:set  var="variantOptions" value="${product.baseOptions[0].options}" />
 			</c:if>
 		</c:if>
-		<h1 id='two varianable'>${not empty variantStyles or not empty variantSizes}</h1> 
+		<%-- <h1 id='two varianable'>${not empty variantStyles or not empty variantSizes}</h1> 
 		<h1 id='stockLevel-staus'>${product.stock.stockLevelStatus.code}</h1>
 		<h1 id='stock-Level-number'>${product.stock.stockLevel}</h1>  
-		<h1 id='purchasable'>${product.purchasable}</h1> 
+		<h1 id='purchasable'>${product.purchasable}</h1>  --%>
 		
 		<c:if test="${not empty variantStyles or not empty variantSizes}">
 			<c:choose>
