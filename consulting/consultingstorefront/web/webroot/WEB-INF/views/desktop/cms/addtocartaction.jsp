@@ -13,14 +13,38 @@
 		<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty" value="1">
 	</c:if>
 	<input type="hidden" name="productCodePost" value="${product.code}"/>
-
+    
+  <%--   <h2 id='showAddToCart'>${showAddToCart}</h2>
+    <h2 id='product.code'>${product.code}</h2>
+    <h2 id='product.baseOptions[0].variantType'>${product.baseOptions[0].variantType}</h2>
+     
+    <h2 id='product.purchasable'>${product.purchasable}</h2>
+     <h2 id='product.stock.stockLevelStatus'>${product.stock.stockLevelStatus}</h2>
+    <h2 id='contains(buttonType'>${fn:contains(buttonType, 'button')}</h2>
+     <h2 id='type'>${product.baseOptions[0].variantType eq 'ConsultantServiceVariantProduct'}</h2> --%>
+    
 	<c:if test="${empty showAddToCart ? true : showAddToCart}">
 		<c:set var="buttonType">button</c:set>
+	
+	
+		<c:choose>
+			<c:when test="${product.baseOptions[0].variantType eq 'ConsultantServiceVariantProduct'}">
+		
+			</c:when>
 
-		<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
-			<c:set var="buttonType">submit</c:set>
-		</c:if>
-
+			<c:otherwise>
+				<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
+					<c:set var="buttonType">submit</c:set>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+	
+	
+		
+		
+		
+		
+		<%-- <h2 id='contains type'>${fn:contains(buttonType, 'button')}</h2> --%>
 		<c:choose>
 			<c:when test="${fn:contains(buttonType, 'button')}">
 				<button type="${buttonType}" class="addToCartButton outOfStock" disabled="disabled">
