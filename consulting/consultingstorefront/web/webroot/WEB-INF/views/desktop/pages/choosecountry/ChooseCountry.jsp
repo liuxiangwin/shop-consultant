@@ -10,7 +10,7 @@
 <form:form id="chooseCountryform"  action="${countryUrl}" method="POST">
 	<div class="form-group">
 		<select id="country" name="country">
-			<option value="UK">United Kidom</option>
+			<option value="UK">United Kingdom</option>
 			<option value="ZH">China</option>
 		</select>
 		 <input type="submit">  
