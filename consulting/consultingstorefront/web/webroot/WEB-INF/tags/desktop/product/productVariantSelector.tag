@@ -239,7 +239,7 @@
 												</option> --%>
 												
 												<option value="${variantOptionUrl}">
-												${variantSize.code}&nbsp ${serviceValue}													
+												${serviceValue}													
 												</option>
 											</c:forEach>
 										</c:if>
