@@ -547,5 +547,10 @@
 	<bean id="searchApprovalStatusPopulator"
 		class="com.hybris.core.search.solrfacetsearch.populators.SearchApprovalStatusPopulator">
 	</bean>
+	
+	<alias name="consultantProductBasicPopulator" alias="productBasicPopulator"/>
+	<bean id="consultantProductBasicPopulator" parent="baseProductPopulator"
+			class="com.hybris.core.search.solrfacetsearch.populators.ConsultantProductPopulator"/>
+	
 
 </beans>

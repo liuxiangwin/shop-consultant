@@ -253,15 +253,16 @@
 				jaloclass="com.hybris.platform.posselector.jalo.PosSelectorComponentJalo">
 			</itemtype>
 
-			<itemtype code="AbstractOrderEntry" autocreate="false" generate="true"	>
+			<!-- <itemtype code="AbstractOrderEntry" autocreate="false"
+				generate="true">
 				<attributes>
 					<attribute qualifier="days" type="java.lang.Long">
-					<modifiers initial="true" read="true" write="false"
-						optional="false" />
-					<persistence type="property" />
-				</attribute>
+						<modifiers initial="true" read="true" write="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
-			</itemtype>
+			</itemtype> -->
 		</typegroup>
 
 
