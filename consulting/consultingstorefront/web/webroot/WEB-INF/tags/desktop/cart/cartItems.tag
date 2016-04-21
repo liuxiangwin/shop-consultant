@@ -147,7 +147,8 @@
 								<form:label id="Alan" cssClass="skip" path="quantity" for="quantity${entry.entryNumber}"><spring:theme code="basket.page.quantity"/></form:label>
 							<%-- 	<form:input disabled="${not entry.updateable}" type="text" size="1" id="quantity${entry.entryNumber}" class="qty" path="quantity" /> --%>
 								<%-- Disable the input with defual stock level with 1--%>
-								<form:input disabled="true" type="text" size="1" id="quantity${entry.entryNumber}" class="qty" path="quantity" />
+								<%-- <form:input disabled="true" type="text" size="1" id="quantity${entry.entryNumber}" class="qty" path="quantity" /> --%>
+								<input  id="quantity${entry.entryNumber}" name="quantity" class="qty" disabled="disabled" value="1" size="1" type="text">
 							</ycommerce:testId>
 							<c:if test="${entry.updateable}" >
 								<ycommerce:testId code="cart_product_updateQuantity">
