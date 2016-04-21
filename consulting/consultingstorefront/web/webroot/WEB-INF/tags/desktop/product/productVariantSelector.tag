@@ -184,7 +184,7 @@
 				<c:if test="${not empty variantSizes}">
 				
 					<div class="size clearfix">
-						<form>
+						<!-- <form> -->
 							<label for="Size">Service Type</label>
 									<select id="Size" class="variant-select" disabled="disabled" >
 										<c:if test="${empty variantSizes}">
@@ -193,11 +193,11 @@
 										<c:if test="${not empty variantSizes}">
 											
 											
-											<option value="${currentStyledProductUrl}"
-												<%--  <c:if test="${empty variantParams['service']}">selected="selected"</c:if>> --%>
+											<%-- <option value="${currentStyledProductUrl}" --%>
+											<%-- <option value=""
+												 <c:if test="${empty variantParams['service']}">selected="selected"</c:if>>
 												<spring:theme code="product.variants.select.size"/> 
-												<!-- Alan liu -->
-											</option>
+											</option> --%>
 											<c:forEach items="${variantSizes}" var="variantSize">
 												<c:set var="optionsString" value="" />											
 												
@@ -238,14 +238,15 @@
 													${variantSize.stock.stockLevel}
 												</option> --%>
 												
-												<option value="${variantOptionUrl}">
+												<%-- <option value="${variantOptionUrl}"> --%>
+												<option value="">
 												${serviceValue}													
 												</option>
 											</c:forEach>
 										</c:if>
 									</select>
 							
-						</form>
+						<!-- </form> -->
 						<a href="#"  class="size-guide" title="<spring:theme code="product.variants.size.guide"/>">&nbsp;</a>
 					</div>
 				</c:if>
