@@ -93,9 +93,6 @@ public class HomePageController extends AbstractPageController
 			//request.getRequestDispatcher("/consultingstorefront/main").forward(request, response);
 		}
 
-
-
-
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
 		ctx.setAttribute("c-channel", "city");
 		ctx.setAttribute("c-intro", "frist_manager");

@@ -224,8 +224,8 @@
 	</bean>
 	
 	
-	<bean id="countrySelectorFilter" class=" com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorFilter" >
-	</bean>
+	<!-- <bean id="countrySelectorFilter" class=" com.hybris.storefront.countryselector.web.interceptors.beforeview.CountrySelectorFilter" >
+	</bean> -->
 	
 	
 	

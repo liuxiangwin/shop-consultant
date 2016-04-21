@@ -25,6 +25,7 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -70,40 +71,83 @@ public class ChooseCountryController extends AbstractPageController
 	public String handleCountry(final HttpServletRequest request, final Model model, final HttpServletResponse response)
 			throws IOException, CMSItemNotFoundException
 	{
-		final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
-		//return cmsPageService.getPageForLabelOrId("homepage");
-		storeCmsPageInModel(model, contentPageModel);
+		final Cookie[] cookies = request.getCookies();
+		Cookie cook;
+		String selectCountry = "";
+		if (cookies != null)
+		{
+			for (int i = 0; i < cookies.length; i++)
+			{
+				cook = cookies[i];
+				if (cook.getName().equalsIgnoreCase("country-selected"))
+				{
+					selectCountry = cook.getValue();
+				}
 
-		final String country = request.getParameter("country");
-		final String lang = request.getParameter("lang");
-		final String cookieValue = country + "_" + lang;
+			}
+		}
+		if (selectCountry.equalsIgnoreCase(""))
+		{
+			final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
+			//final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("siteSelector");
+			//return cmsPageService.getPageForLabelOrId("homepage");
+			model.addAttribute("chooseUrl", "/main/chooseCountry");
+			storeCmsPageInModel(model, contentPageModel);
+			setUpMetaDataForContentPage(model, contentPageModel);
+			updatePageTitle(model, contentPageModel);
+			return getViewForPage(model);
+		}
+		else
+		{
+			if (selectCountry.equalsIgnoreCase("zh"))
+			{
+				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+			}
+			else
+			{
+				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
+			}
+		}
 
-		cookieGenerator.addCookie(response, cookieValue);
-		//cookieGenerator.addCookie(response, country);
-		CookieUtils.addCookie(response, 360000, "country", country);
 
-		getSessionService().getCurrentSession().setAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR, country);
-
-		//final String  cookieName = cookieGenerator.getCookieName();
-
-		cookieGenerator.getCookieName();
-		//response.sendRedirect("https://localhost:9002/consultantstorefront/?site=consultant" + country + "&lang=" + lang);
-
-		//https://localhost:9002/consultingstorefront/zh-consultingsite/en/?clear=true&site=zh-consultingsite
-
-		storeCmsPageInModel(model, contentPageModel);
-		setUpMetaDataForContentPage(model, contentPageModel);
-		updatePageTitle(model, contentPageModel);
-
-		return getViewForPage(model);
 
 	}
 
-	public String beforeRender(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	@RequestMapping(value = "/chooseCountry", method = RequestMethod.POST)
+	public String chooseCountry(@RequestParam(value = "country", required = true) final String country, final Model model,
+			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
 
-		String cmsSite = "";
+		final String cookiValue = country;
+		cookieGenerator.addCookie(response, cookiValue);
+		CookieUtils.addCookie(response, 360000, "country-selected", country);
+		getSessionService().getCurrentSession().setAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR, country);
 
+		if (country.equalsIgnoreCase("zh"))
+		{
+			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+		}
+		else
+		{
+			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
+		}
+		//There is no country in session memory
+		//model.addAttribute("sites", countrySelectorStrategy.getAllCMMSite());
+		//storeCmsPageInModel(model, getContentPageForLabelOrId(null));
+		//setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		//updatePageTitle(model, getContentPageForLabelOrId(null));
+		//return "pages/choosecounty/chooseCountry";
+	}
+
+	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
+	{
+		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
+	}
+
+
+	public String beforeRender(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		String cmsSite = "";
 		if (sessionService.getCurrentSession().getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR) != null)
 		{
 
@@ -117,80 +161,7 @@ public class ChooseCountryController extends AbstractPageController
 			model.addAttribute("sites", countrySelectorStrategy.getAllCMMSite());
 			storeCmsPageInModel(model, getContentPageForLabelOrId(null));
 			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
-			//updatePageTitle(model, getContentPageForLabelOrId(null));
 			return "pages/choosecounty/chooseCountry";
 		}
-	}
-
-
-
-	@RequestMapping(value = "/chooseCountry", method = RequestMethod.POST)
-	public String chooseCountry(@RequestParam(value = "sessionCountry", required = true) final String sessionCountry,
-			final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
-	{
-
-		String cmsSite = "";
-
-		if (sessionService.getCurrentSession().getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR) != null)
-		{
-
-			cmsSite = sessionService.getCurrentSession().getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR);
-
-			if (cmsSite.equals(sessionCountry))
-			{
-				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/" + cmsSite + "?clear=true&site=" + cmsSite;
-			}
-			else
-			{
-				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/" + sessionCountry + "?clear=true&site="
-						+ sessionCountry;
-			}
-		}
-		else
-		{
-			//There is no country in session memory
-			model.addAttribute("sites", countrySelectorStrategy.getAllCMMSite());
-			storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
-			//updatePageTitle(model, getContentPageForLabelOrId(null));
-			return "pages/choosecounty/chooseCountry";
-		}
-	}
-
-
-
-	//@RequestMapping(value = "/choosecountry", method = RequestMethod.GET)
-	public String setCountryWithCookie(@RequestParam("country") final String country, final Model model,
-			final HttpServletResponse response, final HttpServletRequest request) throws IOException
-	{
-		final String actualLanguage = storeSessionFacade.getCurrentLanguage().getIsocode();
-
-		cookieGenerator.addCookie(response, country);
-
-		CookieUtils.addCookie(response, 360000, "country", country);
-
-		getSessionService().getCurrentSession().setAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR, country);
-
-		return (country.isEmpty() ? getBaseReturnURL(request, country) : getNewReturnURL(request, country));
-	}
-
-
-	protected String getNewReturnURL(final HttpServletRequest request, final String country)
-	{
-		return REDIRECT_PREFIX + "https://localhost:9002/conshop/" + country + "/?site=conshop";
-	}
-
-	protected String getBaseReturnURL(final HttpServletRequest request, final String check)
-	{
-		if (check != null && check.trim().length() > 0)
-		{
-			return getNewReturnURL(request, check);
-		}
-		return REDIRECT_PREFIX + "https://localhost:9002/conshop/en/?site=conshop";
-	}
-
-	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
-	{
-		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 }
