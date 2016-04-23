@@ -4,12 +4,14 @@
 package com.hybris.core.search.solrfacetsearch.provider.impl;
 
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.solrfacetsearch.config.IndexConfig;
 import de.hybris.platform.solrfacetsearch.config.IndexedProperty;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.core.model.ConsultantModel;
@@ -26,6 +28,9 @@ public class ConsultantCountrySourceImpl implements ConsultantCountrySource
 
 	private ConsultantService consultantService;
 
+
+	@Autowired
+	private ModelService modelService;
 
 	/**
 	 * @return the consultantService
@@ -81,7 +86,7 @@ public class ConsultantCountrySourceImpl implements ConsultantCountrySource
 
 	private Collection<CountryModel> getCountries(final ConsultantModel consultantModel)
 	{
-		//final Collection<CountryModel> countries = getModelService().getAttributeValue(consultantModel, "activecountries");
+		//final Collection<CountryModel> countries = modelService.getAttributeValue(consultantModel, "activecountries");
 		final Collection<CountryModel> countries = getConsultantService().getActiveCountries(consultantModel);
 
 		return countries;

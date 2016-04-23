@@ -69,31 +69,48 @@ public class DefaultConsultantService implements ConsultantService
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.hybris.core.services.ConsultantService#getActiveCountries(com.hybris.core.model.ConsultantModel)
 	 */
 	@Override
 	public Collection<CountryModel> getActiveCountries(final ConsultantModel consultantModel)
 	{
-		final ConsultantModel exampleConsultant = new ConsultantModel();
-		exampleConsultant.setCode(consultantModel.getCode());
-		final ConsultantModel consultant = flexibleSearchService.getModelByExample(exampleConsultant);
+		//final ConsultantModel exampleConsultant = new ConsultantModel();
+		//exampleConsultant.setCode(consultantModel.getCode());
+		//final ConsultantModel consultant = flexibleSearchService.getModelByExample(exampleConsultant);
+		List<ConsultantModel> resultList = null;
+		try
+		{
+			final String queryUserPk = "SELECT {p:" + ConsultantModel.PK + "} " + "FROM {" + ConsultantModel._TYPECODE + " AS p} "
+					+ "WHERE " + "{p:" + ConsultantModel.CODE + "}=?code";
 
-		if (consultant != null)
-		{
-			return consultant.getActiveCountries();
+			final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
+			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
+			query.setCatalogVersions(catalogVersionModel);
+			query.addQueryParameter("code", consultantModel.getCode());
+			resultList = flexibleSearchService.<ConsultantModel> search(query).getResult();
 		}
-		else
+		catch (final Exception e)
 		{
-			return Collections.emptyList();
+			LOG.error("Exception" + e.getMessage());
 		}
+		if (resultList.size() > 0)
+		{
+			final ConsultantModel consultant = resultList.get(0);
+			if (consultant != null)
+			{
+				return consultant.getActiveCountries();
+			}
+		}
+		return Collections.emptyList();
+		/*
+		 * if (consultant != null) { return consultant.getActiveCountries(); } else { return Collections.emptyList(); }
+		 */
 	}
-
-
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.hybris.core.services.ConsultantService#getCountrySelectedForSession(de.hybris.platform.servicelayer.session.
 	 * SessionService)
@@ -125,7 +142,7 @@ public class DefaultConsultantService implements ConsultantService
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.hybris.core.services.ConsultantService#setCountryCodeSelectedForSession(de.hybris.platform.servicelayer.
 	 * session.SessionService, java.lang.String)
 	 */
@@ -141,7 +158,7 @@ public class DefaultConsultantService implements ConsultantService
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.hybris.core.services.ConsultantService#setCountryPkSelectionForSession(de.hybris.platform.servicelayer.session
 	 * .SessionService, java.lang.String)
@@ -208,7 +225,7 @@ public class DefaultConsultantService implements ConsultantService
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.hybris.core.services.ConsultantService#getExtraInfo(java.lang.String)
 	 */
 	@Override
