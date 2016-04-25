@@ -236,4 +236,25 @@
 		<property name="configurationService" ref="configurationService"/>
 	</bean>
 	
+	
+	
+	<alias name="consultantCommerceCartMergingStrategy" alias="commerceCartMergingStrategy"/>
+	<bean id="consultantCommerceCartMergingStrategy"
+			class="com.hybris.core.price.cart.ConsultantCommerceCartMergingStrategy"
+			parent="defaultCommerceCartMergingStrategy">
+		<property name="userService" ref="userService"/>
+		<property name="commerceCartService" ref="commerceCartService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="commerceAddToCartStrategy" ref="consultantMergeAddCartStrategy"/>
+	</bean>
+	
+	
+	<bean id="consultantMergeAddCartStrategy"
+			class="com.hybris.core.price.cart.ConsultantCommerceMergeAddCartStrategy"
+			parent="defaultCommerceAddToCartStrategy">
+		
+	</bean>
+	
+	
+	
 </beans>
