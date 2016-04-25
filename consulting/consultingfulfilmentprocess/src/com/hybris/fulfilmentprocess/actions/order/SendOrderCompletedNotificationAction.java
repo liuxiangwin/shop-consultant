@@ -13,10 +13,13 @@
  */
 package com.hybris.fulfilmentprocess.actions.order;
 
+import de.hybris.platform.acceleratorservices.email.impl.DefaultEmailService;
 import de.hybris.platform.orderprocessing.events.OrderCompletedEvent;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
 import de.hybris.platform.servicelayer.event.EventService;
+
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -31,6 +34,9 @@ public class SendOrderCompletedNotificationAction extends AbstractProceduralActi
 
 	private EventService eventService;
 
+	@Resource
+	private DefaultEmailService emailService;
+
 	@Override
 	public void executeAction(final OrderProcessModel process)
 	{
@@ -39,6 +45,7 @@ public class SendOrderCompletedNotificationAction extends AbstractProceduralActi
 		{
 			LOG.info("Process: " + process.getCode() + " in step " + getClass());
 		}
+		//emailService.send("Order is compelte");
 	}
 
 	protected EventService getEventService()
