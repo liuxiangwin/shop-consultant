@@ -61,8 +61,8 @@
 
 	<bean id="consultantService" name="consultantService"
 		class="com.hybris.core.services.impl.DefaultConsultantService">
-		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
-		<property name="sessionService" ref="sessionService"></property>
+	<!-- 	<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="sessionService" ref="sessionService"></property> -->
 	</bean>
 
 	<bean id="consultantCountryValueProvider" class="com.hybris.core.search.ConsultantCountryValueProvider"

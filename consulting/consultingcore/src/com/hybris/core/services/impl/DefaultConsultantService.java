@@ -3,6 +3,7 @@
  */
 package com.hybris.core.services.impl;
 
+import de.hybris.platform.catalog.CatalogService;
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
@@ -19,12 +20,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.core.constants.ConsultingCoreConstants;
 import com.hybris.core.model.ConsultantModel;
@@ -37,22 +37,25 @@ import com.hybris.core.services.ConsultantService;
  */
 public class DefaultConsultantService implements ConsultantService
 {
+	@Resource
 	private FlexibleSearchService flexibleSearchService;
 
+	@Resource
 	private SessionService sessionService;
 
-	@Autowired
+	@Resource
 	protected SearchRestrictionService searchRestrictionService;
 
-	@Autowired
+	@Resource
 	private CatalogVersionService catalogVersionService;
+
+	@Resource
+	private CatalogService catalogService;
 
 	@Resource
 	private CMSSiteService cmsSiteService;
 
 	public static final Logger LOG = Logger.getLogger(DefaultConsultantService.class);
-
-
 
 	@Override
 	public Language getDefaultLanguageForCountryIsocode(final String countryIsocode)
@@ -66,27 +69,32 @@ public class DefaultConsultantService implements ConsultantService
 		return langauge;
 	}
 
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.hybris.core.services.ConsultantService#getActiveCountries(com.hybris.core.model.ConsultantModel)
-	 */
 	@Override
 	public Collection<CountryModel> getActiveCountries(final ConsultantModel consultantModel)
 	{
-		//final ConsultantModel exampleConsultant = new ConsultantModel();
-		//exampleConsultant.setCode(consultantModel.getCode());
-		//final ConsultantModel consultant = flexibleSearchService.getModelByExample(exampleConsultant);
+		/*
+		 * final ConsultantModel exampleConsultant = new ConsultantModel();
+		 * exampleConsultant.setCode(consultantModel.getCode()); final ConsultantModel consultant =
+		 * flexibleSearchService.getModelByExample(exampleConsultant);
+		 * 
+		 * if (consultant != null) { return consultant.getActiveCountries(); } else { return Collections.emptyList(); }
+		 */
+
 		List<ConsultantModel> resultList = null;
 		try
 		{
-			final String queryUserPk = "SELECT {p:" + ConsultantModel.PK + "} " + "FROM {" + ConsultantModel._TYPECODE + " AS p} "
-					+ "WHERE " + "{p:" + ConsultantModel.CODE + "}=?code";
+			final String queryUserPk = "SELECT {p.pk} FROM {Consultant AS p JOIN CatalogVersion AS cv on {p.catalogVersion}={cv.pk}"
+					+ " JOIN Catalog AS c on {cv.catalog} = {c.pk}} WHERE {c.id} =?cId" + " AND {cv.version} =?cvVersion"
+					+ " AND  {p:code}=?code";
+			//+ "JOIN Catalog AS c ON {cv.pk}={c.activeCatalogVersion}}"
 
-			final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
+			//+ "WHERE " + "{p:" + ConsultantModel.CODE + "}=?code";
+
+			final CatalogVersionModel catalogVersionModel = this.getCurrentCatalog();
 			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
-			query.setCatalogVersions(catalogVersionModel);
+			//query.setCatalogVersions(catalogVersionModel);
+			query.addQueryParameter("cId", catalogVersionModel.getCatalog().getId());
+			query.addQueryParameter("cvVersion", catalogVersionModel.getCatalog().getVersion());
 			query.addQueryParameter("code", consultantModel.getCode());
 			resultList = flexibleSearchService.<ConsultantModel> search(query).getResult();
 		}
@@ -103,18 +111,27 @@ public class DefaultConsultantService implements ConsultantService
 			}
 		}
 		return Collections.emptyList();
-		/*
-		 * if (consultant != null) { return consultant.getActiveCountries(); } else { return Collections.emptyList(); }
-		 */
+
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.hybris.core.services.ConsultantService#getCountrySelectedForSession(de.hybris.platform.servicelayer.session.
-	 * SessionService)
-	 */
+	private CatalogVersionModel getCurrentCatalog()
+	{
+		final Set<CatalogVersionModel> cls = catalogService.getSessionCatalogVersions();
+		if (cls.size() > 0)
+		{
+			for (final CatalogVersionModel clm : cls)
+			{
+				final String catalogName = clm.getCatalog().getId();
+				if (catalogName.contains("ProductCatalog"))
+				{
+					return clm;
+				}
+			}
+		}
+		return null;
+	}
+
+
 	@Override
 	public String getCountrySelectedForSession(final boolean returnSafeDefault)
 	{
@@ -123,7 +140,6 @@ public class DefaultConsultantService implements ConsultantService
 		{
 			countryInSession = sessionService.getAttribute(ConsultingCoreConstants.SELECTED_CONSULTANT_COUNTRY);
 		}
-
 
 		if (countryInSession != null && (countryInSession.isEmpty() & returnSafeDefault))
 		{
@@ -137,97 +153,31 @@ public class DefaultConsultantService implements ConsultantService
 		}
 	}
 
-
-
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.hybris.core.services.ConsultantService#setCountryCodeSelectedForSession(de.hybris.platform.servicelayer.
-	 * session.SessionService, java.lang.String)
-	 */
 	@Override
 	public void setCountryCodeSelectedForSession(final String countryCode)
 	{
-		if (getSessionService() != null)
+		if (sessionService != null)
 		{
-			getSessionService().setAttribute(ConsultingCoreConstants.SELECTED_CONSULTANT_COUNTRY, countryCode);
+			sessionService.setAttribute(ConsultingCoreConstants.SELECTED_CONSULTANT_COUNTRY, countryCode);
 		}
 	}
 
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.hybris.core.services.ConsultantService#setCountryPkSelectionForSession(de.hybris.platform.servicelayer.session
-	 * .SessionService, java.lang.String)
-	 */
 	@Override
 	public void setCountryPkSelectionForSession(final String countryCode)
 	{
-		if (getSessionService() != null)
+		if (sessionService != null)
 		{
 			final CountryModel exampleCountryModel = new CountryModel();
 			exampleCountryModel.setIsocode(countryCode);
-
 			// Counties aren't catalog aware - so only expecting single entity at most
 			final CountryModel countryModel = flexibleSearchService.getModelByExample(exampleCountryModel);
-
-
 			final PK pk = countryModel.getPk();
-
-			getSessionService().setAttribute(ConsultingCoreConstants.SELECTED_CONSULTANT_COUNTRY_PK, pk.getLongValue());
+			sessionService.setAttribute(ConsultingCoreConstants.SELECTED_CONSULTANT_COUNTRY_PK, pk.getLongValue());
 		}
 	}
 
 
-	/**
-	 * @return the flexibleSearchService
-	 */
-	public FlexibleSearchService getFlexibleSearchService()
-	{
-		return flexibleSearchService;
-	}
 
-
-
-
-	/**
-	 * @param flexibleSearchService
-	 *           the flexibleSearchService to set
-	 */
-	@Required
-	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
-	{
-		this.flexibleSearchService = flexibleSearchService;
-	}
-
-	/**
-	 * @return the sessionService
-	 */
-	public SessionService getSessionService()
-	{
-		return sessionService;
-	}
-
-
-	/**
-	 * @param sessionService
-	 *           the sessionService to set
-	 */
-	@Required
-	public void setSessionService(final SessionService sessionService)
-	{
-		this.sessionService = sessionService;
-	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.hybris.core.services.ConsultantService#getExtraInfo(java.lang.String)
-	 */
 	@Override
 	public List<String> getExtraInfo(final String code)
 	{
@@ -284,9 +234,7 @@ public class DefaultConsultantService implements ConsultantService
 		try
 		{
 			final String queryUserPk = "SELECT {p:" + ConsultantModel.PK + "} " + "FROM {" + ConsultantModel._TYPECODE + " AS p} ";
-			//final CatalogVersionModel catalogVersionModel = cmsSiteService.getCurrentCatalogVersion();
 			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryUserPk);
-			//query.setCatalogVersions(catalogVersionModel);
 			foundContentList = flexibleSearchService.<ConsultantModel> search(query).getResult();
 		}
 		catch (final Exception e)
