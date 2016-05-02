@@ -81,16 +81,11 @@ public class HomePageController extends AbstractPageController
 				{
 					selectCountry = cook.getValue();
 				}
-
 			}
 		}
 		if (selectCountry.equalsIgnoreCase(""))
 		{
-			//getRedirectStrategy().sendRedirect(request, response, "/consultingstorefront/main");
-			//response.sendRedirect("/consultingstorefront/main");
 			return REDIRECT_PREFIX + "/main";
-			//return REDIRECT_PREFIX + "/consultingstorefront/main";
-			//request.getRequestDispatcher("/consultingstorefront/main").forward(request, response);
 		}
 
 		final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();

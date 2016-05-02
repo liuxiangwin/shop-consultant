@@ -14,21 +14,33 @@
 package com.hybris.storefront.countryselector.web.interceptors.beforeview;
 
 
+import static com.hybris.storefront.util.CountryUtil.china_absoluteURL;
+import static com.hybris.storefront.util.CountryUtil.uk_absoluteURL;
+import static com.hybris.storefront.util.CountryUtil.uk_local;
+import static com.hybris.storefront.util.CountryUtil.zh_local;
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.cms2.model.pages.CategoryPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
+import de.hybris.platform.cms2.model.site.CMSSiteModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.site.BaseSiteService;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -62,9 +74,16 @@ public class ChooseCountryController extends AbstractPageController
 	@Resource(name = "cmsPageService")
 	private CMSPageService cmsPageService;
 
+	@Resource(name = "cmsSiteService")
+	private CMSSiteService cmsSiteService;
+
+	@Resource(name = "baseSiteService")
+	private BaseSiteService baseSiteService;
+
 	@Autowired
 	private CountrySelectorStrategy countrySelectorStrategy;
 
+	protected static final Logger LOG = Logger.getLogger(ChooseCountryController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String handleCountry(final HttpServletRequest request, final Model model, final HttpServletResponse response)
@@ -88,8 +107,6 @@ public class ChooseCountryController extends AbstractPageController
 		if (selectCountry.equalsIgnoreCase(""))
 		{
 			final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
-			//final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("siteSelector");
-			//return cmsPageService.getPageForLabelOrId("homepage");
 			model.addAttribute("chooseUrl", "/main/chooseCountry");
 			storeCmsPageInModel(model, contentPageModel);
 			setUpMetaDataForContentPage(model, contentPageModel);
@@ -100,15 +117,45 @@ public class ChooseCountryController extends AbstractPageController
 		{
 			if (selectCountry.equalsIgnoreCase("zh"))
 			{
-				//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
-				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/开发/c/Development";
+				return getViewForPage(china_absoluteURL, model, zh_local);
 			}
 			else
 			{
-				//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
-				return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
+				return getViewForPage(uk_absoluteURL, model, uk_local);
 			}
 		}
+	}
+
+	public CMSSiteModel initializeSiteFromRequest(final String absoluteURL, final String locale)
+	{
+		try
+		{
+			final URL currentURL = new URL(absoluteURL);
+			final CMSSiteModel cmsSiteModel = cmsSiteService.getSiteForURL(currentURL);
+			if (cmsSiteModel != null)
+			{
+				cmsSiteModel.setLocale(locale);
+				baseSiteService.setCurrentBaseSite(cmsSiteModel, true);
+				return cmsSiteModel;
+			}
+		}
+		catch (final MalformedURLException e)
+		{
+			if (LOG.isDebugEnabled())
+			{
+				LOG.debug("Cannot find CMSSite associated with current URL ( " + absoluteURL
+						+ " - check whether this is correct URL) !");
+			}
+		}
+		catch (final CMSItemNotFoundException e)
+		{
+			LOG.warn("Cannot find CMSSite associated with current URL (" + absoluteURL + ")!");
+			if (LOG.isDebugEnabled())
+			{
+				LOG.debug(e);
+			}
+		}
+		return null;
 	}
 
 
@@ -116,7 +163,6 @@ public class ChooseCountryController extends AbstractPageController
 	public String changeCountryFromLink(final HttpServletRequest request, final Model model, final HttpServletResponse response)
 			throws IOException, CMSItemNotFoundException
 	{
-		//The user purpose to open the choose page for another choice
 		final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("chooseCountryPage");
 		model.addAttribute("chooseUrl", "/main/chooseCountry");
 		storeCmsPageInModel(model, contentPageModel);
@@ -132,18 +178,15 @@ public class ChooseCountryController extends AbstractPageController
 	{
 		final String cookiValue = country;
 		cookieGenerator.addCookie(response, cookiValue);
-		CookieUtils.addCookie(response, 360000, "country-selected", country);
-		getSessionService().getCurrentSession().setAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR, country);
+		CookieUtils.addCookie(response, 3600, "country-selected", country);
 
 		if (country.equalsIgnoreCase("zh"))
 		{
-			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/开发/c/Development";
-			//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/zh-consultingsite/zh/Development/c/Development";
+			return getViewForPage(china_absoluteURL, model, zh_local);
 		}
 		else
 		{
-			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
-			//return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/uk-consultingsite/en/Development/c/Development";
+			return getViewForPage(uk_absoluteURL, model, uk_local);
 		}
 	}
 
@@ -152,6 +195,28 @@ public class ChooseCountryController extends AbstractPageController
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
+	public String getViewForPage(final String absoluteURL, final Model model, final String locale)
+	{
+		initializeSiteFromRequest(absoluteURL, locale);
+		//final ContentPageModel contentPageModel = cmsSiteModel.getStartingPage();
+		//final ContentPageModel contentPageModel = null;
+		CategoryPageModel catalogPageModel = null;
+		try
+		{
+			//contentPageModel = cmsPageService.getPageByLabel("category");
+			catalogPageModel = cmsPageService.getPageByCategoryCode("Development");
+		}
+		catch (final CMSItemNotFoundException e)
+		{
+			LOG.debug(e);
+		}
+		storeCmsPageInModel(model, catalogPageModel);
+		//setUpMetaDataForContentPage(model, catalogPageModel);
+		updatePageTitle(model, catalogPageModel);
+		//Pattern like /{category-path}/c/{category-code}
+		//return getViewForPage(model);
+		return REDIRECT_PREFIX + "/Development/c/Development";
+	}
 
 	public String beforeRender(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
@@ -169,5 +234,11 @@ public class ChooseCountryController extends AbstractPageController
 			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
 			return "pages/choosecounty/chooseCountry";
 		}
+	}
+
+	private ContentPageModel getHomePageRender() throws CMSItemNotFoundException
+	{
+		//final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("siteSelector");
+		return cmsPageService.getPageForLabelOrId("homepage");
 	}
 }
