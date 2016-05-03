@@ -55,16 +55,18 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 	@Resource
 	private CatalogService catalogService;
 
+	@Resource
+	private ConsultantPriceStrategy consultantPriceStrategy;
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public Collection<PriceRow> queryPriceRows4Price(final SessionContext ctx,
-			@SuppressWarnings("deprecation") final Product product, final EnumerationValue productGroup, final User user,
-			final EnumerationValue userGroup)
+			@SuppressWarnings("deprecation") final Product product,
+			@SuppressWarnings("deprecation") final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
 	{
 		final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
 
 		Preconditions.checkNotNull(product);
-
 		Preconditions.checkNotNull(productModel);
 		final Set<CatalogVersionModel> cls = catalogService.getSessionCatalogVersions();
 		String catalogId = "";
@@ -79,8 +81,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 				}
 			}
 		}
-
-		//CN Or GB
 		boolean isDomesticPrice = false;
 		boolean isInternationPrice = false;
 
@@ -102,10 +102,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 				isInternationPrice = true;
 			}
 		}
-
-		//deterMineDomesticOrInternation(isDomesticPrice, isInternationPrice, catalogId, productModel);
-		//final Currency currentCurr = ctx.getCurrency();
-		//final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
 
 		final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
 				modelService.<Product> getSource(productModel));
@@ -149,29 +145,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		return null;
 	}
 
-	private void deterMineDomesticOrInternation(boolean isDomesticPrice, boolean isInternationPrice, final String catalogId,
-			final de.hybris.platform.core.model.product.ProductModel productModel)
-	{
-
-		final String productCountry = productModel.getNationality();
-		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
-		{
-			if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
-					&& productCountry.equalsIgnoreCase(SiteUtil.UK_REGION))
-			{
-				isDomesticPrice = true;
-			}
-			else if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
-					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_REGION))
-			{
-				isDomesticPrice = true;
-			}
-			else
-			{
-				isInternationPrice = true;
-			}
-		}
-	}
 
 	@SuppressWarnings(
 	{ "deprecation", "unused" })
