@@ -37,14 +37,14 @@ import com.hybris.core.util.SiteUtil;
 /**
  * This class support customer the EuporeFactory but it powerfully deprecated
  *
- * @author AlanLiu
+ * @author Alan Liu
  *
  */
-//@Deprecated
 public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
-//extends Europe1PriceFactory
 {
 	private final static Logger LOG = Logger.getLogger(ConsultantAwarePriceFactory.class);
+
+	private static final String catalogPattern = "ProductCatalog";
 
 	@Resource
 	private CMSSiteService cmsSiteService;
@@ -55,9 +55,11 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 	@Resource
 	private CatalogService catalogService;
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public Collection<PriceRow> queryPriceRows4Price(final SessionContext ctx, final Product product,
-			final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
+	public Collection<PriceRow> queryPriceRows4Price(final SessionContext ctx,
+			@SuppressWarnings("deprecation") final Product product, final EnumerationValue productGroup, final User user,
+			final EnumerationValue userGroup)
 	{
 		final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
 
@@ -70,9 +72,8 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		{
 			for (final CatalogVersionModel clm : cls)
 			{
-				//final CatalogVersionModel clm = (CatalogVersionModel) cls.toArray()[0];
 				final String catalogName = clm.getCatalog().getId();
-				if (catalogName.contains("ProductCatalog"))
+				if (catalogName.contains(catalogPattern))
 				{
 					catalogId = clm.getCatalog().getId();
 				}
@@ -82,6 +83,7 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		//CN Or GB
 		boolean isDomesticPrice = false;
 		boolean isInternationPrice = false;
+
 		final String productCountry = productModel.getNationality();
 		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
 		{
@@ -100,6 +102,8 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 				isInternationPrice = true;
 			}
 		}
+
+		//deterMineDomesticOrInternation(isDomesticPrice, isInternationPrice, catalogId, productModel);
 		//final Currency currentCurr = ctx.getCurrency();
 		//final Currency base = currentCurr.isBase().booleanValue() ? null : C2LManager.getInstance().getBaseCurrency();
 
@@ -145,6 +149,32 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		return null;
 	}
 
+	private void deterMineDomesticOrInternation(boolean isDomesticPrice, boolean isInternationPrice, final String catalogId,
+			final de.hybris.platform.core.model.product.ProductModel productModel)
+	{
+
+		final String productCountry = productModel.getNationality();
+		if (catalogId != null && !catalogId.equals("") && productCountry != null && !productCountry.equals(""))
+		{
+			if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_UK)
+					&& productCountry.equalsIgnoreCase(SiteUtil.UK_REGION))
+			{
+				isDomesticPrice = true;
+			}
+			else if (catalogId.substring(SiteUtil.START_INDEX, SiteUtil.END_INDEX).equalsIgnoreCase(SiteUtil.SITE_ZH)
+					&& productCountry.equalsIgnoreCase(SiteUtil.ZH_REGION))
+			{
+				isDomesticPrice = true;
+			}
+			else
+			{
+				isInternationPrice = true;
+			}
+		}
+	}
+
+	@SuppressWarnings(
+	{ "deprecation", "unused" })
 	private Collection<PriceRow> orignalQuery(final SessionContext ctx, final Product product,
 			final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
 	{
@@ -154,8 +184,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		final PK userPk = user == null ? null : user.getPK();
 		final PK userGroupPk = userGroup == null ? null : userGroup.getPK();
 		final String productId = extractProductId(ctx, product);
-
-
 		final PDTRowsQueryBuilder builder = getPDTRowsQueryBuilderFor(Europe1Constants.TC.PRICEROW);
 		final QueryWithParams queryAndParams = builder.withAnyProduct().withAnyUser().withProduct(productPk)
 				.withProductId(productId).withProductGroup(productGroupPk).withUser(userPk).withUserGroup(userGroupPk).build();

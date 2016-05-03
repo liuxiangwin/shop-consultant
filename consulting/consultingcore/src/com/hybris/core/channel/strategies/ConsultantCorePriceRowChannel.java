@@ -25,10 +25,8 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("PMD")
 public class ConsultantCorePriceRowChannel implements HybrisEnumValue
 {
-	/** <i>Generated model type code constant.</i> */
 	public final static String _TYPECODE = "PriceRowChannel";
 
-	/** <i>Generated simple class name constant.</i> */
 	public final static String SIMPLE_CLASSNAME = "PriceRowChannel";
 	private static final ConcurrentMap<String, ConsultantCorePriceRowChannel> cache = new ConcurrentHashMap<String, ConsultantCorePriceRowChannel>();
 	/**

@@ -78,7 +78,6 @@ public class ConsultantRetrieveChannelStrategy implements RetrieveChannelStrateg
 		return enumerationService.getEnumerationValues(PriceRowChannel._TYPECODE);
 	}
 
-	//Get the dynamic enum values for the PriceRowChannel code and the exact value for DETECTED_UI_EXPERIENCE_LEVEL
 	private PriceRowChannel getEnumValueForCode(final String channel)
 	{
 		PriceRowChannel channelFromDb = null;

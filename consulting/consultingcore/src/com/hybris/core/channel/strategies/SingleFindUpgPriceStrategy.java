@@ -22,7 +22,7 @@ import com.google.common.base.Preconditions;
 
 
 /**
- * Created by Matt Rossner on 8/31/15.
+ * Created by @author Alan Liu
  */
 public class SingleFindUpgPriceStrategy
 {

@@ -36,6 +36,7 @@ import de.hybris.platform.product.PriceService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.variants.model.VariantProductModel;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -56,7 +57,7 @@ import com.hybris.core.util.SortUtil;
 
 
 /**
- * Default implementation of {@link CommercePriceService}
+ * @author Alan Liu
  */
 public class ConsultantPriceService implements CommercePriceService
 {
@@ -70,6 +71,7 @@ public class ConsultantPriceService implements CommercePriceService
 
 	@Resource
 	private CMSSiteService cmsSiteService;
+
 	@Resource
 	private CatalogService catalogService;
 
