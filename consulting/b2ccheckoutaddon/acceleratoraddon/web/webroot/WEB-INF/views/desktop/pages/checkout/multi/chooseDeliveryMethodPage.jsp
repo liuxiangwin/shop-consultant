@@ -11,7 +11,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
-<c:url value="${nextStepUrl}" var="continueSelectDeliveryMethodUrl"/>
+ <c:url value="${nextStepUrl}" var="continueSelectDeliveryMethodUrl"/> 
+<%-- <c:url value="/checkout/multi/delivery-method/select"  var="continueSelectDeliveryMethodUrl"/> --%>
+
 <c:url value="${previousStepUrl}" var="addDeliveryAddressUrl"/>
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
 
@@ -35,6 +37,16 @@
 						</button>
 					</div>
 				</c:if>
+				
+				 </br>
+                <div id="giftwrapPanel" class="clearfix">
+                    <div class="description"><p><b>Do you want a Promotion Voucher?</b></p></div>
+                    <label>Yes</label><input type="radio" name="gift_wrap" id="gift_wrap_yes" value="yes"/>
+                    <label>No</label><input type="radio" name="gift_wrap" id="dgift_wrap_no" value="no" checked="checked"/>
+                </div>
+				
+				
+				
 			</form:form>
 		</div>
 	</div>
