@@ -1,0 +1,64 @@
+# ImpEx for Importing Prices
+
+"#% impex.setLocale( Locale.ENGLISH )"
+$productCatalog=uk-consultingstoreProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+##$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+$approved=approvalstatus(code)[default='approved']
+$lang=en
+
+
+######################################################
+# Europe1PriceFactory_PTG(code)
+# I'd prefer this wasn't set to product and instead to Product Class group - future to get working
+####################################################
+
+#                                      
+#  Assign the product with Product Price Group
+#
+INSERT_UPDATE UserPriceGroup ; code[unique=true] ; name[lang=$lang] ;  
+                             ; UK-Price-Group    ; UK-Price-Group   ;  
+
+#pg(code[default= Product-Class-Gobal])[unique=true]
+INSERT_UPDATE PriceRow ; ug(code[default= UK-Price-Group]])[unique=true] ; currency(isocode)[unique=true] ; price[unique=true] ; consultantchannel(code)[unique=true,default='no_channel'] ; introducer(code)[unique=true,default='no_contact'] ; minqtd ; unitFactor ; net   ; channel(code)[unique=true] ; unit(code[unique=true,default=HR]) ; $catalogVersion
+                       ;                                                 ; EUR                            ; 700.00             ; "domestic"                                                ;                                                    ; 1      ; 1          ; false ;                            ; domestic                           ;                ;  
+                       ;                                                 ; EUR                            ; 640.00             ; "domestic"                                                ;                                                    ; 100    ; 1          ; false ;                            ; domestic                           ;                ;  
+                       ;                                                 ; EUR                            ; 590.00             ; "domestic"                                                ;                                                    ; 200    ; 1          ; false ;                            ; domestic                           ;                ;  
+                       ;                                                 ; EUR                            ; 460.00             ; "domestic"                                                ;                                                    ; 400    ; 1          ; false ;                            ; domestic                           ;                ;  
+                       ;                                                 ; EUR                            ; 1200.00            ; "international"                                           ;                                                    ; 1      ; 1          ; false ;                            ; international                      ;                ;  
+                       ;                                                 ; EUR                            ; 960.00             ; "international"                                           ;                                                    ; 100    ; 1          ; false ;                            ; international                      ;                ;  
+                       ;                                                 ; EUR                            ; 860.00             ; "international"                                           ;                                                    ; 200    ; 1          ; false ;                            ; international                      ;                ;  
+                       ;                                                 ; EUR                            ; 760.00             ; "international"                                           ;                                                    ; 400    ; 1          ; false ;                            ; international                      ;                ;  
+                                      
+INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                         ; 00000001          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000003          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000010          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000018          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000010          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000024          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000026          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000030          ; Product-Class-Gobal           ;           ;                ;  
+                         ; 00000033          ; Product-Class-Gobal           ;           ;                ;  
+
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+
+                                            ; 00000266          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000267          ; Product-Class-Gobal           ;           ;                ;  
+                                            ; 00000268          ; Product-Class-Gobal           ;           ;                ;  
+                                                                                                 
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+
+                                              ; 00000366          ; Product-Class-Gobal           ;           ;                ;  
+                                              ; 00000367          ; Product-Class-Gobal           ;           ;                ;  
+                                              ; 00000368          ; Product-Class-Gobal           ;           ;                ;  
+
+                                              ; 00000369          ; Product-Class-Gobal           ;           ;                ;  
+                                              ; 00000340          ; Product-Class-Gobal           ;           ;                ;  
+                                              ; 00000341          ; Product-Class-Gobal           ;           ;                ;  
+                                              
+                                              ; 00000342          ; Product-Class-Gobal           ;           ;                ;  
+                                              ; 00000343          ; Product-Class-Gobal           ;           ;                ;  
+                                              
+                                                                                       
