@@ -9,7 +9,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with hybris.
  *
- *  
+ *
  */
 package de.hybris.platform.storefront.controllers;
 
@@ -36,7 +36,7 @@ public interface ControllerConstants
 				String HostedOrderPageErrorPage = ADDON_PREFIX + "pages/checkout/multi/hostedOrderPageErrorPage";
 				String HostedOrderPostPage = ADDON_PREFIX + "pages/checkout/multi/hostedOrderPostPage";
 				String SilentOrderPostPage = ADDON_PREFIX + "pages/checkout/multi/silentOrderPostPage";
-				String GiftWrapPage = ADDON_PREFIX + "pages/checkout/multi/giftWrapPage";
+				String GiftPromotionPage = ADDON_PREFIX + "pages/checkout/multi/giftPromotionPage";
 			}
 		}
 

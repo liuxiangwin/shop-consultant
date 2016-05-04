@@ -34,7 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/checkout/multi/delivery-method")
 public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepController
 {
-	private final static String DELIVERY_METHOD="delivery-method";
+	private final static String DELIVERY_METHOD = "delivery-method";
 
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -54,7 +54,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY,
 				getResourceBreadcrumbBuilder().getBreadcrumbs("checkout.multi.deliveryMethod.breadcrumb"));
 		model.addAttribute("metaRobots", "noindex,nofollow");
-		setCheckoutStepLinksForModel(model,getCheckoutStep());
+		setCheckoutStepLinksForModel(model, getCheckoutStep());
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.ChooseDeliveryMethodPage;
 	}
@@ -62,20 +62,24 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 	/**
 	 * This method gets called when the "Use Selected Delivery Method" button is clicked. It sets the selected delivery
 	 * mode on the checkout facade and reloads the page highlighting the selected delivery Mode.
-	 * 
+	 *
 	 * @param selectedDeliveryMethod
 	 *           - the id of the delivery mode.
 	 * @return - a URL to the page to load.
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod)
+	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod,
+			@RequestParam("gift_wrap") final String selectGiftWrap)
 	{
 		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
 		{
 			getCheckoutFacade().setDeliveryMode(selectedDeliveryMethod);
 		}
-
+		if (StringUtils.isNotEmpty(selectGiftWrap))
+		{
+			getSessionService().setAttribute("GIFT_WRAP", selectGiftWrap.toUpperCase());
+		}
 		return getCheckoutStep().nextStep();
 	}
 
