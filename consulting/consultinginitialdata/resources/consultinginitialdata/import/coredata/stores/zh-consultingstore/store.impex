@@ -23,13 +23,13 @@ $paymentProvider=Mockup
 $promoGrp=consultingpromogroup
 $checkoutFlowGroup=defaultCheckoutGroup
 
-INSERT_UPDATE PromotionGroup;Identifier[unique=true];
-;$promoGrp;
+INSERT_UPDATE PromotionGroup ; Identifier[unique=true] ;  
+                             ; $promoGrp               ;  
 
-# Base Stores
-INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;paymentProvider;checkoutFlowGroup;
-;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;uk-taxes-utg;km;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$orderProcessCode;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$paymentProvider;$checkoutFlowGroup;
+# Base Stores                
+INSERT_UPDATE BaseStore ; uid[unique=true] ; catalogs(id)                           ; currencies(isocode) ; net  ; taxGroup(code) ; storelocatorDistanceUnit(code) ; defaultCurrency(isocode) ; languages(isocode) ; defaultLanguage(isocode) ; deliveryCountries(isocode) ; submitOrderProcessCode ; pickupInStoreMode(code) ; customerAllowedToIgnoreSuggestions  ; paymentProvider  ; checkoutFlowGroup  ;  
+                        ; $storeUid        ; $productCatalog,$classificationCatalog ; $currencies         ; $net ; uk-taxes-utg   ; km                             ; $defaultCurrency         ; $languages         ; $defaultLanguage         ; $deliveryCountries         ; $orderProcessCode      ; $pickupInStoreMode      ; $customerAllowedToIgnoreSuggestions ; $paymentProvider ; $checkoutFlowGroup ;  
 
-INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
-;$storeUid;free-standard-shipping
+INSERT_UPDATE BaseStore2DeliveryModeRel ; source(uid)[unique=true] ; target(code)[unique=true]
+                                        ; $storeUid                ; free-standard-shipping   
 

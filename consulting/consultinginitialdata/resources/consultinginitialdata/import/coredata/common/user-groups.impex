@@ -1,0 +1,36 @@
+######## Customer
+INSERT_UPDATE Customer ; uid[unique=true]         ; customerID[unique=true] ; name         ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
+                       ; alanliuxiang@hotmail.com ; alan-win-win            ; alanliuxiang ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
+
+
+########################################################
+########  Discount part impex ###########
+########################################################                          
+INSERT_UPDATE Discount ; code[unique=true]          ; name[lang=en]              ; itemtype(code)[unique=true,forceWrite=true] ; priority ; value ; absolute[default=false]
+                       ; SAP-Sliver-Member-Discount ; SAP-Sliver-Member-Discount ; Discount                                    ; 1        ; 10    ; false                  ;  
+
+                       
+INSERT_UPDATE UserDiscountGroup ; code[unique=true]                 ; name[lang=en]                     ;  
+                                ; SAP-Sliver-Memeber-Discount-Group ; SAP-Sliver-Memeber-Discount-Group ;  
+
+                                
+INSERT_UPDATE GlobalDiscountRow ; discount(code)             ; ug(code[default= SAP-Sliver-Memeber-Discount-Group])[unique=true] ; user(UID)                ; currency(isocode)[unique=true] ; absolute[default=false] ;  
+                                ; SAP-Sliver-Member-Discount ;                                                                   ; alanliuxiang@hotmail.com ; EUR                            ; false                   ;  
+
+
+
+########################################################
+########  Employee      ###########
+########################################################        
+INSERT_UPDATE Employee ; UID[unique=true] ; writableCatalogVersions(catalog(id),version) ; readableCatalogVersions(catalog(id),version) ; description                                                                         ; name             ; groups(uid)            ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; password
+                       ; china-site-admin ; zh-consultingstoreProductCatalog:Online      ; zh-consultingstoreProductCatalog:Online      ; China Site Admin Can edit order and customer data.Can read China Site product data. ; China Site Admin ; china-site-admin-group ; en                       ; EUR                      ; liuxiang
+
+
+
+########################################################
+########  Country Adminstrator Group ###########
+########################################################    
+INSERT_UPDATE UserGroup ; uid[unique=true]       ; locName[lang=en]       ; groups(uid)[mode=append] ; description                              ;  
+                        ; china-site-admin-group ; china-site-admin-group ; productmanagergroup      ; China site admin group for China country ;  
+
+#                       
