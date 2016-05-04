@@ -2,9 +2,13 @@
 INSERT_UPDATE Customer ; uid[unique=true]         ; customerID[unique=true] ; name         ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
                        ; alanliuxiang@hotmail.com ; alan-win-win            ; alanliuxiang ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
 
+INSERT_UPDATE Customer ; uid[unique=true]    ; customerID[unique=true] ; name        ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
+                       ; liuxiangwin@163.com ; liuxiangwin             ; liuxiangwin ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
+
+
 
 ########################################################
-########  Discount part impex ###########
+########  Discount part impex                ###########
 ########################################################                          
 INSERT_UPDATE Discount ; code[unique=true]          ; name[lang=en]              ; itemtype(code)[unique=true,forceWrite=true] ; priority ; value ; absolute[default=false]
                        ; SAP-Sliver-Member-Discount ; SAP-Sliver-Member-Discount ; Discount                                    ; 1        ; 10    ; false                  ;  
@@ -20,17 +24,36 @@ INSERT_UPDATE GlobalDiscountRow ; discount(code)             ; ug(code[default= 
 
 
 ########################################################
-########  Employee      ###########
+########  Employee of China Site     ###########
 ########################################################        
 INSERT_UPDATE Employee ; UID[unique=true] ; writableCatalogVersions(catalog(id),version) ; readableCatalogVersions(catalog(id),version) ; description                                                                         ; name             ; groups(uid)            ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; password
-                       ; china-site-admin ; zh-consultingstoreProductCatalog:Online      ; zh-consultingstoreProductCatalog:Online      ; China Site Admin Can edit order and customer data.Can read China Site product data. ; China Site Admin ; china-site-admin-group ; en                       ; EUR                      ; liuxiang
+                       ; china-site-admin ; zh-consultingstoreProductCatalog:Online      ; zh-consultingstoreProductCatalog:Online      ; China Site Admin Can edit order and customer data.Can read China Site product data. ; China Site Admin ; china-site-admin-group ; en                       ; EUR                      ; 1234    
 
 
 
 ########################################################
-########  Country Adminstrator Group ###########
+########  China Country Administrator Group ###########
 ########################################################    
 INSERT_UPDATE UserGroup ; uid[unique=true]       ; locName[lang=en]       ; groups(uid)[mode=append] ; description                              ;  
                         ; china-site-admin-group ; china-site-admin-group ; productmanagergroup      ; China site admin group for China country ;  
+                        
 
-#                       
+
+
+
+                        
+########################################################
+########  Employee of United Kingdom Site     ###########
+########################################################         
+INSERT_UPDATE Employee ; UID[unique=true] ; writableCatalogVersions(catalog(id),version) ; readableCatalogVersions(catalog(id),version) ; description                                                                   ; name          ; groups(uid)         ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; password
+                       ; uk-site-admin    ; uk-consultingstoreProductCatalog:Online      ; uk-consultingstoreProductCatalog:Online      ; UK Site Admin Can edit order and customer data.Can read UK Site product data. ; UK Site Admin ; uk-site-admin-group ; en                       ; EUR                      ; 1234    
+
+
+
+################################################################
+########  United Kingdom Country Administrator Group ###########
+################################################################    
+INSERT_UPDATE UserGroup ; uid[unique=true]    ; locName[lang=en]    ; groups(uid)[mode=append] ; description                        ;  
+                        ; uk-site-admin-group ; uk-site-admin-group ; productmanagergroup      ; UK site admin group for UK country ;  
+                        
+                        

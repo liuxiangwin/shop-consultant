@@ -12,6 +12,26 @@ INSERT_UPDATE SearchRestriction ; code[unique=true]                ; active[defa
                                 ; China-site-priceRow-availability ; true                 ; false                   ; china-site-admin-group ; PriceRow             ; "    
                                 
 {pk} IN ({{select {pw.pk} from {PriceRow as pw join ProductPriceGroup as ppg
-		  on {pw.pg}={ppg.pk}}
+		  on {pw.pg}={ppg.pk}}        
 		  where {ppg.code}='Product-Class-China'}})
+"                               
+#####################################################################################################
+########      ########################################################
+######################################################## #############################################
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]          ; active[default=true] ; generate[default=false] ; principal(uid)      ; restrictedType(code) ; query
+                                ; UK-site-price-availability ; true                 ; false                   ; uk-site-admin-group ; ProductPriceGroup    ; "    
+                                
+{pk} IN ({{select {pk} from {ProductPriceGroup as ppg}
+	where {ppg.code} ='Product-Class-UK' }})
+"                               
+
+
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]             ; active[default=true] ; generate[default=false] ; principal(uid)      ; restrictedType(code) ; query
+                                ; UK-site-priceRow-availability ; true                 ; false                   ; uk-site-admin-group ; PriceRow             ; "    
+                                
+{pk} IN ({{select {pw.pk} from {PriceRow as pw join ProductPriceGroup as ppg
+		  on {pw.pg}={ppg.pk}}        
+		  where {ppg.code}='Product-Class-UK'}})
 "                               
