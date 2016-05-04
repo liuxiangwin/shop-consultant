@@ -116,6 +116,11 @@ public class ConsultingSampleDataImportService extends SampleDataImportService
 				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex", extensionName,
 						productCatalogName), false);
 
+		//Load Product Price Group
+		getSetupImpexService().importImpexFile(
+				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices-price-group.impex",
+						extensionName, productCatalogName), false);
+
 		// Load Stock Levels
 		getSetupImpexService().importImpexFile(
 				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-stocklevels.impex", extensionName,
