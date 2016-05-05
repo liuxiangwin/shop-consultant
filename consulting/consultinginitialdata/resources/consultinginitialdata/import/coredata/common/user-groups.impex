@@ -2,8 +2,8 @@
 INSERT_UPDATE Customer ; uid[unique=true]         ; customerID[unique=true] ; name         ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
                        ; alanliuxiang@hotmail.com ; alan-win-win            ; alanliuxiang ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
 
-INSERT_UPDATE Customer ; uid[unique=true]    ; customerID[unique=true] ; name        ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
-                       ; liuxiangwin@163.com ; liuxiangwin             ; liuxiangwin ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
+INSERT_UPDATE Customer ; uid[unique=true] ; customerID[unique=true] ; name     ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
+                       ; candyang@163.com ; candyang                ; candyang ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
 
 
 
@@ -11,15 +11,15 @@ INSERT_UPDATE Customer ; uid[unique=true]    ; customerID[unique=true] ; name   
 ########  Discount part impex                ###########
 ########################################################                          
 INSERT_UPDATE Discount ; code[unique=true]          ; name[lang=en]              ; itemtype(code)[unique=true,forceWrite=true] ; priority ; value ; absolute[default=false]
-                       ; SAP-Sliver-Member-Discount ; SAP-Sliver-Member-Discount ; Discount                                    ; 1        ; 10    ; false                  ;  
+                       ; SAP-Golder-Member-Discount ; SAP-Golder-Member-Discount ; Discount                                    ; 1        ; 10    ; false                  ;  
 
                        
 INSERT_UPDATE UserDiscountGroup ; code[unique=true]                 ; name[lang=en]                     ;  
-                                ; SAP-Sliver-Memeber-Discount-Group ; SAP-Sliver-Memeber-Discount-Group ;  
+                                ; SAP-Golder-Memeber-Discount-Group ; SAP-Golder-Memeber-Discount-Group ;  
 
                                 
-INSERT_UPDATE GlobalDiscountRow ; discount(code)             ; ug(code[default= SAP-Sliver-Memeber-Discount-Group])[unique=true] ; user(UID)                ; currency(isocode)[unique=true] ; absolute[default=false] ;  
-                                ; SAP-Sliver-Member-Discount ;                                                                   ; alanliuxiang@hotmail.com ; EUR                            ; false                   ;  
+INSERT_UPDATE GlobalDiscountRow ; discount(code)             ; ug(code[default= SAP-Golder-Memeber-Discount-Group])[unique=true] ; user(UID)                ; currency(isocode)[unique=true] ; absolute[default=false] ;  
+                                ; SAP-Golder-Member-Discount ;                                                                   ; alanliuxiang@hotmail.com ; EUR                            ; false                   ;  
 
 
 
@@ -57,3 +57,4 @@ INSERT_UPDATE UserGroup ; uid[unique=true]    ; locName[lang=en]    ; groups(uid
                         ; uk-site-admin-group ; uk-site-admin-group ; productmanagergroup      ; UK site admin group for UK country ;  
                         
                         
+
