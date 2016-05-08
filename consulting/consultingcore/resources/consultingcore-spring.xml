@@ -551,6 +551,11 @@
 	<alias name="consultantProductBasicPopulator" alias="productBasicPopulator"/>
 	<bean id="consultantProductBasicPopulator" parent="baseProductPopulator"
 			class="com.hybris.core.search.solrfacetsearch.populators.ConsultantProductPopulator"/>
+			
+	<bean id="consultantPriceStrategy"
+		class="com.hybris.core.channel.strategies.ConsultantPriceStrategy">
+	</bean>
 	
 
+	
 </beans>
