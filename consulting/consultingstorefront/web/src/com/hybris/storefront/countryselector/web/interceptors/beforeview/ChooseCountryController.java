@@ -15,7 +15,9 @@ package com.hybris.storefront.countryselector.web.interceptors.beforeview;
 
 
 import static com.hybris.storefront.util.CountryUtil.china_absoluteURL;
+import static com.hybris.storefront.util.CountryUtil.china_categoryURL;
 import static com.hybris.storefront.util.CountryUtil.uk_absoluteURL;
+import static com.hybris.storefront.util.CountryUtil.uk_categoryURL;
 import static com.hybris.storefront.util.CountryUtil.uk_local;
 import static com.hybris.storefront.util.CountryUtil.zh_local;
 
@@ -34,6 +36,7 @@ import de.hybris.platform.site.BaseSiteService;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -115,14 +118,7 @@ public class ChooseCountryController extends AbstractPageController
 		}
 		else
 		{
-			if (selectCountry.equalsIgnoreCase("zh"))
-			{
-				return getViewForPage(china_absoluteURL, model, zh_local);
-			}
-			else
-			{
-				return getViewForPage(uk_absoluteURL, model, uk_local);
-			}
+			return REDIRECT_PREFIX + "/main/handleRedirect?selectCountry=" + URLEncoder.encode(selectCountry, "UTF-8");
 		}
 	}
 
@@ -136,6 +132,7 @@ public class ChooseCountryController extends AbstractPageController
 			{
 				cmsSiteModel.setLocale(locale);
 				baseSiteService.setCurrentBaseSite(cmsSiteModel, true);
+				cmsSiteModel.setPreviewURL(absoluteURL);
 				return cmsSiteModel;
 			}
 		}
@@ -158,6 +155,22 @@ public class ChooseCountryController extends AbstractPageController
 		return null;
 	}
 
+	@RequestMapping(value = "/handleRedirect", method = RequestMethod.GET)
+	public void handleRedirect(@RequestParam(value = "selectCountry", required = true) final String selectCountry,
+			final HttpServletRequest request, final Model model, final HttpServletResponse response) throws IOException,
+			CMSItemNotFoundException
+	{
+		if (selectCountry.equalsIgnoreCase("zh"))
+		{
+			//return getViewForPage(china_absoluteURL, model, zh_local);
+			getViewForPage(china_absoluteURL, model, zh_local, china_categoryURL, request, response);
+		}
+		else
+		{
+			//return getViewForPage(uk_absoluteURL, model, uk_local);
+			getViewForPage(uk_absoluteURL, model, uk_local, uk_categoryURL, request, response);
+		}
+	}
 
 	@RequestMapping(value = "/changeCountry", method = RequestMethod.GET)
 	public String changeCountryFromLink(final HttpServletRequest request, final Model model, final HttpServletResponse response)
@@ -173,7 +186,7 @@ public class ChooseCountryController extends AbstractPageController
 
 
 	@RequestMapping(value = "/chooseCountry", method = RequestMethod.POST)
-	public String chooseCountry(@RequestParam(value = "country", required = true) final String country, final Model model,
+	public void chooseCountry(@RequestParam(value = "country", required = true) final String country, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
 		final String cookiValue = country;
@@ -182,11 +195,13 @@ public class ChooseCountryController extends AbstractPageController
 
 		if (country.equalsIgnoreCase("zh"))
 		{
-			return getViewForPage(china_absoluteURL, model, zh_local);
+			//return getViewForPage(china_absoluteURL, model, zh_local);
+			getViewForPage(china_absoluteURL, model, zh_local, china_categoryURL, request, response);
 		}
 		else
 		{
-			return getViewForPage(uk_absoluteURL, model, uk_local);
+			//return getViewForPage(uk_absoluteURL, model, uk_local);
+			getViewForPage(uk_absoluteURL, model, uk_local, uk_categoryURL, request, response);
 		}
 	}
 
@@ -195,7 +210,8 @@ public class ChooseCountryController extends AbstractPageController
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
-	public String getViewForPage(final String absoluteURL, final Model model, final String locale)
+	public void getViewForPage(final String absoluteURL, final Model model, final String locale, final String categoryURL,
+			final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
 	{
 		initializeSiteFromRequest(absoluteURL, locale);
 		//final ContentPageModel contentPageModel = cmsSiteModel.getStartingPage();
@@ -215,7 +231,22 @@ public class ChooseCountryController extends AbstractPageController
 		updatePageTitle(model, catalogPageModel);
 		//Pattern like /{category-path}/c/{category-code}
 		//return getViewForPage(model);
-		return REDIRECT_PREFIX + "/Development/c/Development";
+
+		//return REDIRECT_PREFIX + "/Development/c/Development";
+
+		try
+		{
+			//final String redirectURL = "/Development/c/Development";
+			//final String contextPath = httpRequest.getContextPath();
+			//final String encodedRedirectUrl = httpResponse.encodeRedirectURL(contextPath + redirectURL);
+			httpResponse.sendRedirect(categoryURL);
+			//httpResponse.sendRedirect(redirectURL);
+		}
+		catch (final IOException e)
+		{
+			LOG.debug(e);
+		}
+
 	}
 
 	public String beforeRender(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
