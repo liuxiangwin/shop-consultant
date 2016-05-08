@@ -31,7 +31,7 @@ $indexBaseSite=$prefixsite
 ##### Highly Payattion to the Lanngue would create index according this language                           
 #########################################################################################                  
 
-$indexLanguages=ja,en                                                                                      
+$indexLanguages=ja,en,zh                                                                                      
 $indexCurrencies=JPY,EUR,GBP                                                                               
 
 
