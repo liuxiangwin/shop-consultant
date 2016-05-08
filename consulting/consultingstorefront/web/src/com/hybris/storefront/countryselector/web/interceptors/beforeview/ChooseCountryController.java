@@ -122,7 +122,7 @@ public class ChooseCountryController extends AbstractPageController
 		}
 	}
 
-	public CMSSiteModel initializeSiteFromRequest(final String absoluteURL, final String locale)
+	public CMSSiteModel initializeSiteFromRequest(final String absoluteURL, final String categoryURL, final String locale)
 	{
 		try
 		{
@@ -131,8 +131,8 @@ public class ChooseCountryController extends AbstractPageController
 			if (cmsSiteModel != null)
 			{
 				cmsSiteModel.setLocale(locale);
+				cmsSiteModel.setRedirectURL(categoryURL);
 				baseSiteService.setCurrentBaseSite(cmsSiteModel, true);
-				cmsSiteModel.setPreviewURL(absoluteURL);
 				return cmsSiteModel;
 			}
 		}
@@ -213,7 +213,7 @@ public class ChooseCountryController extends AbstractPageController
 	public void getViewForPage(final String absoluteURL, final Model model, final String locale, final String categoryURL,
 			final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
 	{
-		initializeSiteFromRequest(absoluteURL, locale);
+		initializeSiteFromRequest(absoluteURL, categoryURL, locale);
 		//final ContentPageModel contentPageModel = cmsSiteModel.getStartingPage();
 		//final ContentPageModel contentPageModel = null;
 		CategoryPageModel catalogPageModel = null;
@@ -273,3 +273,4 @@ public class ChooseCountryController extends AbstractPageController
 		return cmsPageService.getPageForLabelOrId("homepage");
 	}
 }
+//http://stackoverflow.com/questions/16189365/browser-not-showing-correct-url-even-after-using-response-sendredirect-method
