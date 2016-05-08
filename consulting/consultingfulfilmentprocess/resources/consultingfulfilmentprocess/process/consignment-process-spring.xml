@@ -22,7 +22,8 @@
     <context:annotation-config/>
 
 	<!-- Consignment Process Actions -->
-
+	
+	<!-- !!!!  Interface Process2Warehouse Adapter !!!! -->
 	<bean id="sendConsignmentToWarehouseAction" class="com.hybris.fulfilmentprocess.actions.consignment.SendConsignmentToWarehouseAction"  parent="abstractAction">
 		<property name="process2WarehouseAdapter" ref="process2WarehouseAdapter"/>
 	</bean>
@@ -52,7 +53,8 @@
 	<bean id="subprocessEndAction" class="com.hybris.fulfilmentprocess.actions.consignment.SubprocessEndAction"  parent="abstractAction">
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
-
+	
+	<!-- Interface Process2Warehouse Adapter(2)Shipment -->
 	<bean id="allowShipmentAction" class="com.hybris.fulfilmentprocess.actions.consignment.AllowShipmentAction"  parent="abstractAction">
 		<property name="process2WarehouseAdapter" ref="process2WarehouseAdapter"/>
 	</bean>
