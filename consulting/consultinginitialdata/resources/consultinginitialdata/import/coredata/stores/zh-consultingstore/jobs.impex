@@ -4,9 +4,9 @@ $csClusterId=0
 # Ongoing sync job - the initial one is handled in code
 
 #SELECT * FROM jobs item_t0 WHERE (item_t0.TypePkString=? )
-INSERT_UPDATE CatalogVersionSyncJob;   code[unique=true];                              sourceVersion(catalog(id),version)[unique=true]; 	targetVersion(catalog(id),version)[unique=true]; createNewItems[allownull=true];   removeMissingItems[allownull=true];syncOrder[allownull=true];	sendEmail;	emailAddress;            priority;    nodeId;       	requestAbort;   requestAbortStep;	copycachesize;	enabletransactions;	maxschedulerthreads;	maxthreads
-								   ;   Sync Golbal:Staged -> ZH Product:Staged; consultingstoreProductCatalog:Staged           ;	    zh-consultingstoreProductCatalog:Staged;         TRUE;                             TRUE;                                                       ;	TRUE;  		alan.liu02@sap.com;  10;		  $csClusterId;	 	TRUE;			TRUE;				7000;			FALSE;				4;						4
-
+INSERT_UPDATE CatalogVersionSyncJob ; code[unique=true]                ; sourceVersion(catalog(id),version)[unique=true] ; targetVersion(catalog(id),version)[unique=true] ; createNewItems[allownull=true] ; removeMissingItems[allownull=true] ; syncOrder[allownull=true] ; sendEmail ; emailAddress       ; priority ; nodeId       ; requestAbort ; requestAbortStep ; copycachesize ; enabletransactions ; maxschedulerthreads ; maxthreads
+                                    ; Golbal-Staged->ZH-Product-Staged ; consultingstoreProductCatalog:Staged            ; zh-consultingstoreProductCatalog:Staged         ; TRUE                           ; TRUE                               ;                           ; TRUE      ; alan.liu02@sap.com ; 10       ; $csClusterId ; TRUE         ; TRUE             ; 7000          ; FALSE              ; 4                   ; 4         
+#Golbal-Staged-ZH-Product-Staged    
 
 # To aid understanding in case of product gallery images not sync'ing
 #INSERT_UPDATE SyncAttributeDescriptorConfig;syncJob(code)[unique=true];attributeDescriptor(enclosingType(code),qualifier)[unique=true][default='Product:galleryImages'];copyByValue[default=true]
@@ -14,13 +14,13 @@ INSERT_UPDATE CatalogVersionSyncJob;   code[unique=true];                       
 
 
 # Exclude Category restrictions and linkComponents from all of the above sync jobs
-INSERT_UPDATE SyncAttributeDescriptorConfig;attributeDescriptor(enclosingType(code),qualifier)[unique=true];syncJob(code)[unique=true];copyByValue[allownull=true];includedInSync[allownull=true];translateValue[allownull=true];untranslatable[allownull=true]
-;Category:restrictions;Sync Golbal\:Staged -> ZH Product\:Staged;;FALSE;FALSE;FALSE
-;Category:linkComponents;Sync Golbal\:Staged -> ZH Product\:Staged;;FALSE;FALSE;FALSE
+INSERT_UPDATE SyncAttributeDescriptorConfig ; attributeDescriptor(enclosingType(code),qualifier)[unique=true] ; syncJob(code)[unique=true]                ; copyByValue[allownull=true] ; includedInSync[allownull=true] ; translateValue[allownull=true] ; untranslatable[allownull=true]
+                                            ; Category:restrictions                                           ; Sync Golbal\:Staged -> ZH Product\:Staged ;                             ; FALSE                          ; FALSE                          ; FALSE                         
+                                            ; Category:linkComponents                                         ; Sync Golbal\:Staged -> ZH Product\:Staged ;                             ; FALSE                          ; FALSE                          ; FALSE                         
 
 
-INSERT_UPDATE SyncJob2LangRel;source(code)[unique=true];target(isocode)[unique=true]
-;Sync Golbal\:Staged -> ZH Product\:Staged;en
+INSERT_UPDATE SyncJob2LangRel ; source(code)[unique=true]        ; target(isocode)[unique=true]
+                              ; Golbal-Staged->ZH-Product-Staged ; en                          
 
-INSERT_UPDATE SyncJob2LangRel;source(code)[unique=true];target(isocode)[unique=true]
-;Sync Golbal\:Staged -> ZH Product\:Staged;zh
+INSERT_UPDATE SyncJob2LangRel ; source(code)[unique=true]        ; target(isocode)[unique=true]
+                              ; Golbal-Staged->ZH-Product-Staged ; zh                          

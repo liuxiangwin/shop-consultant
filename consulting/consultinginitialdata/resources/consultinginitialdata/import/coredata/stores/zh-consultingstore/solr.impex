@@ -151,62 +151,62 @@ INSERT_UPDATE SolrValueRangeSet ; name[unique=true] ; qualifier ; type   ; solrV
 # 										Define price ranges 
 ##################################################################################################################### 
 
-INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique=true] ; name[unique=true] ; from ; to    
-                             ; rangeRefGBP1     ; $priceRangeGBP                       ; £0-£19.99         ; 0    ; 19.99 
-                             ; rangeRefGBP2     ; $priceRangeGBP                       ; £20-£49.99        ; 20   ; 49.99 
-                             ; rangeRefGBP3     ; $priceRangeGBP                       ; £50-£99.99        ; 50   ; 99.99 
-                             ; rangeRefGBP4     ; $priceRangeGBP                       ; £100-£199.99      ; 100  ; 199.99
-                             ; rangeRefGBP5     ; $priceRangeGBP                       ; £200-£299.99      ; 200  ; 299.99
-                             ; rangeRefGBP6     ; $priceRangeGBP                       ; £300-£399.99      ; 300  ; 399.99
-                             ; rangeRefGBP7     ; $priceRangeGBP                       ; £400-£499.99      ; 400  ; 499.99
-                             ; rangeRefGBP8     ; $priceRangeGBP                       ; £500-£599.99      ; 500  ; 599.99
-                             ; rangeRefGBP9     ; $priceRangeGBP                       ; £600-£699.99      ; 600  ; 699.99
-                             ; rangeRefGBP10    ; $priceRangeGBP                       ; £700-£799.99      ; 700  ; 799.99
-                             ; rangeRefGBP11    ; $priceRangeGBP                       ; £800-£899.99      ; 800  ; 899.99
+INSERT_UPDATE SolrValueRange ; &rangeValueRefID ; solrValueRangeSet(name)[unique=true] ; name[unique=true] ; from  ; to     
+                             ; rangeRefGBP1     ; $priceRangeGBP                       ; £0-£19.99         ; 0     ; 19.99  
+                             ; rangeRefGBP2     ; $priceRangeGBP                       ; £20-£49.99        ; 20    ; 49.99  
+                             ; rangeRefGBP3     ; $priceRangeGBP                       ; £50-£99.99        ; 50    ; 99.99  
+                             ; rangeRefGBP4     ; $priceRangeGBP                       ; £100-£199.99      ; 100   ; 199.99 
+                             ; rangeRefGBP5     ; $priceRangeGBP                       ; £200-£299.99      ; 200   ; 299.99 
+                             ; rangeRefGBP6     ; $priceRangeGBP                       ; £300-£399.99      ; 300   ; 399.99 
+                             ; rangeRefGBP7     ; $priceRangeGBP                       ; £400-£499.99      ; 400   ; 499.99 
+                             ; rangeRefGBP8     ; $priceRangeGBP                       ; £500-£599.99      ; 500   ; 599.99 
+                             ; rangeRefGBP9     ; $priceRangeGBP                       ; £600-£699.99      ; 600   ; 699.99 
+                             ; rangeRefGBP10    ; $priceRangeGBP                       ; £700-£799.99      ; 700   ; 799.99 
+                             ; rangeRefGBP11    ; $priceRangeGBP                       ; £800-£899.99      ; 800   ; 899.99 
                              ; rangeRefGBP12    ; $priceRangeGBP                       ; £900-£999.99      ; 1000  ; 1999.99
-                             ; rangeRefGBP13    ; $priceRangeGBP                       ; £1,000-£100,000   ; 9000 ; 900000
+                             ; rangeRefGBP13    ; $priceRangeGBP                       ; £1,000-£100,000   ; 9000  ; 900000 
 										                   
-                             ; rangeRefEUR1     ; $priceRangeEUR                       ; €0-€19.99         ; 0    ; 19.99 
-                             ; rangeRefEUR2     ; $priceRangeEUR                       ; €20-€49.99        ; 20   ; 49.99 
-                             ; rangeRefEUR3     ; $priceRangeEUR                       ; €50-€99.99        ; 50   ; 99.99 
-                             ; rangeRefEUR4     ; $priceRangeEUR                       ; €100-€199.99      ; 100  ; 199.99
-                             ; rangeRefEUR5     ; $priceRangeEUR                       ; €200-€299.99      ; 200  ; 299.99
-                             ; rangeRefEUR6     ; $priceRangeEUR                       ; €300-€399.99      ; 300  ; 399.99
-                             ; rangeRefEUR7     ; $priceRangeEUR                       ; €400-€499.99      ; 400  ; 499.99
-                             ; rangeRefEUR8     ; $priceRangeEUR                       ; €500-€599.99      ; 500  ; 599.99
-                             ; rangeRefEUR9     ; $priceRangeEUR                       ; €600-€699.99      ; 600  ; 699.99
-                             ; rangeRefEUR10    ; $priceRangeEUR                       ; €700-€799.99      ; 700  ; 799.99
-                             ; rangeRefEUR11    ; $priceRangeEUR                       ; €800-€899.99      ; 800  ; 899.99
-                             ; rangeRefEUR12    ; $priceRangeEUR                       ; €900-€999.99      ; 900  ; 1999.99
-                             ; rangeRefEUR13    ; $priceRangeEUR                       ; €1,000-€160,000   ; 90000 ; 960000
+                             ; rangeRefEUR1     ; $priceRangeEUR                       ; €0-€19.99         ; 0     ; 19.99  
+                             ; rangeRefEUR2     ; $priceRangeEUR                       ; €20-€49.99        ; 20    ; 49.99  
+                             ; rangeRefEUR3     ; $priceRangeEUR                       ; €50-€99.99        ; 50    ; 99.99  
+                             ; rangeRefEUR4     ; $priceRangeEUR                       ; €100-€199.99      ; 100   ; 199.99 
+                             ; rangeRefEUR5     ; $priceRangeEUR                       ; €200-€299.99      ; 200   ; 299.99 
+                             ; rangeRefEUR6     ; $priceRangeEUR                       ; €300-€399.99      ; 300   ; 399.99 
+                             ; rangeRefEUR7     ; $priceRangeEUR                       ; €400-€499.99      ; 400   ; 499.99 
+                             ; rangeRefEUR8     ; $priceRangeEUR                       ; €500-€599.99      ; 500   ; 599.99 
+                             ; rangeRefEUR9     ; $priceRangeEUR                       ; €600-€699.99      ; 600   ; 699.99 
+                             ; rangeRefEUR10    ; $priceRangeEUR                       ; €700-€799.99      ; 700   ; 799.99 
+                             ; rangeRefEUR11    ; $priceRangeEUR                       ; €800-€899.99      ; 800   ; 899.99 
+                             ; rangeRefEUR12    ; $priceRangeEUR                       ; €900-€999.99      ; 900   ; 1999.99
+                             ; rangeRefEUR13    ; $priceRangeEUR                       ; €1,000-€160,000   ; 90000 ; 960000 
 										                   
-                             ; rangeRefUSD1     ; $priceRangeUSD                       ; $0-$19.99         ; 0    ; 19.99 
-                             ; rangeRefUSD2     ; $priceRangeUSD                       ; $20-$49.99        ; 20   ; 49.99 
-                             ; rangeRefUSD3     ; $priceRangeUSD                       ; $50-$99.99        ; 50   ; 99.99 
-                             ; rangeRefUSD4     ; $priceRangeUSD                       ; $100-$199.99      ; 100  ; 199.99
-                             ; rangeRefUSD5     ; $priceRangeUSD                       ; $200-$299.99      ; 200  ; 299.99
-                             ; rangeRefUSD6     ; $priceRangeUSD                       ; $300-$399.99      ; 300  ; 399.99
-                             ; rangeRefUSD7     ; $priceRangeUSD                       ; $400-$499.99      ; 400  ; 499.99
-                             ; rangeRefUSD8     ; $priceRangeUSD                       ; $500-$599.99      ; 500  ; 599.99
-                             ; rangeRefUSD9     ; $priceRangeUSD                       ; $600-$699.99      ; 600  ; 699.99
-                             ; rangeRefUSD10    ; $priceRangeUSD                       ; $700-$799.99      ; 700  ; 799.99
-                             ; rangeRefUSD11    ; $priceRangeUSD                       ; $800-$899.99      ; 800  ; 899.99
-                             ; rangeRefUSD12    ; $priceRangeUSD                       ; $900-$999.99      ; 900  ; 999.99
-                             ; rangeRefUSD13    ; $priceRangeUSD                       ; $1,000-$100,000   ; 9000 ; 900000
+                             ; rangeRefUSD1     ; $priceRangeUSD                       ; $0-$19.99         ; 0     ; 19.99  
+                             ; rangeRefUSD2     ; $priceRangeUSD                       ; $20-$49.99        ; 20    ; 49.99  
+                             ; rangeRefUSD3     ; $priceRangeUSD                       ; $50-$99.99        ; 50    ; 99.99  
+                             ; rangeRefUSD4     ; $priceRangeUSD                       ; $100-$199.99      ; 100   ; 199.99 
+                             ; rangeRefUSD5     ; $priceRangeUSD                       ; $200-$299.99      ; 200   ; 299.99 
+                             ; rangeRefUSD6     ; $priceRangeUSD                       ; $300-$399.99      ; 300   ; 399.99 
+                             ; rangeRefUSD7     ; $priceRangeUSD                       ; $400-$499.99      ; 400   ; 499.99 
+                             ; rangeRefUSD8     ; $priceRangeUSD                       ; $500-$599.99      ; 500   ; 599.99 
+                             ; rangeRefUSD9     ; $priceRangeUSD                       ; $600-$699.99      ; 600   ; 699.99 
+                             ; rangeRefUSD10    ; $priceRangeUSD                       ; $700-$799.99      ; 700   ; 799.99 
+                             ; rangeRefUSD11    ; $priceRangeUSD                       ; $800-$899.99      ; 800   ; 899.99 
+                             ; rangeRefUSD12    ; $priceRangeUSD                       ; $900-$999.99      ; 900   ; 999.99 
+                             ; rangeRefUSD13    ; $priceRangeUSD                       ; $1,000-$100,000   ; 9000  ; 900000 
 										                   
-                             ; rangeRefJPY1     ; $priceRangeJPY                       ; ¥0-¥19.99         ; 0    ; 19.99 
-                             ; rangeRefJPY2     ; $priceRangeJPY                       ; ¥20-¥49.99        ; 20   ; 49.99 
-                             ; rangeRefJPY3     ; $priceRangeJPY                       ; ¥50-¥99.99        ; 50   ; 99.99 
-                             ; rangeRefJPY4     ; $priceRangeJPY                       ; ¥100-¥199.99      ; 100  ; 199.99
-                             ; rangeRefJPY5     ; $priceRangeJPY                       ; ¥200-¥299.99      ; 200  ; 299.99
-                             ; rangeRefJPY6     ; $priceRangeJPY                       ; ¥300-¥399.99      ; 300  ; 399.99
-                             ; rangeRefJPY7     ; $priceRangeJPY                       ; ¥400-¥499.99      ; 400  ; 499.99
-                             ; rangeRefJPY8     ; $priceRangeJPY                       ; ¥500-¥599.99      ; 500  ; 599.99
-                             ; rangeRefJPY9     ; $priceRangeJPY                       ; ¥600-¥699.99      ; 600  ; 699.99
-                             ; rangeRefJPY10    ; $priceRangeJPY                       ; ¥700-¥799.99      ; 700  ; 799.99
-                             ; rangeRefJPY11    ; $priceRangeJPY                       ; ¥800-¥899.99      ; 800  ; 899.99
+                             ; rangeRefJPY1     ; $priceRangeJPY                       ; ¥0-¥19.99         ; 0     ; 19.99  
+                             ; rangeRefJPY2     ; $priceRangeJPY                       ; ¥20-¥49.99        ; 20    ; 49.99  
+                             ; rangeRefJPY3     ; $priceRangeJPY                       ; ¥50-¥99.99        ; 50    ; 99.99  
+                             ; rangeRefJPY4     ; $priceRangeJPY                       ; ¥100-¥199.99      ; 100   ; 199.99 
+                             ; rangeRefJPY5     ; $priceRangeJPY                       ; ¥200-¥299.99      ; 200   ; 299.99 
+                             ; rangeRefJPY6     ; $priceRangeJPY                       ; ¥300-¥399.99      ; 300   ; 399.99 
+                             ; rangeRefJPY7     ; $priceRangeJPY                       ; ¥400-¥499.99      ; 400   ; 499.99 
+                             ; rangeRefJPY8     ; $priceRangeJPY                       ; ¥500-¥599.99      ; 500   ; 599.99 
+                             ; rangeRefJPY9     ; $priceRangeJPY                       ; ¥600-¥699.99      ; 600   ; 699.99 
+                             ; rangeRefJPY10    ; $priceRangeJPY                       ; ¥700-¥799.99      ; 700   ; 799.99 
+                             ; rangeRefJPY11    ; $priceRangeJPY                       ; ¥800-¥899.99      ; 800   ; 899.99 
                              ; rangeRefJPY12    ; $priceRangeJPY                       ; ¥900-¥999.99      ; 1900  ; 1999.99
-                             ; rangeRefJPY13    ; $priceRangeJPY                       ; ¥1,000-¥100,000   ; 9000 ; 900000
+                             ; rangeRefJPY13    ; $priceRangeJPY                       ; ¥1,000-¥100,000   ; 9000  ; 900000 
 
 ##################################################################################################################### 
 # 										Non-facet properties
@@ -236,7 +236,7 @@ INSERT_UPDATE SolrIndexedProperty ; solrIndexedType(identifier)[unique=true] ; n
                                   ; $solrIndexedType                         ; primaryPromotionCode   ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; promotionCodeValueProvider              ;                       
                                   ; $solrIndexedType                         ; primaryPromotionBanner ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; promotionImageValueProvider             ;                       
                                   ; $solrIndexedType                         ; stockLevelStatus       ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; productStockLevelStatusValueProvider    ;                       
-                                  ; $solrIndexedType                         ; approvalStatus      	  ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; approvalStausValueProvider 								        ;
+                                  ; $solrIndexedType                         ; approvalStatus         ; string     ;                    ;                         ;                          ;                           ;                                    ;                                   ; approvalStausValueProvider              ;                       
 
 #                                  ; $solrIndexedTypeOnline                   ; Favorite_Team          ; string     ;                    ;                         ; true                     ;                           ;                                    ;                                   ; tutoProductContentValueProvider         ;                       
 #                                  ; $solrIndexedTypeStaged                   ; Favorite_Team          ; string     ;                    ;                         ; true                     ;                           ;                                    ;                                   ; tutoProductContentValueProvider         ;                       
@@ -308,8 +308,8 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		
-		WHERE {cty.isocode} = 'CN' 
+		                             
+		WHERE {cty.isocode} = 'CN'   
     }}                         
 )tbl ORDER BY tbl.code"        ;                                          
 
@@ -322,17 +322,17 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'CN' 
-		AND 
-		{p.variantType} IS NULL
-		
-		OR
-		{p:code} IN (
+		WHERE {cty.isocode} = 'CN'   
+		AND                          
+		{p.variantType} IS NULL      
+		                             
+		OR                           
+		{p:code} IN (                
 			{{                          
 				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
-			}}) 
-			
-		
+			}})                         
+			                            
+		                             
 		AND ({p:modifiedtime} >= ?lastIndexTime OR {c2c:modifiedtime} >= ?lastIndexTime)
 	}}	                           
 	UNION		                       
@@ -341,17 +341,17 @@ SELECT DISTINCT tbl.pk, tbl.code FROM
 		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'CN'
-		
-		OR
-		{p:code} IN (
+		WHERE {cty.isocode} = 'CN'   
+		                             
+		OR                           
+		{p:code} IN (                
 			{{                          
 				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
-			}}) 
-		
+			}})                         
+		                             
 		AND ({p:modifiedtime} >= ?lastIndexTime OR {v2c:modifiedtime} >= ?lastIndexTime) 
-		
-		      
+		                             
+		                             
     }}                         
 )tbl ORDER BY tbl.code"        ;                                          
                                ; $solrIndexedType                         ; $solrIndexedType-deleteQuery ; delete     ;                                 ;                                 ;                                   ; "SELECT {PK} FROM {Consultant}" ;          ;  ;  ;  ;  ;  ;  ;  ;  ;  
