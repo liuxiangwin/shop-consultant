@@ -37,47 +37,84 @@ INSERT_UPDATE SearchRestriction ; code[unique=true]             ; active[default
 "                               
 
 
-
-
-
-
 ##############################################################################################################################
+	####  China-Site-Product-JobSearchRestriction
+##############################################################################################################################
+
+
 INSERT_UPDATE JobSearchRestriction ; code[unique=true]              ; job(code)                        ; type(code) ; query
-                                   ; China-Site-Product-Restriction ; Golbal-Staged->ZH-Product-Staged ; Consultant    ; "    
-{Consultant} IN ({{SELECT DISTINCT  {p.pk}  
+                                   ; China-Site-Product-Restriction ; Golbal-Staged->ZH-Product-Staged ; Product ; "    
+{pk} IN ({{
+SELECT tbl.pk  FROM 	
+(		                            
+	{{                            
+		                             
+		SELECT DISTINCT {p.pk} 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'CN' AND {p.variantType}IS NULL }})
-"                                  
-
-
-INSERT_UPDATE JobSearchRestriction ; code[unique=true]                     ; job(code)                        ; type(code)     ; query
-                                   ; China-Site-VairantProduct-Restriction ; Golbal-Staged->ZH-Product-Staged ; ConsultantLevelVariantProduct ; "    
-                                   
-{ConsultantLevelVariantProduct} IN ({{	SELECT DISTINCT {p:pk} 	
-		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p.baseProduct}={bp1.PK} 
+		WHERE {cty.isocode} = 'CN'
+	}}	                           
+	UNION		                       
+	{{                            
+		SELECT DISTINCT {p.pk} 	
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p.baseProduct}={bp1.pk} 
  		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p.pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'CN' }})   
+		WHERE {cty.isocode} = 'CN'  
+		AND   {p:varianttype} IS NOT NULL 
+    }}
+    
+    UNION		                       
+	{{                            
+		SELECT DISTINCT {p.pk} 	
+		FROM {ConsultantServiceVariantProduct AS p JOIN ConsultantLevelVariantProduct AS clp ON {p.baseProduct}={clp.pk} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {clp.pk}       
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'CN'  
+		
+    }}
+                             
+)tbl 
+		}})
 "                                  
+
+##############################################################################################################################
+	####  UK-Site-Product-JobSearchRestriction
+##############################################################################################################################
 
 
 INSERT_UPDATE JobSearchRestriction ; code[unique=true]           ; job(code)                        ; type(code) ; query
                                    ; UK-Site-Product-Restriction ; Golbal-Staged->UK-Product-Staged ; Product    ; "    
-{pk} IN ({{SELECT DISTINCT  {p:PK} AS pk 
+{pk} IN ({{
+SELECT tbl.pk  FROM 	
+(		                            
+	{{                            
+		                             
+		SELECT DISTINCT {p.pk} 
 		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
 		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'GB' AND {p.variantType}IS NULL }})
-"                                  
-
-
-INSERT_UPDATE JobSearchRestriction ; code[unique=true]                  ; job(code)                        ; type(code)     ; query
-                                   ; UK-Site-VairantProduct-Restriction ; Golbal-Staged->UK-Product-Staged ; VariantProduct ; "    
-                                   
-{pk} IN ({{	SELECT DISTINCT {p:PK} AS pk	
-		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
- 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
+		WHERE {cty.isocode} = 'GB'
+	}}	                           
+	UNION		                       
+	{{                            
+		SELECT DISTINCT {p.pk} 	
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p.baseProduct}={bp1.pk} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p.pk}       
 		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
-		WHERE {cty.isocode} = 'GB' }})   
-"                                  
-                                   
+		WHERE {cty.isocode} = 'GB'  
+		AND   {p:varianttype} IS NOT NULL 
+    }}
+    
+    UNION		                       
+	{{                            
+		SELECT DISTINCT {p.pk} 	
+		FROM {ConsultantServiceVariantProduct AS p JOIN ConsultantLevelVariantProduct AS clp ON {p.baseProduct}={clp.pk} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {clp.pk}       
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB'  
+		
+    }}
+                             
+)tbl 
+		}})
+"      
