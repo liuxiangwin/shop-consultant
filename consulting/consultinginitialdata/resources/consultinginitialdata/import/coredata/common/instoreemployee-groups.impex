@@ -1,0 +1,49 @@
+#INSERT_UPDATE UserGroup ; uid[unique=true]      ; locname[lang=de] ; locname[lang=en]        ; groups(uid)  
+#                        ; china-site-admin-group ; In-Store-Gruppe  ; In-Store Employee Group ; employeegroup
+
+
+# this user rights definition relates to ws tests
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;china-site-admin-group;;;;;;;;
+;;;;ComposedType;+;+;+;+
+;;;;Catalog;+;+;+;+
+;;;;ContentCatalog;+;+;+;+
+;;;;CatalogVersion;+;+;+;+
+;;;;Category;+;+;+;+
+;;;;Product;+;+;+;+
+;;;;Unit;+;+;+;+
+;;;;Media;+;+;+;+
+;;;;MediaContainer;+;+;+;+
+;;;;MediaContainer;+;+;+;+
+;;;;MediaFormat;+;+;+;+
+
+;;;;UserPriceGroup;+;+;+;+
+;;;;ProductPriceGroup;+;+;+;+
+;;;;PriceRow;+;+;+;+
+$END_USERRIGHTS;;;;;
+
+
+
+# this user rights definition relates to ws tests
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;uk-site-admin-group;;;;;;;;
+;;;;ComposedType;+;+;+;+
+;;;;Catalog;+;+;+;+
+;;;;ContentCatalog;+;+;+;+
+;;;;CatalogVersion;+;+;+;+
+;;;;Category;+;+;+;+
+;;;;Product;+;+;+;+
+;;;;Unit;+;+;+;+
+;;;;Media;+;+;+;+
+;;;;MediaContainer;+;+;+;+
+;;;;MediaContainer;+;+;+;+
+;;;;MediaFormat;+;+;+;+
+
+
+;;;;UserPriceGroup;+;+;+;+
+;;;;ProductPriceGroup;+;+;+;+
+;;;;PDTRow;+;+;+;+
+;;;;PriceRow;+;+;+;+
+$END_USERRIGHTS;;;;;

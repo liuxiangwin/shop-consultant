@@ -5,6 +5,8 @@ INSERT_UPDATE Customer ; uid[unique=true]         ; customerID[unique=true] ; na
 INSERT_UPDATE Customer ; uid[unique=true] ; customerID[unique=true] ; name     ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
                        ; candyang@163.com ; candyang                ; candyang ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
 
+INSERT_UPDATE Customer ; uid[unique=true]    ; customerID[unique=true] ; name        ; description                ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; groups(uid)   ; password
+                       ; liuxiangwin@163.com ; liuxiangwin             ; liuxiangwin ; a good customer from China ; zh                       ; EUR                      ; customergroup ; liuxiang
 
 
 ########################################################
@@ -57,4 +59,12 @@ INSERT_UPDATE UserGroup ; uid[unique=true]    ; locName[lang=en]    ; groups(uid
                         ; uk-site-admin-group ; uk-site-admin-group ; productmanagergroup      ; UK site admin group for UK country ;  
                         
                         
+
+
+################################################################
+########  Synchronization Job User ###########
+################################################################    
+INSERT_UPDATE Employee ; UID[unique=true] ; description                        ; name     ; password
+                       ; syn-user         ; Specific user for Synchronization. ; Syn User ; 1234    
+
 
