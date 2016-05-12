@@ -51,6 +51,11 @@ public class ConsultingSampleDataImportService extends SampleDataImportService
 						false);
 			}
 		}
+
+		//Load Demo User Data
+		getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/userData/user-demo-data.impex", extensionName),
+				true);
+
 	}
 
 	@Override
