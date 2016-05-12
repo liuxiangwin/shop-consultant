@@ -12,7 +12,6 @@ $clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hyb
 
 # Insert Product Classifications
 
-
 $programmingdisciplines=@programmingdisciplines[$clAttrModifiers];  
 $datadisciplines=@datadisciplines[$clAttrModifiers];  
 $businessuserdisciplines=@businessuserdisciplines[$clAttrModifiers];  
@@ -20,49 +19,17 @@ $devopsdisciplines=@devopsdisciplines[$clAttrModifiers];
 $testingdisciplines=@testingdisciplines[$clAttrModifiers];  
 $projectdisciplines=@projectdisciplines[$clAttrModifiers];  
 
-# replace <string> and <int> with actual values
-#$feature2=@<string>, <int>[$clAttrModifiers];  
-#INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
-#;1;$feature1;$feature2....;
+INSERT_UPDATE Consultant ; code[unique=true] ; $programmingdisciplines ; $datadisciplines    ; $businessuserdisciplines ; $devopsdisciplines ; $testingdisciplines ; $projectdisciplines ; $catalogVersion
+                         ; 00000001          ; Impex,Groovy,UX Design  ; Solr                ; Backoffice               ; Performance        ; Functional Testing  ; Agile               ;                
+                         ; 00000003          ; Java,Scala,UX Design    ; Solr,MySQL,Oracle   ; CMS                      ; Performance        ; Functional Testing  ; Agile,Scrum         ;                
+                         ; 00000010          ; Spring,Groovy,Scripting ; Solr                ; Backoffice               ; Performance        ; Functional Testing  ; Agile,Scrum         ;                
+                         ; 00000018          ; Java,Groovy,UX Design   ; Solr                ; CMS                      ; Performance        ; Smoke Testing       ; Agile,Scrum         ;                
+                         ; 00000024          ; Scala,UX Design         ; HDFS                ; Backoffice               ; System             ; Smoke Testing       ; Agile,XP            ;                
+                         ; 00000026          ; Groovy,UX Design        ; BigTable            ; Microsoft Office         ; System             ; Smoke Testing       ; Agile,XP            ;                
+                         ; 00000030          ; JavaScript,Hadoop       ; NoSQL Database      ; Microsoft Office         ; System             ; Unit Testing        ; Agile,XP            ;                
+                         ; 00000033          ; Java,Groovy,UX Design   ; Solr,NoSQL Database ; Backoffice               ; Review             ; Unit Testing        ; Scrum,Kanban        ;                
 
-#INSERT_UPDATE Consultant;code[unique=true];$programmingdisciplines;$datadisciplines;$businessuserdisciplines;$devopsdisciplines;$testingdisciplines;$projectdisciplines;$catalogVersion;
-#;00000001;Java,Spring;;
-INSERT_UPDATE Consultant ; code[unique=true] ; $programmingdisciplines     ; $datadisciplines ; $businessuserdisciplines ; $devopsdisciplines ; $testingdisciplines    ; $projectdisciplines ; $catalogVersion
-                         ; 00000001          ; Impex,Groovy,UX Design      ; Solr             ; Backoffice               ; Performance        ; Functional Testing     ; Agile               ;                
-
-                         ; 00000002          ; Spring,Groovy,Scripting     ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000003          ; Java,Scala,UX Design        ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000004          ; Java,Groovy,UX Design       ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000005          ; Java,Scala,UX Design        ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000006          ; Spring,Scala,Javascript     ;                  ;                          ;                    ;                        ;                     ;                
- 
-
-                         ; 00000010          ;                             ; Solr             ;                          ;                    ;                        ;                     ;                
-                         ; 00000011          ;                             ; Solr             ;                          ;                    ;                        ;                     ;                
-                         ; 00000012          ;                             ; Solr             ;                          ;                    ;                        ;                     ;                
-                         ; 00000013          ;                             ; Solr             ;                          ;                    ;                        ;                     ;                
-
-
-                         ; 00000018          ;                             ;                  ; CMS                      ;                    ;                        ;                     ;                
-                         ; 00000019          ;                             ;                  ; Training                 ;                    ;                        ;                     ;                
-                         ; 00000020          ;                             ;                  ; Training                 ;                    ;                        ;                     ;                
-                         ; 00000021          ;                             ;                  ; Backoffice               ;                    ;                        ;                     ;                
- 
-
-                         ; 00000024          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000025          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-
-                         ; 00000026          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000027          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000028          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000029          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-
-                         ; 00000030          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000031          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-                         ; 00000032          ;                             ;                  ;                          ;                    ;                        ;                     ;                
-
-                         ; 00000033          ; Java,Groovy,UX Design       ; Solr             ; Backoffice               ;                    ;                        ; Scrum               ;                
-                         ; 00000034          ;                             ; Solr             ;                          ; Performance        ;                        ; Kanban              ;                
-                         ; 00000035          ; Spring,Scala,UX Design      ;                  ;                          ;                    ; Automated Unit Testing ; Agile               ;                
-                         ; 00000036          ;                             ;                  ; Training                 ; Performance        ;                        ; Scrum               ;                
-
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $programmingdisciplines ; $datadisciplines  ; $businessuserdisciplines ; $devopsdisciplines ; $testingdisciplines ; $projectdisciplines ; $catalogVersion
+                                            ; 00000266          ; Impex,Groovy,UX Design  ; Solr,MySQL        ; Backoffice               ; Performance        ; Functional Testing  ; Agile               ;                
+                                            ; 00000267          ; Java,Scala,UX Design    ; Solr,MySQL,Oracle ; CMS                      ; Performance        ; Functional Testing  ; Agile,Scrum         ;                
+                                            ; 00000268          ; Groovy,UX Design        ; BigTable          ; Microsoft Office         ; System             ; Smoke Testing       ; Agile,XP            ;                

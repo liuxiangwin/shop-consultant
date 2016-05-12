@@ -1,7 +1,7 @@
 # Project classifications
 
 $classificiationSystem=ConsultingStoreClassification
-$classificiationSystemName=Y Consulting Classification System
+$classificiationSystemName=Consulting Classification System
 $systemVersion=1.0
 $productCatalog=consultingstoreProductCatalog
 $catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
@@ -45,40 +45,51 @@ INSERT_UPDATE ClassificationAttribute ; code[unique=true]       ; $classSystemVe
 
 # CAV - (aka) feature values          
 INSERT_UPDATE ClassificationAttributeValue ; code[unique=true]             ; $classSystemVersion ;  
-                                           ; Java                          ;                     
-                                           ; Spring                        ;                     
-                                           ; Impex                         ;                     
-                                           ; Scala                         ;                     
-                                           ; Groovy                        ;                     
-                                           ; Architect                     ;                     
-                                           ; UX Design                     ;                     
-                                           ; Scripting                     ;                     
-                                           ; Javascript                    ;                     
-                                           ; Solr                          ;                     ;  ;  
-                                           ; CMS                           ;                     ;  ;  
-                                           ; Training                      ;                     ;  ;  
-                                           ; Backoffice                    ;                     ;  ;  
-                                           ; Performance                   ;                     ;  ;  
-                                           ; Automated integration Testing ;                     ;  ;  
-                                           ; Automated Unit Testing        ;                     ;  ;  
-                                           ; Smoke Testing                 ;                     ;  ;  
-                                           ; Functional Testing            ;                     ;  ;  
-                                           ; System Integrated Testing     ;                     ;  ;  
-                                           ; Jira Mgmt                     ;                     ;  ;  
-                                           ; Scrum                         ;                     ;  ;  
-                                           ; Agile                         ;                     ;  ;  
-                                           ; Kanban                        ;                     ;  ;  
-
-
-
+                                           ; Java                          ;                     ;  
+                                           ; Spring                        ;                     ;  
+                                           ; Impex                         ;                     ;  
+                                           ; Scala                         ;                     ;  
+                                           ; Groovy                        ;                     ;  
+                                           ; Architect                     ;                     ;  
+                                           ; UX Design                     ;                     ;  
+                                           ; Scripting                     ;                     ;  
+                                           ; Javascript                    ;                     ;  
+                                           ; Solr                          ;                     ;  
+                                           ; CMS                           ;                     ;  
+                                           ; Training                      ;                     ;  
+                                           ; Backoffice                    ;                     ;  
+                                           ; Performance                   ;                     ;  
+                                           ; Automated integration Testing ;                     ;  
+                                           ; Automated Unit Testing        ;                     ;  
+                                           ; Smoke Testing                 ;                     ;  
+                                           ; Functional Testing            ;                     ;  
+                                           ; System Integrated Testing     ;                     ;  
+                                           ; Jira Mgmt                     ;                     ;  
+                                           
+                                           ; Scrum                         ;                     ;  
+                                           ; Agile                         ;                     ;  
+                                           ; Kanban                        ;                     ;  
+                                           ; XP                            ;                     ;
+                                           ; Hadoop                        ;                     ;                          
+                                           ; MySQL                         ;                     ;  
+                                           ; Oracle                        ;                     ;  
+                                           ; HDFS                          ;                     ;  
+                                           ; BigTable                      ;                     ;  
+                                           ; NoSQL Database                ;                     ;  
+                                           ; Microsoft Office              ;                     ;  
+                                           ; System                        ;                     ;  
+                                           ; Review                        ;                     ;  
+                                           ; Smoke Testing                 ;                     ;  
+                                           ; Unit Testing                  ;                     ;  
+  
 # Assign attributes to experience classification
 INSERT_UPDATE ClassAttributeAssignment ; $class                          ; $attribute              ; position ; $unit ; attributeType(code[default=string]) ; multiValued[default=false] ; range[default=false] ; localized[default=false] ; attributeValues(code,$classSystemVersion)                                                                       
-                                       ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript                                         ;  
-                                       ; dataclassification              ; datadisciplines         ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Solr                                                                                                            ;  
-                                       ; businessuserclassification      ; businessuserdisciplines ; 0        ;       ; enum                                ; true                       ;                      ;                          ; CMS,Training,Backoffice                                                                                         ;  
-                                       ; operationalclassification       ; devopsdisciplines       ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Performance                                                                                                     ;  
-                                       ; testingclassification           ; testingdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Automated integration Testing,Automated Unit Testing,Smoke Testing,Functional Testing,System Integrated Testing ;  
-                                       ; projectmanagementclassification ; projectdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Jira Mgmt,Scrum,Agile,Kanban                                                                                    ;  
+                                       ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript,Hadoop                                         ;  
+                                       ; dataclassification              ; datadisciplines         ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Solr,MySQL,Oracle                                                                                                            ;  
+                                       ; businessuserclassification      ; businessuserdisciplines ; 0        ;       ; enum                                ; true                       ;                      ;                          ; CMS,Training,Backoffice,Microsoft Office                                                                                         ;  
+                                       ; operationalclassification       ; devopsdisciplines       ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Performance,System,Review                                                                                                     ;  
+                                       ; testingclassification           ; testingdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Automated integration Testing,Automated Unit Testing,Smoke Testing,Functional Testing,System Integrated Testing,Unit Testing ;  
+                                       ; projectmanagementclassification ; projectdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Jira Mgmt,Scrum,Agile,Kanban,XP                                                                                    ;  
 
 
 UPDATE Category ; $catVer[unique=true] ; code[unique=true]     ; supercategories(code,$sysVer)[mode=append] ;  

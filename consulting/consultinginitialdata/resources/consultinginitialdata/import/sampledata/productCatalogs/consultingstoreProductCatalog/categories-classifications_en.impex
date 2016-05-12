@@ -1,6 +1,6 @@
 # ImpEx for Importing Category Classifications
 $classificiationSystem=ConsultingStoreClassification
-$classificiationSystemName=Y Consulting Classification System
+$classificiationSystemName=Consulting Classification System
 $systemVersion=1.0
 $lang=en
 $superClass=superCategories(code,$sysVer)
@@ -51,3 +51,20 @@ UPDATE ClassificationAttributeValue ; code[unique=true]             ; name[lang=
                                     ; Scrum                         ; Scrum                         ;                     
                                     ; Agile                         ; Agile                         ;                     
                                     ; Kanban                        ; Kanban                        ;                     
+
+                                    ; Scrum                         ; Scrum                         ;                     
+                                    ; Agile                         ; Agile                         ;                     
+                                    ; XP                            ; XP                            ;                     
+                                    ; Hadoop                        ; Hadoop                        ;                     
+                                    ; MySQL                         ; MySQL                         ;                     
+                                    ; Oracle                        ; Oracle                        ;                     
+                                    ; HDFS                          ; HDFS                          ;                     
+                                    ; BigTable                      ; BigTable                      ;                     
+                                    ; NoSQL Database                ; NoSQL Database                ;                     
+                                    ; Microsoft Office              ; Microsoft Office              ;                     
+                                    ; System                        ; System                        ;                     
+                                    ; Review                        ; Review                        ;                     
+                                    ; Smoke Testing                 ; Smoke Testing                 ;                     
+                                    ; Unit Testing                  ; Unit Testing                  ;                     
+                                    
+                                    
