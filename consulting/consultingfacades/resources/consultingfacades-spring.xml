@@ -257,4 +257,19 @@
 	
 	
 	
+		
+ 	<!-- Context information loader - bean that load context information -->
+	<!-- <alias name="consultantContextInformationLoader" alias="contextInformationLoader" />
+	<bean id="consultantContextInformationLoader"
+		class="com.hybris.core.contextloader.storfront.ConsultantContextInformationLoader">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="modelService" ref="modelService" />
+		<property name="timeService" ref="timeService" />
+		<property name="userService" ref="userService" />
+		<property name="strategies" ref="contextLoadStrategiesList" />
+		<property name="previewRequestStrategies" ref="previewRequestStrategiesList" />
+	</bean>	 -->	
+		
 </beans>
