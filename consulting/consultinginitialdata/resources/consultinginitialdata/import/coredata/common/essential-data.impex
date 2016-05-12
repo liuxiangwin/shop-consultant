@@ -168,7 +168,6 @@ INSERT_UPDATE Trigger ; cronjob(code)[unique=true]    ; cronExpression
                       ; MediaConversionCronjobConsult ; 0 0 0 * * ?   ;  
 
 
-
 ################################## Merge-Delivery--files CronJob######################################
 ################   INSERT_UPDATE CronJob;   code[unique=true]   ;   job(code);                          singleExecutable; sessionLanguage(isocode)
 ################   					    ;   mergeDeliveryHCTJob ;   mergeDeliveryHCTCronJob(Spring-ID); false;            de

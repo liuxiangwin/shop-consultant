@@ -64,7 +64,7 @@ INSERT_UPDATE UserGroup ; uid[unique=true]    ; locName[lang=en]    ; groups(uid
 ################################################################
 ########  Synchronization Job User ###########
 ################################################################    
-INSERT_UPDATE Employee ; UID[unique=true] ; description                        ; name     ; password
-                       ; syn-user         ; Specific user for Synchronization. ; Syn User ; 1234    
+INSERT_UPDATE Employee ; UID[unique=true] ; description                        ; name     ; password;groups(uid)
+                       ; syn-user         ; Specific user for Synchronization. ; Syn User ; 1234    ;           ;
 
 
