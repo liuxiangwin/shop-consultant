@@ -1,0 +1,32 @@
+###########################################################################################
+#
+#	Create 2 customers with billing and shipping address in Montreal.
+#	Both customers have registered their debit card and credit card information.
+#
+###########################################################################################
+$lang=en
+
+INSERT_UPDATE Address ; streetname[unique=true] ; streetnumber[unique=true] ; postalcode[unique=true] ; duplicate[unique=true] ; town     ; country(isocode) ; billingAddress ; contactAddress ; shippingAddress ; unloadingAddress ; firstname ; lastname ; email               ; title(code) ; gender(code) ; owner(Customer.uid)[unique=true]
+                      ; Machestic               ; London                    ; 1006868                 ; false                  ; Montreal ; GB               ; true           ; false          ; true            ; false            ; Zhang     ; Terry    ; zhang.terry@sap.com ; mr          ; MALE         ; alanliuxiang@hotmail.com        ;  
+                      ; Beijing                 ; XueYuanRoad               ; 100086                  ; false                  ; Haidian  ; CN               ; true           ; false          ; true            ; false            ; Alan      ; Liu      ; alan.liu@sap.com    ; mr          ; MALE         ; alanliuxiang@hotmail.com        ;  
+
+INSERT_UPDATE Customer ; uid[unique=true]         ; defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate) ; defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate)
+                       ; alanliuxiang@hotmail.com ; alanliuxiang@hotmail.com:Machestic:London:1006868:false                                    ; alanliuxiang@hotmail.com:Machestic:London:1006868:false                                     ;  
+                       ; alanliuxiang@hotmail.com ; alanliuxiang@hotmail.com:Beijing:XueYuanRoad:100086:false                                  ; alanliuxiang@hotmail.com:Beijing:XueYuanRoad:100086:false                                   ;  
+
+#                       ; liuxiangwin@163.com      ; liuxiangwin@163.com:Beijing:XueYuanRoad:100086:false                                       ; liuxiangwin@163.com:Beijing:XueYuanRoad:100086:false                                        ;  
+#                       ; liuxiangwin@163.com      ; liuxiangwin@163.com:Machestic:London:1006868:false                                         ; liuxiangwin@163.com:Machestic:London:1006868:false                                          ;  
+
+#                       ; candyang@163.com         ; candyang@163.com:Beijing:XueYuanRoad:100086:false                                          ; liuxiangwin@163.com:Beijing:XueYuanRoad:100086:false                                        ;  
+#                       ; candyang@163.com         ; candyang@163.com:Machestic:London:1006868:false                                            ; liuxiangwin@163.com:Machestic:London:1006868:false                                          ;  
+
+
+
+INSERT_UPDATE CreditCardType ; code[unique=true] ; name[lang=$lang]
+                             ; amex              ; American Express
+                             ; visa              ; Visa            
+                             ; master            ; MasterCard      
+
+INSERT_UPDATE CreditCardPaymentInfo ; code[unique=true] ; user(uid)[unique=true]   ; ccOwner  ; number           ; type(code) ; validFromMonth ; validFromYear ; validToMonth ; validToYear
+                                    ; amex              ; alanliuxiang@hotmail.com ; Alan Liu ; 6225780703671522 ; amex       ; 1              ; 2016          ; 12           ; 2026       
+
