@@ -63,6 +63,7 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException
 	{
+
 		return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
 	}
 

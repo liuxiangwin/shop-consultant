@@ -137,7 +137,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	 * <li>Current Catalog Versions</li>
 	 * <li>Enabled language fallback</li>
 	 * </ul>
-	 * 
+	 *
 	 * @see ContextInformationLoader#initializeSiteFromRequest(String)
 	 * @see ContextInformationLoader#setCatalogVersions()
 	 * @param httpRequest
@@ -149,13 +149,19 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	protected boolean processNormalRequest(final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
 			throws IOException
 	{
-		final String queryString = httpRequest.getQueryString();
+		String queryString = httpRequest.getQueryString();
 		final String currentRequestURL = httpRequest.getRequestURL().toString();
 
 		//set current site
 		CMSSiteModel cmsSiteModel = getCurrentCmsSite();
 		if (cmsSiteModel == null || StringUtils.contains(queryString, CLEAR_CMSSITE_PARAM))
 		{
+
+			if (queryString.contains("/zh") && queryString.contains("/c/Development"))
+			{
+				queryString = queryString.split("/zh")[0];
+			}
+
 			final String absoluteURL = StringUtils.removeEnd(currentRequestURL, "/")
 					+ (StringUtils.isBlank(queryString) ? "" : "?" + queryString);
 
@@ -204,7 +210,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	 * <li>Load all fake information (like: User, User group, Language, Time ...)
 	 * <li>Generating target URL according to Preview Data
 	 * </ul>
-	 * 
+	 *
 	 * @param httpRequest
 	 *           current request
 	 * @return target URL
@@ -217,7 +223,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 		previewDataModel.setLanguage(filterPreviewLanguageForSite(httpRequest, previewDataModel.getLanguage()));
 		previewDataModel.setUiExperience(previewDataModel.getUiExperience());
 
-		//load necessary information 
+		//load necessary information
 		getContextInformationLoader().initializePreviewRequest(previewDataModel);
 		//load fake context information
 		getContextInformationLoader().loadFakeContextInformation(httpRequest, previewDataModel);
@@ -240,7 +246,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	/**
 	 * Filters the preview language to a language supported by the site. If the requested preview language is not
 	 * supported, returns the default site language instead.
-	 * 
+	 *
 	 * @param httpRequest
 	 *           current request
 	 * @param previewLanguage
@@ -265,7 +271,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	/**
 	 * Enables or disables language fall back
 	 * <p/>
-	 * 
+	 *
 	 * @param httpRequest
 	 *           current request
 	 * @param enabled
@@ -284,7 +290,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	/**
 	 * Generates target URL accordingly to valid Preview Data passed as a parameter
 	 * <p/>
-	 * 
+	 *
 	 * @param httpRequest
 	 *           current request
 	 * @param previewDataModel
@@ -317,7 +323,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	/**
 	 * Retrieves current mapping handler in order to generate proper target URL for CMS Page
 	 * <p/>
-	 * 
+	 *
 	 * @return current mapping handler
 	 */
 	protected UrlResolver<PreviewDataModel> getPreviewDataModelUrlResolver()
