@@ -27,13 +27,7 @@ INSERT_UPDATE PriceRow ; pg(code[default= Product-Class-China])[unique=true] ; c
 INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
                          ; 00000001          ; Product-Class-China           ;           ;                ;  
                          ; 00000003          ; Product-Class-China           ;           ;                ;  
-                         ; 00000010          ; Product-Class-China           ;           ;                ;  
                          ; 00000018          ; Product-Class-China           ;           ;                ;  
-                         ; 00000010          ; Product-Class-China           ;           ;                ;  
-                         ; 00000024          ; Product-Class-China           ;           ;                ;  
-                         ; 00000026          ; Product-Class-China           ;           ;                ;  
-                         ; 00000030          ; Product-Class-China           ;           ;                ;  
-                         ; 00000033          ; Product-Class-China           ;           ;                ;  
 
 INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
 

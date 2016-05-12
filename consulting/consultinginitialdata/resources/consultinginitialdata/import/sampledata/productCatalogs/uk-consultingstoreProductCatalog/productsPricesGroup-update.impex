@@ -34,11 +34,9 @@ INSERT_UPDATE PriceRow ; pg(code[default= Product-Class-UK])[unique=true] ; curr
                                       
 
 INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
-                         ; 00000001          ; Product-Class-UK              ;           ;                ;  
                          ; 00000003          ; Product-Class-UK              ;           ;                ;  
                          ; 00000010          ; Product-Class-UK              ;           ;                ;  
                          ; 00000018          ; Product-Class-UK              ;           ;                ;  
-                         ; 00000010          ; Product-Class-UK              ;           ;                ;  
                          ; 00000024          ; Product-Class-UK              ;           ;                ;  
                          ; 00000026          ; Product-Class-UK              ;           ;                ;  
                          ; 00000030          ; Product-Class-UK              ;           ;                ;  

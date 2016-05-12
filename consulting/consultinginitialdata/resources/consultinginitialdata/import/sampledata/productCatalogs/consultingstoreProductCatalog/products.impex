@@ -26,29 +26,6 @@ INSERT_UPDATE Consultant ; code[unique=true] ; $supercategories                 
                          ; 00000033          ; Development                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
                          ; 00000066          ; Development                                                                   ;             ; hybris           ;                 ;                        ;     ; ConsultantLevelVariantProduct ;                 ;           ;            ;               ;  
 
-
-# Uber expert (me) ;-)   
-#                         ; 00000001          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 10Years       ;  
-
-# Development consultants only
-#                         ; 00000003          ; Development                                                                   ; CN          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Big Data   ; 5Years        ;  
-# Data consultants only  
-#                         ; 00000010          ; Data                                                                          ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
-# Business-User-Centric consultants only
-#                         ; 00000018          ; Business-User-Centric                                                         ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
-# Operational consultants only
-#                         ; 00000024          ; Operational                                                                   ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Web Search ;               ;  
-# Testing consultants only
-#                         ; 00000026          ; Testing                                                                       ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
-# Project-Management consultants only
-#                         ; 00000030          ; Project-Management                                                            ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
-# Mixed skilled consultants
-#                         ; 00000033          ; Business-User-Centric,Development,Data,Project-Management                     ; UK          ; hybris           ;                 ;                        ;     ;                               ;                 ;           ; Cloud      ;               ;  
-
-## Define Grade level base variant product
-#                         ; 00000066          ; Development                                                                   ;             ; hybris           ;                 ;                        ;     ; ConsultantLevelVariantProduct ;                 ;           ;            ;               ;  
-
-
 # Link countries to Consultants and where they can work
 # ImpEx for Importing Products
 # GB, FR, SE, ES, JP, DE 
