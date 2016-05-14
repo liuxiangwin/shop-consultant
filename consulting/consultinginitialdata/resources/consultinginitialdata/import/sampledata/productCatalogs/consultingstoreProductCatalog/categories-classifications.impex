@@ -35,7 +35,7 @@ INSERT_UPDATE ClassificationClass ; code[unique=true]               ; allowedPri
                                   ; projectmanagementclassification ;                                               ;             ;               
 
 
-# Classification attribute (aka) feature descriptor (aka) feature list(s)
+# Classification Attribute feature Descriptor feature list(s)
 INSERT_UPDATE ClassificationAttribute ; code[unique=true]       ; $classSystemVersion
                                       ; programmingdisciplines  ;                    
                                       ; datadisciplines         ;                    
@@ -85,6 +85,7 @@ INSERT_UPDATE ClassificationAttributeValue ; code[unique=true]             ; $cl
                                            ; Smoke Testing                 ;                     ;  
                                            ; Unit Testing                  ;                     ;  
                                            
+# Build Relationship with Class & Desciption & Feautre Value 
 # Assign attributes to experience classification
 INSERT_UPDATE ClassAttributeAssignment ; $class                          ; $attribute              ; position ; $unit ; attributeType(code[default=string]) ; multiValued[default=false] ; range[default=false] ; localized[default=false] ; attributeValues(code,$classSystemVersion)                                                                                    
                                        ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript,Hadoop                                               ;  
