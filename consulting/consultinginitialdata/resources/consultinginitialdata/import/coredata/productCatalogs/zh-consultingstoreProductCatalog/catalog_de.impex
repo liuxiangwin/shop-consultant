@@ -7,5 +7,5 @@ $productCatalog=zh-consultingstoreProductCatalog
 $lang=de
 
 # Create Catalog
-UPDATE Catalog;id[unique=true];name[lang=$lang]
-;$productCatalog;Beratung Shop Produktkatalog;
+UPDATE Catalog ; id[unique=true] ; name[lang=$lang]             
+               ; $productCatalog ; Beratung Shop Produktkatalog ;  

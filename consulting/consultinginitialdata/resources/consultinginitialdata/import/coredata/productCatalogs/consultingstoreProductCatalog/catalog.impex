@@ -17,11 +17,12 @@
 
 $productCatalog=consultingstoreProductCatalog
 
-$classificationCatalog=ConsultingStoreClassification
-
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 $languages=de,en,fr,ja,es,se
+
+$classificationCatalog=ConsultingStoreClassification
+
 
 ########################################################################################################################
 ###   Product(catalogVersion 4592878)-----catalogVersion(pk_4592878,catalog_7756563)------catalog(pk_776563,Default)
@@ -29,11 +30,15 @@ $languages=de,en,fr,ja,es,se
 
 ########################################################################################################################
 # Product catalog
-INSERT_UPDATE       Catalog ; id[unique=true]
-                            ; $productCatalog
+INSERT_UPDATE Catalog 		 ; id[unique=true]
+                      		 ; $productCatalog
 ########################################################################################################################                          
-                            
-                            
+
+# Product versions for product catalogs
+INSERT_UPDATE CatalogVersion ; catalog(id)[unique=true] ; version[unique=true] ; active ; languages(isoCode) ; readPrincipals(uid) ; writePrincipals(uid)
+                             ; $productCatalog          ; Staged               ; false  ; $languages         ; productmanagergroup ; productmanagergroup ;  
+                             
+                             
 ########################################################################################################################
 					# Classification catalog
 					## SELECT * FROM catalogs
@@ -42,10 +47,6 @@ INSERT_UPDATE ClassificationSystem ; id[unique=true]
                                    ; $classificationCatalog
 ########################################################################################################################
 
-
-# Product versions for product catalogs
-INSERT_UPDATE CatalogVersion ; catalog(id)[unique=true] ; version[unique=true] ; active ; languages(isoCode) ; readPrincipals(uid) ; writePrincipals(uid)
-                             ; $productCatalog          ; Staged               ; false  ; $languages         ; productmanagergroup ; productmanagergroup ;
 
 # Insert Classifications System Version
 INSERT_UPDATE ClassificationSystemVersion ; catalog(id)[unique=true] ; version[unique=true] ; active ; inclPacking[virtual=true,default=true] ; inclDuty[virtual=true,default=true] ; inclFreight[virtual=true,default=true] ; inclAssurance[virtual=true,default=true]
