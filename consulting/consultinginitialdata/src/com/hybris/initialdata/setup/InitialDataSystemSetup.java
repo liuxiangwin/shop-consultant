@@ -48,7 +48,8 @@ import com.hybris.initialdata.constants.ConsultingInitialDataConstants;
 
 
 /**
- * This class provides hooks into the system's initialization and update processes.
+ * @author Alan Liu
+ * @class This provides hooks into the system's initialization and update processes.
  *
  * @see "https://wiki.hybris.com/display/release4/Hooks+for+Initialization+and+Update+Process"
  */
@@ -66,13 +67,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 	private static final String ZH_CONSULTING_STORE = "zh-consultingstore";
 	private static final String UK_CONSULTING_STORE = "uk-consultingstore";
-	//private static final String FR_CONSULTING_STORE = "fr-consultingstore";
-	//private static final String SE_CONSULTING_STORE = "se-consultingstore";
-	//private static final String ES_CONSULTING_STORE = "es-consultingstore";
-	//private static final String JP_CONSULTING_STORE = "jp-consultingstore";
-
 	private static final String BASE_CONSULTING_CATALOG_PREFIX = "consultingstore";
-
 	private static final String EXTENSION_NAME = "consultinginitialdata";
 
 
@@ -92,27 +87,6 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@Resource(name = "catalogService")
 	private CatalogService catalogService;
 
-	/**
-	 * @return the modelService
-	 */
-	private ModelService getModelService()
-	{
-		return modelService;
-	}
-
-
-	/**
-	 * @param modelService
-	 *           the modelService to set
-	 */
-	public void setModelService(final ModelService modelService)
-	{
-		this.modelService = modelService;
-	}
-
-	/**
-	 * Generates the Dropdown and Multi-select boxes for the project data import
-	 */
 	@Override
 	@SystemSetupParameterMethod
 	public List<SystemSetupParameter> getInitializationOptions()
@@ -122,9 +96,6 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
 		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", true));
 		params.add(createBooleanSystemSetupParameter(ACTIVATE_SOLR_CRON_JOBS, "Activate Solr Cron Jobs", true));
-
-		// Add more Parameters here as you require
-
 		return params;
 	}
 
@@ -152,71 +123,43 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	public void createProjectData(final SystemSetupContext context)
 	{
 
-		/********/
-		/* CORE */
-		/********/
+		/////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////CORE Data //////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 		// Common
 		getConsultingCoreDataImportService().importCommonData(EXTENSION_NAME);
 
 		// 1. Import core base product catalog (Staged only)
 		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, BASE_CONSULTING_CATALOG_PREFIX);
 
-
 		// 2. Import core base content catalog (Staged)
 		getConsultingCoreDataImportService().importContentCatalog(EXTENSION_NAME, BASE_CONSULTING_CATALOG_PREFIX);
 
 
-		// 3. Import core country product catalogs
+		// 3. Import core Country Specific Product catalogs
 		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, UK_CONSULTING_STORE);
 		getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, ZH_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, SE_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, ES_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, FR_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importProductCatalog(EXTENSION_NAME, JP_CONSULTING_STORE);
 
-
-
-		// 4. Import core country stores
+		// 4. Import core Country Specific Stores
 		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, UK_CONSULTING_STORE, "");
 		getConsultingCoreDataImportService().importStore(EXTENSION_NAME, ZH_CONSULTING_STORE, "");
-		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
-		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
-		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
-		//getConsultingCoreDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
 
-
-
-
-
-		// 5 Import core solr
+		// 5 Import core Solr configuration,job trigger configuration
 		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE);
 		getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE);
 
-
-
-		// 6 Import Jobs
+		// 6 Import Jobs includes (Synchronization job define & JobSearchRestriction)
 		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, UK_CONSULTING_STORE);
 		getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, ZH_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, SE_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, ES_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, FR_CONSULTING_STORE);
-		//getConsultingCoreDataImportService().importJobs(EXTENSION_NAME, JP_CONSULTING_STORE);
 
-
-
-		/**********/
-		/* SAMPLE */
-		/*********/
+		/////////////////////////////////////////////////////////////////////////////////
+		//////////////////////// SAMPLE Data ////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 		// 7 Import Sample Common
 		getConsultingSampleDataImportService().importCommonData(EXTENSION_NAME);
 
 		// 8. Import sample base product catalog
 		getConsultingSampleDataImportService().importProductCatalog(EXTENSION_NAME, BASE_CONSULTING_CATALOG_PREFIX);
-
 
 		// 9. Import sample base content catalog
 		getConsultingSampleDataImportService().importContentCatalog(EXTENSION_NAME, BASE_CONSULTING_CATALOG_PREFIX);
@@ -224,112 +167,71 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		// 10 Sample Store
 		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, UK_CONSULTING_STORE, "");
 		getConsultingSampleDataImportService().importStore(EXTENSION_NAME, ZH_CONSULTING_STORE, "");
-		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, SE_CONSULTING_STORE, "");
-		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, ES_CONSULTING_STORE, "");
-		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, FR_CONSULTING_STORE, "");
-		//getConsultingSampleDataImportService().importStore(EXTENSION_NAME, JP_CONSULTING_STORE, "");
 
+		// 12. Sync global product catalog to country staged
+		executeGlobalCatalogSyncJob(UK_CONSULTING_STORE);
+		executeGlobalCatalogSyncJob(ZH_CONSULTING_STORE);
 
-
-		// 11. Run media conversion on baseProductCatalog
-		// Can't get this working but will post support q's
-		//final MediaConversionCronJobModel mediaConversionCronJob = modelService.create(MediaConversionCronJobModel.class);
-		//final JobModel jobModel = cronjobService.getJob("mediaConversionJob");
-		//mediaConversionCronJob.setJob(jobModel);
-		//mediaConversionCronJob.setCode("mediaConversionJob-init");
-		//mediaConversionCronJob.setSessionUser(getUserService().getCurrentUser());
-		//mediaConversionCronJob.setSessionLanguage(getUserService().getCurrentUser().getSessionLanguage());
-		//mediaConversionCronJob.setSessionCurrency(getUserService().getCurrentUser().getSessionCurrency());
-		//getModelService().save(mediaConversionCronJob);
-		//getCronJobService().performCronJob(mediaConversionCronJob);
-
-		// 12. Sync base product catalog to country staged
-		executeBaseCatalogSyncJob(UK_CONSULTING_STORE);
-		executeBaseCatalogSyncJob(ZH_CONSULTING_STORE);
-		//executeBaseCatalogSyncJob(SE_CONSULTING_STORE);
-		//executeBaseCatalogSyncJob(ES_CONSULTING_STORE);
-		//executeBaseCatalogSyncJob(FR_CONSULTING_STORE);
-		//executeBaseCatalogSyncJob(JP_CONSULTING_STORE);
-
-
-
-		// 13. Sync staged country to online
+		// 13. Sync each country specific staged version to their online version
 		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, UK_CONSULTING_STORE, true);
 		getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, ZH_CONSULTING_STORE, true);
-		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, SE_CONSULTING_STORE, true);
-		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, ES_CONSULTING_STORE, true);
-		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, FR_CONSULTING_STORE, true);
-		//getConsultingSampleDataImportService().synchronizeProductCatalog(this, context, JP_CONSULTING_STORE, true);
+
+		//Import sample Country specific product catalog
+		getConsultingSampleDataImportService().importProductCatalog(EXTENSION_NAME, ZH_CONSULTING_STORE);
+		getConsultingSampleDataImportService().importProductCatalog(EXTENSION_NAME, UK_CONSULTING_STORE);
 
 
-		// 14 Sync base content to onbline content
+		// 14 Sync base content to online content
 		getConsultingSampleDataImportService().synchronizeContentCatalog(this, context, BASE_CONSULTING_CATALOG_PREFIX, true);
 
-
-		// 15 Import Sample Solr
+		// 15 Import Sample Solr configuration
 		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE,
 				getSolrMode(UK_CONSULTING_STORE));
 		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE,
 				getSolrMode(ZH_CONSULTING_STORE));
-		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE,
-		//		getSolrMode(SE_CONSULTING_STORE));
-		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE,
-		//		getSolrMode(ES_CONSULTING_STORE));
-		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE,
-		//		getSolrMode(FR_CONSULTING_STORE));
-		//getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE,
-		//		getSolrMode(JP_CONSULTING_STORE));
 
-
-		// 16. Activate solr cor jobs
-
+		// 16. Activate Solr cron job with online&Stage data
 		LOG.debug("Activating solr indexes ");
-		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Staged");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Staged");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Staged");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Staged");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Staged");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Staged");
+		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Staged");
+
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Online");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Online");
 		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Online");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ES_CONSULTING_STORE + "Online");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, FR_CONSULTING_STORE + "Online");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, JP_CONSULTING_STORE + "Online");
 
 	}
-
-
 
 	private String getSolrMode(final String storeName)
 	{
 		return Config.getParameter(storeName + ".solrMode");
 	}
 
-	public PerformResult executeBaseCatalogSyncJob(final String catalogId)
+	@SuppressWarnings("deprecation")
+	public PerformResult executeGlobalCatalogSyncJob(final String catalogId)
 	{
 		PerformResult performResult = null;
 
-		// In the case of the base, do our own custom sync to the staged version of each sub catalog
+		// In the case of the Global, do our own custom sync to
+		//the staged version of each country specific catalog
 		final Catalog baseConsultingCatalogue = CatalogManager.getInstance().getCatalog(
 				BASE_CONSULTING_CATALOG_PREFIX + "ProductCatalog");
 		final Catalog targetConsultingCatalogue = CatalogManager.getInstance().getCatalog(catalogId + "ProductCatalog");
 
 		if (baseConsultingCatalogue != null && targetConsultingCatalogue != null)
 		{
-			final CatalogVersion baseConsultingSource = baseConsultingCatalogue.getCatalogVersion(CatalogManager.OFFLINE_VERSION);
+			final CatalogVersion globalConsultingSource = baseConsultingCatalogue.getCatalogVersion(CatalogManager.OFFLINE_VERSION);
 			final CatalogVersion targetConsultingTarget = targetConsultingCatalogue
 					.getCatalogVersion(CatalogManager.OFFLINE_VERSION);
 
 			performResult = executeCatalogSyncJob(
-					CatalogManager.getInstance().getSyncJob(baseConsultingSource, targetConsultingTarget), catalogId
+					CatalogManager.getInstance().getSyncJob(globalConsultingSource, targetConsultingTarget), catalogId
 							+ "ProductCatalog");
 
 		}
 		return performResult;
 	}
 
-
+	@SuppressWarnings("deprecation")
 	private PerformResult executeCatalogSyncJob(final SyncItemJob catalogSyncJob, final String catalogName)
 	{
 		final SyncItemCronJob syncJob = catalogSyncJob.newExecution();
@@ -353,8 +255,15 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		return new PerformResult(result, status);
 	}
 
+	private ModelService getModelService()
+	{
+		return modelService;
+	}
 
-
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
 
 	public CoreDataImportService getCoreDataImportService()
 	{
@@ -378,96 +287,73 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		this.sampleDataImportService = sampleDataImportService;
 	}
 
-	/**
-	 * @return the cronJobService
-	 */
 	public CronJobService getCronJobService()
 	{
 		return cronJobService;
 	}
 
-	/**
-	 * @param cronJobService
-	 *           the cronJobService to set
-	 */
 
 	public void setCronJobService(final CronJobService cronJobService)
 	{
 		this.cronJobService = cronJobService;
 	}
 
-	/**
-	 * @return the consultingSampleDataImportService
-	 */
 	public ConsultingSampleDataImportService getConsultingSampleDataImportService()
 	{
 		return consultingSampleDataImportService;
 	}
 
-	/**
-	 * @param consultingSampleDataImportService
-	 *           the consultingSampleDataImportService to set
-	 */
 	@Required
 	public void setConsultingSampleDataImportService(final ConsultingSampleDataImportService consultingSampleDataImportService)
 	{
 		this.consultingSampleDataImportService = consultingSampleDataImportService;
 	}
 
-
-	/**
-	 * @return the consultingCoreDataImportService
-	 */
 	public ConsultingCoreDataImportService getConsultingCoreDataImportService()
 	{
 		return consultingCoreDataImportService;
 	}
 
-	/**
-	 * @param consultingCoreDataImportService
-	 *           the consultingCoreDataImportService to set
-	 */
 	@Required
 	public void setConsultingCoreDataImportService(final ConsultingCoreDataImportService consultingCoreDataImportService)
 	{
 		this.consultingCoreDataImportService = consultingCoreDataImportService;
 	}
 
-
-	/**
-	 * @return the catalogService
-	 */
 	public CatalogService getCatalogService()
 	{
 		return catalogService;
 	}
 
-	/**
-	 * @param catalogService
-	 *           the catalogService to set
-	 */
 	public void setCatalogService(final CatalogService catalogService)
 	{
 		this.catalogService = catalogService;
 	}
 
-
-	/**
-	 * @return the userService
-	 */
 	public UserService getUserService()
 	{
 		return userService;
 	}
 
-
-	/**
-	 * @param userService
-	 *           the userService to set
-	 */
 	public void setUserService(final UserService userService)
 	{
 		this.userService = userService;
+	}
+
+	@SuppressWarnings("unused")
+	private void medieConvertProcess()
+	{
+		// 11. Run media conversion on baseProductCatalog
+		// Can't get this working but will post support q's
+		//final MediaConversionCronJobModel mediaConversionCronJob = modelService.create(MediaConversionCronJobModel.class);
+		//final JobModel jobModel = cronjobService.getJob("mediaConversionJob");
+		//mediaConversionCronJob.setJob(jobModel);
+		//mediaConversionCronJob.setCode("mediaConversionJob-init");
+		//mediaConversionCronJob.setSessionUser(getUserService().getCurrentUser());
+		//mediaConversionCronJob.setSessionLanguage(getUserService().getCurrentUser().getSessionLanguage());
+		//mediaConversionCronJob.setSessionCurrency(getUserService().getCurrentUser().getSessionCurrency());
+		//getModelService().save(mediaConversionCronJob);
+		//getCronJobService().performCronJob(mediaConversionCronJob);
 	}
 
 }

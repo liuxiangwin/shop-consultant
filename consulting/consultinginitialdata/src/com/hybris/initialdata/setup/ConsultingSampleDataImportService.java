@@ -110,20 +110,13 @@ public class ConsultingSampleDataImportService extends SampleDataImportService
 						productCatalogName), false);
 
 		// Load Prices
-		//getSetupImpexService()
-		//		.importImpexFile(String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex",
-		//				extensionName, productCatalogName), false);
-
 		//getSetupImpexService().importImpexFile(
-		//		String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/product-prices-class.impex", extensionName,
+		//		String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex", extensionName,
 		//				productCatalogName), false);
-		getSetupImpexService().importImpexFile(
-				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices.impex", extensionName,
-						productCatalogName), false);
 
 		//Load Product Price Group
 		getSetupImpexService().importImpexFile(
-				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/products-prices-price-group.impex",
+				String.format("/%s/import/sampledata/productCatalogs/%sProductCatalog/productsPricesGroup-update.impex",
 						extensionName, productCatalogName), false);
 
 		// Load Stock Levels
@@ -173,7 +166,6 @@ public class ConsultingSampleDataImportService extends SampleDataImportService
 			getSetupImpexService().importImpexFile(
 					String.format("/%s/import/sampledata/stores/%s/btg.impex", extensionName, storeName), false);
 		}
-
 		getSetupImpexService().importImpexFile(
 				String.format("/%s/import/sampledata/stores/%s/warehouses.impex", extensionName, storeName), false);
 
