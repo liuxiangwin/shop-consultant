@@ -17,3 +17,4 @@ UPDATE Category ; code[unique=true]     ; $catalogVersion ; name[lang=$lang]
                 ; Operational           ;                 ; Operational          
                 ; Testing               ;                 ; Testing              
                 ; Project-Management    ;                 ; Project Management   
+         		; IT-Serivce            ;    			  ; IT-Serivce   

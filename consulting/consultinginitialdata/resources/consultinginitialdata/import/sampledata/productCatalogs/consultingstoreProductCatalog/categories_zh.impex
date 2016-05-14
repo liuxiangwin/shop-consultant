@@ -17,3 +17,4 @@ UPDATE Category ; code[unique=true]     ; $catalogVersion ; name[lang=$lang]
                 ; Operational           ;                 ; 备选          
                 ; Testing               ;                 ; 测试              
                 ; Project-Management    ;                 ; 项目管理   
+				; IT-Serivce            ;    			  ; IT服务   
