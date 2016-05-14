@@ -18,6 +18,9 @@ $unit=unit(code,$classSystemVersion)
 INSERT_UPDATE ClassificationSystem ; id[unique=true]        ; name[lang=$lang]           
                                    ; $classificiationSystem ; $classificiationSystemName ;  
 
+########################################################################################
+# ClassificationSystemversion extends CatalogVersionModel 
+########################################################################################
 INSERT_UPDATE ClassificationSystemversion ; catalog(id)[unique=true] ; version[unique=true] ; active ; writeprincipals(uid) ; languages(isocode) ; inclPacking[virtual=true,default=true] ; inclDuty[virtual=true,default=true] ; inclFreight[virtual=true,default=true] ; inclAssurance[virtual=true,default=true] ;  ;  ;  
                                           ; $classificiationSystem   ; $systemVersion       ; true   ; employeegroup        ; en                 ;                                        ;                                     ;                                        ;                                          ;  ;  
 
@@ -69,8 +72,8 @@ INSERT_UPDATE ClassificationAttributeValue ; code[unique=true]             ; $cl
                                            ; Scrum                         ;                     ;  
                                            ; Agile                         ;                     ;  
                                            ; Kanban                        ;                     ;  
-                                           ; XP                            ;                     ;
-                                           ; Hadoop                        ;                     ;                          
+                                           ; XP                            ;                     ;  
+                                           ; Hadoop                        ;                     ;  
                                            ; MySQL                         ;                     ;  
                                            ; Oracle                        ;                     ;  
                                            ; HDFS                          ;                     ;  
@@ -81,15 +84,15 @@ INSERT_UPDATE ClassificationAttributeValue ; code[unique=true]             ; $cl
                                            ; Review                        ;                     ;  
                                            ; Smoke Testing                 ;                     ;  
                                            ; Unit Testing                  ;                     ;  
-  
+                                           
 # Assign attributes to experience classification
-INSERT_UPDATE ClassAttributeAssignment ; $class                          ; $attribute              ; position ; $unit ; attributeType(code[default=string]) ; multiValued[default=false] ; range[default=false] ; localized[default=false] ; attributeValues(code,$classSystemVersion)                                                                       
-                                       ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript,Hadoop                                         ;  
+INSERT_UPDATE ClassAttributeAssignment ; $class                          ; $attribute              ; position ; $unit ; attributeType(code[default=string]) ; multiValued[default=false] ; range[default=false] ; localized[default=false] ; attributeValues(code,$classSystemVersion)                                                                                    
+                                       ; programmingclassification       ; programmingdisciplines  ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Java,Spring,Impex,Scala,Groovy,Architect,UX Design,Scripting,Javascript,Hadoop                                               ;  
                                        ; dataclassification              ; datadisciplines         ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Solr,MySQL,Oracle                                                                                                            ;  
-                                       ; businessuserclassification      ; businessuserdisciplines ; 0        ;       ; enum                                ; true                       ;                      ;                          ; CMS,Training,Backoffice,Microsoft Office                                                                                         ;  
-                                       ; operationalclassification       ; devopsdisciplines       ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Performance,System,Review                                                                                                     ;  
+                                       ; businessuserclassification      ; businessuserdisciplines ; 0        ;       ; enum                                ; true                       ;                      ;                          ; CMS,Training,Backoffice,Microsoft Office                                                                                     ;  
+                                       ; operationalclassification       ; devopsdisciplines       ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Performance,System,Review                                                                                                    ;  
                                        ; testingclassification           ; testingdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Automated integration Testing,Automated Unit Testing,Smoke Testing,Functional Testing,System Integrated Testing,Unit Testing ;  
-                                       ; projectmanagementclassification ; projectdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Jira Mgmt,Scrum,Agile,Kanban,XP                                                                                    ;  
+                                       ; projectmanagementclassification ; projectdisciplines      ; 0        ;       ; enum                                ; true                       ;                      ;                          ; Jira Mgmt,Scrum,Agile,Kanban,XP                                                                                              ;  
 
 
 UPDATE Category ; $catVer[unique=true] ; code[unique=true]     ; supercategories(code,$sysVer)[mode=append] ;  
