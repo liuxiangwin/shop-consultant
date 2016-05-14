@@ -100,16 +100,3 @@ UPDATE Category ; $catVer[unique=true] ; code[unique=true]     ; supercategories
                 ;                      ; Testing               ; testingclassification                      ;  ;  ;  
                 ;                      ; Project-Management    ; projectmanagementclassification            ;  ;  ;  
 
-
-#  Classification Units
-#INSERT_UPDATE ClassificationAttributeUnit;code[unique=true];symbol;unitType;:$catalogVersion
-#;stars;Stars;string;$classificiationSystem:$systemVersion;
-#;years;Years;string;$classificiationSystem:$systemVersion;
-
-# CAV - (aka) feature values
-#INSERT_UPDATE ClassificationAttributeValue;code[unique=true];$catalogVersion;
-#;1;$classificiationSystem:$systemVersion;
-#;2;$classificiationSystem:$systemVersion;
-#;3;$classificiationSystem:$systemVersion;
-#;4;$classificiationSystem:$systemVersion;
-#;5;$classificiationSystem:$systemVersion;

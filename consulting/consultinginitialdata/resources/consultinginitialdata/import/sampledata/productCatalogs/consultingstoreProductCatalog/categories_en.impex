@@ -9,6 +9,9 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 # Language
 $lang=en
 
+##############################################################################
+############## This is UnitKidom localzation
+##############################################################################
 # Create Categories
 UPDATE Category ; code[unique=true]     ; $catalogVersion ; name[lang=$lang]     
                 ; Development           ;                 ; Development          
