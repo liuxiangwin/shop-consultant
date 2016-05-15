@@ -18,6 +18,7 @@
 # Units
 INSERT_UPDATE Unit ; unitType[unique=true] ; code[unique=true] ; name[lang=de] ; name[lang=en] ;  ;  ;  ;  
                    ; each                  ; EA                ; eaches        ; each          ;  ;  ;  ;  
+                   ; hour                  ; pieces            ; per hour      ; per hour      ;  ;  ;  ;  
                    ; hour                  ; HR                ; per hour      ; per hour      ;  ;  ;  ;  
                    ; hour                  ; domestic          ; per hour      ; per hour      ;  ;  ;  ;  
                    ; hour                  ; international     ; per hour      ; per hour      ;  ;  ;  ;  
