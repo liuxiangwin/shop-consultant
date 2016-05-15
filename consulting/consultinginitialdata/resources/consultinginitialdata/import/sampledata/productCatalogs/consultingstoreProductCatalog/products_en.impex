@@ -10,22 +10,22 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $lang=en
 
 # Update allProducts with localisations
-UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang]  ; summary[lang=$lang] ; description[lang=$lang]
-               ; 00000001          ;                 ; David Wang          ;                     ;                        
+UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
+               ; 00000001          ;                 ; David Wang       ;                     ;                        
                ; 00000003          ;                 ; Lee Shan         ;                     ;                        
-               ; 00000010          ;                 ; Tony Erton        ;                     ;                        
-               ; 00000018          ;                 ; Herick Brown      ;                     ;                        
-               ; 00000024          ;                 ; Pat Tog           ;                     ;                        
-               ; 00000026          ;                 ; Rebecca Walls     ;                     ;                        
+               ; 00000010          ;                 ; Tony Erton       ;                     ;                        
+               ; 00000018          ;                 ; Herick Brown     ;                     ;                        
+               ; 00000024          ;                 ; Pat Tog          ;                     ;                        
+               ; 00000026          ;                 ; Rebecca Walls    ;                     ;                        
                ; 00000030          ;                 ; Nick Routelledge ;                     ;                        
-               ; 00000033          ;                 ; Brendon Dobbs     ;                     ;                        
+               ; 00000033          ;                 ; Brendon Dobbs    ;                     ;                        
 
                
                
 # Update Varaiant Product Name
 UPDATE Product ; code[unique=true] ; $catalogVersion ; name[lang=$lang] ; summary[lang=$lang] ; description[lang=$lang]
-               ; 00000266          ;                 ; Steve Luious      ;                     ;                        
-               ; 00000267          ;                 ; Tony Redemoon       ;                     ;                        
+               ; 00000266          ;                 ; Steve Luious     ;                     ;                        
+               ; 00000267          ;                 ; Tony Redemoon    ;                     ;                        
                ; 00000268          ;                 ; Jack Lenon       ;                     ;                        
                
 	              
