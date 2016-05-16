@@ -12,15 +12,15 @@ INSERT_UPDATE UserGroup ; UID[unique=true]    ; groups(uid)[mode=append]
 INSERT_UPDATE Employee ; UID[unique=true] ; $setPassword ; description     ; name            ; groups(uid)         ; sessionLanguage(isocode) ; sessionCurrency(isocode)
                        ; productmanager   ;              ; Product manager ; Product Manager ; productmanagergroup ; en                       ; EUR                     
 
-UPDATE CatalogVersion ; catalog(id)[unique=true]      ; version[unique=true] ; writePrincipals(uid)               ;  
-                      ; consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
+#UPDATE CatalogVersion ; catalog(id)[unique=true]      ; version[unique=true] ; writePrincipals(uid)               ;  
+#                      ; consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
 
                       
-UPDATE CatalogVersion ; catalog(id)[unique=true]         ; version[unique=true] ; writePrincipals(uid)               ;  
-                      ; zh-consultingstoreProductCatalog ; Online               ; productmanagergroup,productmanager ;  
-                      ; zh-consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
+#UPDATE CatalogVersion ; catalog(id)[unique=true]         ; version[unique=true] ; writePrincipals(uid)               ;  
+#                      ; zh-consultingstoreProductCatalog ; Online               ; productmanagergroup,productmanager ;  
+#                      ; zh-consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
 
-UPDATE CatalogVersion ; catalog(id)[unique=true]         ; version[unique=true] ; writePrincipals(uid)               ;  
-                      ; uk-consultingstoreProductCatalog ; Online               ; productmanagergroup,productmanager ;  
-                      ; uk-consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
+#UPDATE CatalogVersion ; catalog(id)[unique=true]         ; version[unique=true] ; writePrincipals(uid)               ;  
+#                      ; uk-consultingstoreProductCatalog ; Online               ; productmanagergroup,productmanager ;  
+#                      ; uk-consultingstoreProductCatalog ; Staged               ; productmanagergroup,productmanager ;  
                       
