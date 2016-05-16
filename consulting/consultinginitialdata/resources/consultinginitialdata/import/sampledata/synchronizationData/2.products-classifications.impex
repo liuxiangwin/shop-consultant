@@ -1,0 +1,27 @@
+# ImpEx for Importing Product Classifications
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog=consultingstoreProductCatalog
+$productCatalogName=Consulting Store Product Catalog
+$classificationCatalog=ConsultingStoreClassification
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+
+# Insert Product Classifications
+
+$programmingdisciplines=@programmingdisciplines[$clAttrModifiers];  
+$datadisciplines=@datadisciplines[$clAttrModifiers];  
+$businessuserdisciplines=@businessuserdisciplines[$clAttrModifiers];  
+$devopsdisciplines=@devopsdisciplines[$clAttrModifiers];  
+$testingdisciplines=@testingdisciplines[$clAttrModifiers];  
+$projectdisciplines=@projectdisciplines[$clAttrModifiers];  
+
+INSERT_UPDATE Consultant ; code[unique=true] ; $programmingdisciplines ; $datadisciplines    ; $businessuserdisciplines ; $devopsdisciplines ; $testingdisciplines ; $projectdisciplines ; $catalogVersion
+                         ; 00000166          ; Impex,Groovy,UX Design  ; Solr                ; Backoffice               ; Performance        ; Functional Testing  ; Agile               ;                
+                         ; 00000167          ; Java,Scala,UX Design    ; Solr,MySQL,Oracle   ; CMS                      ; Performance        ; Functional Testing  ; Agile,Scrum         ;                
+
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $programmingdisciplines ; $datadisciplines  ; $businessuserdisciplines ; $devopsdisciplines ; $testingdisciplines ; $projectdisciplines ; $catalogVersion
+                                            ; 00000296          ; Impex,Groovy,UX Design  ; Solr,MySQL        ; Backoffice               ; Performance        ; Functional Testing  ; Agile               ;                

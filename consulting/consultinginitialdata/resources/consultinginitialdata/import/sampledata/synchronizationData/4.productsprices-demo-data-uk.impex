@@ -1,0 +1,18 @@
+# ImpEx for Importing Prices
+
+"#% impex.setLocale( Locale.ENGLISH )"
+$productCatalog=uk-consultingstoreProductCatalog
+#$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+##$taxGroup=Europe1PriceFactory_PTG(code)[default=uk-vat-full]
+$approved=approvalstatus(code)[default='approved']
+$lang=en
+
+#                                      
+#  Assign the product with Product Price Group
+#
+INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                         ; 00000167          ; Product-Class-UK              ;           ;                ;  
+                                              
+                                                  

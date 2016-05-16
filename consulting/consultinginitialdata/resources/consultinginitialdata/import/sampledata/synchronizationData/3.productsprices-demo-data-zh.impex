@@ -1,0 +1,25 @@
+# ImpEx for Importing Prices
+
+"#% impex.setLocale( Locale.ENGLISH )"
+
+$productCatalog=zh-consultingstoreProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$approved=approvalstatus(code)[default='approved']
+$lang=en
+
+
+
+INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                         ; 00000166          ; Product-Class-China           ;           ;                ;  
+
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                                            ; 00000296          ; Product-Class-China           ;           ;                ;  
+                                                                                                 
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                                              ; 00000396          ; Product-Class-China           ;           ;                ;  
+                                              ; 00000397          ; Product-Class-China           ;           ;                ;  
+                                              ; 00000398          ; Product-Class-China           ;           ;                ;  
+
+                                              
+                                                  
