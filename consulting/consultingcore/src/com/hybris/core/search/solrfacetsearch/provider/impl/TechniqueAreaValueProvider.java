@@ -30,8 +30,7 @@ import com.hybris.core.services.ConsultantService;
  * @author Alan Liu
  *
  */
-public class TutoProductContentValueProvider extends AbstractPropertyFieldValueProvider implements FieldValueProvider,
-		Serializable
+public class TechniqueAreaValueProvider extends AbstractPropertyFieldValueProvider implements FieldValueProvider, Serializable
 {
 	private FieldNameProvider fieldNameProvider;
 
@@ -87,17 +86,6 @@ public class TutoProductContentValueProvider extends AbstractPropertyFieldValueP
 			throw new FieldValueProviderException("Cannot evaluate " + indexedProperty.getName() + " using "
 					+ this.getClass().getName(), e);
 		}
-
-		/*
-		 * final Collection<FieldValue> fieldValues = new ArrayList<FieldValue>(); final List<ConsultantModel>
-		 * foundContentList = consultantService.getTutoContentProduct(); for (final ConsultantModel consultantModel :
-		 * foundContentList) { if (consultantModel != null) {
-		 *
-		 * final Collection<String> fieldNames = fieldNameProvider.getFieldNames(indexedProperty, null); for (final String
-		 * * fieldName : fieldNames) { //fieldValues.add(new FieldValue("contentValue", consultantModel.getContent()));
-		 * fieldValues.add(new FieldValue(fieldName, consultantModel.getContent())); } } }
-		 */
-
 	}
 
 	protected List<FieldValue> createFieldValue(final String value, final LanguageModel language,

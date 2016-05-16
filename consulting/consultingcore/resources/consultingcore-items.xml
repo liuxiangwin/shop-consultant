@@ -119,6 +119,12 @@
 
 	<itemtypes>
 
+		
+		<!-- BEGIN Synchronization jobs -->
+		<itemtype code="EasyCatalogVersionSyncJob" autocreate="true" generate="true"
+   		 extends="CatalogVersionSyncJob" jaloclass="com.yrnet.easy.easycronjobs.jalo.EasyCatalogVersionSyncJob" />
+		<!-- END Synchronization jobs -->
+		
 		<!-- Add New Type code here for refernce -->
 		<typegroup name="Consulting">
 

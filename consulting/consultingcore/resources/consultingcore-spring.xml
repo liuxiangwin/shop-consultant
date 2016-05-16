@@ -472,8 +472,8 @@
 	</bean>
 
 
-	<bean id="tutoProductContentValueProvider"
-		class="com.hybris.core.search.solrfacetsearch.provider.impl.TutoProductContentValueProvider"
+	<bean id="techniqueAreaValueProvider"
+		class="com.hybris.core.search.solrfacetsearch.provider.impl.TechniqueAreaValueProvider"
 		parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
 		<property name="consultantService" ref="consultantService" />
