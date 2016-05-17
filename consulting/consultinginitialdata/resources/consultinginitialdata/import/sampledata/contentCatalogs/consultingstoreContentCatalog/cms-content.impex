@@ -67,7 +67,7 @@ INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true] ; na
                                ;                         ; UkSiteLink       ; UK    ; UK Site Link    ; /setcountry?country=uk&lang=en ; UkSiteLink ; UkSiteLink    ;                                    ;  
                                
                                
-INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name                  ; masterTemplate(uid,$contentCV) ; label        ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
+INSERT_UPDATE ContentPage ; $contentCV[unique=true] ; uid[unique=true] ; name                  ; masterTemplate(uid,$contentCV) ; label       ; defaultPage[default='true'] ; approvalStatus(code)[default='approved'] ; homepage[default='false']
                           ;                         ; siteSelector     ; Country Selector Page ; ContentPage1Template           ; siteSelector
 
 # Site-wide Homepage                 
@@ -89,14 +89,35 @@ INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]     ; nam
 # ContentSlotForPage      
 INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='siteSelector'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
 #INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='chooseCountryPage'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
-                                 ;                         ; Section2B-choose ; Section2B             ;                                                                ; Section2BSlot-choose                     ;  ;  ;  
+                                 ;                         ; Section2B-choose ; Section2B             ;                                                           ; Section2BSlot-choose                     ;  ;  ;  
+
+
+###########  Choose Page Customization ##########################
+INSERT_UPDATE Media ; $contentCV[unique=true] ; code[unique=true]         ; realfilename      ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg'] ; &imageRef ; folder(qualifier)[default='images'] ;  
+                    ;                         ; /images/china.png         ; china.png         ; $siteResource/images/china.png                                             ;                            ; chinaLogo ;                                     ;  
+                    ;                         ; /images/unitedkingdom.png ; unitedkingdom.png ; $siteResource/images/unitedkingdom.png                                     ;                            ; ukLogo    ;                                     ;  
+
+INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true] ; name                 ; $picture[lang=$lang]      ; &componentRef ; urlLink
+                                    ;                         ; china-logo       ; China Logo Component ; /images/china.png         ; china-logo    ; "#"    
+                                    ;                         ; uk-logo          ; UK Logo Component    ; /images/unitedkingdom.png ; uk-logo       ; "#"    
+###########  Choose Page Customization Slot##########################            
+INSERT_UPDATE ContentSlot ; $contentCV[unique=true] ; uid[unique=true]      ; name                                    ; active ; cmsComponents(&componentRef) ;  ;  ;  
+                          ;                         ; Section2B-logo-choose ; Section2B Slot for Country Log Selector ; true   ; china-logo, uk-logo          ;  ;  ;  
+
+###########  Choose Page Customization Page##########################                            
+INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='chooseCountryPage'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
+#INSERT_UPDATE ContentSlotForPage ; $contentCV[unique=true] ; uid[unique=true] ; position[unique=true] ; page(uid,$contentCV)[unique=true][default='chooseCountryPage'] ; contentSlot(uid,$contentCV)[unique=true] ;  ;  ;  
+                                 ;                         ; Section2B-logo   ; Section2B             ;                                                                ; Section2B-logo-choose                    ;  ;  ;  
+                                 
+
+
 
 
 # CMS Link Components Define Customer LinkComponent              
 INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true] ; uid[unique=true]                  ; name                            ; url                                                                     ; &linkRef                          ; &componentRef                     ; target(code)[default='sameWindow']
                                ;                         ; ConsultantChannelLink             ; Consultant Channel Link         ; /                                                                       ; ConsultantChannelLink             ; ConsultantChannelLink             ;                                   ; Channel               ;  ;  
 
-                               ;                         ; GlobalCountryLink                 ; Global Header Country Link      ; /main/changeCountry                                                                       ; GlobalCountryLink                 ; GlobalCountryLink                 ;                                   ;                       ;  ;  
+                               ;                         ; GlobalCountryLink                 ; Global Header Country Link      ; /main/changeCountry                                                     ; GlobalCountryLink                 ; GlobalCountryLink                 ;                                   ;                       ;  ;  
                                ;                         ; HomepageNavLink                   ; Home Page Nav Link              ; /                                                                       ; HomepageNavLink                   ; HomepageNavLink                   ;                                   ;                       ;  ;  
                                ;                         ; StoreFinderLink                   ; Store Finder Link               ; /store-finder                                                           ; StoreFinderLink                   ; StoreFinderLink                   ;                                   ;                       ;  ;  
                                ;                         ; LoginLink                         ; Login Link                      ; /login                                                                  ; LoginLink                         ; LoginLink                         ;                                   ;                       ;  ;  
@@ -519,8 +540,8 @@ INSERT_UPDATE SimpleBannerComponent ; $contentCV[unique=true] ; uid[unique=true]
                                     ;                         ; CareerOneComponent    ; Career one Component    ; CareerOneComponent    ; /images/career1.jpg            ; "/"    ;  
                                     ;                         ; CareerTwoComponent    ; Career two Component    ; CareerTwoComponent    ; /images/career2.jpg            ; "/"    ;  
 
-INSERT_UPDATE ProductCarouselComponent ; $contentCV[unique = true] ; uid[unique = true]        ; name                                        ; products(code, $productCV)                            ; scroll(code) ; popup ; &componentRef            
-                                       ;                           ; HomePageCarouselComponent ; ConsutlantService Homepage Product Carousel ; 00000001,00000002,00000003,00000004,00000005,00000006 ; allVisible   ; false ; HomePageCarouselComponent
+INSERT_UPDATE ProductCarouselComponent ; $contentCV[unique = true] ; uid[unique = true]        ; name                                        ; products(code, $productCV) ; scroll(code) ; popup ; &componentRef            
+                                       ;                           ; HomePageCarouselComponent ; ConsutlantService Homepage Product Carousel ; 00000003                   ; allVisible   ; false ; HomePageCarouselComponent
 
 
 
