@@ -16,3 +16,6 @@ INSERT_UPDATE Consultant ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $
                          ; 00000167          ; Product-Class-UK              ;           ;                ;  
                                               
                                                   
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; Europe1PriceFactory_PPG(code) ; $approved ; $catalogVersion
+                                            ; 00000296          ; Product-Class-UK           ;           ;                ;  
+                                                                                                 

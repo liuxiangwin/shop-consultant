@@ -26,14 +26,26 @@ INSERT_UPDATE Consultant ; code[unique=true] ; $activeCountries ; $supercategori
 
 # Consultant Variant Product
 # Insert Level Products(Principal,Senior,Standard)
-INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $activeCountries ; nationality ; $supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=pieces] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content  ; level     
+INSERT_UPDATE ConsultantLevelVariantProduct ; code[unique=true] ; $activeCountries ; nationality ; $supercategories                                                              ; $baseProduct ; levelCategory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=pieces] ; ean ; variantType(code)               ; $catalogVersion ; $approved ; content  ; level[lang=en]      ;
                                             ; 00000296          ; GB,CN            ; CN          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000168     ; Principal           ; hybris           ;                 ;                            ;     ; ConsultantServiceVariantProduct ;                 ;           ; Big Data ; Principal ;  
 
+
+
 # Insert service type of 00000266 Principal consultant		                
-INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=pieces] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content    ; service             ; nationality
-                                              ; 00000396          ; 00000296     ; Architecture_Review  ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; Architecture_Review ; UK         ;  
-                                              ; 00000397          ; 00000296     ; System_Review        ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; System_Review       ; UK         ;  
-                                              ; 00000398          ; 00000296     ; Perf_Review          ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Web Search ; Perf_Review         ; UK         ;  
+#INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=pieces] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content    ; service             ; nationality
+#                                              ; 00000396          ; 00000296     ; Architecture_Review  ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; Architecture_Review ; UK         ;  
+#                                              ; 00000397          ; 00000296     ; System_Review        ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; System_Review       ; UK         ;  
+#                                              ; 00000398          ; 00000296     ; Perf_Review          ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Web Search ; Perf_Review         ; UK         ;  
+
+# Insert service type of 00000266 Principal consultant		                
+INSERT_UPDATE ConsultantServiceVariantProduct ; code[unique=true] ; $supercategories                                                              ; $baseProduct ; serviceCatgory(code) ; manufacturerName ; manufacturerAID ; unit(code)[default=pieces] ; ean ; variantType(code) ; $catalogVersion ; $approved ; content    ; service[lang=en]             ; nationality
+                                              ; 00000396          ; Development,Data,Business-User-Centric,Operational,Testing,Project-Management ; 00000296     ; Architecture_Review  ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; Architecture_Review ; UK         ;  
+                                              ; 00000397          ; Data                                                                          ; 00000296     ; System_Review        ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Big Data   ; System_Review       ; UK         ;  
+                                              ; 00000398          ; Business-User-Centric                                                         ; 00000296     ; Perf_Review          ; hybris           ;                 ;                            ;     ;                   ;                 ;           ; Web Search ; Perf_Review         ; UK         ;  
+
+
+
+
 
 ####################################################################                                             
 #	 Update Product with localization           
