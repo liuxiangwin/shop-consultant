@@ -5,7 +5,7 @@
 $productCatalog=uk-consultingstoreProductCatalog
 $classificationCatalog=ConsultingStoreClassification
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$languages=de,en,ja
+$languages=de,en,ja,zh
 
 #########################################################################################################################################
 # Product catalog
