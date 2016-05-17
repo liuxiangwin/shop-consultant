@@ -22,7 +22,6 @@
 			type="set" />
 	</collectiontypes>
 
-
 	<enumtypes>
 		<enumtype generate="true" code="SwatchColorEnum" autocreate="true"
 			dynamic="true">
@@ -39,7 +38,7 @@
 			<value code="WHITE" />
 			<value code="YELLOW" />
 		</enumtype>
-
+		
 		<enumtype code="ConsultantLevelEnum" autocreate="true"
 			generate="true" dynamic="true">
 			<value code="Principal" />
@@ -62,8 +61,7 @@
 			<value code="domestic" />
 			<value code="international" />
 		</enumtype>
-
-
+		
 		<enumtype code="Introducer" autocreate="true" generate="true"
 			dynamic="true">
 			<value code="no_contact" />
@@ -71,18 +69,14 @@
 			<value code="second_manager" />
 			<value code="thrid_manager" />
 		</enumtype>
-
-
-
+		
 		<enumtype code="PriceRowChannel" autocreate="false" generate="false"
 			dynamic="true">
 			<!-- Default Values to support Mobile channel and desktop channel -->
 			<value code="domestic" />
 			<value code="international" />
 		</enumtype>
-
 	</enumtypes>
-
 
 	<relations>
 		<relation localized="false" generate="true"
@@ -93,8 +87,7 @@
 			<targetElement type="Country" qualifier="activeCountries"
 				cardinality="many"></targetElement>
 		</relation>
-
-
+		
 		<relation localized="false" generate="true"
 			code="VariantConsultant2CountryRelation">
 			<deployment table="VariantCon2CntryRel" typecode="18001" />
@@ -104,7 +97,6 @@
 				cardinality="many"></targetElement>
 		</relation>
 
-
 		<relation generate="true" localized="false" code="Customer2CMSSite"
 			autocreate="true">
 			<description>This relation connects customer with site</description>
@@ -113,21 +105,28 @@
 			<targetElement type="CMSSite" cardinality="one"
 				qualifier="site" collectiontype="list" />
 		</relation>
-
-
 	</relations>
 
 	<itemtypes>
+		<typegroup name="CronJobGroup">
+			<!-- BEGIN Synchronization jobs -->
+			<itemtype code="GlobalToConuntrySyncJob" autocreate="true"
+				generate="true" extends="CatalogVersionSyncJob" 
+				jaloclass="com.hybris.core.jalo.GlobalToConuntrySyncJob" />
+			<!-- END Synchronization jobs -->
+			
+			<itemtype code="GlobalToCountrySyncItemCronJob" autocreate="true"
+			 generate="true" extends="SyncItemCronJob" 
+			 jaloclass="com.hybris.core.jalo.GlobalToCountrySyncItemCronJob"/>
+			
+			<itemtype code="ConsultantCartRemovalJob" autocreate="true"
+				generate="true" extends="CartRemovalCronJob"
+				jaloclass="com.hybris.core.jalo.ConsultantCartRemovalJob">
+			</itemtype>
+		</typegroup>
 
-		
-		<!-- BEGIN Synchronization jobs -->
-		<itemtype code="EasyCatalogVersionSyncJob" autocreate="true" generate="true"
-   		 extends="CatalogVersionSyncJob" jaloclass="com.yrnet.easy.easycronjobs.jalo.EasyCatalogVersionSyncJob" />
-		<!-- END Synchronization jobs -->
-		
 		<!-- Add New Type code here for refernce -->
-		<typegroup name="Consulting">
-
+		<typegroup name="ConsultingGroup">
 			<!-- Country Definition -->
 			<itemtype code="Country" autocreate="false" generate="false">
 				<attributes>
@@ -137,7 +136,6 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
 			<!-- PriceRow Definition -->
 			<itemtype code="PriceRow" extends="PriceRow"
 				jaloclass="de.hybris.platform.europe1.jalo.PriceRow" autocreate="false"
@@ -148,7 +146,6 @@
 						<modifiers read="true" write="true" optional="true" />
 						<defaultvalue>em().getEnumerationValue("ConsultantChannel","no_channel")</defaultvalue>
 					</attribute>
-
 					<attribute type="introducer" qualifier="Introducer">
 						<persistence type="property" />
 						<modifiers read="true" write="true" optional="true" />
@@ -156,7 +153,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
+			<!-- Product Extension -->
 			<itemtype code="Product" autocreate="false" generate="true"
 				jaloclass="com.hybris.core.jalo.Consultant">
 				<description>Extending the Product from core with additional attributes.</description>
@@ -168,9 +165,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
-
-
+			<!-- Consultant Extension -->
 			<itemtype code="Consultant" extends="Product" autocreate="true"
 				generate="true" jaloclass="com.hybris.core.jalo.Consultant">
 				<description>The representation of a consultant</description>
@@ -185,7 +180,6 @@
 						<modifiers optional="true" />
 						<persistence type="property"></persistence>
 					</attribute>
-
 					<attribute type="java.lang.String" qualifier="experienceyear">
 						<modifiers optional="true" />
 						<persistence type="property" />
@@ -199,7 +193,8 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
+			
+			<!-- ConsultantLevelVariantProduct Extension -->
 			<itemtype code="ConsultantLevelVariantProduct" extends="VariantProduct"
 				autocreate="true" generate="true"
 				jaloclass="com.hybris.core.jalo.ConsultantLevelVariantProduct">
@@ -212,7 +207,6 @@
 						<modifiers />
 						<persistence type="property" />
 					</attribute>
-
 					<attribute qualifier="levelCategory" type="ConsultantLevel">
 						<description>Consultant Level.</description>
 						<modifiers />
@@ -222,17 +216,14 @@
 					<!-- <attribute type="java.lang.String" qualifier="nationality"> <modifiers 
 						optional="true" /> <persistence type="property" /> <description>Nationality 
 						of consultant</description> </attribute> -->
-
 					<attribute type="java.lang.String" qualifier="content">
 						<modifiers optional="true" />
 						<persistence type="property" />
 						<description>Attribute is used in category/search page to display the product content</description>
 					</attribute>
-
 				</attributes>
 			</itemtype>
-
-
+			<!-- ConsultantServiceVariantProduct Extension -->
 			<itemtype code="ConsultantServiceVariantProduct" extends="ConsultantLevelVariantProduct"
 				autocreate="true" generate="true"
 				jaloclass="com.hybris.core.jalo.ConsultantServiceVariantProduct">
@@ -245,7 +236,6 @@
 						<modifiers />
 						<persistence type="property" />
 					</attribute>
-
 					<attribute qualifier="serviceCatgory" type="ConsultantSerivceType">
 						<description>Consultant Serivce Type</description>
 						<modifiers />
@@ -259,16 +249,10 @@
 				jaloclass="com.hybris.platform.posselector.jalo.PosSelectorComponentJalo">
 			</itemtype>
 
-			<!-- <itemtype code="AbstractOrderEntry" autocreate="false"
-				generate="true">
-				<attributes>
-					<attribute qualifier="days" type="java.lang.Long">
-						<modifiers initial="true" read="true" write="false"
-							optional="false" />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype> -->
+			<!-- <itemtype code="AbstractOrderEntry" autocreate="false" generate="true"> 
+				<attributes> <attribute qualifier="days" type="java.lang.Long"> <modifiers 
+				initial="true" read="true" write="false" optional="false" /> <persistence 
+				type="property" /> </attribute> </attributes> </itemtype> -->
 		</typegroup>
 
 
