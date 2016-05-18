@@ -149,7 +149,7 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 	protected boolean processNormalRequest(final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
 			throws IOException
 	{
-		String queryString = httpRequest.getQueryString();
+		final String queryString = httpRequest.getQueryString();
 		final String currentRequestURL = httpRequest.getRequestURL().toString();
 
 		//set current site
@@ -157,10 +157,14 @@ public class CMSSiteFilter extends OncePerRequestFilter implements CMSFilter
 		if (cmsSiteModel == null || StringUtils.contains(queryString, CLEAR_CMSSITE_PARAM))
 		{
 
-			if (queryString.contains("/zh") && queryString.contains("/c/Development"))
-			{
-				queryString = queryString.split("/zh")[0];
-			}
+			//if (queryString.contains("/zh") && queryString.contains("/c/Development"))
+			//{
+			//	queryString = queryString.split("/zh")[0];
+			//}
+			//else if (queryString.contains("/en") && queryString.contains("/c/Development"))
+			//{
+			//	queryString = queryString.split("/en")[0];
+			//}
 
 			final String absoluteURL = StringUtils.removeEnd(currentRequestURL, "/")
 					+ (StringUtils.isBlank(queryString) ? "" : "?" + queryString);

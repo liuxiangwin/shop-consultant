@@ -9,9 +9,17 @@ package com.hybris.storefront.util;
  */
 public class CountryUtil
 {
-	public static final String china_absoluteURL = "http://localhost:9001/consultingstorefront?clear=true&site=zh-consultingsite";
+	public static final String china_absoluteURL = "https://zh-consultingsite.local:9002/consultingstorefront/"
+			+ "zh-consultingsite/zh/Development/c/Development";
 
-	public static final String uk_absoluteURL = "https://localhost:9002/consultingstorefront?clear=true&site=uk-consultingsite";
+	public static final String uk_absoluteURL = "https://uk-consultingsite.local:9002/consultingstorefront"
+			+ "/uk-consultingsite/en/Development/c/Development";
+
+	//public static final String china_absoluteURL = "http://localhost:9001/consultingstorefront?clear=true&site=zh-consultingsite";
+
+	//public static final String uk_absoluteURL = "https://localhost:9002/consultingstorefront?clear=true&site=uk-consultingsite";
+
+
 
 	public static final String zh_local = "zh_CN";
 

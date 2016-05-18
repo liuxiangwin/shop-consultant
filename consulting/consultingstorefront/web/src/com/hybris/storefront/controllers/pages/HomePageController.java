@@ -14,7 +14,6 @@
 package com.hybris.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController.ShowMode;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -81,26 +80,37 @@ public class HomePageController extends AbstractPageController
 			throws CMSItemNotFoundException, IOException
 	{
 
-		/*
-		 * final Cookie[] cookies = request.getCookies();
-		 * 
-		 * Cookie cook; String selectCountry = ""; if (cookies != null) { for (int i = 0; i < cookies.length; i++) { cook
-		 * = cookies[i]; if (cook.getName().equalsIgnoreCase("country-selected")) { selectCountry = cook.getValue(); } } }
-		 */
-		//final String selectCountry = request.getParameter("country-selected");
-
+		//final Cookie[] cookies = request.getCookies();
+		//Cookie cook;
+		//String selectCountry = "";
+		//if (cookies != null)
+		//{
+		//	for (int i = 0; i < cookies.length; i++)
+		//	{
+		//		cook = cookies[i];
+		//		if (cook.getName().equalsIgnoreCase("country-selected"))
+		//		{
+		//			selectCountry = cook.getValue();
+		//		}
+		//	}
+		//}
+		//if (selectCountry.equalsIgnoreCase(""))
+		//{
+		//	return REDIRECT_PREFIX + "/main";
+		//}
 		if (request.getQueryString() != null)
 		{
 			if (!request.getQueryString().contains("consultingsite"))
 			{
-				return REDIRECT_PREFIX + "/main";
+				//return REDIRECT_PREFIX + "/main";
+				response.sendRedirect("/main");
 			}
 		}
-
 		if (logout)
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "account.confirmation.signout.title");
-			return REDIRECT_PREFIX + ROOT;
+			//return REDIRECT_PREFIX + ROOT;
+			response.sendRedirect(ROOT);
 		}
 
 		//storeCmsPageInModel(model, getContentPageForLabelOrId(null));
@@ -121,11 +131,20 @@ public class HomePageController extends AbstractPageController
 		storeCmsPageInModel(model, catalogPageModel);
 		updatePageTitle(model, catalogPageModel);
 
-		return categoryPageController.category("Development", "", 0, ShowMode.Page, "", model, request, response);
+		return getViewForPage(model);
 
+		//return FORWARD_PREFIX + "/Development/c/Development";
+		//return categoryPageController.category("Development", "", 0, ShowMode.Page, "", model, request, response);
 		//return getViewForPage(catalogPageModel);
 
-		//return performSearchAndGetResultsPage("Development", "", "", "", "", model, request, response);
+
+		//final String redirect_url = ControllerConstants.Url.REDIRECT_PREFIX + "https://" + country.toLowerCase()
+		//		+ "-consultingsite.local:9002/consultingstorefront/" + country.toLowerCase()
+		//		+ "-consultingsite/en/search?q=%3Arelevance&show=All";
+
+		//LOG.debug("redirecting to " + redirect_url);
+
+		//return REDIRECT_PREFIX + "/Development/c/Development";
 	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)

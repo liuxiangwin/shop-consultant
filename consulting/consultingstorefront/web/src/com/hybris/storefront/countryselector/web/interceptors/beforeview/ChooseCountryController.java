@@ -101,7 +101,6 @@ public class ChooseCountryController extends AbstractPageController
 				{
 					selectCountry = cook.getValue();
 				}
-
 			}
 		}
 		if (selectCountry.equalsIgnoreCase(""))
@@ -199,8 +198,6 @@ public class ChooseCountryController extends AbstractPageController
 			final HttpServletResponse response)
 	{
 		initializeSiteFromRequest(absoluteURL, locale);
-		//final ContentPageModel contentPageModel = cmsSiteModel.getStartingPage();
-		//final ContentPageModel contentPageModel = null;
 		CategoryPageModel catalogPageModel = null;
 		try
 		{
@@ -218,24 +215,6 @@ public class ChooseCountryController extends AbstractPageController
 		//return getViewForPage(model);
 		//response.setContentType("text/html");
 		return REDIRECT_PREFIX + "/Development/c/Development";
-	}
-
-	public String beforeRender(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
-	{
-		String cmsSite = "";
-		if (sessionService.getCurrentSession().getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR) != null)
-		{
-			cmsSite = sessionService.getCurrentSession().getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR);
-			return REDIRECT_PREFIX + "https://localhost:9002/consultingstorefront/" + cmsSite + "?clear=true&site=" + "cmsSite";
-		}
-		else
-		{
-			//There is no country in session memory
-			model.addAttribute("sites", countrySelectorStrategy.getAllCMMSite());
-			storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
-			return "pages/choosecounty/chooseCountry";
-		}
 	}
 
 	private ContentPageModel getHomePageRender() throws CMSItemNotFoundException
