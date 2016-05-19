@@ -4,6 +4,11 @@ select * from {Category as c}
 
 
 
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//////////////////Product and Category Relatioship ////////////////////////////
+
 select * from {Product as p
 
 	JOIN CategoryProductRelation as p2c ON {p.pk} = {p2c.target} 
@@ -11,10 +16,32 @@ select * from {Product as p
    } where {p.code}='00000001' 
 
 
+///////////////////////Defination////////////////////////////
 
-SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
-		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
-		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
-		WHERE {cty.isocode} = 'CN'   
-		AND                          
-		{p.variantType} IS NULL   
+catalog-items.xml
+
+
+P-2-c
+++++++++++++++
++++ P  ++++ C+++
+    01 +++  Sony
+    02 +++  Sony
+    
+Category--- Classifcation 同一张表
+                    p_code             aCLTS   propTS
+					IT-Serivce       	0	    0					
+					dataclassification	0	    0
+    
+    
+
+<relation code="CategoryProductRelation" autocreate="true" generate="true" localized="false">
+			<deployment table="Cat2ProdRel" typecode="143"/>
+    		<sourceElement qualifier="supercategories" type="Category" cardinality="many" ordered="false">
+    		    <description>Super Categories</description>
+    			<modifiers read="true" write="true" search="true" optional="true"/>
+    		</sourceElement>
+    		<targetElement qualifier="products" type="Product" cardinality="many" collectiontype="list" ordered="true">
+    		    <description>Products</description>
+    			<modifiers read="true" write="true" search="true" optional="true"/>
+    		</targetElement>		
+ </relation>
