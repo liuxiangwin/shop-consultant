@@ -5,6 +5,8 @@ package com.hybris.core.channel.strategies;
 
 import de.hybris.platform.catalog.CatalogService;
 import de.hybris.platform.catalog.jalo.CatalogAwareEurope1PriceFactory;
+import de.hybris.platform.catalog.jalo.CatalogManager;
+import de.hybris.platform.catalog.jalo.CatalogVersion;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.core.PK;
@@ -80,6 +82,12 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 					catalogId = clm.getCatalog().getId();
 				}
 			}
+		}
+
+		else
+		{
+			final CatalogVersion clv = CatalogManager.getInstance().getCatalogVersion(product);
+			catalogId = clv.getCatalog().getId();
 		}
 		boolean isDomesticPrice = false;
 		boolean isInternationPrice = false;
@@ -161,6 +169,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 		final QueryWithParams queryAndParams = builder.withAnyProduct().withAnyUser().withProduct(productPk)
 				.withProductId(productId).withProductGroup(productGroupPk).withUser(userPk).withUserGroup(userGroupPk).build();
 		return FlexibleSearch.getInstance().search(ctx, queryAndParams.getQuery(), queryAndParams.getParams(), PriceRow.class)
-				.getResult();
+				.getResult();//
 	}
 }
