@@ -66,4 +66,14 @@ SELECT tbl.pk  FROM
 )tbl                               
 		}})                              
 "                                  
+
+INSERT_UPDATE CatalogVersionSyncJob ; code[unique=true]                                    ; roottypes(code)[mode=append] ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; Category                     ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; Product                      ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; Keyword                      ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; Media                        ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; MediaContainer               ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; TaxRow                       ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; DiscountRow                  ;  
+                                    ; sync uk-consultingstoreProductCatalog:Staged->Online ; SolrHeroProductDefinition    ;  
                                    

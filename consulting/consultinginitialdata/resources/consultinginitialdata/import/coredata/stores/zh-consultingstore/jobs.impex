@@ -62,4 +62,16 @@ SELECT tbl.pk  FROM
 )tbl                               
 		}})                              
 "                                  
-                                   
+#####################################################################################################
+####  rootTypes control             
+###################################################################################################
+                                    
+INSERT_UPDATE CatalogVersionSyncJob ; code[unique=true]                                    ; roottypes(code)[mode=append] ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; Category                     ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; Product                      ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; Keyword                      ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; Media                        ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; MediaContainer               ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; TaxRow                       ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; DiscountRow                  ;  
+                                    ; sync zh-consultingstoreProductCatalog:Staged->Online ; SolrHeroProductDefinition    ;  
