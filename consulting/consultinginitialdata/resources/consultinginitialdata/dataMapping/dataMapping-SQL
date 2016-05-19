@@ -1,0 +1,20 @@
+select * from {Product as p} where {p.code}='00000001' 
+
+select * from {Category as c}
+
+
+
+select * from {Product as p
+
+	JOIN CategoryProductRelation as p2c ON {p.pk} = {p2c.target} 
+	JOIN Category as c ON {c.pk} = {p2c.source}
+   } where {p.code}='00000001' 
+
+
+
+SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+		WHERE {cty.isocode} = 'CN'   
+		AND                          
+		{p.variantType} IS NULL   
