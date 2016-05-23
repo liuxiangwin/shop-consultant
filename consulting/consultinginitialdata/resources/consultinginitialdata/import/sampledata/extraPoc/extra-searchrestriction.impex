@@ -1,0 +1,20 @@
+
+INSERT_UPDATE Employee ; UID[unique=true]    ; writableCatalogVersions(catalog(id),version) ; readableCatalogVersions(catalog(id),version) ; description                                                                                                       ; name                ; groups(uid)            ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; password
+                       ; Development-Manager ; zh-consultingstoreProductCatalog:Online      ; zh-consultingstoreProductCatalog:Online      ; Development-Manager Development-Manager only could see development category product read China Site product data. ; Development-Manager ; china-site-admin-group ; en                       ; EUR                      ; 1234    
+
+
+
+
+
+
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]   ; active[default=true] ; generate[default=false] ; principal(uid)      ; restrictedType(code) ; query
+                                ; Development-Manager ; true                 ; false                   ; Development-Manager ; Category             ; "    
+                                
+{pk} IN ({{select {pk} from {Category as c}
+	where {c.code} ='Development' }})
+"                               
+
+
+
+
