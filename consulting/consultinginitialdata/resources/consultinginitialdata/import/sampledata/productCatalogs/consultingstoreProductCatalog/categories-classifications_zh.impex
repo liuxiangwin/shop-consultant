@@ -1,29 +1,29 @@
 # ImpEx for Importing Category Classifications
 $classificiationSystem=ConsultingStoreClassification
-$classificiationSystemName=Y Consulting Classification System
+$classificiationSystemName=Consulting Classification System
 $systemVersion=1.0
 $lang=zh
 $superClass=superCategories(code,$sysVer)
 $catalogVersion=catalogVersion(catalog(id[default=$classificiationSystem]), version[default=$systemVersion])[unique=true]
 $classSystemVersion=systemVersion(catalog(id[default='$classificiationSystem']),version[default='1.0'])[unique=true]
 
-UPDATE ClassificationClass ; code[unique=true]               ; name[lang=$lang]             ; $catalogVersion
-                           ; programmingclassification       ; "编程" Classification   ;                ;  
-                           ; dataclassification              ; "数据" Classification          ;                ;  
-                           ; businessuserclassification      ; "商务"Business User Classification ;                ;  
-                           ; operationalclassification       ; "操作"Operation Classification     ;                ;  
-                           ; testingclassification           ; "测试"Testing Classification       ;                ;  
-                           ; projectmanagementclassification ; "项目管理"Project Mgmt Classification  ;                ;  
+UPDATE ClassificationClass ; code[unique=true]               ; name[lang=$lang] ; $catalogVersion
+                           ; programmingclassification       ; "编程"             ;                ;  
+                           ; dataclassification              ; "数据"             ;                ;  
+                           ; businessuserclassification      ; "商务"             ;                ;  
+                           ; operationalclassification       ; "操作"             ;                ;  
+                           ; testingclassification           ; "测试"             ;                ;  
+                           ; projectmanagementclassification ; "项目管理"           ;                ;  
 
 
 # Classification attribute (aka) feature descriptor (aka) feature list(s)
-UPDATE ClassificationAttribute ; code[unique=true]       ; name[lang=$lang]          ; $classSystemVersion
-                               ; programmingdisciplines  ; "编程"Programming Disciplines   ;                    
-                               ; datadisciplines         ; "数据"Data Disciplines          ;                    
-                               ; businessuserdisciplines ; "商务"Business User Disciplines ;                    
-                               ; devopsdisciplines       ; "操作"Devops Disciplines        ;                    
-                               ; testingdisciplines      ; "测试"Testing Disciplines       ;                    
-                               ; projectdisciplines      ; "项目管理"Project Disciplines       ;                    
+UPDATE ClassificationAttribute ; code[unique=true]       ; name[lang=$lang] ; $classSystemVersion
+                               ; programmingdisciplines  ; "编程描述"           ;                    
+                               ; datadisciplines         ; "数据描述"           ;                    
+                               ; businessuserdisciplines ; "商务描述"           ;                    
+                               ; devopsdisciplines       ; "操作描述"           ;                    
+                               ; testingdisciplines      ; "测试描述"           ;                    
+                               ; projectdisciplines      ; "项目管理描述"         ;                    
 
 # CAV - (aka) feature values   
 UPDATE ClassificationAttributeValue ; code[unique=true]             ; name[lang=$lang]              ; $classSystemVersion ;  
@@ -49,5 +49,5 @@ UPDATE ClassificationAttributeValue ; code[unique=true]             ; name[lang=
                                     ; System Integrated Testing     ; System Integrated Testing     ;                     
                                     ; Jira Mgmt                     ; Jira Mgmt                     ;                     
                                     ; Scrum                         ; Scrum                         ;                     
-                                    ; Agile                         ; Agile                         ;                     
-                                    ; Kanban                        ; Kanban                        ;                     
+                                    ; Agile                         ; 敏捷                            ;                     
+                                    ; Kanban                        ; 看板                            ;                     
