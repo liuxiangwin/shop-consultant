@@ -48,13 +48,18 @@ public class CheckAuthorizeOrderPaymentAction extends AbstractSimpleDecisionActi
 				{
 					for (final PaymentTransactionEntryModel entry : transaction.getEntries())
 					{
-						if (entry.getType().equals(PaymentTransactionType.AUTHORIZATION)
-								&& TransactionStatus.ACCEPTED.name().equals(entry.getTransactionStatus()))
+						//if (entry.getType().equals(PaymentTransactionType.AUTHORIZATION)
+						//		&& TransactionStatus.ACCEPTED.name().equals(entry.getTransactionStatus()))
+						//{
+						if (true)
 						{
+							entry.setType(PaymentTransactionType.AUTHORIZATION);
+							entry.setTransactionStatus(TransactionStatus.ACCEPTED.name());
 							order.setStatus(OrderStatus.PAYMENT_AUTHORIZED);
 							modelService.save(order);
 							return Transition.OK;
 						}
+						//}
 					}
 				}
 			}
