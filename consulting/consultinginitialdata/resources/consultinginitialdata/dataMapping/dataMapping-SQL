@@ -30,6 +30,7 @@ select * from {
      AND 
      {cv.version} = 'Online' 
 
+4 个 Category 4 条rows记录
 ///////////////////////Definition////////////////////////////
 
 catalog-items.xml

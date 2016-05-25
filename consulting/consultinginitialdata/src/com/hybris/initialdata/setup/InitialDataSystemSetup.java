@@ -30,6 +30,10 @@ import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import de.hybris.platform.cronjob.enums.CronJobResult;
 import de.hybris.platform.cronjob.enums.CronJobStatus;
+import de.hybris.platform.jalo.type.ComposedType;
+import de.hybris.platform.jalo.type.TypeManager;
+import de.hybris.platform.jalo.user.User;
+import de.hybris.platform.jalo.user.UserManager;
 import de.hybris.platform.servicelayer.cronjob.CronJobService;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -190,14 +194,13 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getConsultingSampleDataImportService().importSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE,
 				getSolrMode(ZH_CONSULTING_STORE));
 
-		// 16. Activate Solr cron job with online&Stage data
+		// 16. Activate Solr cron job with Online&Stage data
 		LOG.debug("Activating solr indexes ");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Staged");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Staged");
 
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, UK_CONSULTING_STORE + "Online");
 		getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, ZH_CONSULTING_STORE + "Online");
-		//getConsultingCoreDataImportService().runSolrIndex(EXTENSION_NAME, SE_CONSULTING_STORE + "Online");
 
 	}
 
@@ -213,6 +216,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 		// In the case of the Global, do our own custom sync to
 		//the staged version of each country specific catalog
+		@SuppressWarnings("deprecation")
 		final Catalog baseConsultingCatalogue = CatalogManager.getInstance().getCatalog(
 				BASE_CONSULTING_CATALOG_PREFIX + "ProductCatalog");
 		final Catalog targetConsultingCatalogue = CatalogManager.getInstance().getCatalog(catalogId + "ProductCatalog");
@@ -239,6 +243,11 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		syncJob.setLogToFile(false);
 		syncJob.setForceUpdate(false);
 
+		final User synUser = UserManager.getInstance().getEmployeeByLogin("syn-user");
+		if (synUser != null)
+		{
+			syncJob.setSessionUser(synUser);
+		}
 		LOG.info("Created cronjob [" + syncJob.getCode() + "] to synchronize catalog [" + BASE_CONSULTING_CATALOG_PREFIX
 				+ "] staged to catalog [" + catalogName + "] staged.");
 		LOG.info("Configuring full version sync");
@@ -253,6 +262,15 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		final CronJobResult result = getModelService().get(syncJob.getResult());
 		final CronJobStatus status = getModelService().get(syncJob.getStatus());
 		return new PerformResult(result, status);
+	}
+
+	private void addRootTypes()
+	{
+		//add the Types we want to sync
+		final List<ComposedType> rootTypes = new ArrayList<ComposedType>();
+		rootTypes.add(TypeManager.getInstance().getComposedType("Category"));
+		rootTypes.add(TypeManager.getInstance().getComposedType("Product"));
+		rootTypes.add(TypeManager.getInstance().getComposedType("Media"));
 	}
 
 	private ModelService getModelService()
