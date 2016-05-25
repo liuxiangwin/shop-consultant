@@ -97,14 +97,14 @@
 				cardinality="many"></targetElement>
 		</relation>
 
-		<relation generate="true" localized="false" code="Customer2CMSSite"
+		<!-- <relation generate="true" localized="false" code="Customer2CMSSite"
 			autocreate="true">
 			<description>This relation connects customer with site</description>
 			<sourceElement type="Customer" cardinality="many"
 				qualifier="customers" />
 			<targetElement type="CMSSite" cardinality="one"
 				qualifier="site" collectiontype="list" />
-		</relation>
+		</relation> -->
 	</relations>
 
 	<itemtypes>

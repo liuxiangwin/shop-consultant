@@ -6,6 +6,29 @@
 					<cockpit code="TopHeaderSlot"/>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="5" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="Section1" />
+				</td>
+			</tr>
+			<tr>
+				<td width="20%" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="Section2A" />
+				</td>
+				<td width="80%" colspan="4" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="Section2B" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="Section3" />
+				</td>
+			</tr>
+			<tr>
+				<td height="270px" colspan="5" class="structureViewSection">
+					<cockpit code="Footer" />
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">

@@ -2,5 +2,5 @@
 # Import Access Rights for Report Cockpit
 #
 
-INSERT_UPDATE CockpitUIComponentAccessRight;code[unique=true];readPrincipals(uid);writePrincipals(uid);
-;cockpit.perspective.jirafe;analyticsperspectivegroup;analyticsperspectivegroup
+INSERT_UPDATE CockpitUIComponentAccessRight ; code[unique=true]          ; readPrincipals(uid)       ; writePrincipals(uid)     ;  
+                                            ; cockpit.perspective.jirafe ; analyticsperspectivegroup ; analyticsperspectivegroup

@@ -65,7 +65,8 @@ public class CountrySelectorStrategy
 
 	private String getSiteUidForLoggedUser(final CustomerModel currentUser)
 	{
-		return (currentUser.getSessionLanguage() != null) ? currentUser.getSite().getUid() : null;
+		return (currentUser.getSessionLanguage() != null) ? "" : null;
+		//currentUser.getSite().getUid() : null;
 	}
 
 	private String getSiteUidForAnonymousUser(final CustomerModel anonymousUser)

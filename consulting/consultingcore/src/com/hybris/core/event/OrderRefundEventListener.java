@@ -16,12 +16,13 @@ package com.hybris.core.event;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
 import de.hybris.platform.commerceservices.event.AbstractSiteEventListener;
+//import com.hybris.fulfilmentprocess.events.OrderCancelledEvent;
+import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
-import com.hybris.fulfilmentprocess.events.OrderCancelledEvent;
 
 import org.springframework.beans.factory.annotation.Required;
 
