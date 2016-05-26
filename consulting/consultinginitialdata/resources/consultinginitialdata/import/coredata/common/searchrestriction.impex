@@ -37,14 +37,27 @@ INSERT_UPDATE SearchRestriction ; code[unique=true]             ; active[default
 "                               
 
 
+#####################################################################################################
+######## Define GlobalCatalog   
+######################################################## #############################################
 
 
 
 INSERT_UPDATE SearchRestriction ; code[unique=true]                ; active[default=true] ; generate[default=false] ; principal(uid)         ; restrictedType(code) ; query
-                                ; GlobalCatalog-availability       ; true                 ; false                   ; china-site-admin-group ; Catalog             ; "    
+                                ; GlobalCatalog-availability-China ; true                 ; false                   ; china-site-admin-group ; Catalog              ; "    
                                 
 {pk} IN ({{ select {c.pk} from {Catalog as c }        
 		  where {c.id}='zh-consultingstoreProductCatalog'
-		  
-		 }})
-"       
+		                              
+		 }})                          
+"                               
+
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]             ; active[default=true] ; generate[default=false] ; principal(uid)      ; restrictedType(code) ; query
+                                ; GlobalCatalog-availability-UK ; true                 ; false                   ; uk-site-admin-group ; Catalog              ; "    
+                                
+{pk} IN ({{ select {c.pk} from {Catalog as c }        
+		  where {c.id}='uk-consultingstoreProductCatalog'
+		                              
+		 }})                          
+"                               
