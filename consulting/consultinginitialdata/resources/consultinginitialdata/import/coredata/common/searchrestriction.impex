@@ -36,3 +36,15 @@ INSERT_UPDATE SearchRestriction ; code[unique=true]             ; active[default
 		  where {ppg.code}='Product-Class-UK'}})
 "                               
 
+
+
+
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]                ; active[default=true] ; generate[default=false] ; principal(uid)         ; restrictedType(code) ; query
+                                ; GlobalCatalog-availability       ; true                 ; false                   ; china-site-admin-group ; Catalog             ; "    
+                                
+{pk} IN ({{ select {c.pk} from {Catalog as c }        
+		  where {c.id}='zh-consultingstoreProductCatalog'
+		  
+		 }})
+"       
