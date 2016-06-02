@@ -25,6 +25,10 @@ import de.hybris.platform.solrfacetsearch.config.IndexedType;
 import de.hybris.platform.solrfacetsearch.search.SearchQuery;
 
 
+/**
+ * @author Alan Liu
+ *
+ */
 public class SearchApprovalStatusPopulator<INDEXED_PROPERTY_TYPE, INDEXED_TYPE_SORT_TYPE>
 		implements
 		Populator<SearchQueryPageableData<SolrSearchQueryData>, SolrSearchRequest<FacetSearchConfig, IndexedType, INDEXED_PROPERTY_TYPE, SearchQuery, INDEXED_TYPE_SORT_TYPE>>
@@ -32,8 +36,6 @@ public class SearchApprovalStatusPopulator<INDEXED_PROPERTY_TYPE, INDEXED_TYPE_S
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@SuppressWarnings("deprecation")
 	@Override
