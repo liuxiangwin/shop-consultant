@@ -63,6 +63,7 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 		super.onLogoutSuccess(request, response, authentication);
 	}
 
+
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -76,12 +77,6 @@ public class StorefrontLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandle
 				targetUrl = super.getDefaultTargetUrl();
 			}
 		}
-		//final String targetUrlModify = "/jp-consultingsite/en/?clear=true&site=uk-consultingsite";
-		//https://localhost:9002/consultingstorefront/jp-consultingsite/en/?clear=true&site=jp-consultingsite
-
-
-		//return targetUrlModify;
-
-		return "https://localhost:9002/consultingstorefront/uk-consultingsite/en/?clear=true&site=uk-consultingsite";
+		return targetUrl;
 	}
 }
