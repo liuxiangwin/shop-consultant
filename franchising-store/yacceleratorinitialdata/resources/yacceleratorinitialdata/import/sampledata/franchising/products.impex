@@ -1,0 +1,30 @@
+# ImpEx for Importing Products into Electronics Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+#$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$lang=en
+$storeUid=electronics
+
+#INSERT_UPDATE Franchising ; code[unique=true] ; name[lang=$lang] ; franchisingName ; $catalogVersion ;  
+#                          ; 2016000001        ; ShangHai         ; ShangHai        ;                 ;  
+#                          ; 2016000002        ; Beijing          ; Beijing         ;                 ;  
+
+INSERT_UPDATE PointOfService ; code[unique=true] name[unique=true] ; type(code) ; address(&addrID) ; latitude ; longitude ; geocodeTimestamp[dateformat=dd-MM-yyyy] ; $storeImage          ; basestore(uid)[default=$storeUid] ; features(code)
+                             ; 2016000001;ShangHai          ; STORE      ; shanghai-addr1   ; 35,7091  ; 139,6732  ; 29-04-2025                              ; electronics_store_01 ;                                   ;               
+                             ; 2016000002;Beijing           ; STORE      ; beijing-addr2    ; 35,6673  ; 139,75429 ; 29-04-2025                              ; electronics_store_02 ;                                   ;               
+                             
+
+
+# Insert Products            
+INSERT_UPDATE Product ; code[unique=true] ; franchising(code) ; $supercategories ; manufacturerName ; manufacturerAID ; unit(code) ; ean          ; variantType(code) ; $catalogVersion ; $approved
+                      ; 3555166           ; 2016000001,2016000002  ; 578, brand_10    ; Canon            ; 3820B046AA      ; pieces     ; 8714574542027
+
+
+
+

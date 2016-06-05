@@ -1,0 +1,200 @@
+===============================================
+SELECT *
+  from {Product as p
+  join Product2FranchisingRelation as p2f ON {p.pk} = {p2f.source} 
+  JOIN Franchising as fr ON {p2f.target} = {fr.pk} 
+  }
+
+where {p.code}='3555166'
+  
+  
+where  
+ {fr.code} = '2016000002'
+
+
+===========================================================================================
+SELECT DISTINCT {pr:PK} AS pk
+		FROM {PriceRow as pr 
+		JOIN Franchising as fr ON {pr.Franchising} = {fr.pk} 
+		}
+		WHERE {fr.code} = '2016000002'
+
+
+===========================================================================================
+
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		                            
+	{{                            
+		                             
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}
+		JOIN CatalogVersion as cv on {cv.pk} = {p.catalogversion}
+        JOIN Catalog as c on {cv.catalog} = {c.pk} 
+		}
+		WHERE {cty.isocode} = 'CN'
+		AND {p.variantType}IS NULL
+		AND
+        {c.id} = 'zh-consultingstoreProductCatalog' 
+    	 AND 
+        {cv.version} = 'Online'     
+		
+	}}	                           
+	UNION		                       
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
+		JOIN Country as cty ON {cty.pk} = {v2c.target}
+		JOIN CatalogVersion as cv on {cv.pk} = {p.catalogversion}
+        JOIN Catalog as c on {cv.catalog} = {c.pk}	
+		} 
+		
+		WHERE {cty.isocode} = 'CN' 
+		AND
+        {c.id} = 'zh-consultingstoreProductCatalog' 
+    	 AND 
+        {cv.version} = 'Online'    
+    }}                         
+)tbl ORDER BY tbl.code
+
+
+==============================================
+
+
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code ,{p.catalogVersion}
+		FROM {
+      Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}
+      JOIN CatalogVersion as cv on {cv.pk} = {p.catalogversion}
+      JOIN Catalog as c on {cv.catalog} = {c.pk}         
+        }
+     WHERE {cty.isocode} = 'CN' 
+         
+      AND
+     {c.id} = 'zh-consultingstoreProductCatalog' 
+     AND 
+     {cv.version} = 'Online'     
+         
+		AND 
+		{p.variantType} IS NULL
+		
+		AND 
+		({p.approvalstatus}=
+		({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}}))
+		
+		OR
+		{p:code} IN (
+			{{                          
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= '2016-04-16 21:50:00.0'
+			}}) 
+			
+		
+		AND ({p:modifiedtime} >= '2016-04-16 21:50:00.0' OR {c2c:modifiedtime} >= '2016-04-16 21:50:00.0')
+     
+
+==================
+
+
+SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+		WHERE {cty.isocode} = 'CN' and {p.variantType} IS NULL
+		
+		and ({p.approvalstatus}= 
+        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='unapproved'}}))	
+		
+		  AND ({p:modifiedtime} >= '2016-04-16 18:58:00.0'  
+            OR {c2c:modifiedtime} >= '2016-04-16 18:58:00.0'
+
+		   ) 
+		   
+		   
+SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {ConsultantLevelVariantProduct AS p JOIN Consultant AS bp1 ON {p:baseProduct}={bp1:PK} 
+ 		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:pk}       
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'CN' 
+		AND ({p.approvalstatus}= 
+        ({{SELECT {pk} FROM {ArticleApprovalStatus as AP} WHERE {AP.code}='approved'}})) 	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+
+SELECT DISTINCT tbl.pk, tbl.code FROM 	
+(		
+	{{
+		
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 
+		FROM {Consultant as p JOIN Consultant2CountryRelation as c2c ON {p.pk} = {c2c.source} 
+		JOIN Country as cty	ON {cty.pk} = {c2c.target}}
+	}}	
+	UNION		
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code 	
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK}
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {p:baseProduct}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}} 
+		WHERE {cty.isocode} = 'GB' OR {cty.isocode} ='JP'
+    }}
+	UNION	
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} 
+		JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} 
+		JOIN VariantConsultant2CountryRelation as v2c ON {v2c.source} = {bp1:PK}
+		JOIN Country as cty ON {cty.pk} = {v2c.target}}
+	}}		
+)tbl ORDER BY tbl.code  
+
+
+
+
+
+	
+SELECT {PK}	
+	
+	
+
+SELECT DISTINCT tbl.pk, tbl.code FROM 
+(
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN Product AS bp1 ON {p:baseProduct}={bp1:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp1:PK} }
+		WHERE {p:varianttype} IS NULL AND ({bp1:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {VariantProduct AS p JOIN VariantProduct AS bp1 ON {p:baseProduct}={bp1:PK} JOIN Product AS bp2 ON {bp1:baseProduct}={bp2:PK} LEFT JOIN CustomerReview AS cr ON {cr:product}={bp2:PK} }
+		WHERE {p:varianttype} IS NULL AND ({bp2:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}                            
+	UNION                         
+	{{                            
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
+			{{                          
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}                          
+		)                            
+	}}                            
+)tbl ORDER BY tbl.code    
+	
+select * from {Product as P} where {P.pk}='8796137848833'	

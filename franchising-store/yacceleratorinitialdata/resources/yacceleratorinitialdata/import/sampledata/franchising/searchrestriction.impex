@@ -1,0 +1,16 @@
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]                           ; active[default=true] ; generate[default=false] ; principal(uid)            ; restrictedType(code) ; query
+                                ; Beijing-franchising-PriceGroup-availability ; true                 ; false                   ; Beijing-franchising-admin ; PriceRow             ; "    
+                                
+{pk} IN ({{
+  SELECT DISTINCT {pr:PK} AS pk
+		FROM {PriceRow as pr 
+		JOIN Franchising as fr ON {pr.Franchising} = {fr.pk} 
+		}
+		WHERE {fr.code} = '2016000002'
+ }})
+"                               
+
+
+
+
