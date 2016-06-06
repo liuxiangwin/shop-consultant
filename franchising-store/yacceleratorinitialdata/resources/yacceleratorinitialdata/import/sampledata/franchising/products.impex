@@ -18,13 +18,29 @@ $storeUid=electronics
 INSERT_UPDATE PointOfService ; name[unique=true] ; type(code) ; latitude ; longitude ; geocodeTimestamp[dateformat=dd-MM-yyyy] ; basestore(uid)[default=$storeUid] ; features(code)
                              ; ShangHai          ; STORE      ; 35,7091  ; 139,6732  ; 29-04-2025                              ;                                   ;               
                              ; Beijing           ; STORE      ; 35,6673  ; 139,75429 ; 29-04-2025                              ;                                   ;               
-                             
 
 
-# Insert Products            
+INSERT_UPDATE Warehouse ; code[unique=true]  ; name               ; vendor(code)[default=default] ; default[default=true]
+                        ; warehouse_shanghai ; warehouse_shanghai ;                               
+                        ; warehouse_beijing  ; warehouse_beijing  ;                               
+
+INSERT_UPDATE PointOfService ; name[unique=true]  ; displayName        ; warehouses(code)   ; latitude   ; longitude   ; geocodeTimestamp[dateformat=dd.MM.yyyy] ; type(code)[default=WAREHOUSE]
+                             ; warehouse_shanghai ; Warehouse Shanghai ; warehouse_shanghai ; 33,5933317 ; 130,3515247 ; 11.12.2025                              
+                             ; warehouse_beijing  ; Warehouse Beijing  ; warehouse_beijing  ; 35,7116188 ; 139,7082147 ; 11.12.2025                              
+
+
+
+
+INSERT_UPDATE BaseStore2WarehouseRel ; source(uid)[unique=true] ; target(code)[unique=true]
+                                     ; $storeUid                ; warehouse_shanghai       
+                                     ; $storeUid                ; warehouse_beijing        
+
+# Insert Products                    
 INSERT_UPDATE Product ; code[unique=true] ; pointsOfService(name) ; $supercategories ; manufacturerName ; manufacturerAID ; unit(code) ; ean          ; variantType(code) ; $catalogVersion ; $approved
-                      ; 3555166           ; ShangHai,Beijing  ; 578, brand_10    ; Canon            ; 3820B046AA      ; pieces     ; 8714574542027
+                      ; 3555166           ; ShangHai,Beijing      ; 578, brand_10    ; Canon            ; 3820B046AA      ; pieces     ; 8714574542027
 
 
-
+INSERT_UPDATE StockLevel ; available ; warehouse(code)[unique=true] ; inStockStatus(code) ; maxPreOrder ; maxStockLevelHistoryCount ; overSelling ; preOrder ; productCode[unique=true] ; reserved
+                         ; 6         ; warehouse_shanghai           ; notSpecified        ; 0           ; 0                         ; 0           ; 0        ; 3555166                  ; 0       
+                         ; 8         ; warehouse_beijing            ; notSpecified        ; 0           ; 0                         ; 0           ; 0        ; 3555166                  ; 0       
 
