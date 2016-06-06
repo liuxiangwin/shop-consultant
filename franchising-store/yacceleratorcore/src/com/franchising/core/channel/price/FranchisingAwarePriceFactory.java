@@ -7,20 +7,15 @@ import de.hybris.platform.catalog.CatalogService;
 import de.hybris.platform.catalog.jalo.CatalogAwareEurope1PriceFactory;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.core.Registry;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.europe1.jalo.Europe1PriceFactory;
-import de.hybris.platform.europe1.jalo.PriceRow;
-import de.hybris.platform.europe1.model.PriceRowModel;
-import de.hybris.platform.jalo.SessionContext;
-import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.order.price.JaloPriceFactoryException;
 import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.jalo.product.Product;
-import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,58 +47,38 @@ public class FranchisingAwarePriceFactory extends CatalogAwareEurope1PriceFactor
 	private CatalogService catalogService;
 
 	@SuppressWarnings("deprecation")
-	public Collection<PriceRow> queryPrice(final SessionContext ctx, @SuppressWarnings("deprecation") final Product product,
-			@SuppressWarnings("deprecation") final EnumerationValue productGroup, final User user, final EnumerationValue userGroup)
+	public List<PriceInformation> queryFranchisingPrice(final ProductModel productModel)
 	{
-		final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
-
-		Preconditions.checkNotNull(product);
+		//final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
+		//Preconditions.checkNotNull(product);
 		Preconditions.checkNotNull(productModel);
-		final boolean isDomesticPrice = false;
-		final boolean isInternationPrice = false;
-
+		List<PriceInformation> priceList = new ArrayList<PriceInformation>();
 		try
 		{
-			final List<PriceInformation> priceList = Europe1PriceFactory.getInstance().getProductPriceInformations(
+			priceList = Europe1PriceFactory.getInstance().getProductPriceInformations(
 					modelService.<Product> getSource(productModel), Calendar.getInstance().getTime(), false);
 		}
 		catch (final JaloPriceFactoryException e)
 		{
-			e.printStackTrace();
+			LOG.error("Not franchising price found by FranchisingAwarePriceFactory");
 		}
 
 
 
-		final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
-				modelService.<Product> getSource(productModel));
+		//final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
+		//		modelService.<Product> getSource(productModel));
 
-		final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
-				modelService.<Product> getSource(productModel), productClass);
-
-		final List<PriceRow> domesticList = new ArrayList<PriceRow>();
-		final List<PriceRow> internationList = new ArrayList<PriceRow>();
-
-		for (final PriceRow priceRow : priceRowsList)
-		{
-			//final Currency priceRowCurr = priceRow.getCurrency();
-			//if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
-			//{
-			final PriceRowModel priceRowModel = modelService.get(priceRow);
-			//}
-		}
-		if (isDomesticPrice)
-		{
-			return domesticList;
-		}
-		else if (isInternationPrice)
-		{
-			return internationList;
-		}
-		else
-		{
-			LOG.error("Not match price row list found");
-		}
-		return null;
+		//final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
+		//		modelService.<Product> getSource(productModel), productClass);
+		//for (final PriceRow priceRow : priceRowsList)
+		//{
+		//final Currency priceRowCurr = priceRow.getCurrency();
+		//if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
+		//{
+		//final PriceRowModel priceRowModel = modelService.get(priceRow);
+		//}
+		//}
+		return priceList;
 	}
 
 	public static FranchisingAwarePriceFactory getInstance()

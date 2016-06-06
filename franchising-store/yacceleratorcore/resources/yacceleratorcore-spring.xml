@@ -435,7 +435,7 @@
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
 	
-	<alias alias="europe1.manager" name="europe1.manager2" />
+	<alias alias="europe1.manager2" name="europe1.manager2" />
 	<bean id="europe1.manager2"
 		class="com.franchising.core.channel.price.FranchisingAwarePriceFactory"
 		init-method="init" destroy-method="destroy">
