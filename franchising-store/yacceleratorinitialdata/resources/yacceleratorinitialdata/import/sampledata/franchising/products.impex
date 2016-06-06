@@ -22,7 +22,7 @@ INSERT_UPDATE PointOfService ; name[unique=true] ; type(code) ; latitude ; longi
 
 
 # Insert Products            
-INSERT_UPDATE Product ; code[unique=true] ; franchising(code) ; $supercategories ; manufacturerName ; manufacturerAID ; unit(code) ; ean          ; variantType(code) ; $catalogVersion ; $approved
+INSERT_UPDATE Product ; code[unique=true] ; pointsOfService(name) ; $supercategories ; manufacturerName ; manufacturerAID ; unit(code) ; ean          ; variantType(code) ; $catalogVersion ; $approved
                       ; 3555166           ; ShangHai,Beijing  ; 578, brand_10    ; Canon            ; 3820B046AA      ; pieces     ; 8714574542027
 
 
