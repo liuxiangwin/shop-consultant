@@ -9,7 +9,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with hybris.
  *
- *  
+ *
  */
 package com.franchising.core.channel.storefinder;
 
@@ -21,10 +21,12 @@ import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceStockD
 import de.hybris.platform.commercefacades.storelocator.data.StoreStockHolder;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
+import de.hybris.platform.commerceservices.store.data.GeoPoint;
 import de.hybris.platform.commerceservices.storefinder.StoreFinderService;
 import de.hybris.platform.commerceservices.storefinder.data.PointOfServiceDistanceData;
 import de.hybris.platform.commerceservices.storefinder.data.StoreFinderSearchPageData;
-import de.hybris.platform.commerceservices.store.data.GeoPoint;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.store.services.BaseStoreService;
@@ -37,10 +39,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import com.franchising.core.channel.price.FranchisingAwarePriceFactory;
+
 
 /**
  * Default implementation of {@link StoreFinderStockFacade}
- * 
+ *
  */
 public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> implements
 		StoreFinderStockFacade<ITEM, StoreFinderStockSearchPageData<ITEM>>
@@ -98,8 +102,8 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 	}
 
 	@Override
-	public StoreFinderStockSearchPageData<ITEM> productSearch(final GeoPoint geoPoint,
-			final ProductData productData, final PageableData pageableData)
+	public StoreFinderStockSearchPageData<ITEM> productSearch(final GeoPoint geoPoint, final ProductData productData,
+			final PageableData pageableData)
 	{
 		final StoreFinderSearchPageData<PointOfServiceDistanceData> storeFinderSearchPageData = getStoreFinderService()
 				.positionSearch(getBaseStoreService().getCurrentBaseStore(), geoPoint, pageableData);
@@ -114,10 +118,15 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 		{
 			final StoreStockHolder storeStockHolder = createStoreStockHolder();
 			storeStockHolder.setPointOfService(distanceData.getPointOfService());
-			storeStockHolder.setProduct(getProductService().getProductForCode(productData.getCode()));
+			final ProductModel productModel = getProductService().getProductForCode(productData.getCode());
+			storeStockHolder.setProduct(productModel);
 
 			final ITEM posStockData = getStoreStockConverter().convert(storeStockHolder);
 			posStockData.setFormattedDistance(getPointOfServiceDistanceDataConverter().convert(distanceData).getFormattedDistance());
+
+			final List<PriceInformation> franchisingList = FranchisingAwarePriceFactory.getInstance().queryFranchisingPrice(
+					productModel);
+
 			result.add(posStockData);
 		}
 		return createSearchResult(result, storeFinderSearchPageData.getPagination(), productData);

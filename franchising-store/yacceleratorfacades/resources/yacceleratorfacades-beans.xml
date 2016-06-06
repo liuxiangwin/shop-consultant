@@ -23,9 +23,14 @@
 	Extend the search model for take the price into it 
 	 -->
 	<!-- <bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceStockData"
-	      extends="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData">
+	      extends="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceStockData">
 		<property name="stockData" type="de.hybris.platform.commercefacades.product.data.StockData"/>
 		<property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 	</bean> -->
+	
+	
+	<bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceStockData">
+		<property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
 	
 </beans>
