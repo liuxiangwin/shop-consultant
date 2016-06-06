@@ -42,7 +42,7 @@
 
 		<relation localized="false" generate="true"
 			code="Product2PointOfServiceRelation">
-			<deployment table="Pro2PointOfService" typecode="18000" />
+			<deployment table="Pro2PointOfService" typecode="19000" />
 			<sourceElement type="Product" qualifier="product"
 				cardinality="many"></sourceElement>
 			<targetElement type="PointOfService" qualifier="pointsOfService"
