@@ -1,4 +1,7 @@
-===============================================
+
+
+
+==============================================================================
 SELECT *
   from {Product as p
   join Product2FranchisingRelation as p2f ON {p.pk} = {p2f.source} 
@@ -7,9 +10,48 @@ SELECT *
 
 where {p.code}='3555166'
   
-  
 where  
  {fr.code} = '2016000002'
+=============================================================================================
+
+SELECT DISTINCT {c:PK} AS pk
+   FROM {PointOfService AS c
+   JOIN Product2PointOfServiceRelation as p2p ON {c.pk} = {p2p.target}
+   JOIN Product as p ON {p.pk} = {p2p.source} 
+   }
+WHERE {p.code}='3555166'
+=============================================================================================
+query: [SELECT {c:pk} FROM {PointOfService AS c} 
+WHERE {c:product}=?product AND {c:type}=?type ],
+ query parameters: [{type=STORE, product=ProductModel (8796236120065)}]
+==============================================================================================
+
+SELECT  DISTINCT {ps:PK} AS pk
+   FROM {PointOfService AS ps
+   LEFT JOIN PoS2WarehouseRel as p2w ON {ps.pk} = {p2w.source} 
+   LEFT JOIN Warehouse as w ON {w.pk} = {p2w.target}
+   LEFT JOIN Stocklevel AS s  ON {w.pk} = {s.warehouse}}
+	WHERE {s.productCode}='3555166'
+   
+   
+   
+   
+   
+
+ 
+ 
+ {s.productCode}='3555166'
+ 
+ 
+SELECT  DISTINCT {w:PK} AS pk 
+FROM {Warehouse as w 
+JOIN Stocklevel AS s  ON {w.pk} = {s.warehouse}}
+WHERE {s.productCode}='3555166'
+ 
+
+JOIN Stocklevel AS s ON {s.warehouse} = {p2w.target}   
+JOIN Warehouse as w ON{w.pk} = {p2w.target}
+
 
 
 ===========================================================================================
