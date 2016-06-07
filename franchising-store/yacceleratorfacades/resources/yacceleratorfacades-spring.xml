@@ -216,18 +216,6 @@
 
 
 	<!-- Storefinder -->
-	<alias name="franchisingStoreFinderStockFacade" alias="storeFinderStockFacade" />
-	<bean id="franchisingStoreFinderStockFacade"
-		class="com.franchising.core.channel.storefinder.FranchisingFinderStockFacade">
-		<property name="storeStockConverter" ref="storeStockConverter" />
-		<property name="baseStoreService" ref="baseStoreService" />
-		<property name="storeFinderService" ref="storeFinderService" />
-		<property name="pointOfServiceService" ref="pointOfServiceService" />
-		<property name="productService" ref="productService" />
-		<property name="pointOfServiceDistanceDataConverter" ref="pointOfServiceDistanceDataConverter" />
-	</bean>
-
-
 	<alias name="franchisingStoreFinderService" alias="storeFinderService" />
 	<bean id="franchisingStoreFinderService"
 		class="com.franchising.core.channel.storefinder.FranchisingFinderService">
@@ -236,6 +224,21 @@
 		<!-- <property name="siteConfigService" ref="siteConfigService"/> -->
 		<property name="pointOfServicePagedGenericDao" ref="pointOfServicePagedGenericDao" />
 		<property name="pointOfServiceGenericDao" ref="pointOfServiceGenericDao" />
+		
 	</bean>
+	
+	<alias name="franchisingStoreFinderStockFacade" alias="storeFinderStockFacade" />
+	<bean id="franchisingStoreFinderStockFacade"
+		class="com.franchising.core.channel.storefinder.FranchisingFinderStockFacade">
+		<property name="storeStockConverter" ref="storeStockConverter" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="franchisingStoreFinderService" ref="storeFinderService" />
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+		<property name="productService" ref="productService" />
+		<property name="pointOfServiceDistanceDataConverter" ref="pointOfServiceDistanceDataConverter" />
+	</bean>
+
+
+
 
 </beans>

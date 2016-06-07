@@ -24,8 +24,12 @@ import de.hybris.platform.commerceservices.storefinder.StoreFinderService;
 import de.hybris.platform.commerceservices.storefinder.data.PointOfServiceDistanceData;
 import de.hybris.platform.commerceservices.storefinder.data.StoreFinderSearchPageData;
 import de.hybris.platform.commerceservices.util.AbstractComparator;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.storelocator.GPS;
 import de.hybris.platform.storelocator.GeoWebServiceWrapper;
@@ -46,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -64,6 +70,9 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 	private GeoWebServiceWrapper geoWebServiceWrapper;
 	private PagedGenericDao<PointOfServiceModel> pointOfServicePagedGenericDao;
 	private GenericDao<PointOfServiceModel> pointOfServiceGenericDao;
+
+	@Resource
+	private FlexibleSearchService flexibleSearchService;
 
 	protected GenericDao<PointOfServiceModel> getPointOfServiceGenericDao()
 	{
@@ -147,13 +156,6 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		return createSearchResult(locationText, geoPoint, Collections.<ITEM> emptyList(), createPaginationData());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#locationSearch(de.hybris.platform.store.
-	 * BaseStoreModel, java.lang.String, de.hybris.platform.commerceservices.search.pagedata.PageableData, int)
-	 */
 	@Override
 	public StoreFinderSearchPageData<ITEM> locationSearch(final BaseStoreModel baseStore, final String locationText,
 			final PageableData pageableData, final double maxRadiusKm)
@@ -197,6 +199,12 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		return doSearch(baseStore, null, geoPoint, pageableData, null);
 	}
 
+	public StoreFinderSearchPageData<ITEM> positionSearchWithProduct(final ProductModel productModel,
+			final BaseStoreModel baseStore, final GeoPoint geoPoint, final PageableData pageableData)
+	{
+		return doSearchWithProduct(productModel, baseStore, null, geoPoint, pageableData, null);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -211,13 +219,6 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		return doSearch(baseStore, null, geoPoint, pageableData, Double.valueOf(maxRadius));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#getPointOfServiceForName(de.hybris.platform
-	 * .store.BaseStoreModel, java.lang.String)
-	 */
 	@Override
 	public PointOfServiceModel getPointOfServiceForName(final BaseStoreModel baseStore, final String name)
 	{
@@ -333,6 +334,54 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		}
 
 		return addressData;
+	}
+
+
+	protected StoreFinderSearchPageData<ITEM> doSearchWithProduct(final ProductModel productModel, final BaseStoreModel baseStore,
+			final String locationText, final GeoPoint centerPoint, final PageableData pageableData, final Double maxRadiusKm)
+	{
+		final Collection<PointOfServiceModel> posResults;
+
+		final int resultRangeStart = pageableData.getCurrentPage() * pageableData.getPageSize();
+		final int resultRangeEnd = (pageableData.getCurrentPage() + 1) * pageableData.getPageSize();
+
+		if (maxRadiusKm != null)
+		{
+			posResults = getPointsOfServiceNear(centerPoint, maxRadiusKm.doubleValue(), baseStore);
+		}
+		else
+		{
+			//final Map<String, Object> paramMap = new HashMap<String, Object>();
+			//paramMap.put("product", productModel);
+			//paramMap.put("type", PointOfServiceTypeEnum.STORE);
+			//posAll = getPointOfServiceGenericDao().find(paramMap);
+			final String queryPosWith = "SELECT  DISTINCT {ps:PK} AS pk FROM {PointOfService AS ps"
+					+ " LEFT JOIN PoS2WarehouseRel as p2w ON {ps.pk} = {p2w.source} "
+					+ " JOIN Warehouse as w ON {w.pk} = {p2w.target} " + " JOIN Stocklevel AS s  ON {w.pk} = {s.warehouse}} "
+					+ " WHERE {s.productCode}=?productCode" + "  AND {ps.type} =?type";
+
+			final FlexibleSearchQuery query = new FlexibleSearchQuery(queryPosWith);
+			query.addQueryParameter("productCode", productModel.getCode());
+			query.addQueryParameter("type", PointOfServiceTypeEnum.STORE);
+			final SearchResult<PointOfServiceModel> result = flexibleSearchService.search(query);
+			posResults = result.getResult();
+
+		}
+
+		if (posResults != null)
+		{
+			// Sort all the POS
+			final List<ITEM> orderedResults = calculateDistances(centerPoint, posResults);
+			final PaginationData paginationData = createPagination(pageableData, posResults.size());
+			// Slice the required range window out of the results
+			final List<ITEM> orderedResultsWindow = orderedResults.subList(Math.min(orderedResults.size(), resultRangeStart),
+					Math.min(orderedResults.size(), resultRangeEnd));
+
+			return createSearchResult(locationText, centerPoint, orderedResultsWindow, paginationData);
+		}
+
+		// Return no results
+		return createSearchResult(locationText, centerPoint, Collections.<ITEM> emptyList(), createPagination(pageableData, 0));
 	}
 
 	protected StoreFinderSearchPageData<ITEM> doSearch(final BaseStoreModel baseStore, final String locationText,
@@ -600,6 +649,22 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		{
 			return "<" + min + "," + max + ">";
 		}
+	}
+
+	interface queryBlok
+	{
+
+		String queryAllPOS = "SELECT  DISTINCT {w:PK} AS pk FROM "
+				+ "{Warehouse as w  JOIN Stocklevel AS s  ON {w.pk} = {s.warehouse}}" + "WHERE {s.productCode}=?productCode";
+
+
+		String queryPOS = "SELECT DISTINCT {c:PK} AS pk  FROM "
+				+ "{PointOfService AS c JOIN Product2PointOfServiceRelation as p2p ON {c.pk} = {p2p.target}"
+				+ "JOIN Product as p ON {p.pk} = {p2p.source}}" + "WHERE " + "{p:" + ProductModel.CODE + "}=?productCode";
+
+
+		//final Map<String, Object> paramMap = new HashMap<String, Object>();
+		//paramMap.put("type", PointOfServiceTypeEnum.STORE);
 	}
 
 }

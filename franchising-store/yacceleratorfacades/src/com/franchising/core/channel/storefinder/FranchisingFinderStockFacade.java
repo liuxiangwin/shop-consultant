@@ -13,6 +13,7 @@
  */
 package com.franchising.core.channel.storefinder;
 
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.storefinder.StoreFinderStockFacade;
 import de.hybris.platform.commercefacades.storefinder.data.StoreFinderStockSearchPageData;
@@ -22,11 +23,9 @@ import de.hybris.platform.commercefacades.storelocator.data.StoreStockHolder;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
 import de.hybris.platform.commerceservices.store.data.GeoPoint;
-import de.hybris.platform.commerceservices.storefinder.StoreFinderService;
 import de.hybris.platform.commerceservices.storefinder.data.PointOfServiceDistanceData;
 import de.hybris.platform.commerceservices.storefinder.data.StoreFinderSearchPageData;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.store.services.BaseStoreService;
@@ -36,6 +35,8 @@ import de.hybris.platform.storelocator.pos.PointOfServiceService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -51,16 +52,39 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 {
 	private Converter<StoreStockHolder, ITEM> storeStockConverter;
 	private BaseStoreService baseStoreService;
-	private StoreFinderService<PointOfServiceDistanceData, StoreFinderSearchPageData<PointOfServiceDistanceData>> storeFinderService;
+
+	//@Resource
+	private FranchisingFinderService franchisingStoreFinderService;
+
+	/**
+	 * @return the franchisingStoreFinderService
+	 */
+	public FranchisingFinderService getFranchisingStoreFinderService()
+	{
+		return franchisingStoreFinderService;
+	}
+
+	/**
+	 * @param franchisingStoreFinderService
+	 *           the franchisingStoreFinderService to set
+	 */
+	public void setFranchisingStoreFinderService(final FranchisingFinderService franchisingStoreFinderService)
+	{
+		this.franchisingStoreFinderService = franchisingStoreFinderService;
+	}
+
 	private PointOfServiceService pointOfServiceService;
 	private ProductService productService;
 	private Converter<PointOfServiceDistanceData, PointOfServiceData> pointOfServiceDistanceDataConverter;
+
+	@Resource
+	private FranchisingAwarePriceFactory franchisingAwarePriceFactory;
 
 	@Override
 	public StoreFinderStockSearchPageData<ITEM> productSearch(final String location, final ProductData productData,
 			final PageableData pageableData)
 	{
-		final StoreFinderSearchPageData<PointOfServiceDistanceData> storeFinderSearchPageData = getStoreFinderService()
+		final StoreFinderSearchPageData<PointOfServiceDistanceData> storeFinderSearchPageData = franchisingStoreFinderService
 				.locationSearch(getBaseStoreService().getCurrentBaseStore(), location, pageableData);
 		return getResultForPOSData(storeFinderSearchPageData, productData);
 	}
@@ -79,7 +103,7 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 				geoPoint.setLatitude(pointOfService.getLatitude().doubleValue());
 				geoPoint.setLongitude(pointOfService.getLongitude().doubleValue());
 
-				storeFinderSearchPageData = getStoreFinderService().positionSearch(getBaseStoreService().getCurrentBaseStore(),
+				storeFinderSearchPageData = franchisingStoreFinderService.positionSearch(getBaseStoreService().getCurrentBaseStore(),
 						geoPoint, pageableData, pointOfService.getNearbyStoreRadius().doubleValue());
 			}
 			else
@@ -88,7 +112,7 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 				geoPoint.setLatitude(pointOfService.getLatitude().doubleValue());
 				geoPoint.setLongitude(pointOfService.getLongitude().doubleValue());
 
-				storeFinderSearchPageData = getStoreFinderService().positionSearch(getBaseStoreService().getCurrentBaseStore(),
+				storeFinderSearchPageData = franchisingStoreFinderService.positionSearch(getBaseStoreService().getCurrentBaseStore(),
 						geoPoint, pageableData);
 
 			}
@@ -105,8 +129,9 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 	public StoreFinderStockSearchPageData<ITEM> productSearch(final GeoPoint geoPoint, final ProductData productData,
 			final PageableData pageableData)
 	{
-		final StoreFinderSearchPageData<PointOfServiceDistanceData> storeFinderSearchPageData = getStoreFinderService()
-				.positionSearch(getBaseStoreService().getCurrentBaseStore(), geoPoint, pageableData);
+		final ProductModel productModel = getProductService().getProductForCode(productData.getCode());
+		final StoreFinderSearchPageData<PointOfServiceDistanceData> storeFinderSearchPageData = franchisingStoreFinderService
+				.positionSearchWithProduct(productModel, getBaseStoreService().getCurrentBaseStore(), geoPoint, pageableData);
 		return getResultForPOSData(storeFinderSearchPageData, productData);
 	}
 
@@ -124,8 +149,11 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 			final ITEM posStockData = getStoreStockConverter().convert(storeStockHolder);
 			posStockData.setFormattedDistance(getPointOfServiceDistanceDataConverter().convert(distanceData).getFormattedDistance());
 
-			final List<PriceInformation> franchisingList = FranchisingAwarePriceFactory.getInstance().queryFranchisingPrice(
-					productModel);
+
+			final PriceData franchisingPrice = franchisingAwarePriceFactory.queryFranchisingPrice(productModel,
+					storeStockHolder.getPointOfService());
+			posStockData.setPriceData(franchisingPrice);
+			//Preconditions.checkNotNull(franchisingPrice);
 
 			result.add(posStockData);
 		}
@@ -199,17 +227,7 @@ public class FranchisingFinderStockFacade<ITEM extends PointOfServiceStockData> 
 		this.baseStoreService = baseStoreService;
 	}
 
-	protected StoreFinderService<PointOfServiceDistanceData, StoreFinderSearchPageData<PointOfServiceDistanceData>> getStoreFinderService()
-	{
-		return storeFinderService;
-	}
 
-	@Required
-	public void setStoreFinderService(
-			final StoreFinderService<PointOfServiceDistanceData, StoreFinderSearchPageData<PointOfServiceDistanceData>> storeFinderService)
-	{
-		this.storeFinderService = storeFinderService;
-	}
 
 	protected PointOfServiceService getPointOfServiceService()
 	{

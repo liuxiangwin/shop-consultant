@@ -30,7 +30,8 @@
 	
 	
 	<bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceStockData">
-		<property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<!-- <property name="priceInformation" type="de.hybris.platform.jalo.order.price.PriceInformation"/> -->
+	    <property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 	</bean>
 	
 </beans>
