@@ -27,6 +27,7 @@
 				<div class="resultLine2">${pickupStore.address.line2}</div>
 				<div class="resultTown">${pickupStore.address.town}</div>
 				<div class="resultUip">${pickupStore.address.postalCode}</div>
+				<div class="resultPrice">${pickupStore.priceData.formattedValue}</div>
 			</div>
 			<div class="resultDistance">${pickupStore.formattedDistance}</div>
 			

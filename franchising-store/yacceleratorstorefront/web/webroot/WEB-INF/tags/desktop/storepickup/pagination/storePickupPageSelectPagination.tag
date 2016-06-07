@@ -18,6 +18,7 @@
 		<button class="link" type="submit"><spring:theme code="pickup.pagination.next"/></button>
 	</form>
 </c:if>
+
 <c:set var="limit" value="${numberPagesShown}"/>
 <c:set var="halfLimit"><fmt:formatNumber value="${limit/2}" maxFractionDigits="0"/></c:set>
 <c:set var="beginPage">
