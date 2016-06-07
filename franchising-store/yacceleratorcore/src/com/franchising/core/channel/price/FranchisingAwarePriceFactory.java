@@ -6,17 +6,26 @@ package com.franchising.core.channel.price;
 import de.hybris.platform.catalog.CatalogService;
 import de.hybris.platform.catalog.jalo.CatalogAwareEurope1PriceFactory;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
-import de.hybris.platform.core.Registry;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.europe1.jalo.Europe1PriceFactory;
+import de.hybris.platform.europe1.constants.Europe1Tools;
+import de.hybris.platform.europe1.jalo.PriceRow;
+import de.hybris.platform.europe1.model.PriceRowModel;
+import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.jalo.c2l.Currency;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.order.price.JaloPriceFactoryException;
 import de.hybris.platform.jalo.order.price.PriceInformation;
 import de.hybris.platform.jalo.product.Product;
+import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -46,45 +55,95 @@ public class FranchisingAwarePriceFactory extends CatalogAwareEurope1PriceFactor
 	@Resource
 	private CatalogService catalogService;
 
+	private static FranchisingAwarePriceFactory instance;
+
 	@SuppressWarnings("deprecation")
-	public List<PriceInformation> queryFranchisingPrice(final ProductModel productModel)
+	public PriceData queryFranchisingPrice(final ProductModel productModel, final PointOfServiceModel pointOfServiceModel)
 	{
-		//final de.hybris.platform.core.model.product.ProductModel productModel = modelService.get(product.getPK());
-		//Preconditions.checkNotNull(product);
 		Preconditions.checkNotNull(productModel);
-		List<PriceInformation> priceList = new ArrayList<PriceInformation>();
+		PriceInformation priceInformation = null;
 		try
 		{
-			priceList = Europe1PriceFactory.getInstance().getProductPriceInformations(
-					modelService.<Product> getSource(productModel), Calendar.getInstance().getTime(), false);
+			final SessionContext ctx = JaloSession.getCurrentSession().getSessionContext();
+
+			priceInformation = getPriceInformations(ctx, modelService.<Product> getSource(productModel),
+					getPPG(ctx, modelService.<Product> getSource(productModel)), ctx.getUser(), getUPG(ctx, ctx.getUser()),
+					ctx.getCurrency(), false, Calendar.getInstance().getTime(), null, pointOfServiceModel);
+
 		}
 		catch (final JaloPriceFactoryException e)
 		{
 			LOG.error("Not franchising price found by FranchisingAwarePriceFactory");
 		}
-
-
-
-		//final EnumerationValue productClass = Europe1PriceFactory.getInstance().getPPG(ctx,
-		//		modelService.<Product> getSource(productModel));
-
-		//final Collection<PriceRow> priceRowsList = Europe1PriceFactory.getInstance().getProductPriceRowsFast(ctx,
-		//		modelService.<Product> getSource(productModel), productClass);
-		//for (final PriceRow priceRow : priceRowsList)
-		//{
-		//final Currency priceRowCurr = priceRow.getCurrency();
-		//if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
-		//{
-		//final PriceRowModel priceRowModel = modelService.get(priceRow);
-		//}
-		//}
-		return priceList;
+		final PriceData priceData = new PriceData();
+		if (priceInformation == null)
+		{
+			//The franchising has not set yet
+			priceData.setCurrencyIso("");
+			priceData.setFormattedValue(String.valueOf(""));
+		}
+		else
+		{
+			priceData.setCurrencyIso(priceInformation.getPriceValue().getCurrencyIso());
+			priceData.setFormattedValue(String.valueOf(priceInformation.getPriceValue().getValue()));
+			priceData.setValue(BigDecimal.valueOf((priceInformation.getPriceValue().getValue())));
+		}
+		return priceData;
 	}
+
+	protected PriceInformation getPriceInformations(final SessionContext ctx,
+			@SuppressWarnings("deprecation") final Product product,
+			@SuppressWarnings("deprecation") final EnumerationValue productGroup, final User user,
+			@SuppressWarnings("deprecation") final EnumerationValue userGroup, final Currency curr, final boolean net,
+			final Date date, final Collection taxValues, final PointOfServiceModel pointOfServiceModel)
+			throws JaloPriceFactoryException
+	{
+		final Collection<PriceRow> priceRows = matchPriceRowsForInfo(ctx, product, productGroup, user, userGroup, curr, date, net);
+		//final List<PriceInformation> priceInfos = new ArrayList<PriceInformation>(priceRows.size());
+		Collection theTaxValues = taxValues;
+		PriceInformation pInfo = null;
+
+		for (final PriceRow priceRow : priceRows)
+		{
+
+			final PriceRowModel priceRowModel = modelService.get(priceRow);
+			final PointOfServiceModel franchising = priceRowModel.getPointsOfService();
+
+			if (franchising != null)
+			{
+				if (franchising.getName().equals(pointOfServiceModel.getName()))
+				{
+					pInfo = Europe1Tools.createPriceInformation(priceRow, curr);
+					if (pInfo.getPriceValue().isNet() != net)
+					{
+						// lazy load taxes if prices have to be converted
+						if (theTaxValues == null)
+						{
+							theTaxValues = Europe1Tools.getTaxValues(getTaxInformations(product, getPTG(ctx, product), user,
+									getUTG(ctx, user), date));
+						}
+						// we have to create a new info object since it is immutable
+						pInfo = new PriceInformation(pInfo.getQualifiers(), pInfo.getPriceValue().getOtherPrice(theTaxValues));
+						//priceInfos.add(pInfo);
+					}
+				}
+			}
+		}
+		return pInfo;
+	}
+
+
 
 	public static FranchisingAwarePriceFactory getInstance()
-	{
-		return (FranchisingAwarePriceFactory) Registry.getCurrentTenant().getJaloConnection().getExtensionManager()
-				.getExtension("yacceleratorcore");
-	}
 
+	{
+		if (instance == null)
+		{
+			instance = new FranchisingAwarePriceFactory();
+		}
+		return instance;
+
+		//return (FranchisingAwarePriceFactory) Registry.getCurrentTenant().getJaloConnection().getExtensionManager()
+		//		.getExtension("yacceleratorcore");
+	}
 }
