@@ -224,9 +224,9 @@
 		<!-- <property name="siteConfigService" ref="siteConfigService"/> -->
 		<property name="pointOfServicePagedGenericDao" ref="pointOfServicePagedGenericDao" />
 		<property name="pointOfServiceGenericDao" ref="pointOfServiceGenericDao" />
-		
+
 	</bean>
-	
+
 	<alias name="franchisingStoreFinderStockFacade" alias="storeFinderStockFacade" />
 	<bean id="franchisingStoreFinderStockFacade"
 		class="com.franchising.core.channel.storefinder.FranchisingFinderStockFacade">
@@ -238,7 +238,50 @@
 		<property name="pointOfServiceDistanceDataConverter" ref="pointOfServiceDistanceDataConverter" />
 	</bean>
 
+	<alias alias="commerceCartService" name="franchisingCommerceCartService" />
+	<bean id="franchisingCommerceCartService"
+		class="com.franchising.core.channel.storefinder.FranchisingCommerceCartService">
+		<property name="modelService" ref="modelService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceCartDao" ref="commerceCartDao" />
+		<property name="cartValidationStrategy" ref="cartValidationStrategy" />
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy" />
+		<property name="commerceCartEstimateTaxesStrategy" ref="commerceCartEstimateTaxesStrategy" />
+		<property name="commerceCartHashCalculationStrategy" ref="commerceCartHashCalculationStrategy" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="staleCartRemovalStrategy" ref="staleCartRemovalStrategy" />
+		<property name="commerceAddToCartStrategy" ref="commerceAddToCartStrategy" />
+		<property name="commerceUpdateCartEntryStrategy" ref="commerceUpdateCartEntryStrategy" />
+		<property name="commerceCartRestorationStrategy" ref="commerceCartRestorationStrategy" />
+		<property name="commerceCartSplitStrategy" ref="commerceCartSplitStrategy" />
+		<property name="commerceRemoveEntriesStrategy" ref="commerceRemoveEntriesStrategy" />
+		<property name="commerceCartMergingStrategy" ref="commerceCartMergingStrategy" />
+	</bean>
 
+
+	<alias name="franchisingCommerceAddToCartStrategy" alias="commerceAddToCartStrategy" />
+	<bean id="franchisingCommerceAddToCartStrategy"
+		class="com.franchising.core.channel.storefinder.FranchisingCommerceAddToCartStrategy"
+		parent="abstractCommerceAddToCartStrategy">
+		<property name="commerceAddToCartMethodHooks" ref="commerceAddToCartMethodHooks" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="franchisingModificationPopulator" alias="cartModificationPopulator" />
+	<bean id="franchisingModificationPopulator"
+		class=" com.franchising.core.channel.storefinder.FranchisingModificationPopulator">
+		<property name="orderEntryConverter" ref="orderEntryConverter" />
+	</bean>
+
+	<alias name="franchisingEntryPopulator" alias="orderEntryPopulator" />
+	<bean id="franchisingEntryPopulator"
+		class="com.franchising.core.channel.storefinder.FranchisingOrderEntryPopulator">
+		<property name="productConverter" ref="orderEntryProductConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="entryOrderChecker" ref="commerceOrderEntryModifiableChecker" />
+		<property name="deliveryModeConverter" ref="deliveryModeConverter" />
+		<property name="pointOfServiceConverter" ref="pointOfServiceConverter" />
+	</bean>
 
 
 </beans>
