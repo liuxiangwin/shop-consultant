@@ -278,8 +278,6 @@ public class PickupInStoreController extends AbstractSearchPageController
 		try
 		{
 			franchisingAwarePriceFactory.setFranchisingChannel(true);
-
-
 			if (franchisingPrice != null && !franchisingPrice.isEmpty())
 			{
 				final PriceData priceData = new PriceData();
@@ -290,23 +288,11 @@ public class PickupInStoreController extends AbstractSearchPageController
 				franchisingAwarePriceFactory.setPriceData(priceData);
 			}
 
-
 			final CartModificationData cartModification = cartFacade.addToCart(code, qty, storeId);
 			model.addAttribute("quantity", Long.valueOf(cartModification.getQuantityAdded()));
 			final OrderEntryData entry = cartModification.getEntry();
-			if (franchisingPrice != null && !franchisingPrice.isEmpty())
-			{
-				entry.setFromFranchising("true");
-				//modelService.save(entry);
-			}
-			else
-			{
-				entry.setFromFranchising("false");
-				//modelService.save(entry);
-			}
 
 			model.addAttribute("entry", entry);
-
 
 			if (cartModification.getQuantityAdded() == 0L)
 			{
@@ -362,66 +348,103 @@ public class PickupInStoreController extends AbstractSearchPageController
 	@RequestMapping(value = "/cart/update", method = RequestMethod.POST, produces = "application/json")
 	public String updateCartQuantities(@RequestParam("storeNamePost") final String storeId,
 			@RequestParam("entryNumber") final long entryNumber, @RequestParam("hiddenPickupQty") final long quantity,
-			@RequestParam("franchisingPrice") final String franchisingPrice,
+			@RequestParam("franchisingPrice") final String franchisingPrice, @RequestParam("currency") final String currency,
 
 			final RedirectAttributes redirectModel) throws CommerceCartModificationException
 	{
 		final CartModificationData cartModificationData = cartFacade.updateCartEntry(entryNumber, storeId);
 
-		if (entryNumber == cartModificationData.getEntry().getEntryNumber().intValue())
+		try
 		{
-			final CartModificationData cartModification = cartFacade.updateCartEntry(entryNumber, quantity);
-			if (cartModification.getQuantity() == quantity)
+			if (entryNumber == cartModificationData.getEntry().getEntryNumber().intValue())
 			{
-				// Success
-				if (cartModification.getQuantity() == 0)
+				franchisingAwarePriceFactory.setFranchisingChannel(true);
+				if (franchisingPrice != null && !franchisingPrice.isEmpty())
 				{
-					// Success in removing entry
-					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.remove");
+					final PriceData priceData = new PriceData();
+					priceData.setCurrencyIso(currency);
+					priceData.setValue(new BigDecimal(franchisingPrice));
+					priceData.setFormattedValue(franchisingPrice);
+					franchisingAwarePriceFactory.setPriceData(priceData);
+				}
+
+				final CartModificationData cartModification = cartFacade.updateCartEntry(entryNumber, quantity);
+				if (cartModification.getQuantity() == quantity)
+				{
+					// Success
+					if (cartModification.getQuantity() == 0)
+					{
+						// Success in removing entry
+						GlobalMessages
+								.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.remove");
+					}
+					else
+					{
+						// Success in update quantity
+						GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+								"basket.page.message.update.pickupinstoreitem");
+					}
 				}
 				else
 				{
-					// Success in update quantity
-					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-							"basket.page.message.update.pickupinstoreitem");
+					// Less than successful
+					GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
 				}
 			}
-			else
+			else if (!CommerceCartModificationStatus.SUCCESS.equals(cartModificationData.getStatusCode()))
 			{
-				// Less than successful
+				//When update pickupInStore happens to be same as existing entry with POS and SKU and that merged POS has lower stock
 				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-						"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+						"basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode());
 			}
 		}
-		else if (!CommerceCartModificationStatus.SUCCESS.equals(cartModificationData.getStatusCode()))
+		finally
 		{
-			//When update pickupInStore happens to be same as existing entry with POS and SKU and that merged POS has lower stock
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode());
+			franchisingAwarePriceFactory.setFranchisingChannel(false);
 		}
+
 
 		return REDIRECT_PREFIX + "/cart";
 	}
 
 	@RequestMapping(value = "/cart/update/delivery", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String updateToDelivery(@RequestParam("entryNumber") final long entryNumber, final RedirectAttributes redirectModel)
-			throws CommerceCartModificationException
+	public String updateToDelivery(@RequestParam("entryNumber") final long entryNumber,
+			@RequestParam("franchisingPrice") final String franchisingPrice, @RequestParam("currency") final String currency,
+			final RedirectAttributes redirectModel) throws CommerceCartModificationException
 	{
-		final CartModificationData cartModificationData = cartFacade.updateCartEntry(entryNumber, null);
-		if (CommerceCartModificationStatus.SUCCESS.equals(cartModificationData.getStatusCode()))
+		try
 		{
-			// Success in update quantity
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"basket.page.message.update.pickupinstoreitem.toship");
-		}
-		else
-		{
-			// Less than successful
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode());
+			franchisingAwarePriceFactory.setFranchisingChannel(true);
+			if (franchisingPrice != null && !franchisingPrice.isEmpty())
+			{
+				final PriceData priceData = new PriceData();
+				priceData.setCurrencyIso(currency);
+				priceData.setValue(new BigDecimal(franchisingPrice));
+				priceData.setFormattedValue(franchisingPrice);
+				franchisingAwarePriceFactory.setPriceData(priceData);
+			}
+			final CartModificationData cartModificationData = cartFacade.updateCartEntry(entryNumber, null);
+			if (CommerceCartModificationStatus.SUCCESS.equals(cartModificationData.getStatusCode()))
+			{
+				// Success in update quantity
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+						"basket.page.message.update.pickupinstoreitem.toship");
+			}
+			else
+			{
+				// Less than successful
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						"basket.information.quantity.reducedNumberOfItemsAdded." + cartModificationData.getStatusCode());
+			}
+
 		}
 
+		finally
+		{
+			franchisingAwarePriceFactory.setFranchisingChannel(false);
+		}
 		return REDIRECT_PREFIX + "/cart";
 	}
 

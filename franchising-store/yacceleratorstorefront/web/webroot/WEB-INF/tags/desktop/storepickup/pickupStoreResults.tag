@@ -60,7 +60,8 @@
 							<input type="hidden" name="productCodePost" value="${searchPageData.product.code}"/>
 							<input type="hidden" name="entryNumber" value="${entryNumber}"/>
 							<input type="hidden" name="hiddenPickupQty" value="1" class="hiddenPickupQty"/>
-							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.formattedValue}" class="franchisingPrice"/>
+							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.value}" class="franchisingPrice"/>
+							<input type="hidden" name="currency" value="${pickupStore.priceData.currencyIso}" class="currency"/>
 							<button type="submit" class="positive  pickup_here_instore_button">
 								<spring:theme code="pickup.here.button"/>
 							</button>
@@ -71,7 +72,8 @@
 							<input type="hidden" name="storeNamePost" value="${pickupStore.name}"/>
 							<input type="hidden" name="productCodePost" value="${searchPageData.product.code}"/>
 							<input type="hidden" name="hiddenPickupQty" value="1" class="hiddenPickupQty" />
-							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.formattedValue}" class="franchisingPrice"/>
+							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.value}" class="franchisingPrice"/>
+							<input type="hidden" name="currency" value="${pickupStore.priceData.currencyIso}" class="currency"/>
 							<button type="submit" class="positive pickup_add_to_bag_instore_button">
 								<spring:theme code="text.addToCart"/>
 							</button>

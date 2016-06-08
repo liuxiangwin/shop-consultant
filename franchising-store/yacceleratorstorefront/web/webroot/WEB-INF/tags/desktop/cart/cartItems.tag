@@ -119,7 +119,7 @@
 									<input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
 									
 									<input type="hidden" name="fromFranchising" value="${entry.fromFranchising}" class="fromFranchising"/>
-									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.formattedValue}" class="franchisingPrice"/>
+									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.value}" class="franchisingPrice"/>
 									<input type="hidden" name="currency" value="${entry.basePrice.currencyIso}" class="currency"/>
 									
 									<ycommerce:testId code="cart_product_quantity">
@@ -149,7 +149,7 @@
 									<input type="hidden" name="initialQuantity" value="${entry.quantity}"/>	
 									
 									<input type="hidden" name="fromFranchising" value="${entry.fromFranchising}" class="fromFranchising"/>
-									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.formattedValue}" class="franchisingPrice"/>
+									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.value}" class="franchisingPrice"/>
 									<input type="hidden" name="currency" value="${entry.basePrice.currencyIso}" class="currency"/>
 									
 									<span class="qty">
