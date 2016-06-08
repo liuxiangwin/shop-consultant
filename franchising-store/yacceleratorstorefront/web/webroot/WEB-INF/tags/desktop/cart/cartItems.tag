@@ -117,6 +117,11 @@
 									<input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
 									<input type="hidden" name="productCode" value="${entry.product.code}"/>
 									<input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
+									
+									<input type="hidden" name="fromFranchising" value="${entry.fromFranchising}" class="fromFranchising"/>
+									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.formattedValue}" class="franchisingPrice"/>
+									<input type="hidden" name="currency" value="${entry.basePrice.currencyIso}" class="currency"/>
+									
 									<ycommerce:testId code="cart_product_quantity">
 										<form:label cssClass="skip" path="quantity" for="quantity${entry.entryNumber}"><spring:theme code="basket.page.quantity"/></form:label>
 										<form:input disabled="${not entry.updateable}" type="text" size="1" id="quantity${entry.entryNumber}" class="qty" path="quantity" />
@@ -142,6 +147,11 @@
 									<input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
 									<input type="hidden" name="productCode" value="${entry.product.code}"/>
 									<input type="hidden" name="initialQuantity" value="${entry.quantity}"/>	
+									
+									<input type="hidden" name="fromFranchising" value="${entry.fromFranchising}" class="fromFranchising"/>
+									<input type="hidden" name="franchisingPrice" value="${entry.basePrice.formattedValue}" class="franchisingPrice"/>
+									<input type="hidden" name="currency" value="${entry.basePrice.currencyIso}" class="currency"/>
+									
 									<span class="qty">
 										<c:out value="${entry.quantity}" />
 									</span>

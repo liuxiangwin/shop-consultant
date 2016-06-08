@@ -54,10 +54,13 @@
 			<c:if test="${pickupStore.stockData.stockLevel gt 0 or empty pickupStore.stockData.stockLevel}">
 				<c:choose>
 					<c:when test="${cartPage}">
-						<form:form id="selectStoreForm" class="select_store_form" action="${updateSelectStoreUrl}" method="post">
+					<form:form id="selectStoreForm" class="select_store_form" action="${updateSelectStoreUrl}" method="post">
+						<%-- <form:form id="selectStoreForm" class="select_store_form" action="${addToCartToPickupInStoreUrl}" method="post"> --%>
 							<input type="hidden" name="storeNamePost" value="${pickupStore.name}"/>
+							<input type="hidden" name="productCodePost" value="${searchPageData.product.code}"/>
 							<input type="hidden" name="entryNumber" value="${entryNumber}"/>
 							<input type="hidden" name="hiddenPickupQty" value="1" class="hiddenPickupQty"/>
+							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.formattedValue}" class="franchisingPrice"/>
 							<button type="submit" class="positive  pickup_here_instore_button">
 								<spring:theme code="pickup.here.button"/>
 							</button>
@@ -68,6 +71,7 @@
 							<input type="hidden" name="storeNamePost" value="${pickupStore.name}"/>
 							<input type="hidden" name="productCodePost" value="${searchPageData.product.code}"/>
 							<input type="hidden" name="hiddenPickupQty" value="1" class="hiddenPickupQty" />
+							<input type="hidden" name="franchisingPrice" value="${pickupStore.priceData.formattedValue}" class="franchisingPrice"/>
 							<button type="submit" class="positive pickup_add_to_bag_instore_button">
 								<spring:theme code="text.addToCart"/>
 							</button>

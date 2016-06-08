@@ -20,8 +20,10 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.acceleratorstorefrontcommons.forms.PickupInStoreForm;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.storefinder.StoreFinderStockFacade;
 import de.hybris.platform.commercefacades.storefinder.data.StoreFinderStockSearchPageData;
@@ -30,9 +32,11 @@ import de.hybris.platform.commerceservices.order.CommerceCartModificationExcepti
 import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
 import de.hybris.platform.commerceservices.store.data.GeoPoint;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.yacceleratorstorefront.controllers.ControllerConstants;
 import de.hybris.platform.yacceleratorstorefront.security.cookie.CustomerLocationCookieGenerator;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -54,6 +58,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.franchising.core.channel.price.FranchisingAwarePriceFactory;
 
 
 @Controller
@@ -89,6 +95,12 @@ public class PickupInStoreController extends AbstractSearchPageController
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource
+	private ModelService modelService;
+
+	@Resource
+	private FranchisingAwarePriceFactory franchisingAwarePriceFactory;
 
 	@ModelAttribute("googleApiVersion")
 	public String getGoogleApiVersion()
@@ -244,8 +256,8 @@ public class PickupInStoreController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
 	public String addToCartPickup(@RequestParam("productCodePost") final String code,
-			@RequestParam("storeNamePost") final String storeId, final Model model, @Valid final PickupInStoreForm form,
-			final BindingResult bindingErrors)
+			@RequestParam("storeNamePost") final String storeId, @RequestParam("franchisingPrice") final String franchisingPrice,
+			final Model model, @Valid final PickupInStoreForm form, final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
 		{
@@ -260,11 +272,41 @@ public class PickupInStoreController extends AbstractSearchPageController
 			return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 		}
 
+		final ProductData productData = productFacade.getProductForCodeAndOptions(code,
+				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE));
+		final String currency = productData.getPrice().getCurrencyIso();
 		try
 		{
+			franchisingAwarePriceFactory.setFranchisingChannel(true);
+
+
+			if (franchisingPrice != null && !franchisingPrice.isEmpty())
+			{
+				final PriceData priceData = new PriceData();
+				priceData.setCurrencyIso(currency);
+				priceData.setValue(new BigDecimal(franchisingPrice));
+				priceData.setFormattedValue(franchisingPrice);
+				productData.setPrice(priceData);
+				franchisingAwarePriceFactory.setPriceData(priceData);
+			}
+
+
 			final CartModificationData cartModification = cartFacade.addToCart(code, qty, storeId);
 			model.addAttribute("quantity", Long.valueOf(cartModification.getQuantityAdded()));
-			model.addAttribute("entry", cartModification.getEntry());
+			final OrderEntryData entry = cartModification.getEntry();
+			if (franchisingPrice != null && !franchisingPrice.isEmpty())
+			{
+				entry.setFromFranchising("true");
+				//modelService.save(entry);
+			}
+			else
+			{
+				entry.setFromFranchising("false");
+				//modelService.save(entry);
+			}
+
+			model.addAttribute("entry", entry);
+
 
 			if (cartModification.getQuantityAdded() == 0L)
 			{
@@ -285,13 +327,14 @@ public class PickupInStoreController extends AbstractSearchPageController
 			model.addAttribute("quantity", Long.valueOf(0L));
 			LOG.warn("Couldn't add product of code " + code + " to cart.", ex);
 		}
+		finally
+		{
+			franchisingAwarePriceFactory.setFranchisingChannel(false);
+		}
 
-		final ProductData productData = productFacade.getProductForCodeAndOptions(code,
-				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE));
+
 		model.addAttribute("product", productData);
-
 		model.addAttribute("cartData", cartFacade.getSessionCart());
-
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 
@@ -319,6 +362,8 @@ public class PickupInStoreController extends AbstractSearchPageController
 	@RequestMapping(value = "/cart/update", method = RequestMethod.POST, produces = "application/json")
 	public String updateCartQuantities(@RequestParam("storeNamePost") final String storeId,
 			@RequestParam("entryNumber") final long entryNumber, @RequestParam("hiddenPickupQty") final long quantity,
+			@RequestParam("franchisingPrice") final String franchisingPrice,
+
 			final RedirectAttributes redirectModel) throws CommerceCartModificationException
 	{
 		final CartModificationData cartModificationData = cartFacade.updateCartEntry(entryNumber, storeId);

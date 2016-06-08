@@ -29,11 +29,13 @@ import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.yacceleratorstorefront.controllers.ControllerConstants;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
@@ -53,6 +55,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.franchising.core.channel.price.FranchisingAwarePriceFactory;
 
 
 /**
@@ -77,6 +81,10 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "productVariantFacade")
 	private ProductFacade productFacade;
+
+
+	@Resource
+	private FranchisingAwarePriceFactory franchisingAwarePriceFactory;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -189,9 +197,11 @@ public class CartPageController extends AbstractCartPageController
 
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
-			@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber,
+			@RequestParam("fromFranchising") final String fromFranchising,
+			@RequestParam("franchisingPrice") final String franchisingPrice, @RequestParam("currency") final String currency,
+			final Model model, @Valid final UpdateQuantityForm form, final BindingResult bindingResult,
+			final HttpServletRequest request, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		if (bindingResult.hasErrors())
 		{
@@ -211,6 +221,18 @@ public class CartPageController extends AbstractCartPageController
 		{
 			try
 			{
+				if (fromFranchising != null && fromFranchising.equalsIgnoreCase("true"))
+				{
+					franchisingAwarePriceFactory.setFranchisingChannel(true);
+					final PriceData priceData = new PriceData();
+					priceData.setCurrencyIso(currency);
+					priceData.setValue(new BigDecimal(franchisingPrice));
+					priceData.setFormattedValue(franchisingPrice);
+					franchisingAwarePriceFactory.setPriceData(priceData);
+				}
+
+
+
 				final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
 						form.getQuantity().longValue());
 				if (cartModification.getQuantity() == form.getQuantity().longValue())
@@ -256,6 +278,10 @@ public class CartPageController extends AbstractCartPageController
 			catch (final CommerceCartModificationException ex)
 			{
 				LOG.warn("Couldn't update product with the entry number: " + entryNumber + ".", ex);
+			}
+			finally
+			{
+				franchisingAwarePriceFactory.setFranchisingChannel(false);
 			}
 		}
 
