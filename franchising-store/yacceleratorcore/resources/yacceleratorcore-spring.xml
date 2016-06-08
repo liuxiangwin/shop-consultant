@@ -448,5 +448,7 @@
 			class="com.franchising.core.channel.price.FranchisingPriceStrategy"
 			parent="abstractBusinessService"/>
 	
+
+	
 	
 </beans>

@@ -103,7 +103,7 @@
 				generate="true">
 				<attributes>
 					<attribute qualifier="fromFranchising" type="java.lang.String">
-						<modifiers initial="true" read="true" write="false"
+						<modifiers initial="true" read="true" write="true"
 							optional="false" />
 						<persistence type="property" />
 					</attribute>
