@@ -34,4 +34,22 @@
 	    <property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 	</bean>
 	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="fromFranchising" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
+		<property name="fromFranchising" type="String">
+			<description>fromFranchising</description>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CartModificationData">
+		<property name="fromFranchising" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commerceservices.order.CommerceCartModification">
+		<property name="fromFranchising" type="String"/>
+	</bean>
+	
 </beans>
