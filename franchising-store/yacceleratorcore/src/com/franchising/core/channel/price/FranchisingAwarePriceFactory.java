@@ -57,6 +57,11 @@ public class FranchisingAwarePriceFactory extends CatalogAwareEurope1PriceFactor
 
 	private static FranchisingAwarePriceFactory instance;
 
+	public boolean franchisingChannel;
+
+	public PriceData priceData;
+
+
 	@SuppressWarnings("deprecation")
 	public PriceData queryFranchisingPrice(final ProductModel productModel, final PointOfServiceModel pointOfServiceModel)
 	{
@@ -132,6 +137,40 @@ public class FranchisingAwarePriceFactory extends CatalogAwareEurope1PriceFactor
 		return pInfo;
 	}
 
+	/**
+	 * @return the franchisingChannel
+	 */
+	public boolean isFranchisingChannel()
+	{
+		return franchisingChannel;
+	}
+
+	/**
+	 * @param franchisingChannel
+	 *           the franchisingChannel to set
+	 */
+	public void setFranchisingChannel(final boolean franchisingChannel)
+	{
+		this.franchisingChannel = franchisingChannel;
+	}
+
+
+	/**
+	 * @return the priceData
+	 */
+	public PriceData getPriceData()
+	{
+		return priceData;
+	}
+
+	/**
+	 * @param priceData
+	 *           the priceData to set
+	 */
+	public void setPriceData(final PriceData priceData)
+	{
+		this.priceData = priceData;
+	}
 
 
 	public static FranchisingAwarePriceFactory getInstance()

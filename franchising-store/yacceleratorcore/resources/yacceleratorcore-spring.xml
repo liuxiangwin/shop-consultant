@@ -443,4 +443,10 @@
 	</bean>
 	
 	
+	<alias name="franchisingPriceStrategy" alias="currentFactoryFindPricingStrategy"/>
+	<bean id="franchisingPriceStrategy" 
+			class="com.franchising.core.channel.price.FranchisingPriceStrategy"
+			parent="abstractBusinessService"/>
+	
+	
 </beans>
