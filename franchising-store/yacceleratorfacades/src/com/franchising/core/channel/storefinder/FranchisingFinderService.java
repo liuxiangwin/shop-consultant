@@ -122,7 +122,7 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#locationSearch(de.hybris.platform.store.
 	 * BaseStoreModel, java.lang.String, de.hybris.platform.commerceservices.search.pagedata.PageableData)
@@ -187,7 +187,7 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#positionSearch(de.hybris.platform.store.
 	 * BaseStoreModel, double, double, de.hybris.platform.commerceservices.search.pagedata.PageableData)
@@ -207,7 +207,7 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#positionSearch(de.hybris.platform.store.
 	 * BaseStoreModel, double, double, de.hybris.platform.commerceservices.search.pagedata.PageableData, int)
@@ -242,7 +242,7 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * de.hybris.platform.acceleratorservices.storefinder.StoreFinderService#getPointOfServiceDistanceForName(de.hybris
 	 * .platform.store.BaseStoreModel, java.lang.String, double, double)
@@ -351,10 +351,6 @@ public class FranchisingFinderService<ITEM extends PointOfServiceDistanceData> i
 		}
 		else
 		{
-			//final Map<String, Object> paramMap = new HashMap<String, Object>();
-			//paramMap.put("product", productModel);
-			//paramMap.put("type", PointOfServiceTypeEnum.STORE);
-			//posAll = getPointOfServiceGenericDao().find(paramMap);
 			final String queryPosWith = "SELECT  DISTINCT {ps:PK} AS pk FROM {PointOfService AS ps"
 					+ " LEFT JOIN PoS2WarehouseRel as p2w ON {ps.pk} = {p2w.source} "
 					+ " JOIN Warehouse as w ON {w.pk} = {p2w.target} " + " JOIN Stocklevel AS s  ON {w.pk} = {s.warehouse}} "
