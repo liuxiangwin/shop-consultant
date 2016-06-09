@@ -124,7 +124,7 @@ public class FranchisingCommerceCartService implements CommerceCartService
 		}
 		else
 		{
-			parameter.setFromFranchising("true");
+			parameter.setFromFranchising("false");
 		}
 		return this.addToCart(parameter);
 	}
@@ -138,7 +138,7 @@ public class FranchisingCommerceCartService implements CommerceCartService
 		}
 		else
 		{
-			parameter.setFromFranchising("true");
+			parameter.setFromFranchising("false");
 		}
 
 		return this.getCommerceAddToCartStrategy().addToCart(parameter);
