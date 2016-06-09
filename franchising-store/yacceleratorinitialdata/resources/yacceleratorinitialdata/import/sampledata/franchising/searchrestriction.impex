@@ -1,14 +1,30 @@
+########################################################
+########  Employee of China Site     ###########
+########################################################        
+INSERT_UPDATE Employee ; UID[unique=true]          ; writableCatalogVersions(catalog(id),version) ; readableCatalogVersions(catalog(id),version) ; description               ; name                      ; groups(uid)                     ; sessionLanguage(isocode) ; sessionCurrency(isocode) ; password
+                       ; Beijing-franchising-admin ; electronicsProductCatalog:Online             ; electronicsProductCatalog:Online             ; Beijing franchising admin ; Beijing franchising Admin ; beijing-franchising-admin-group ; en                       ; EUR                      ; 1234    
 
-INSERT_UPDATE SearchRestriction ; code[unique=true]                           ; active[default=true] ; generate[default=false] ; principal(uid)            ; restrictedType(code) ; query
-                                ; Beijing-franchising-PriceGroup-availability ; true                 ; false                   ; Beijing-franchising-admin ; PriceRow             ; "    
+
+INSERT_UPDATE UserGroup ; uid[unique=true]                ; locName[lang=en]                ; groups(uid)[mode=append] ; description                                        ;  
+                        ; beijing-franchising-admin-group ; beijing-franchising-admin-group ; productmanagergroup      ; beijing-franchising-admin-group for bejing product ;  
+                        
+
+
+
+
+
+
+
+INSERT_UPDATE SearchRestriction ; code[unique=true]                           ; active[default=true] ; generate[default=false] ; principal(uid)                  ; restrictedType(code) ; query
+                                ; Beijing-franchising-PriceGroup-availability ; true                 ; false                   ; beijing-franchising-admin-group ; PriceRow             ; "    
                                 
-{pk} IN ({{
-  SELECT DISTINCT {pr:PK} AS pk
-		FROM {PriceRow as pr 
-		JOIN Franchising as fr ON {pr.Franchising} = {fr.pk} 
-		}
-		WHERE {fr.code} = '2016000002'
- }})
+{pk} IN ({{                     
+ SELECT DISTINCT {pr:PK} AS pk 
+		FROM {PriceRow as pr          
+		JOIN PointOfService as ps ON {pr.pointsOfService} = {ps.pk} 
+		}                             
+		WHERE {ps.name} = 'Beijing'
+ }})                            
 "                               
 
 
