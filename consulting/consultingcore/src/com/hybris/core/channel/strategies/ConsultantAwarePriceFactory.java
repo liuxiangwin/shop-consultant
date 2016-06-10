@@ -122,9 +122,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 
 		for (final PriceRow priceRow : priceRowsList)
 		{
-			//final Currency priceRowCurr = priceRow.getCurrency();
-			//if (currentCurr.equals(priceRowCurr) && (base == null || !base.equals(priceRowCurr)))
-			//{
 			final PriceRowModel priceRowModel = modelService.get(priceRow);
 			final String channel = priceRowModel.getConsultantChannel().getCode();
 
@@ -136,7 +133,6 @@ public class ConsultantAwarePriceFactory extends CatalogAwareEurope1PriceFactory
 			{
 				internationList.add(priceRow);
 			}
-			//}
 		}
 		if (isDomesticPrice)
 		{
