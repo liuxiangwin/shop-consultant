@@ -23,9 +23,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hybris.core.service.data.country.strategies.CountrySelectorStrategy;
 import com.hybris.platform.posselector.model.PosSelectorComponentModel;
 import com.hybris.storefront.controllers.cms.AbstractCMSComponentController;
-import com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy;
 
 
 

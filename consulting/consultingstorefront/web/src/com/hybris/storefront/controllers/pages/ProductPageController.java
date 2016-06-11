@@ -67,7 +67,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hybris.core.services.ConsultantService;
+import com.hybris.core.services.products.ConsultantService;
 import com.hybris.storefront.controllers.ControllerConstants;
 
 
