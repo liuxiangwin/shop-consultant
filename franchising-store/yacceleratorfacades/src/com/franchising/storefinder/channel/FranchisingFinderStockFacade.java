@@ -11,7 +11,7 @@
  *
  *
  */
-package com.franchising.core.channel.storefinder;
+package com.franchising.storefinder.channel;
 
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -41,6 +41,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.franchising.core.channel.price.FranchisingAwarePriceFactory;
+import com.franchising.core.channel.service.FranchisingFinderService;
 
 
 /**
