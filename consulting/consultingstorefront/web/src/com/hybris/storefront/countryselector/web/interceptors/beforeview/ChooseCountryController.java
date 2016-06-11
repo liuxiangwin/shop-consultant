@@ -201,7 +201,6 @@ public class ChooseCountryController extends AbstractPageController
 		CategoryPageModel catalogPageModel = null;
 		try
 		{
-			//contentPageModel = cmsPageService.getPageByLabel("category");
 			catalogPageModel = cmsPageService.getPageByCategoryCode("Development");
 		}
 		catch (final CMSItemNotFoundException e)
@@ -209,17 +208,12 @@ public class ChooseCountryController extends AbstractPageController
 			LOG.debug(e);
 		}
 		storeCmsPageInModel(model, catalogPageModel);
-		//setUpMetaDataForContentPage(model, catalogPageModel);
 		updatePageTitle(model, catalogPageModel);
-		//Pattern like /{category-path}/c/{category-code}
-		//return getViewForPage(model);
-		//response.setContentType("text/html");
 		return REDIRECT_PREFIX + "/Development/c/Development";
 	}
 
 	private ContentPageModel getHomePageRender() throws CMSItemNotFoundException
 	{
-		//final ContentPageModel contentPageModel = cmsPageService.getPageByLabel("siteSelector");
 		return cmsPageService.getPageForLabelOrId("homepage");
 	}
 }

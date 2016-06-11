@@ -40,7 +40,7 @@ public class CountrySelectorBeforeViewHandler implements BeforeControllerHandler
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.hybris.storefront.interceptors.BeforeControllerHandler#beforeController(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse, org.springframework.web.method.HandlerMethod)
@@ -68,9 +68,7 @@ public class CountrySelectorBeforeViewHandler implements BeforeControllerHandler
 		}
 		if (selectCountry.equalsIgnoreCase(""))
 		{
-			//getRedirectStrategy().sendRedirect(request, response, "/consultingstorefront/main");
 			response.sendRedirect("/consultingstorefront/main");
-			//request.getRequestDispatcher("/consultingstorefront/main").forward(request, response);
 			return false;
 		}
 		return true;

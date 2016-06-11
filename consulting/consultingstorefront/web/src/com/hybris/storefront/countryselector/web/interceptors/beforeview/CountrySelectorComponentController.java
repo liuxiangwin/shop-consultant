@@ -13,9 +13,6 @@
  */
 package com.hybris.storefront.countryselector.web.interceptors.beforeview;
 
-import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.LoginForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.servicelayer.session.SessionService;
 
 import javax.annotation.Resource;
@@ -47,14 +44,9 @@ public class CountrySelectorComponentController extends AbstractCMSComponentCont
 	protected void fillModel(final HttpServletRequest request, final Model model, final PosSelectorComponentModel component)
 	{
 		model.addAttribute("sites", countrySelectorStrategy.getAllCMMSite());
-		//model.addAttribute("currentPos", localStoreFacade.currentBaseStore());
 		model.addAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR,
 				sessionService.getAttribute(CountrySelectorStrategy.SESSION_SELECT_COUNTYR));
 
-		/*final LoginForm loginForm = new LoginForm();
-		model.addAttribute(loginForm);
-		model.addAttribute(new RegisterForm());
-		model.addAttribute(new GuestForm());*/
 
 	}
 }
