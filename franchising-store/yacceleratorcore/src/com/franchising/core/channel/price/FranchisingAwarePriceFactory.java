@@ -104,7 +104,6 @@ public class FranchisingAwarePriceFactory extends CatalogAwareEurope1PriceFactor
 			throws JaloPriceFactoryException
 	{
 		final Collection<PriceRow> priceRows = matchPriceRowsForInfo(ctx, product, productGroup, user, userGroup, curr, date, net);
-		//final List<PriceInformation> priceInfos = new ArrayList<PriceInformation>(priceRows.size());
 		Collection theTaxValues = taxValues;
 		PriceInformation pInfo = null;
 
