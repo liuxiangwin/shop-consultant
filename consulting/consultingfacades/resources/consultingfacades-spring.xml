@@ -191,12 +191,6 @@
 
 	<bean id="genderData" class="com.hybris.facades.product.data.GenderData" scope="prototype"/>
 	
-	<!-- <alias name="tutoContentCommerceSearchResultProductPopulator" alias="tutoContentCommerceSearchResultProductPopulator"/>
-    <bean id="tutoContentCommerceSearchResultProductPopulator"
-          class="com.hybris.facades.populators.TutoSearchResultProductPopulator">
-    </bean> 
-	 -->
-	
 	<alias name="tutoContentCommerceSearchResultProductPopulator" alias="tutoContentCommerceSearchResultProductPopulator"/>
     <bean id="tutoContentCommerceSearchResultProductPopulator"
           class="com.hybris.facades.populators.TutoSearchResultProductPopulator"
@@ -205,71 +199,5 @@
 	
 	<bean id="consultantStockLevelFacade" class="com.hybris.facades.stocklevel.DefaultStockLevelFacade">
 	</bean>
-	
-	<alias name="consultantUpdateCart" alias="commerceUpdateCartEntryStrategy"/>
-	<bean id="consultantUpdateCart"
-			class="com.hybris.core.price.cart.ConsultantCommerceUpdateCartEntryStrategy"
-			parent="defaultCommerceUpdateCartEntryStrategy">
-		<property name="commerceUpdateCartEntryHooks" ref="commerceUpdateCartEntryMethodHooks"/>
-		<property name="configurationService" ref="configurationService"/>
-	</bean> 
-	
-	
-	<alias name="consultantCartValidationStrategy" alias="cartValidationStrategy"/>
-	<bean id="consultantCartValidationStrategy"
-			class="com.hybris.core.price.cart.ConsultantCartValidationStrategy"
-			parent="defaultCartValidationStrategy">
-		<property name="modelService" ref="modelService"/>
-		<property name="cartService" ref="cartService"/>
-		<property name="productService" ref="productService"/>
-		<property name="commerceStockService" ref="commerceStockService"/>
-		<property name="baseStoreService" ref="baseStoreService"/>
-		<property name="userService" ref="userService"/>
-	</bean>
-	
-	
-	<alias name="consultantCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
-	<bean id="consultantCommerceAddToCartStrategy"
-			class="com.hybris.core.price.cart.ConsultantCommerceAddToCartStrategy"
-			parent="defaultCommerceAddToCartStrategy">
-		<property name="commerceAddToCartMethodHooks" ref="commerceAddToCartMethodHooks"/>
-		<property name="configurationService" ref="configurationService"/>
-	</bean>
-	
-	
-	
-	<alias name="consultantCommerceCartMergingStrategy" alias="commerceCartMergingStrategy"/>
-	<bean id="consultantCommerceCartMergingStrategy"
-			class="com.hybris.core.price.cart.ConsultantCommerceCartMergingStrategy"
-			parent="defaultCommerceCartMergingStrategy">
-		<property name="userService" ref="userService"/>
-		<property name="commerceCartService" ref="commerceCartService"/>
-		<property name="baseSiteService" ref="baseSiteService"/>
-		<property name="commerceAddToCartStrategy" ref="consultantMergeAddCartStrategy"/>
-	</bean>
-	
-	
-	<bean id="consultantMergeAddCartStrategy"
-			class="com.hybris.core.price.cart.ConsultantCommerceMergeAddCartStrategy"
-			parent="defaultCommerceAddToCartStrategy">
-		
-	</bean>
-	
-	
-	
-		
- 	<!-- Context information loader - bean that load context information -->
-	<!-- <alias name="consultantContextInformationLoader" alias="contextInformationLoader" />
-	<bean id="consultantContextInformationLoader"
-		class="com.hybris.core.contextloader.storfront.ConsultantContextInformationLoader">
-		<property name="baseSiteService" ref="baseSiteService" />
-		<property name="cmsSiteService" ref="cmsSiteService" />
-		<property name="i18NService" ref="i18NService" />
-		<property name="modelService" ref="modelService" />
-		<property name="timeService" ref="timeService" />
-		<property name="userService" ref="userService" />
-		<property name="strategies" ref="contextLoadStrategiesList" />
-		<property name="previewRequestStrategies" ref="previewRequestStrategiesList" />
-	</bean>	 -->	
 		
 </beans>

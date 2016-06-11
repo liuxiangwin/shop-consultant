@@ -9,7 +9,7 @@ import de.hybris.platform.jalo.c2l.Language;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hybris.core.services.ConsultantService;
+import com.hybris.core.services.products.ConsultantService;
 import com.hybris.facades.product.ConsultantFacade;
 
 

@@ -18,11 +18,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorfacades"/>
 		<requires-extension name="consultingcore"/>
-
 		<coremodule generated="true" manager="de.hybris.platform.jalo.extension.GenericManager" packageroot="com.hybris.facades"/>
-
-		
-		
 	</extension>
 
 </extensioninfo>
