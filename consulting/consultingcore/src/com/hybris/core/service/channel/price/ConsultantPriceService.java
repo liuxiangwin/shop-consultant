@@ -130,13 +130,13 @@ public class ConsultantPriceService implements CommercePriceService
 		
 		consultantAwarePriceFactory.getChannelPriceWithCurrency(product,ccp);
 
-		if (!domesticList.isEmpty() && isDomesticPrice)
+		if (!domesticList.isEmpty() && ccp.isDomesticPrice())
 		{
-			return getMinPriceForLowestQunatity(domesticList);
+			return getMinPriceForLowestQunatity(ccp.getDomesticPriceInforList());
 		}
-		else if (!internationList.isEmpty() && isInternationPrice)
+		else if (!internationList.isEmpty() && ccp.isInternationPrice())
 		{
-			return getMinPriceForLowestQunatity(internationList);
+			return getMinPriceForLowestQunatity(ccp.getInternalPriceInforList());
 		}
 		return null;
 
