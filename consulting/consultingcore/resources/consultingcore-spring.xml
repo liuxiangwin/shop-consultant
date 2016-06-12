@@ -60,9 +60,9 @@
 		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider" />
 
 	<bean id="consultantService" name="consultantService"
-		class="com.hybris.core.services.impl.DefaultConsultantService">
-	<!-- 	<property name="flexibleSearchService" ref="flexibleSearchService"></property>
-		<property name="sessionService" ref="sessionService"></property> -->
+		class="com.hybris.core.services.products.impl.DefaultConsultantService">
+		<!-- <property name="flexibleSearchService" ref="flexibleSearchService"></property> 
+			<property name="sessionService" ref="sessionService"></property> -->
 	</bean>
 
 	<bean id="consultantCountryValueProvider" class="com.hybris.core.search.ConsultantCountryValueProvider"
@@ -82,11 +82,6 @@
 		class="com.hybris.core.search.solrfacetsearch.provider.impl.ConsultantCountrySourceImpl">
 		<property name="consultantService" ref="consultantService" />
 	</bean>
-
-	<!-- <bean id="categoryCodeValueProvider" class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider" 
-		parent="abstractPropertyFieldValueProvider"> <property name="categoriesQualifier" 
-		value="supercategories" /> <property name="fieldNameProvider" ref="solrFieldNameProvider" 
-		/> </bean> -->
 
 	<bean id="categoryCodeValueProvider"
 		class="de.hybris.platform.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
@@ -413,7 +408,6 @@
 
 
 	<!-- checkout flow configuration -->
-
 	<bean id="pickUpInStoreCheckoutFlowStrategy"
 		class="com.hybris.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy">
 		<property name="pickupStrategy" ref="pickupStrategy" />
@@ -463,6 +457,10 @@
 		<property name="rootCategoryCode" value="categories" />
 	</bean>
 
+	<alias name="consultantProductBasicPopulator" alias="productBasicPopulator" />
+	<bean id="consultantProductBasicPopulator" parent="baseProductPopulator"
+		class="com.hybris.core.search.solrfacetsearch.populators.ConsultantProductPopulator" />
+
 
 	<!-- Product Value Provider -->
 	<bean id="approvalStausValueProvider"
@@ -493,17 +491,12 @@
 	</bean>
 
 	<!-- Replace the Default Channel for customerzation -->
-	<alias alias="retrieveChannelStrategy" name="alanRetrieveChannelStrategy" />
-	<bean id="alanRetrieveChannelStrategy"
-		class="com.hybris.core.channel.strategies.ConsultantRetrieveChannelStrategy"
+	<alias alias="retrieveChannelStrategy" name="consultantRetrieveChannelStrategy" />
+	<bean id="consultantRetrieveChannelStrategy"
+		class="com.hybris.core.service.channel.price.strategies.ConsultantRetrieveChannelStrategy"
 		scope="tenant">
 		<property name="enumerationService" ref="enumerationService" />
 	</bean>
-
-	<!-- europe1.manager -->
-	<!-- <bean id="europe1.manager" class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory" 
-		init-method="init" destroy-method="destroy"> <property name="retrieveChannelStrategy" 
-		ref="alanRetrieveChannelStrategy"/> </bean> -->
 
 	<!-- Replace the DefaultPrice Service for customerzation -->
 	<alias alias="priceService" name="netPriceService" />
@@ -516,23 +509,21 @@
 
 	<alias alias="commercePriceService" name="consultantCommercePriceService" />
 	<bean id="consultantCommercePriceService"
-		class="com.hybris.core.channel.strategies.ConsultantPriceService">
+		class="com.hybris.core.service.channel.price.ConsultantPriceService">
 		<property name="priceService" ref="priceService" />
 	</bean>
 
-
-	<alias alias="europe1.manager" name="europe1.manager2" />
-	<bean id="europe1.manager2"
-		class="com.hybris.core.channel.strategies.ConsultantAwarePriceFactory"
+	<!-- <alias alias="europe1.manager" name="europe1.manager2" /> <bean id="europe1.manager2" -->
+	<alias alias="europe1.manager" name="consultantAwarePriceFactory" />
+	<bean id="consultantAwarePriceFactory"
+		class="com.hybris.core.service.channel.price.factory.ConsultantAwarePriceFactory"
 		init-method="init" destroy-method="destroy">
 		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
 	</bean>
 
-
 	<bean id="countrySelectorStrategy"
-		class="com.hybris.storefront.countryselector.strategies.CountrySelectorStrategy">
+		class="com.hybris.core.service.data.country.strategies.CountrySelectorStrategy">
 	</bean>
-
 
 	<alias name="defaultExtendedCommerceSearchQueryPageableConverter"
 		alias="commerceSearchQueryPageableConverter" />
@@ -547,15 +538,41 @@
 	<bean id="searchApprovalStatusPopulator"
 		class="com.hybris.core.search.solrfacetsearch.populators.SearchApprovalStatusPopulator">
 	</bean>
-	
-	<alias name="consultantProductBasicPopulator" alias="productBasicPopulator"/>
-	<bean id="consultantProductBasicPopulator" parent="baseProductPopulator"
-			class="com.hybris.core.search.solrfacetsearch.populators.ConsultantProductPopulator"/>
-			
-	<bean id="consultantPriceStrategy"
-		class="com.hybris.core.channel.strategies.ConsultantPriceStrategy">
-	</bean>
-	
 
-	
+	<alias name="consultantCommerceCartMergingStrategy" alias="commerceCartMergingStrategy" />
+	<bean id="consultantCommerceCartMergingStrategy"
+		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCommerceCartMergingStrategy"
+		parent="defaultCommerceCartMergingStrategy">
+		<property name="userService" ref="userService" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceAddToCartStrategy" ref="consultantMergeAddCartStrategy" />
+	</bean>
+
+	<bean id="consultantMergeAddCartStrategy"
+		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCommerceMergeAddCartStrategy"
+		parent="defaultCommerceAddToCartStrategy">
+
+	</bean>
+
+	<alias name="consultantUpdateCart" alias="commerceUpdateCartEntryStrategy" />
+	<bean id="consultantUpdateCart"
+		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCommerceUpdateCartEntryStrategy"
+		parent="defaultCommerceUpdateCartEntryStrategy">
+		<property name="commerceUpdateCartEntryHooks" ref="commerceUpdateCartEntryMethodHooks" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="consultantCartValidationStrategy" alias="cartValidationStrategy" />
+	<bean id="consultantCartValidationStrategy"
+		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCartValidationStrategy"
+		parent="defaultCartValidationStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
 </beans>

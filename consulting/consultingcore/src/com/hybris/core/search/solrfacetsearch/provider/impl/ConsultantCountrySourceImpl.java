@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.hybris.core.model.ConsultantModel;
 import com.hybris.core.search.solrfacetsearch.provider.ConsultantCountrySource;
-import com.hybris.core.services.ConsultantService;
+import com.hybris.core.services.products.ConsultantService;
 
 
 /**

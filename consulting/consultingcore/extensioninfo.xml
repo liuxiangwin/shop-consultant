@@ -18,18 +18,14 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="acceleratorcms"/>
-		<!-- <requires-extension name="consultingfulfilmentprocess"/> -->
-		<requires-extension name="yacceleratorordermanagement"/>
+		<requires-extension name="consultingfulfilmentprocess"/> 
+		<!-- <requires-extension name="yacceleratorordermanagement"/> -->
 		<requires-extension name="commerceservices"/>
 		<requires-extension name="commercefacades"/>
 		<requires-extension name="hmc"/>
 
 		<coremodule generated="true" manager="com.hybris.core.jalo.ConsultingCoreManager" packageroot="com.hybris.core"/>
-
 		<hmcmodule extensionclassname="com.hybris.core.hmc.ConsultingCoreHMCExtension"/>
-
-		
-		
 		<meta key="backoffice-module" value="true"/>
 	</extension>
 

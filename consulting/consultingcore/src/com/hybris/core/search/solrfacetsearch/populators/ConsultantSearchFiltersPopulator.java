@@ -16,7 +16,7 @@ import de.hybris.platform.solrfacetsearch.search.SearchQuery.Operator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.hybris.core.services.ConsultantService;
+import com.hybris.core.services.products.ConsultantService;
 
 
 /**

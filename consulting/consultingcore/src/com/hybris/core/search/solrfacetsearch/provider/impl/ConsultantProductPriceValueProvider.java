@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.hybris.core.channel.strategies.ConsultantPriceService;
+import com.hybris.core.service.channel.price.ConsultantPriceService;
 
 
 /**
