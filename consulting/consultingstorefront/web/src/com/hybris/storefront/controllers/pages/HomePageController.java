@@ -53,8 +53,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomePageController extends AbstractPageController
 {
 
-	private static final String SELECTED_COUNTRY_CODE = "selectedcountry";
-
 	@Resource(name = "cmsSiteService")
 	private CMSSiteService cmsSiteService;
 
@@ -73,49 +71,25 @@ public class HomePageController extends AbstractPageController
 	@Resource
 	private SessionService sessionService;
 
-	//@RequestMapping(method = RequestMethod.GET, value = "/{country}/")
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
 			final RedirectAttributes redirectModel, final HttpServletResponse response, final HttpServletRequest request)
 			throws CMSItemNotFoundException, IOException
 	{
 
-		//final Cookie[] cookies = request.getCookies();
-		//Cookie cook;
-		//String selectCountry = "";
-		//if (cookies != null)
-		//{
-		//	for (int i = 0; i < cookies.length; i++)
-		//	{
-		//		cook = cookies[i];
-		//		if (cook.getName().equalsIgnoreCase("country-selected"))
-		//		{
-		//			selectCountry = cook.getValue();
-		//		}
-		//	}
-		//}
-		//if (selectCountry.equalsIgnoreCase(""))
-		//{
-		//	return REDIRECT_PREFIX + "/main";
-		//}
+
 		if (request.getQueryString() != null)
 		{
 			if (!request.getQueryString().contains("consultingsite"))
 			{
-				//return REDIRECT_PREFIX + "/main";
 				response.sendRedirect("/main");
 			}
 		}
 		if (logout)
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "account.confirmation.signout.title");
-			//return REDIRECT_PREFIX + ROOT;
 			response.sendRedirect(ROOT);
 		}
-
-		//storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		//setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
-		//updatePageTitle(model, getContentPageForLabelOrId(null));
 
 		final CategoryModel category = commerceCategoryService.getCategoryForCode("Development");
 
@@ -132,19 +106,6 @@ public class HomePageController extends AbstractPageController
 		updatePageTitle(model, catalogPageModel);
 
 		return getViewForPage(model);
-
-		//return FORWARD_PREFIX + "/Development/c/Development";
-		//return categoryPageController.category("Development", "", 0, ShowMode.Page, "", model, request, response);
-		//return getViewForPage(catalogPageModel);
-
-
-		//final String redirect_url = ControllerConstants.Url.REDIRECT_PREFIX + "https://" + country.toLowerCase()
-		//		+ "-consultingsite.local:9002/consultingstorefront/" + country.toLowerCase()
-		//		+ "-consultingsite/en/search?q=%3Arelevance&show=All";
-
-		//LOG.debug("redirecting to " + redirect_url);
-
-		//return REDIRECT_PREFIX + "/Development/c/Development";
 	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
