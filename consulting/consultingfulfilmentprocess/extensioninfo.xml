@@ -14,9 +14,10 @@
 
 	<extension abstractclassprefix="Generated" classprefix="ConsultingFulfilmentProcess" managername="ConsultingFulfilmentProcessManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="consultingfulfilmentprocess">
 
-
+		
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="ticketsystem"/>
+		<!-- <requires-extension name="yacceleratorordermanagement"/> -->
 
 		<coremodule generated="true" manager="com.hybris.fulfilmentprocess.jalo.ConsultingFulfilmentProcessManager" packageroot="com.hybris.fulfilmentprocess"/>
 

@@ -21,13 +21,14 @@ import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
-import com.hybris.fulfilmentprocess.constants.ConsultingFulfilmentProcessConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.hybris.fulfilmentprocess.constants.ConsultingFulfilmentProcessConstants;
 
 
 public class SplitOrderAction extends AbstractProceduralAction<OrderProcessModel>
@@ -51,7 +52,7 @@ public class SplitOrderAction extends AbstractProceduralAction<OrderProcessModel
 		{
 			if (entry.getConsignmentEntries() == null || entry.getConsignmentEntries().isEmpty())
 			{
-				entriesToSplit.add(entry);
+				entriesToSplit.add(entry);//添加订单商品到拆单list中
 			}
 		}
 
