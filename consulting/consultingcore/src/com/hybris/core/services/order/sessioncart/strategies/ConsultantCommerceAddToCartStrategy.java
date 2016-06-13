@@ -22,13 +22,19 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 
 
-/**
- * Abstract strategy for adding items to the cart
- */
 public class ConsultantCommerceAddToCartStrategy extends DefaultCommerceAddToCartStrategy
 
 {
 	@Override
+	/**
+	 * 
+	 */
+	/**
+	 * Modify the OOTB Add cart validation with variant ConsultantModel  
+	 * since the OOTB model does not  allow the product model with VariantType
+	 * could add the session cart 
+	 * @param CommerceCartParameter parameters
+	 */
 	public void validateAddToCart(final CommerceCartParameter parameters) throws CommerceCartModificationException
 	{
 		final CartModel cartModel = parameters.getCart();

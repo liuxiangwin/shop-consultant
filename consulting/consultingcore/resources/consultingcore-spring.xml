@@ -563,6 +563,16 @@
 		<property name="configurationService" ref="configurationService" />
 	</bean>
 
+
+
+	<alias name="consultantCommerceAddToCartStrategy" alias="commerceAddToCartStrategy" />
+	<bean id="consultantCommerceAddToCartStrategy"
+		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCommerceAddToCartStrategy"
+		parent="defaultCommerceAddToCartStrategy">
+		<property name="commerceAddToCartMethodHooks" ref="commerceAddToCartMethodHooks" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
 	<alias name="consultantCartValidationStrategy" alias="cartValidationStrategy" />
 	<bean id="consultantCartValidationStrategy"
 		class="com.hybris.core.services.order.sessioncart.strategies.ConsultantCartValidationStrategy"
